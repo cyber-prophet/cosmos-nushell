@@ -1,0 +1,7 @@
+[
+  {
+    "_command_root": "query graph",
+    "_command": "stats",
+    "_description": "Query the graph stats"
+  }
+]

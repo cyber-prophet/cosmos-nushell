@@ -1,0 +1,7 @@
+[
+  {
+    "_command_root": "query params",
+    "_command": "subspace",
+    "_description": "Query for raw parameters by subspace and key"
+  }
+]

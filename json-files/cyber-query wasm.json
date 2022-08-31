@@ -1,0 +1,47 @@
+[
+  {
+    "_command_root": "query wasm",
+    "_command": "code",
+    "_description": "Downloads wasm bytecode for given code id"
+  },
+  {
+    "_command_root": "query wasm",
+    "_command": "code-info",
+    "_description": "Prints out metadata of a code id"
+  },
+  {
+    "_command_root": "query wasm",
+    "_command": "contract",
+    "_description": "Prints out metadata of a contract given its address"
+  },
+  {
+    "_command_root": "query wasm",
+    "_command": "contract-history",
+    "_description": "Prints out the code history for a contract given its address"
+  },
+  {
+    "_command_root": "query wasm",
+    "_command": "contract-state",
+    "_description": "Querying commands for the wasm module"
+  },
+  {
+    "_command_root": "query wasm",
+    "_command": "libwasmvm-version",
+    "_description": "Get libwasmvm version"
+  },
+  {
+    "_command_root": "query wasm",
+    "_command": "list-code",
+    "_description": "List all wasm bytecode on the chain"
+  },
+  {
+    "_command_root": "query wasm",
+    "_command": "list-contract-by-code",
+    "_description": "List wasm all bytecode on the chain for given code id"
+  },
+  {
+    "_command_root": "query wasm",
+    "_command": "pinned",
+    "_description": "List all pinned code ids"
+  }
+]

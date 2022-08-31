@@ -1,0 +1,17 @@
+[
+  {
+    "_command_root": "debug",
+    "_command": "addr",
+    "_description": "Convert an address between hex and bech32"
+  },
+  {
+    "_command_root": "debug",
+    "_command": "pubkey",
+    "_description": "Decode a pubkey from proto JSON"
+  },
+  {
+    "_command_root": "debug",
+    "_command": "raw-bytes",
+    "_description": "Convert raw bytes output (eg. [10 21 13 255]) to hex"
+  }
+]

@@ -1,0 +1,17 @@
+[
+  {
+    "_command_root": "query mint",
+    "_command": "annual-provisions",
+    "_description": "Query the current minting annual provisions value"
+  },
+  {
+    "_command_root": "query mint",
+    "_command": "inflation",
+    "_description": "Query the current minting inflation value"
+  },
+  {
+    "_command_root": "query mint",
+    "_command": "params",
+    "_description": "Query the current minting parameters"
+  }
+]

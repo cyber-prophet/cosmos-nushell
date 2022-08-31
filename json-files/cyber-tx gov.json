@@ -1,0 +1,22 @@
+[
+  {
+    "_command_root": "tx gov",
+    "_command": "deposit",
+    "_description": "Deposit tokens for an active proposal"
+  },
+  {
+    "_command_root": "tx gov",
+    "_command": "submit-proposal",
+    "_description": "Submit a proposal along with an initial deposit"
+  },
+  {
+    "_command_root": "tx gov",
+    "_command": "vote",
+    "_description": "Vote for an active proposal, options: yes/no/no_with_veto/abstain"
+  },
+  {
+    "_command_root": "tx gov",
+    "_command": "weighted-vote",
+    "_description": "Vote for an active proposal, options: yes/no/no_with_veto/abstain"
+  }
+]

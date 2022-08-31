@@ -1,0 +1,52 @@
+[
+  {
+    "_command_root": "query liquidity",
+    "_command": "batch",
+    "_description": "Query details of a liquidity pool batch"
+  },
+  {
+    "_command_root": "query liquidity",
+    "_command": "deposit",
+    "_description": "Query the deposit messages on the liquidity pool batch"
+  },
+  {
+    "_command_root": "query liquidity",
+    "_command": "deposits",
+    "_description": "Query all deposit messages of the liquidity pool batch"
+  },
+  {
+    "_command_root": "query liquidity",
+    "_command": "params",
+    "_description": "Query the values set as liquidity parameters"
+  },
+  {
+    "_command_root": "query liquidity",
+    "_command": "pool",
+    "_description": "Query details of a liquidity pool"
+  },
+  {
+    "_command_root": "query liquidity",
+    "_command": "pools",
+    "_description": "Query for all liquidity pools"
+  },
+  {
+    "_command_root": "query liquidity",
+    "_command": "swap",
+    "_description": "Query for the swap message on the batch of the liquidity pool specified pool-id and msg-index"
+  },
+  {
+    "_command_root": "query liquidity",
+    "_command": "swaps",
+    "_description": "Query all swap messages in the liquidity pool batch"
+  },
+  {
+    "_command_root": "query liquidity",
+    "_command": "withdraw",
+    "_description": "Query the withdraw messages in the liquidity pool batch"
+  },
+  {
+    "_command_root": "query liquidity",
+    "_command": "withdraws",
+    "_description": "Query for all withdraw messages on the liquidity pool batch"
+  }
+]

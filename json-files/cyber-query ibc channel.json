@@ -1,0 +1,57 @@
+[
+  {
+    "_command_root": "query ibc channel",
+    "_command": "channels",
+    "_description": "Query all channels"
+  },
+  {
+    "_command_root": "query ibc channel",
+    "_command": "client-state",
+    "_description": "Query the client state associated with a channel"
+  },
+  {
+    "_command_root": "query ibc channel",
+    "_command": "connections",
+    "_description": "Query all channels associated with a connection"
+  },
+  {
+    "_command_root": "query ibc channel",
+    "_command": "end",
+    "_description": "Query a channel end"
+  },
+  {
+    "_command_root": "query ibc channel",
+    "_command": "next-sequence-receive",
+    "_description": "Query a next receive sequence"
+  },
+  {
+    "_command_root": "query ibc channel",
+    "_command": "packet-ack",
+    "_description": "Query a packet acknowledgement"
+  },
+  {
+    "_command_root": "query ibc channel",
+    "_command": "packet-commitment",
+    "_description": "Query a packet commitment"
+  },
+  {
+    "_command_root": "query ibc channel",
+    "_command": "packet-commitments",
+    "_description": "Query all packet commitments associated with a channel"
+  },
+  {
+    "_command_root": "query ibc channel",
+    "_command": "packet-receipt",
+    "_description": "Query a packet receipt"
+  },
+  {
+    "_command_root": "query ibc channel",
+    "_command": "unreceived-acks",
+    "_description": "Query all the unreceived acks associated with a channel"
+  },
+  {
+    "_command_root": "query ibc channel",
+    "_command": "unreceived-packets",
+    "_description": "Query all the unreceived packets associated with a channel"
+  }
+]

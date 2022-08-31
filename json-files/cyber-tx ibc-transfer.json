@@ -1,0 +1,7 @@
+[
+  {
+    "_command_root": "tx ibc-transfer",
+    "_command": "transfer",
+    "_description": "Transfer a fungible token through IBC"
+  }
+]

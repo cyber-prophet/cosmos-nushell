@@ -1,0 +1,32 @@
+[
+  {
+    "_command_root": "query distribution",
+    "_command": "commission",
+    "_description": "Query distribution validator commission"
+  },
+  {
+    "_command_root": "query distribution",
+    "_command": "community-pool",
+    "_description": "Query the amount of coins in the community pool"
+  },
+  {
+    "_command_root": "query distribution",
+    "_command": "params",
+    "_description": "Query distribution params"
+  },
+  {
+    "_command_root": "query distribution",
+    "_command": "rewards",
+    "_description": "Query all distribution delegator rewards or rewards from a particular validator"
+  },
+  {
+    "_command_root": "query distribution",
+    "_command": "slashes",
+    "_description": "Query distribution validator slashes"
+  },
+  {
+    "_command_root": "query distribution",
+    "_command": "validator-outstanding-rewards",
+    "_description": "Query distribution outstanding (un-withdrawn) rewards for a validator and all their delegations"
+  }
+]

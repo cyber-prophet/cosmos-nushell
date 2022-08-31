@@ -1,0 +1,7 @@
+[
+  {
+    "_command_root": "tx vesting",
+    "_command": "create-vesting-account",
+    "_description": "Create a new vesting account funded with an allocation of tokens."
+  }
+]

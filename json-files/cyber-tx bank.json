@@ -1,0 +1,7 @@
+[
+  {
+    "_command_root": "tx bank",
+    "_command": "send",
+    "_description": "Send funds from one account to another. Note, the'--from' flag is"
+  }
+]

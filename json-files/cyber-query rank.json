@@ -1,0 +1,52 @@
+[
+  {
+    "_command_root": "query rank",
+    "_command": "backlinks",
+    "_description": "Query backlinks of given particle"
+  },
+  {
+    "_command_root": "query rank",
+    "_command": "is-exist",
+    "_description": "Query is link exist between particles for given account"
+  },
+  {
+    "_command_root": "query rank",
+    "_command": "is-exist-any",
+    "_description": "Query is any link exist between particles"
+  },
+  {
+    "_command_root": "query rank",
+    "_command": "karma",
+    "_description": "Query the current karma of given neuron"
+  },
+  {
+    "_command_root": "query rank",
+    "_command": "negentropy",
+    "_description": "Query the current negentropy of given particle"
+  },
+  {
+    "_command_root": "query rank",
+    "_command": "negentropy",
+    "_description": "Query the current negentropy of whole graph"
+  },
+  {
+    "_command_root": "query rank",
+    "_command": "params",
+    "_description": "Query the current rank parameters"
+  },
+  {
+    "_command_root": "query rank",
+    "_command": "rank",
+    "_description": "Query the current rank of given particle"
+  },
+  {
+    "_command_root": "query rank",
+    "_command": "search",
+    "_description": "Query search of given particle"
+  },
+  {
+    "_command_root": "query rank",
+    "_command": "top",
+    "_description": "Query top"
+  }
+]

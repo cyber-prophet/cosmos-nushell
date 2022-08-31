@@ -1,0 +1,32 @@
+[
+  {
+    "_command_root": "tendermint",
+    "_command": "reset-state",
+    "_description": "Remove all the data and WAL"
+  },
+  {
+    "_command_root": "tendermint",
+    "_command": "show-address",
+    "_description": "Shows this node's tendermint validator consensus address"
+  },
+  {
+    "_command_root": "tendermint",
+    "_command": "show-node-id",
+    "_description": "Show this node's ID"
+  },
+  {
+    "_command_root": "tendermint",
+    "_command": "show-validator",
+    "_description": "Show this node's tendermint validator info"
+  },
+  {
+    "_command_root": "tendermint",
+    "_command": "unsafe-reset-all",
+    "_description": "(unsafe) Remove all the data and WAL, reset this node's validator to genesis state"
+  },
+  {
+    "_command_root": "tendermint",
+    "_command": "version",
+    "_description": "Print tendermint libraries' version"
+  }
+]
