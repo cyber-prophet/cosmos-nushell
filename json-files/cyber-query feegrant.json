@@ -1,0 +1,17 @@
+[
+  {
+    "_command_root": "query feegrant",
+    "_command": "grant",
+    "_description": "Query details of a single grant"
+  },
+  {
+    "_command_root": "query feegrant",
+    "_command": "grants-by-grantee",
+    "_description": "Query all grants of a grantee"
+  },
+  {
+    "_command_root": "query feegrant",
+    "_command": "grants-by-granter",
+    "_description": "Query all grants by a granter"
+  }
+]

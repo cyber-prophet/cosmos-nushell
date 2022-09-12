@@ -1,0 +1,47 @@
+[
+  {
+    "_command_root": "keys",
+    "_command": "add",
+    "_description": "Add an encrypted private key (either newly generated or recovered), encrypt it, and save to <name> file"
+  },
+  {
+    "_command_root": "keys",
+    "_command": "delete",
+    "_description": "Delete the given keys"
+  },
+  {
+    "_command_root": "keys",
+    "_command": "export",
+    "_description": "Export private keys"
+  },
+  {
+    "_command_root": "keys",
+    "_command": "import",
+    "_description": "Import private keys into the local keybase"
+  },
+  {
+    "_command_root": "keys",
+    "_command": "list",
+    "_description": "List all keys"
+  },
+  {
+    "_command_root": "keys",
+    "_command": "migrate",
+    "_description": "Migrate keys from the legacy (db-based) Keybase"
+  },
+  {
+    "_command_root": "keys",
+    "_command": "mnemonic",
+    "_description": "Compute the bip39 mnemonic for some input entropy"
+  },
+  {
+    "_command_root": "keys",
+    "_command": "parse",
+    "_description": "Parse address from hex to bech32 and vice versa"
+  },
+  {
+    "_command_root": "keys",
+    "_command": "show",
+    "_description": "Retrieve key information by name or address"
+  }
+]

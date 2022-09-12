@@ -1,0 +1,82 @@
+[
+  {
+    "_command_root": "tx gov submit-proposal",
+    "_command": "cancel-software-upgrade",
+    "_description": "Cancel the current software upgrade proposal"
+  },
+  {
+    "_command_root": "tx gov submit-proposal",
+    "_command": "clear-contract-admin",
+    "_description": "Submit a clear admin for a contract to prevent further migrations proposal"
+  },
+  {
+    "_command_root": "tx gov submit-proposal",
+    "_command": "community-pool-spend",
+    "_description": "Submit a community pool spend proposal"
+  },
+  {
+    "_command_root": "tx gov submit-proposal",
+    "_command": "execute-contract",
+    "_description": "Submit a execute wasm contract proposal (run by any address)"
+  },
+  {
+    "_command_root": "tx gov submit-proposal",
+    "_command": "ibc-upgrade",
+    "_description": "Submit an IBC upgrade proposal"
+  },
+  {
+    "_command_root": "tx gov submit-proposal",
+    "_command": "instantiate-contract",
+    "_description": "Submit an instantiate wasm contract proposal"
+  },
+  {
+    "_command_root": "tx gov submit-proposal",
+    "_command": "migrate-contract",
+    "_description": "Submit a migrate wasm contract to a new code version proposal"
+  },
+  {
+    "_command_root": "tx gov submit-proposal",
+    "_command": "param-change",
+    "_description": "Submit a parameter change proposal"
+  },
+  {
+    "_command_root": "tx gov submit-proposal",
+    "_command": "pin-codes",
+    "_description": "Submit a pin code proposal for pinning a code to cache"
+  },
+  {
+    "_command_root": "tx gov submit-proposal",
+    "_command": "set-contract-admin",
+    "_description": "Submit a new admin for a contract proposal"
+  },
+  {
+    "_command_root": "tx gov submit-proposal",
+    "_command": "software-upgrade",
+    "_description": "Submit a software upgrade proposal"
+  },
+  {
+    "_command_root": "tx gov submit-proposal",
+    "_command": "sudo-contract",
+    "_description": "Submit a sudo wasm contract proposal (to call privileged commands)"
+  },
+  {
+    "_command_root": "tx gov submit-proposal",
+    "_command": "unpin-codes",
+    "_description": "Submit a unpin code proposal for unpinning a code to cache"
+  },
+  {
+    "_command_root": "tx gov submit-proposal",
+    "_command": "update-client",
+    "_description": "Submit an update IBC client proposal"
+  },
+  {
+    "_command_root": "tx gov submit-proposal",
+    "_command": "update-instantiate-config",
+    "_description": "Submit an update instantiate config proposal."
+  },
+  {
+    "_command_root": "tx gov submit-proposal",
+    "_command": "wasm-store",
+    "_description": "Submit a wasm binary proposal"
+  }
+]

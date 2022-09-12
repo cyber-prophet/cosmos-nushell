@@ -1,0 +1,137 @@
+[
+  {
+    "_command_root": "query",
+    "_command": "account",
+    "_description": "Query for account by address"
+  },
+  {
+    "_command_root": "query",
+    "_command": "auth",
+    "_description": "Querying commands for the auth module"
+  },
+  {
+    "_command_root": "query",
+    "_command": "authz",
+    "_description": "Querying commands for the authz module"
+  },
+  {
+    "_command_root": "query",
+    "_command": "bandwidth",
+    "_description": "Querying commands for the bandwidth module"
+  },
+  {
+    "_command_root": "query",
+    "_command": "bank",
+    "_description": "Querying commands for the bank module"
+  },
+  {
+    "_command_root": "query",
+    "_command": "block",
+    "_description": "Get verified data for a the block at given height"
+  },
+  {
+    "_command_root": "query",
+    "_command": "distribution",
+    "_description": "Querying commands for the distribution module"
+  },
+  {
+    "_command_root": "query",
+    "_command": "dmn",
+    "_description": "Querying commands for the dmn module"
+  },
+  {
+    "_command_root": "query",
+    "_command": "evidence",
+    "_description": "Query for evidence by hash or for all (paginated) submitted evidence"
+  },
+  {
+    "_command_root": "query",
+    "_command": "feegrant",
+    "_description": "Querying commands for the feegrant module"
+  },
+  {
+    "_command_root": "query",
+    "_command": "gov",
+    "_description": "Querying commands for the governance module"
+  },
+  {
+    "_command_root": "query",
+    "_command": "graph",
+    "_description": "Querying commands for the graph module"
+  },
+  {
+    "_command_root": "query",
+    "_command": "grid",
+    "_description": "Querying commands for the grid module"
+  },
+  {
+    "_command_root": "query",
+    "_command": "ibc",
+    "_description": "Querying commands for the IBC module"
+  },
+  {
+    "_command_root": "query",
+    "_command": "ibc-transfer",
+    "_description": "IBC fungible token transfer query subcommands"
+  },
+  {
+    "_command_root": "query",
+    "_command": "liquidity",
+    "_description": "Querying commands for the liquidity module"
+  },
+  {
+    "_command_root": "query",
+    "_command": "mint",
+    "_description": "Querying commands for the minting module"
+  },
+  {
+    "_command_root": "query",
+    "_command": "params",
+    "_description": "Querying commands for the params module"
+  },
+  {
+    "_command_root": "query",
+    "_command": "rank",
+    "_description": "Querying commands for the rank module"
+  },
+  {
+    "_command_root": "query",
+    "_command": "resources",
+    "_description": "Querying commands for the resources module"
+  },
+  {
+    "_command_root": "query",
+    "_command": "slashing",
+    "_description": "Querying commands for the slashing module"
+  },
+  {
+    "_command_root": "query",
+    "_command": "staking",
+    "_description": "Querying commands for the staking module"
+  },
+  {
+    "_command_root": "query",
+    "_command": "tendermint-validator-set",
+    "_description": "Get the full tendermint validator set at given height"
+  },
+  {
+    "_command_root": "query",
+    "_command": "tx",
+    "_description": "Query for a transaction by hash, \"<addr>/<seq>\" combination or comma-separated signatures in a committed block"
+  },
+  {
+    "_command_root": "query",
+    "_command": "txs",
+    "_description": "Query for paginated transactions that match a set of events"
+  },
+  {
+    "_command_root": "query",
+    "_command": "upgrade",
+    "_description": "Querying commands for the upgrade module"
+  },
+  {
+    "_command_root": "query",
+    "_command": "wasm",
+    "_description": "Querying commands for the wasm module"
+  }
+]

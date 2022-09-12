@@ -1,0 +1,52 @@
+[
+  {
+    "_command_root": "query gov",
+    "_command": "deposit",
+    "_description": "Query details of a deposit"
+  },
+  {
+    "_command_root": "query gov",
+    "_command": "deposits",
+    "_description": "Query deposits on a proposal"
+  },
+  {
+    "_command_root": "query gov",
+    "_command": "param",
+    "_description": "Query the parameters (voting|tallying|deposit) of the governance process"
+  },
+  {
+    "_command_root": "query gov",
+    "_command": "params",
+    "_description": "Query the parameters of the governance process"
+  },
+  {
+    "_command_root": "query gov",
+    "_command": "proposal",
+    "_description": "Query details of a single proposal"
+  },
+  {
+    "_command_root": "query gov",
+    "_command": "proposals",
+    "_description": "Query proposals with optional filters"
+  },
+  {
+    "_command_root": "query gov",
+    "_command": "proposer",
+    "_description": "Query the proposer of a governance proposal"
+  },
+  {
+    "_command_root": "query gov",
+    "_command": "tally",
+    "_description": "Get the tally of a proposal vote"
+  },
+  {
+    "_command_root": "query gov",
+    "_command": "vote",
+    "_description": "Query details of a single vote"
+  },
+  {
+    "_command_root": "query gov",
+    "_command": "votes",
+    "_description": "Query votes on a proposal"
+  }
+]

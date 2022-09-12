@@ -1,0 +1,37 @@
+[
+  {
+    "_command_root": "query grid",
+    "_command": "params",
+    "_description": "Query the current grid module parameters information"
+  },
+  {
+    "_command_root": "query grid",
+    "_command": "route",
+    "_description": "Query grid route that routes for given source and destination accounts"
+  },
+  {
+    "_command_root": "query grid",
+    "_command": "routed-from",
+    "_description": "Query grid value that routed from source account"
+  },
+  {
+    "_command_root": "query grid",
+    "_command": "routed-to",
+    "_description": "Query grid value that routed to destination account"
+  },
+  {
+    "_command_root": "query grid",
+    "_command": "routes",
+    "_description": "Query all grid routes"
+  },
+  {
+    "_command_root": "query grid",
+    "_command": "routes-from",
+    "_description": "Query all grid routes that made from source account"
+  },
+  {
+    "_command_root": "query grid",
+    "_command": "routes-to",
+    "_description": "Query all grid routes that routed to destination account"
+  }
+]

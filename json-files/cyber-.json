@@ -1,0 +1,97 @@
+[
+  {
+    "_command_root": "",
+    "_command": "add-genesis-account",
+    "_description": "Add a genesis account to genesis.json"
+  },
+  {
+    "_command_root": "",
+    "_command": "collect-gentxs",
+    "_description": "Collect genesis txs and output a genesis.json file"
+  },
+  {
+    "_command_root": "",
+    "_command": "config",
+    "_description": "Create or query an application CLI configuration file"
+  },
+  {
+    "_command_root": "",
+    "_command": "debug",
+    "_description": "Tool for helping with debugging your application"
+  },
+  {
+    "_command_root": "",
+    "_command": "export",
+    "_description": "Export state to JSON"
+  },
+  {
+    "_command_root": "",
+    "_command": "gentx",
+    "_description": "Generate a genesis tx carrying a self delegation"
+  },
+  {
+    "_command_root": "",
+    "_command": "help",
+    "_description": "Help about any command"
+  },
+  {
+    "_command_root": "",
+    "_command": "init",
+    "_description": "Initialize private validator, p2p, genesis, and application configuration files"
+  },
+  {
+    "_command_root": "",
+    "_command": "keys",
+    "_description": "Manage your application's keys"
+  },
+  {
+    "_command_root": "",
+    "_command": "migrate",
+    "_description": "Migrate genesis to a specified target version"
+  },
+  {
+    "_command_root": "",
+    "_command": "query",
+    "_description": "Querying subcommands"
+  },
+  {
+    "_command_root": "",
+    "_command": "rollback",
+    "_description": "rollback cosmos-sdk and tendermint state by one height"
+  },
+  {
+    "_command_root": "",
+    "_command": "start",
+    "_description": "Run the full node"
+  },
+  {
+    "_command_root": "",
+    "_command": "status",
+    "_description": "Query remote node for status"
+  },
+  {
+    "_command_root": "",
+    "_command": "tendermint",
+    "_description": "Tendermint subcommands"
+  },
+  {
+    "_command_root": "",
+    "_command": "testnet",
+    "_description": "Initialize files for a simapp testnet"
+  },
+  {
+    "_command_root": "",
+    "_command": "tx",
+    "_description": "Transactions subcommands"
+  },
+  {
+    "_command_root": "",
+    "_command": "validate-genesis",
+    "_description": "validates the genesis file at the default location or at the location passed as an arg"
+  },
+  {
+    "_command_root": "",
+    "_command": "version",
+    "_description": "Print the application binary version information"
+  }
+]

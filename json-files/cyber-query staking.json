@@ -1,0 +1,72 @@
+[
+  {
+    "_command_root": "query staking",
+    "_command": "delegation",
+    "_description": "Query a delegation based on address and validator address"
+  },
+  {
+    "_command_root": "query staking",
+    "_command": "delegations",
+    "_description": "Query all delegations made by one delegator"
+  },
+  {
+    "_command_root": "query staking",
+    "_command": "delegations-to",
+    "_description": "Query all delegations made to one validator"
+  },
+  {
+    "_command_root": "query staking",
+    "_command": "historical-info",
+    "_description": "Query historical info at given height"
+  },
+  {
+    "_command_root": "query staking",
+    "_command": "params",
+    "_description": "Query the current staking parameters information"
+  },
+  {
+    "_command_root": "query staking",
+    "_command": "pool",
+    "_description": "Query the current staking pool values"
+  },
+  {
+    "_command_root": "query staking",
+    "_command": "redelegation",
+    "_description": "Query a redelegation record based on delegator and a source and destination validator address"
+  },
+  {
+    "_command_root": "query staking",
+    "_command": "redelegations",
+    "_description": "Query all redelegations records for one delegator"
+  },
+  {
+    "_command_root": "query staking",
+    "_command": "redelegations-from",
+    "_description": "Query all outgoing redelegatations from a validator"
+  },
+  {
+    "_command_root": "query staking",
+    "_command": "unbonding-delegation",
+    "_description": "Query an unbonding-delegation record based on delegator and validator address"
+  },
+  {
+    "_command_root": "query staking",
+    "_command": "unbonding-delegations",
+    "_description": "Query all unbonding-delegations records for one delegator"
+  },
+  {
+    "_command_root": "query staking",
+    "_command": "unbonding-delegations-from",
+    "_description": "Query all unbonding delegatations from a validator"
+  },
+  {
+    "_command_root": "query staking",
+    "_command": "validator",
+    "_description": "Query a validator"
+  },
+  {
+    "_command_root": "query staking",
+    "_command": "validators",
+    "_description": "Query for all validators"
+  }
+]

@@ -1,0 +1,12 @@
+[
+  {
+    "_command_root": "tx feegrant",
+    "_command": "grant",
+    "_description": "Grant Fee allowance to an address"
+  },
+  {
+    "_command_root": "tx feegrant",
+    "_command": "revoke",
+    "_description": "revoke fee-grant"
+  }
+]

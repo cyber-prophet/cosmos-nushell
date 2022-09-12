@@ -1,0 +1,17 @@
+[
+  {
+    "_command_root": "query authz",
+    "_command": "grants",
+    "_description": "query grants for a granter-grantee pair and optionally a msg-type-url"
+  },
+  {
+    "_command_root": "query authz",
+    "_command": "grants-by-grantee",
+    "_description": "query authorization grants granted to a grantee"
+  },
+  {
+    "_command_root": "query authz",
+    "_command": "grants-by-granter",
+    "_description": "query authorization grants granted by granter"
+  }
+]

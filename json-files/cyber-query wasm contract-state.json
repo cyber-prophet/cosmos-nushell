@@ -1,0 +1,17 @@
+[
+  {
+    "_command_root": "query wasm contract-state",
+    "_command": "all",
+    "_description": "Prints out all internal state of a contract given its address"
+  },
+  {
+    "_command_root": "query wasm contract-state",
+    "_command": "raw",
+    "_description": "Prints out internal state for key of a contract given its address"
+  },
+  {
+    "_command_root": "query wasm contract-state",
+    "_command": "smart",
+    "_description": "Calls contract with given address with query data and prints the returned result"
+  }
+]

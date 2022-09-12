@@ -1,0 +1,12 @@
+[
+  {
+    "_command_root": "tx ibc",
+    "_command": "channel",
+    "_description": "IBC channel transaction subcommands"
+  },
+  {
+    "_command_root": "tx ibc",
+    "_command": "client",
+    "_description": "IBC client transaction subcommands"
+  }
+]
