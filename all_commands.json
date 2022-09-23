@@ -481,7 +481,7 @@
             "      --inv-check-period uint                           Assert registered invariants every N blocks",
             "      --min-retain-blocks uint                          Minimum block height offset during ABCI commit to prune Tendermint blocks",
             "      --minimum-gas-prices string                       Minimum gas prices to accept for transactions; Any fee in a tx must meet this minimum (e.g. 0.01photino;0.0001stake)",
-            "      --moniker string                                  node name (default \"Pro16.local\")",
+            "      --moniker string                                  node name (default \"Pro16\")",
             "      --p2p.laddr string                                node listen address. (0.0.0.0:0 means any interface, any port) (default \"tcp://0.0.0.0:26656\")",
             "      --p2p.persistent_peers string                     comma-delimited ID@host:port persistent peers",
             "      --p2p.pex                                         enable/disable Peer-Exchange (default true)",
@@ -1147,8 +1147,9 @@
     {
         "command": "cyber tx authz grant",
         "Description": [
-            "grant authorization to an address to execute a transaction on your behalf:",
-            "Examples:",
+            "grant authorization to an address to execute a transaction on your behalf:"
+        ],
+        "Examples": [
             " $ cyber tx authz grant cosmos1skjw.. send /cosmos.bank.v1beta1.MsgSend --spend-limit=1000stake --from=cosmos1skl..",
             " $ cyber tx authz grant cosmos1skjw.. generic --msg-type=/cosmos.gov.v1beta1.MsgVote --from=cosmos1sk.."
         ],
@@ -1161,7 +1162,7 @@
             "  -b, --broadcast-mode string        Transaction broadcasting mode (sync|async|block) (default \"sync\")",
             "      --deny-validators strings      Deny validators addresses separated by ,",
             "      --dry-run                      ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it",
-            "      --expiration int               The Unix timestamp. Default is one year. (default 1695352673)",
+            "      --expiration int               The Unix timestamp. Default is one year. (default 1695367476)",
             "      --fee-account string           Fee account pays fees for the transaction instead of deducting from the signer",
             "      --fees string                  Fees to pay along with transaction; eg: 10uatom",
             "      --from string                  Name or address of private key with which to sign",
@@ -1196,8 +1197,9 @@
         "command": "cyber tx feegrant grant",
         "Description": [
             "Grant authorization to pay fees from your address. Note, the'--from' flag is",
-            "\t\t\t\tignored as it is implied from [granter].",
-            "Examples:",
+            "\t\t\t\tignored as it is implied from [granter]."
+        ],
+        "Examples": [
             "cyber tx feegrant grant cosmos1skjw... cosmos1skjw... --spend-limit 100stake --expiration 2022-01-30T15:04:05Z or",
             "cyber tx feegrant grant cosmos1skjw... cosmos1skjw... --spend-limit 100stake --period 3600 --period-limit 10stake --expiration 36000 or",
             "cyber tx feegrant grant cosmos1skjw... cosmos1skjw... --spend-limit 100stake --expiration 2022-01-30T15:04:05Z ",
@@ -1552,8 +1554,9 @@
             "\t- ConsensusState JSON example: {\"@type\":\"/ibc.lightclients.solomachine.v1.ConsensusState\",\"public_key\":{\"@type\":\"/cosmos.crypto.secp256k1.PubKey\",\"key\":\"AtK50+5pJOoaa04qqAqrnyAqsYrwrR/INnA6UPIaYZlp\"},\"diversifier\":\"testing\",\"timestamp\":\"10\"}"
         ],
         "Usage": [
-            "  cyber tx ibc client create [path/to/client_state.json] [path/to/consensus_state.json] [flags]",
-            "Examples:",
+            "  cyber tx ibc client create [path/to/client_state.json] [path/to/consensus_state.json] [flags]"
+        ],
+        "Examples": [
             "cyber tx ibc client create [path/to/client_state.json] [path/to/consensus_state.json] --from node0 --home ../node0/<app>cli --chain-id $CID"
         ],
         "Flags": [
@@ -1594,8 +1597,9 @@
             "update existing client with a header"
         ],
         "Usage": [
-            "  cyber tx ibc client update [client-id] [path/to/header.json] [flags]",
-            "Examples:",
+            "  cyber tx ibc client update [client-id] [path/to/header.json] [flags]"
+        ],
+        "Examples": [
             "cyber tx ibc client update [client-id] [path/to/header.json] --from node0 --home ../node0/<app>cli --chain-id $CID"
         ],
         "Flags": [
@@ -2131,8 +2135,9 @@
             "submit a client misbehaviour to prevent future updates"
         ],
         "Usage": [
-            "  cyber tx ibc client misbehaviour [path/to/misbehaviour.json] [flags]",
-            "Examples:",
+            "  cyber tx ibc client misbehaviour [path/to/misbehaviour.json] [flags]"
+        ],
+        "Examples": [
             "cyber tx ibc client misbehaviour [path/to/misbehaviour.json] --from node0 --home ../node0/<app>cli --chain-id $CID"
         ],
         "Flags": [
@@ -2725,8 +2730,9 @@
             "corresponding to the counterparty channel. Any timeout set to 0 is disabled."
         ],
         "Usage": [
-            "  cyber tx ibc-transfer transfer [src-port] [src-channel] [receiver] [amount] [flags]",
-            "Examples:",
+            "  cyber tx ibc-transfer transfer [src-port] [src-channel] [receiver] [amount] [flags]"
+        ],
+        "Examples": [
             "cyber tx ibc-transfer transfer [src-port] [src-channel] [receiver] [amount]"
         ],
         "Flags": [
@@ -2910,8 +2916,9 @@
     {
         "command": "cyber query authz grants-by-grantee",
         "Description": [
-            "Query authorization grants granted to a grantee.",
-            "Examples:",
+            "Query authorization grants granted to a grantee."
+        ],
+        "Examples": [
             "$ cyber q authz grants-by-grantee cosmos1skj.."
         ],
         "Usage": [
@@ -3307,8 +3314,9 @@
             "Query the denom hash info from a given denom trace"
         ],
         "Usage": [
-            "  cyber query ibc-transfer denom-hash [trace] [flags]",
-            "Examples:",
+            "  cyber query ibc-transfer denom-hash [trace] [flags]"
+        ],
+        "Examples": [
             "cyber query ibc-transfer denom-hash [denom_trace]"
         ],
         "Flags": [
@@ -3331,8 +3339,9 @@
             "Query the trace info for all token denominations"
         ],
         "Usage": [
-            "  cyber query ibc-transfer denom-traces [flags]",
-            "Examples:",
+            "  cyber query ibc-transfer denom-traces [flags]"
+        ],
+        "Examples": [
             "cyber query ibc-transfer denom-traces"
         ],
         "Flags": [
@@ -3361,8 +3370,9 @@
             "Query the current ibc-transfer parameters"
         ],
         "Usage": [
-            "  cyber query ibc-transfer params [flags]",
-            "Examples:",
+            "  cyber query ibc-transfer params [flags]"
+        ],
+        "Examples": [
             "cyber query ibc-transfer params"
         ],
         "Flags": [
@@ -3963,8 +3973,9 @@
             "\t- ConsensusState JSON example: {\"@type\":\"/ibc.lightclients.solomachine.v1.ConsensusState\",\"public_key\":{\"@type\":\"/cosmos.crypto.secp256k1.PubKey\",\"key\":\"AtK50+5pJOoaa04qqAqrnyAqsYrwrR/INnA6UPIaYZlp\"},\"diversifier\":\"testing\",\"timestamp\":\"10\"}"
         ],
         "Usage": [
-            "  cyber tx ibc client upgrade [client-identifier] [path/to/client_state.json] [path/to/consensus_state.json] [upgrade-client-proof] [upgrade-consensus-state-proof] [flags]",
-            "Examples:",
+            "  cyber tx ibc client upgrade [client-identifier] [path/to/client_state.json] [path/to/consensus_state.json] [upgrade-client-proof] [upgrade-consensus-state-proof] [flags]"
+        ],
+        "Examples": [
             "cyber tx ibc client upgrade [client-identifier] [path/to/client_state.json] [path/to/consensus_state.json] [client-state-proof] [consensus-state-proof] --from node0 --home ../node0/<app>cli --chain-id $CID"
         ],
         "Flags": [
@@ -4341,8 +4352,9 @@
         "command": "cyber query authz grants",
         "Description": [
             "Query authorization grants for a granter-grantee pair. If msg-type-url",
-            "is set, it will select grants only for that msg type.",
-            "Examples:",
+            "is set, it will select grants only for that msg type."
+        ],
+        "Examples": [
             "$ cyber query authz grants cosmos1skj.. cosmos1skjwj..",
             "$ cyber query authz grants cosmos1skjw.. cosmos1skjwj.. /cosmos.bank.v1beta1.MsgSend"
         ],
@@ -4546,8 +4558,9 @@
             "Get the escrow address for a channel"
         ],
         "Usage": [
-            "  cyber query ibc-transfer escrow-address [flags]",
-            "Examples:",
+            "  cyber query ibc-transfer escrow-address [flags]"
+        ],
+        "Examples": [
             "cyber query ibc-transfer escrow-address [port] [channel-id]"
         ],
         "Flags": [
@@ -5502,8 +5515,9 @@
             "Query the denom trace info from a given trace hash"
         ],
         "Usage": [
-            "  cyber query ibc-transfer denom-trace [hash] [flags]",
-            "Examples:",
+            "  cyber query ibc-transfer denom-trace [hash] [flags]"
+        ],
+        "Examples": [
             "cyber query ibc-transfer denom-trace [hash]"
         ],
         "Flags": [
@@ -7262,8 +7276,9 @@
     {
         "command": "cyber query authz grants-by-granter",
         "Description": [
-            "Query authorization grants granted by granter.",
-            "Examples:",
+            "Query authorization grants granted by granter."
+        ],
+        "Examples": [
             "$ cyber q authz grants-by-granter cosmos1skj.."
         ],
         "Usage": [
@@ -7735,8 +7750,9 @@
             "Query the client state associated with a channel, by providing its port and channel identifiers."
         ],
         "Usage": [
-            "  cyber query ibc channel client-state [port-id] [channel-id] [flags]",
-            "Examples:",
+            "  cyber query ibc channel client-state [port-id] [channel-id] [flags]"
+        ],
+        "Examples": [
             "cyber query ibc channel client-state [port-id] [channel-id]"
         ],
         "Flags": [
@@ -7759,8 +7775,9 @@
             "Query an IBC channel end from a port and channel identifiers"
         ],
         "Usage": [
-            "  cyber query ibc channel end [port-id] [channel-id] [flags]",
-            "Examples:",
+            "  cyber query ibc channel end [port-id] [channel-id] [flags]"
+        ],
+        "Examples": [
             "cyber query ibc channel end [port-id] [channel-id]"
         ],
         "Flags": [
@@ -7784,8 +7801,9 @@
             "Query a packet acknowledgement"
         ],
         "Usage": [
-            "  cyber query ibc channel packet-ack [port-id] [channel-id] [sequence] [flags]",
-            "Examples:",
+            "  cyber query ibc channel packet-ack [port-id] [channel-id] [sequence] [flags]"
+        ],
+        "Examples": [
             "cyber query ibc channel packet-ack [port-id] [channel-id] [sequence]"
         ],
         "Flags": [
@@ -7809,8 +7827,9 @@
             "Query all packet commitments associated with a channel"
         ],
         "Usage": [
-            "  cyber query ibc channel packet-commitments [port-id] [channel-id] [flags]",
-            "Examples:",
+            "  cyber query ibc channel packet-commitments [port-id] [channel-id] [flags]"
+        ],
+        "Examples": [
             "cyber query ibc channel packet-commitments [port-id] [channel-id]"
         ],
         "Flags": [
@@ -7841,8 +7860,9 @@
             "- Unreceived packet acknowledgement: packet commitment exists on original sending (executing) chain and ack exists on receiving chain."
         ],
         "Usage": [
-            "  cyber query ibc channel unreceived-acks [port-id] [channel-id] [flags]",
-            "Examples:",
+            "  cyber query ibc channel unreceived-acks [port-id] [channel-id] [flags]"
+        ],
+        "Examples": [
             "cyber query ibc channel unreceived-acks [port-id] [channel-id] --sequences=1,2,3"
         ],
         "Flags": [
@@ -7866,8 +7886,9 @@
             "Query all connections ends from a chain"
         ],
         "Usage": [
-            "  cyber query ibc connection connections [flags]",
-            "Examples:",
+            "  cyber query ibc connection connections [flags]"
+        ],
+        "Examples": [
             "cyber query ibc connection connections"
         ],
         "Flags": [
@@ -7896,8 +7917,9 @@
             "Query stored client connection paths"
         ],
         "Usage": [
-            "  cyber query ibc connection path [client-id] [flags]",
-            "Examples:",
+            "  cyber query ibc connection path [client-id] [flags]"
+        ],
+        "Examples": [
             "cyber query  ibc connection path [client-id]"
         ],
         "Flags": [
@@ -8172,8 +8194,9 @@
             "Query all channels from a chain"
         ],
         "Usage": [
-            "  cyber query ibc channel channels [flags]",
-            "Examples:",
+            "  cyber query ibc channel channels [flags]"
+        ],
+        "Examples": [
             "cyber query ibc channel channels"
         ],
         "Flags": [
@@ -8202,8 +8225,9 @@
             "Query the next receive sequence for a given channel"
         ],
         "Usage": [
-            "  cyber query ibc channel next-sequence-receive [port-id] [channel-id] [flags]",
-            "Examples:",
+            "  cyber query ibc channel next-sequence-receive [port-id] [channel-id] [flags]"
+        ],
+        "Examples": [
             "cyber query ibc channel next-sequence-receive [port-id] [channel-id]"
         ],
         "Flags": [
@@ -8227,8 +8251,9 @@
             "Query a packet receipt"
         ],
         "Usage": [
-            "  cyber query ibc channel packet-receipt [port-id] [channel-id] [sequence] [flags]",
-            "Examples:",
+            "  cyber query ibc channel packet-receipt [port-id] [channel-id] [sequence] [flags]"
+        ],
+        "Examples": [
             "cyber query ibc channel packet-receipt [port-id] [channel-id] [sequence]"
         ],
         "Flags": [
@@ -8252,8 +8277,9 @@
             "Query stored connection end"
         ],
         "Usage": [
-            "  cyber query ibc connection end [connection-id] [flags]",
-            "Examples:",
+            "  cyber query ibc connection end [connection-id] [flags]"
+        ],
+        "Examples": [
             "cyber query ibc connection end [connection-id]"
         ],
         "Flags": [
@@ -8403,8 +8429,9 @@
             "Query all channels associated with a connection"
         ],
         "Usage": [
-            "  cyber query ibc channel connections [connection-id] [flags]",
-            "Examples:",
+            "  cyber query ibc channel connections [connection-id] [flags]"
+        ],
+        "Examples": [
             "cyber query ibc channel connections [connection-id]"
         ],
         "Flags": [
@@ -8435,8 +8462,9 @@
             "- Unreceived packet commitments: no acknowledgement exists on receiving chain for the given packet commitment sequence on sending chain."
         ],
         "Usage": [
-            "  cyber query ibc channel unreceived-packets [port-id] [channel-id] [flags]",
-            "Examples:",
+            "  cyber query ibc channel unreceived-packets [port-id] [channel-id] [flags]"
+        ],
+        "Examples": [
             "cyber query ibc channel unreceived-packets [port-id] [channel-id] --sequences=1,2,3"
         ],
         "Flags": [
@@ -8513,8 +8541,9 @@
             "Query a packet commitment"
         ],
         "Usage": [
-            "  cyber query ibc channel packet-commitment [port-id] [channel-id] [sequence] [flags]",
-            "Examples:",
+            "  cyber query ibc channel packet-commitment [port-id] [channel-id] [sequence] [flags]"
+        ],
+        "Examples": [
             "cyber query ibc channel packet-commitment [port-id] [channel-id] [sequence]"
         ],
         "Flags": [
@@ -8612,8 +8641,9 @@
             "Query all the consensus states from a given client state."
         ],
         "Usage": [
-            "  cyber query ibc client consensus-states [client-id] [flags]",
-            "Examples:",
+            "  cyber query ibc client consensus-states [client-id] [flags]"
+        ],
+        "Examples": [
             "cyber query ibc client consensus-states [client-id]"
         ],
         "Flags": [
@@ -8642,8 +8672,9 @@
             "Query the current ibc client parameters"
         ],
         "Usage": [
-            "  cyber query ibc client params [flags]",
-            "Examples:",
+            "  cyber query ibc client params [flags]"
+        ],
+        "Examples": [
             "cyber query ibc client params"
         ],
         "Flags": [
@@ -8666,8 +8697,9 @@
             "Query stored client state"
         ],
         "Usage": [
-            "  cyber query ibc client state [client-id] [flags]",
-            "Examples:",
+            "  cyber query ibc client state [client-id] [flags]"
+        ],
+        "Examples": [
             "cyber query ibc client state [client-id]"
         ],
         "Flags": [
@@ -8691,8 +8723,9 @@
             "Query client activity status. Any client without an 'Active' status is considered inactive"
         ],
         "Usage": [
-            "  cyber query ibc client status [client-id] [flags]",
-            "Examples:",
+            "  cyber query ibc client status [client-id] [flags]"
+        ],
+        "Examples": [
             "cyber query ibc client status [client-id]"
         ],
         "Flags": [
@@ -8713,8 +8746,9 @@
             "If the '--latest' flag is included, the query returns the latest consensus state, overriding the height argument."
         ],
         "Usage": [
-            "  cyber query ibc client consensus-state [client-id] [height] [flags]",
-            "Examples:",
+            "  cyber query ibc client consensus-state [client-id] [height] [flags]"
+        ],
+        "Examples": [
             "cyber query ibc client  consensus-state [client-id] [height]"
         ],
         "Flags": [
@@ -8739,8 +8773,9 @@
             "Query the self consensus state for this chain. This result may be used for verifying IBC clients representing this chain which are hosted on counterparty chains."
         ],
         "Usage": [
-            "  cyber query ibc client self-consensus-state [flags]",
-            "Examples:",
+            "  cyber query ibc client self-consensus-state [flags]"
+        ],
+        "Examples": [
             "cyber query ibc client self-consensus-state"
         ],
         "Flags": [
@@ -8763,8 +8798,9 @@
             "Query the latest Tendermint header of the running chain"
         ],
         "Usage": [
-            "  cyber query ibc client header [flags]",
-            "Examples:",
+            "  cyber query ibc client header [flags]"
+        ],
+        "Examples": [
             "cyber query ibc client  header"
         ],
         "Flags": [
@@ -8787,8 +8823,9 @@
             "Query all available light clients"
         ],
         "Usage": [
-            "  cyber query ibc client states [flags]",
-            "Examples:",
+            "  cyber query ibc client states [flags]"
+        ],
+        "Examples": [
             "cyber query ibc client states"
         ],
         "Flags": [
