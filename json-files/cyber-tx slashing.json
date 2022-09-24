@@ -1,7 +1,0 @@
-[
-  {
-    "_command_root": "tx slashing",
-    "_command": "unjail",
-    "_description": "unjail validator previously jailed for downtime"
-  }
-]

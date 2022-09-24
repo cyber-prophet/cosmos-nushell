@@ -1,7 +1,0 @@
-[
-  {
-    "_command_root": "tx crisis",
-    "_command": "invariant-broken",
-    "_description": "Submit proof that an invariant broken to halt the chain"
-  }
-]
