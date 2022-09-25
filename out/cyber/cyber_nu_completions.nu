@@ -1,3 +1,14 @@
+def "cy keys table" [] {
+	cyber keys list | lines | window 5 -s 5 | 
+    each {|it| ($it| parse -r '(?P<col>\w+):(?P<value>.*)')} | 
+    each {|it| ($it| transpose -r)} | reduce {|it, acc| $it | append $acc} | 
+    select name type address 
+}
+
+def "nu-complete cyber keys names" [] {
+    cy keys table | get name
+  }
+
 
 # Collect genesis txs and output a genesis.json file
 extern 'cyber collect-gentxs' [
@@ -23,7 +34,7 @@ extern 'cyber gentx' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -273,7 +284,7 @@ extern 'cyber tx broadcast' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -304,7 +315,7 @@ extern 'cyber tx decode' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -336,7 +347,7 @@ extern 'cyber tx encode' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -369,7 +380,7 @@ extern 'cyber tx multisign-batch' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -404,7 +415,7 @@ extern 'cyber tx sign' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -439,7 +450,7 @@ extern 'cyber tx validate-signatures' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -474,7 +485,7 @@ extern 'cyber tx authz grant' [
 	--expiration: int		# The Unix timestamp. Default is one year. (default 1695572546)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -510,7 +521,7 @@ extern 'cyber tx feegrant grant' [
 	--expiration: string		# The RFC 3339 timestamp after which the grant expires for the user
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -545,7 +556,7 @@ extern 'cyber tx graph cyberlink' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -577,7 +588,7 @@ extern 'cyber tx liquidity deposit' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -609,7 +620,7 @@ extern 'cyber tx liquidity withdraw' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -640,7 +651,7 @@ extern 'cyber tx wasm clear-contract-admin' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -674,7 +685,7 @@ extern 'cyber tx wasm instantiate' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -708,7 +719,7 @@ extern 'cyber tx wasm set-contract-admin' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -740,7 +751,7 @@ extern 'cyber tx ibc client create' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -828,7 +839,7 @@ extern 'cyber tx authz exec' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -860,7 +871,7 @@ extern 'cyber tx feegrant revoke' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -892,7 +903,7 @@ extern 'cyber tx liquidity create-pool' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -922,7 +933,7 @@ extern 'cyber tx slashing unjail' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -955,7 +966,7 @@ extern 'cyber tx wasm migrate' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -1056,7 +1067,7 @@ extern 'cyber tx distribution fund-community-pool' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -1086,7 +1097,7 @@ extern 'cyber tx distribution withdraw-all-rewards' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -1119,7 +1130,7 @@ extern 'cyber tx gov deposit' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -1151,7 +1162,7 @@ extern 'cyber tx gov vote' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -1186,7 +1197,7 @@ extern 'cyber tx ibc-transfer transfer' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -1223,7 +1234,7 @@ extern 'cyber tx staking create-validator' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -1263,7 +1274,7 @@ extern 'cyber tx staking edit-validator' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -1300,7 +1311,7 @@ extern 'cyber tx staking unbond' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -1831,7 +1842,7 @@ extern 'cyber tx multisign' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -1875,7 +1886,7 @@ extern 'cyber tx wasm execute' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -1910,7 +1921,7 @@ extern 'cyber tx ibc client upgrade' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -1956,7 +1967,7 @@ extern 'cyber tx bank send' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -1988,7 +1999,7 @@ extern 'cyber tx distribution withdraw-rewards' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -2020,7 +2031,7 @@ extern 'cyber tx gov weighted-vote' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -2052,7 +2063,7 @@ extern 'cyber tx staking delegate' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -2471,7 +2482,7 @@ extern 'cyber tx sign-batch' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -2510,7 +2521,7 @@ extern 'cyber tx liquidity swap' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -2543,7 +2554,7 @@ extern 'cyber tx staking redelegate' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -2664,7 +2675,7 @@ extern 'cyber tx vesting create-vesting-account' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -2789,7 +2800,7 @@ extern 'cyber tx crisis invariant-broken' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -2898,7 +2909,7 @@ extern 'cyber tx gov submit-proposal clear-contract-admin' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -2936,7 +2947,7 @@ extern 'cyber tx gov submit-proposal execute-contract' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -2976,7 +2987,7 @@ extern 'cyber tx gov submit-proposal instantiate-contract' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -3013,7 +3024,7 @@ extern 'cyber tx gov submit-proposal param-change' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -3047,7 +3058,7 @@ extern 'cyber tx gov submit-proposal set-contract-admin' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -3084,7 +3095,7 @@ extern 'cyber tx gov submit-proposal sudo-contract' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -3121,7 +3132,7 @@ extern 'cyber tx gov submit-proposal update-client' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -3155,7 +3166,7 @@ extern 'cyber tx gov submit-proposal wasm-store' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -3206,7 +3217,7 @@ extern 'cyber tx authz revoke' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -3250,7 +3261,7 @@ extern 'cyber tx resources investmint' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -3438,7 +3449,7 @@ extern 'cyber tx gov submit-proposal community-pool-spend' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -3473,7 +3484,7 @@ extern 'cyber tx gov submit-proposal migrate-contract' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -3509,7 +3520,7 @@ extern 'cyber tx gov submit-proposal software-upgrade' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -3545,7 +3556,7 @@ extern 'cyber tx gov submit-proposal update-instantiate-config' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -3777,7 +3788,7 @@ extern 'cyber tx gov submit-proposal ibc-upgrade' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -3811,7 +3822,7 @@ extern 'cyber tx gov submit-proposal unpin-codes' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -3899,7 +3910,7 @@ extern 'cyber tx grid create-route' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -3931,7 +3942,7 @@ extern 'cyber tx grid edit-route' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -4074,7 +4085,7 @@ extern 'cyber tx wasm store' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -4147,7 +4158,7 @@ extern 'cyber tx gov submit-proposal pin-codes' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -4207,7 +4218,7 @@ extern 'cyber tx grid edit-route-name' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -4301,7 +4312,7 @@ extern 'cyber tx distribution set-withdraw-addr' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -4354,7 +4365,7 @@ extern 'cyber tx grid delete-route' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -4468,7 +4479,7 @@ extern 'cyber tx gov submit-proposal cancel-software-upgrade' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber keys names"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
