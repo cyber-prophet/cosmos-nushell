@@ -6,7 +6,7 @@ def "cy keys table" [] {
 }
 
 def "nu-complete cyber keys names" [] {
-    cy keys table | get name
+    (cy keys table).name | zip (cy keys table).address | flatten
   }
 
 
