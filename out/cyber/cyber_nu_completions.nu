@@ -1,6 +1,4 @@
 
-alias cy = cyber --chain-id bostrom --node https://rpc.bostrom.cybernode.ai:443 
-
 export def "cyber _keys table" [] {
 	cyber keys list | lines | window 5 -s 5 | 
     each {|it| ($it| parse -r '(?P<col>\w+):(?P<value>.*)')} | 
@@ -8,21 +6,21 @@ export def "cyber _keys table" [] {
     select name type address 
 }
 
-    export def "nu-complete cyber _keys names" [] {
+export def "nu-complete cyber _keys values" [] {
     (cyber _keys table).name | zip (cyber _keys table).address | flatten
   }
 
-def "nu-completions-cyber--acc-val-cons-" [] { ["acc", "val", "cons"] }
-def "nu-completions-cyber--text-json-" [] { ["text", "json"] }
-def "nu-completions-cyber--default-nothing-everything-custom-" [] { ["default", "nothing", "everything", "custom"] }
-def "nu-completions-cyber--json-plain-" [] { ["json", "plain"] }
 def "nu-completions-cyber--os-file-kwallet-pass-test-memory-" [] { ["os", "file", "kwallet", "pass", "test", "memory"] }
+def "nu-completions-cyber--json-plain-" [] { ["json", "plain"] }
 def "nu-completions-cyber--socket---grpc-" [] { ["socket", "grpc"] }
-def "nu-completions-cyber--sync-async-block-" [] { ["sync", "async", "block"] }
+def "nu-completions-cyber--acc-val-cons-" [] { ["acc", "val", "cons"] }
 def "nu-completions-cyber--os-file-kwallet-pass-test-" [] { ["os", "file", "kwallet", "pass", "test"] }
+def "nu-completions-cyber--sync-async-block-" [] { ["sync", "async", "block"] }
 def "nu-completions-cyber--direct-amino-json-" [] { ["direct", "amino-json"] }
 def "nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-" [] { ["trace", "debug", "info", "warn", "error", "fatal", "panic"] }
+def "nu-completions-cyber--text-json-" [] { ["text", "json"] }
 def "nu-completions-cyber--os-file-test-" [] { ["os", "file", "test"] }
+def "nu-completions-cyber--default-nothing-everything-custom-" [] { ["default", "nothing", "everything", "custom"] }
 
 # Add a genesis account to genesis.json. The provided account must specify the account address or key name and a list of initial coins. If a key name is given, the address will be looked up in the local Keybase. The list of initial tokens must contain valid denominations. Accounts may optionally be supplied with vesting parameters.
 export extern 'cyber add-genesis-account' [
@@ -37,7 +35,7 @@ export extern 'cyber add-genesis-account' [
 	--vesting-amount: string		# amount of coins for vesting accounts
 	--vesting-end-time: int		# schedule end time (unix epoch) for vesting accounts
 	--vesting-start-time: int		# schedule start time (unix epoch) for vesting accounts
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -47,7 +45,7 @@ export extern 'cyber add-genesis-account' [
 export extern 'cyber collect-gentxs' [
 	--gentx-dir: string		# override default "gentx" directory from which collect and execute genesis transactions; default [--home]/config/gentx/
 	--help(-h)		# help for collect-gentxs
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -58,7 +56,7 @@ export extern 'cyber config' [
 	key: string
 	value: string
 	--help(-h)		# help for config
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -68,7 +66,7 @@ export extern 'cyber config' [
 export extern 'cyber debug addr' [
 	address: string
 	--help(-h)		# help for addr
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -78,7 +76,7 @@ export extern 'cyber debug addr' [
 export extern 'cyber debug pubkey' [
 	pubkey: string
 	--help(-h)		# help for pubkey
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -88,7 +86,7 @@ export extern 'cyber debug pubkey' [
 export extern 'cyber debug raw-bytes' [
 	raw_bytes: string
 	--help(-h)		# help for raw-bytes
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -100,7 +98,7 @@ export extern 'cyber export' [
 	--height: int		# Export state from a particular height (-1 means latest height) (default -1)
 	--help(-h)		# help for export
 	--jail-allowed-addrs: string		# Comma-separated list of operator addresses of jailed validators to unjail
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -113,7 +111,7 @@ export extern 'cyber gentx' [
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--amount: string		# Amount of coins to bond
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--chain-id: string = 'bostrom'	# The network chain ID
+	--chain-id: string		# The network chain ID
 	--commission-max-change-rate: string		# The maximum commission change rate percentage (per day)
 	--commission-max-rate: string		# The maximum commission rate percentage
 	--commission-rate: string		# The initial commission rate percentage
@@ -121,7 +119,7 @@ export extern 'cyber gentx' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -134,7 +132,7 @@ export extern 'cyber gentx' [
 	--ledger		# Use a connected Ledger device
 	--min-self-delegation: string		# The minimum self delegation required on the validator
 	--moniker: string		# The validator's (optional) moniker
-	--node: string = 'https://rpc.bostrom.cybernode.ai:443 '		# <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+	--node: string		# <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
 	--node-id: string		# The node's NodeID
 	--note: string		# Note to add a description to the transaction (previously --memo)
 	--offline		# Offline mode (does not allow any online functionality
@@ -147,7 +145,7 @@ export extern 'cyber gentx' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--website: string		# The validator's (optional) website
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -157,7 +155,7 @@ export extern 'cyber gentx' [
 export extern 'cyber help' [
 	command: string
 	--help(-h)		# help for help
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -170,7 +168,7 @@ export extern 'cyber init' [
 	--help(-h)		# help for init
 	--overwrite(-o)		# overwrite the genesis.json file
 	--recover		# provide seed phrase to recover existing key instead of creating
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -194,7 +192,7 @@ export extern 'cyber keys add' [
 	--nosort		# Keys passed to --multisig are taken in the order they're supplied
 	--pubkey: string		# Parse a public key in JSON format and saves key info to <name> file.
 	--recover		# Provide seed phrase to recover existing key instead of creating
-	--home: string		# The application home directory (default "/Users/user/.cyber")
+	--home: string		# The application home directory (default "/Users/user//.cyber")
 	--keyring-backend: string@"nu-completions-cyber--os-file-test-"		# Select keyring's backend (os|file|test) (default "os")
 	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
@@ -209,7 +207,7 @@ export extern 'cyber keys delete' [
 	--force(-f)		# Remove the key unconditionally without asking for the passphrase. Deprecated.
 	--help(-h)		# help for delete
 	--yes(-y)		# Skip confirmation prompt when deleting offline or ledger key references
-	--home: string		# The application home directory (default "/Users/user/.cyber")
+	--home: string		# The application home directory (default "/Users/user//.cyber")
 	--keyring-backend: string@"nu-completions-cyber--os-file-test-"		# Select keyring's backend (os|file|test) (default "os")
 	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
@@ -224,7 +222,7 @@ export extern 'cyber keys export' [
 	--help(-h)		# help for export
 	--unarmored-hex		# Export unarmored hex privkey. Requires --unsafe.
 	--unsafe		# Enable unsafe operations. This flag must be switched on along with all unsafe operation-specific options.
-	--home: string		# The application home directory (default "/Users/user/.cyber")
+	--home: string		# The application home directory (default "/Users/user//.cyber")
 	--keyring-backend: string@"nu-completions-cyber--os-file-test-"		# Select keyring's backend (os|file|test) (default "os")
 	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
@@ -238,7 +236,7 @@ export extern 'cyber keys import' [
 	name: string
 	keyfile: string
 	--help(-h)		# help for import
-	--home: string		# The application home directory (default "/Users/user/.cyber")
+	--home: string		# The application home directory (default "/Users/user//.cyber")
 	--keyring-backend: string@"nu-completions-cyber--os-file-test-"		# Select keyring's backend (os|file|test) (default "os")
 	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
@@ -251,7 +249,7 @@ export extern 'cyber keys import' [
 export extern 'cyber keys list' [
 	--help(-h)		# help for list
 	--list-names(-n)		# List names only
-	--home: string		# The application home directory (default "/Users/user/.cyber")
+	--home: string		# The application home directory (default "/Users/user//.cyber")
 	--keyring-backend: string@"nu-completions-cyber--os-file-test-"		# Select keyring's backend (os|file|test) (default "os")
 	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
@@ -265,7 +263,7 @@ export extern 'cyber keys migrate' [
 	old_home_dir: string
 	--dry-run		# Run migration without actually persisting any changes to the new Keybase
 	--help(-h)		# help for migrate
-	--home: string		# The application home directory (default "/Users/user/.cyber")
+	--home: string		# The application home directory (default "/Users/user//.cyber")
 	--keyring-backend: string@"nu-completions-cyber--os-file-test-"		# Select keyring's backend (os|file|test) (default "os")
 	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
@@ -278,7 +276,7 @@ export extern 'cyber keys migrate' [
 export extern 'cyber keys mnemonic' [
 	--help(-h)		# help for mnemonic
 	--unsafe-entropy		# Prompt the user to supply their own entropy, instead of relying on the system
-	--home: string		# The application home directory (default "/Users/user/.cyber")
+	--home: string		# The application home directory (default "/Users/user//.cyber")
 	--keyring-backend: string@"nu-completions-cyber--os-file-test-"		# Select keyring's backend (os|file|test) (default "os")
 	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
@@ -291,7 +289,7 @@ export extern 'cyber keys mnemonic' [
 export extern 'cyber keys parse' [
 	hex_or_bech32_address: string
 	--help(-h)		# help for parse
-	--home: string		# The application home directory (default "/Users/user/.cyber")
+	--home: string		# The application home directory (default "/Users/user//.cyber")
 	--keyring-backend: string@"nu-completions-cyber--os-file-test-"		# Select keyring's backend (os|file|test) (default "os")
 	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
@@ -308,7 +306,7 @@ export extern 'cyber keys show' [
 	--help(-h)		# help for show
 	--multisig-threshold: int		# K out of N required signatures (default 1)
 	--pubkey(-p)		# Output the public key only (overrides --output)
-	--home: string		# The application home directory (default "/Users/user/.cyber")
+	--home: string		# The application home directory (default "/Users/user//.cyber")
 	--keyring-backend: string@"nu-completions-cyber--os-file-test-"		# Select keyring's backend (os|file|test) (default "os")
 	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
@@ -324,7 +322,7 @@ export extern 'cyber migrate' [
 	--chain-id: string		# override chain_id with this flag
 	--genesis-time: string		# override genesis_time with this flag
 	--help(-h)		# help for migrate
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -338,7 +336,7 @@ export extern 'cyber query account' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -352,7 +350,7 @@ export extern 'cyber query auth account' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -371,7 +369,7 @@ export extern 'cyber query auth accounts' [
 	--page-key: string		# pagination page-key of all-accounts to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -384,7 +382,7 @@ export extern 'cyber query auth params' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -406,7 +404,7 @@ export extern 'cyber query authz grants' [
 	--page-key: string		# pagination page-key of grants to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -426,7 +424,7 @@ export extern 'cyber query authz grants-by-grantee' [
 	--page-key: string		# pagination page-key of grantee-grants to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -446,7 +444,7 @@ export extern 'cyber query authz grants-by-granter' [
 	--page-key: string		# pagination page-key of granter-grants to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -459,7 +457,7 @@ export extern 'cyber query bandwidth load' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -473,7 +471,7 @@ export extern 'cyber query bandwidth neuron' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -486,7 +484,7 @@ export extern 'cyber query bandwidth params' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -499,7 +497,7 @@ export extern 'cyber query bandwidth price' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -512,7 +510,7 @@ export extern 'cyber query bandwidth total' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -526,14 +524,14 @@ export extern 'cyber query bank balances' [
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for balances
 	--limit: int		# pagination limit of all balances to query for (default 100)
-	--node: string = 'https://rpc.bostrom.cybernode.ai:443'	# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--offset: int		# pagination offset of all balances to query for
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--page: int		# pagination page of all balances to query for. This sets offset to a multiple of limit (default 1)
 	--page-key: string		# pagination page-key of all balances to query for
 	--reverse		# results are sorted in descending order
-	--chain-id: string = 'bostrom'	# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -547,7 +545,7 @@ export extern 'cyber query bank denom-metadata' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -567,7 +565,7 @@ export extern 'cyber query bank total' [
 	--page-key: string		# pagination page-key of all supply totals to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -579,7 +577,7 @@ export extern 'cyber query block' [
 	--help(-h)		# help for block
 	--node(-n): string		# Node to connect to (default "tcp://localhost:26657")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -593,7 +591,7 @@ export extern 'cyber query distribution commission' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -606,7 +604,7 @@ export extern 'cyber query distribution community-pool' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -619,7 +617,7 @@ export extern 'cyber query distribution params' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -634,7 +632,7 @@ export extern 'cyber query distribution rewards' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -656,7 +654,7 @@ export extern 'cyber query distribution slashes' [
 	--page-key: string		# pagination page-key of validator slashes to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -670,7 +668,7 @@ export extern 'cyber query distribution validator-outstanding-rewards' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -683,7 +681,7 @@ export extern 'cyber query dmn params' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -698,7 +696,7 @@ export extern 'cyber query dmn thought' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -713,7 +711,7 @@ export extern 'cyber query dmn thought-stats' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -726,7 +724,7 @@ export extern 'cyber query dmn thoughts' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -739,7 +737,7 @@ export extern 'cyber query dmn thoughts-stats' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -758,7 +756,7 @@ export extern 'cyber query evidence' [
 	--page-key: string		# pagination page-key of evidence to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -773,7 +771,7 @@ export extern 'cyber query feegrant grant' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -793,7 +791,7 @@ export extern 'cyber query feegrant grants-by-grantee' [
 	--page-key: string		# pagination page-key of grants to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -813,7 +811,7 @@ export extern 'cyber query feegrant grants-by-granter' [
 	--page-key: string		# pagination page-key of grants to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -828,7 +826,7 @@ export extern 'cyber query gov deposit' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -848,7 +846,7 @@ export extern 'cyber query gov deposits' [
 	--page-key: string		# pagination page-key of deposits to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -862,7 +860,7 @@ export extern 'cyber query gov param' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -875,7 +873,7 @@ export extern 'cyber query gov params' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -889,7 +887,7 @@ export extern 'cyber query gov proposal' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -911,7 +909,7 @@ export extern 'cyber query gov proposals' [
 	--status: string		# (optional) filter proposals by proposal status, status: deposit_period/voting_period/passed/rejected
 	--voter: string		# (optional) filter by proposals voted on by voted
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -925,7 +923,7 @@ export extern 'cyber query gov proposer' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -939,7 +937,7 @@ export extern 'cyber query gov tally' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -954,7 +952,7 @@ export extern 'cyber query gov vote' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -974,7 +972,7 @@ export extern 'cyber query gov votes' [
 	--page-key: string		# pagination page-key of votes to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -987,7 +985,7 @@ export extern 'cyber query graph stats' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1000,7 +998,7 @@ export extern 'cyber query grid params' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1015,7 +1013,7 @@ export extern 'cyber query grid route' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1029,7 +1027,7 @@ export extern 'cyber query grid routed-from' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1043,7 +1041,7 @@ export extern 'cyber query grid routed-to' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1056,7 +1054,7 @@ export extern 'cyber query grid routes' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1070,7 +1068,7 @@ export extern 'cyber query grid routes-from' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1084,7 +1082,7 @@ export extern 'cyber query grid routes-to' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1103,7 +1101,7 @@ export extern 'cyber query ibc channel channels' [
 	--page-key: string		# pagination page-key of channels to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1118,7 +1116,7 @@ export extern 'cyber query ibc channel client-state' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1138,7 +1136,7 @@ export extern 'cyber query ibc channel connections' [
 	--page-key: string		# pagination page-key of channels associated with a connection to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1154,7 +1152,7 @@ export extern 'cyber query ibc channel end' [
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--prove		# show proofs for the query results (default true)
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1170,7 +1168,7 @@ export extern 'cyber query ibc channel next-sequence-receive' [
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--prove		# show proofs for the query results (default true)
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1187,7 +1185,7 @@ export extern 'cyber query ibc channel packet-ack' [
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--prove		# show proofs for the query results (default true)
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1204,7 +1202,7 @@ export extern 'cyber query ibc channel packet-commitment' [
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--prove		# show proofs for the query results (default true)
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1225,7 +1223,7 @@ export extern 'cyber query ibc channel packet-commitments' [
 	--page-key: string		# pagination page-key of packet commitments associated with a channel to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1242,7 +1240,7 @@ export extern 'cyber query ibc channel packet-receipt' [
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--prove		# show proofs for the query results (default true)
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1258,7 +1256,7 @@ export extern 'cyber query ibc channel unreceived-acks' [
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--sequences: int		# 64Slice   comma separated list of packet sequence numbers (default [])
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1274,7 +1272,7 @@ export extern 'cyber query ibc channel unreceived-packets' [
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--sequences: int		# 64Slice   comma separated list of packet sequence numbers (default [])
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1291,7 +1289,7 @@ export extern 'cyber query ibc client consensus-state' [
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--prove		# show proofs for the query results (default true)
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1311,7 +1309,7 @@ export extern 'cyber query ibc client consensus-states' [
 	--page-key: string		# pagination page-key of consensus states to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1324,7 +1322,7 @@ export extern 'cyber query ibc client header' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1337,7 +1335,7 @@ export extern 'cyber query ibc client params' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1350,7 +1348,7 @@ export extern 'cyber query ibc client self-consensus-state' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1365,7 +1363,7 @@ export extern 'cyber query ibc client state' [
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--prove		# show proofs for the query results (default true)
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1384,7 +1382,7 @@ export extern 'cyber query ibc client states' [
 	--page-key: string		# pagination page-key of client states to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1395,7 +1393,7 @@ export extern 'cyber query ibc client status' [
 	client_id: string
 	--help(-h)		# help for status
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1414,7 +1412,7 @@ export extern 'cyber query ibc connection connections' [
 	--page-key: string		# pagination page-key of connection ends to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1429,7 +1427,7 @@ export extern 'cyber query ibc connection end' [
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--prove		# show proofs for the query results (default true)
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1444,7 +1442,7 @@ export extern 'cyber query ibc connection path' [
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--prove		# show proofs for the query results (default true)
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1458,7 +1456,7 @@ export extern 'cyber query ibc-transfer denom-hash' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1472,7 +1470,7 @@ export extern 'cyber query ibc-transfer denom-trace' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1491,7 +1489,7 @@ export extern 'cyber query ibc-transfer denom-traces' [
 	--page-key: string		# pagination page-key of denominations trace to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1504,7 +1502,7 @@ export extern 'cyber query ibc-transfer escrow-address' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1517,7 +1515,7 @@ export extern 'cyber query ibc-transfer params' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1531,7 +1529,7 @@ export extern 'cyber query liquidity batch' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1546,7 +1544,7 @@ export extern 'cyber query liquidity deposit' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1560,7 +1558,7 @@ export extern 'cyber query liquidity deposits' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1573,7 +1571,7 @@ export extern 'cyber query liquidity params' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1589,7 +1587,7 @@ export extern 'cyber query liquidity pool' [
 	--pool-coin-denom: string		# The denomination of the pool coin
 	--reserve-acc: string		# The Bech32 address of the reserve account
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1602,7 +1600,7 @@ export extern 'cyber query liquidity pools' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1617,7 +1615,7 @@ export extern 'cyber query liquidity swap' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1631,7 +1629,7 @@ export extern 'cyber query liquidity swaps' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1646,7 +1644,7 @@ export extern 'cyber query liquidity withdraw' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1660,7 +1658,7 @@ export extern 'cyber query liquidity withdraws' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1673,7 +1671,7 @@ export extern 'cyber query mint annual-provisions' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1686,7 +1684,7 @@ export extern 'cyber query mint inflation' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1699,7 +1697,7 @@ export extern 'cyber query mint params' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1714,7 +1712,7 @@ export extern 'cyber query params subspace' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1730,7 +1728,7 @@ export extern 'cyber query rank backlinks' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1746,7 +1744,7 @@ export extern 'cyber query rank is-exist' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1761,7 +1759,7 @@ export extern 'cyber query rank is-exist-any' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1775,7 +1773,7 @@ export extern 'cyber query rank karma' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1789,7 +1787,7 @@ export extern 'cyber query rank negentropy' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1802,7 +1800,7 @@ export extern 'cyber query rank params' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1816,7 +1814,7 @@ export extern 'cyber query rank rank' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1832,7 +1830,7 @@ export extern 'cyber query rank search' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1845,7 +1843,7 @@ export extern 'cyber query rank top' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1861,7 +1859,7 @@ export extern 'cyber query resources investmint' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1874,7 +1872,7 @@ export extern 'cyber query resources params' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1887,7 +1885,7 @@ export extern 'cyber query slashing params' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1901,7 +1899,7 @@ export extern 'cyber query slashing signing-info' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1920,7 +1918,7 @@ export extern 'cyber query slashing signing-infos' [
 	--page-key: string		# pagination page-key of signing infos to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1935,7 +1933,7 @@ export extern 'cyber query staking delegation' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1955,7 +1953,7 @@ export extern 'cyber query staking delegations' [
 	--page-key: string		# pagination page-key of delegations to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1975,7 +1973,7 @@ export extern 'cyber query staking delegations-to' [
 	--page-key: string		# pagination page-key of validator delegations to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1989,7 +1987,7 @@ export extern 'cyber query staking historical-info' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2002,7 +2000,7 @@ export extern 'cyber query staking params' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2015,7 +2013,7 @@ export extern 'cyber query staking pool' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2031,7 +2029,7 @@ export extern 'cyber query staking redelegation' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2051,7 +2049,7 @@ export extern 'cyber query staking redelegations' [
 	--page-key: string		# pagination page-key of delegator redelegations to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2071,7 +2069,7 @@ export extern 'cyber query staking redelegations-from' [
 	--page-key: string		# pagination page-key of validator redelegations to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2086,7 +2084,7 @@ export extern 'cyber query staking unbonding-delegation' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2106,7 +2104,7 @@ export extern 'cyber query staking unbonding-delegations' [
 	--page-key: string		# pagination page-key of unbonding delegations to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2126,7 +2124,7 @@ export extern 'cyber query staking unbonding-delegations-from' [
 	--page-key: string		# pagination page-key of unbonding delegations to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2140,7 +2138,7 @@ export extern 'cyber query staking validator' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2159,7 +2157,7 @@ export extern 'cyber query staking validators' [
 	--page-key: string		# pagination page-key of validators to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2174,7 +2172,7 @@ export extern 'cyber query tendermint-validator-set' [
 	--node(-n): string		# Node to connect to (default "tcp://localhost:26657")
 	--page: int		# Query a specific page of paginated results (default 1)
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2189,7 +2187,7 @@ export extern 'cyber query tx' [
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--type: string		# The type to be used when querying tx, can be one of "hash", "acc_seq", "signature" (default "hash")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2205,7 +2203,7 @@ export extern 'cyber query txs' [
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--page: int		# Query a specific page of paginated results (default 1)
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2219,7 +2217,7 @@ export extern 'cyber query upgrade applied' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2232,7 +2230,7 @@ export extern 'cyber query upgrade module_versions' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2245,7 +2243,7 @@ export extern 'cyber query upgrade plan' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2259,7 +2257,7 @@ export extern 'cyber query wasm code' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2273,7 +2271,7 @@ export extern 'cyber query wasm code-info' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2287,7 +2285,7 @@ export extern 'cyber query wasm contract' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2307,7 +2305,7 @@ export extern 'cyber query wasm contract-history' [
 	--page-key: string		# pagination page-key of contract history to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2327,7 +2325,7 @@ export extern 'cyber query wasm contract-state all' [
 	--page-key: string		# pagination page-key of contract state to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2345,7 +2343,7 @@ export extern 'cyber query wasm contract-state raw' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2363,7 +2361,7 @@ export extern 'cyber query wasm contract-state smart' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2373,7 +2371,7 @@ export extern 'cyber query wasm contract-state smart' [
 export extern 'cyber query wasm libwasmvm-version' [
 	--help(-h)		# help for libwasmvm-version
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2392,7 +2390,7 @@ export extern 'cyber query wasm list-code' [
 	--page-key: string		# pagination page-key of list codes to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2412,7 +2410,7 @@ export extern 'cyber query wasm list-contract-by-code' [
 	--page-key: string		# pagination page-key of list contracts by code to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2431,7 +2429,7 @@ export extern 'cyber query wasm pinned' [
 	--page-key: string		# pagination page-key of list codes to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2440,7 +2438,7 @@ export extern 'cyber query wasm pinned' [
 # A state rollback is performed to recover from an incorrect application state transition, when Tendermint has persisted an incorrect app hash and is thus unable to make progress. Rollback overwrites a state at height n with the state at height n - 1. The application also roll back to height n - 1. No blocks are removed, so upon restarting Tendermint the transactions in block n will be re-executed a
 export extern 'cyber rollback' [
 	--help(-h)		# help for rollback
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2464,7 +2462,7 @@ export extern 'cyber start' [
 	--inv-check-period: int		# Assert registered invariants every N blocks
 	--min-retain-blocks: int		# Minimum block height offset during ABCI commit to prune Tendermint blocks
 	--minimum-gas-prices: string		# Minimum gas prices to accept for transactions; Any fee in a tx must meet this minimum (e.g. 0.01photino;0.0001stake)
-	--moniker: string		# node name (default "Pro16")
+	--moniker: string		# node name (default "Pro16.local")
 	--priv_validator_laddr: string		# socket address to listen on for connections from external priv_validator process
 	--proxy_app: string		# proxy app address, or one of: 'kvstore', 'persistent_kvstore', 'counter', 'e2e' or 'noop' for local testing. (default "tcp://127.0.0.1:26658")
 	--pruning: string@"nu-completions-cyber--default-nothing-everything-custom-"		# Pruning strategy (default|nothing|everything|custom) (default "default")
@@ -2477,7 +2475,7 @@ export extern 'cyber start' [
 	--unsafe-skip-upgrades: string		# Skip a set of upgrade heights to continue the old binary
 	--with-tendermint		# Run abci app embedded in-process with tendermint (default true)
 	--x-crisis-skip-assert-invariants		# Skip x/crisis invariants check on startup
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2487,7 +2485,7 @@ export extern 'cyber start' [
 export extern 'cyber status' [
 	--help(-h)		# help for status
 	--node(-n): string		# Node to connect to (default "tcp://localhost:26657")
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2496,7 +2494,7 @@ export extern 'cyber status' [
 # Remove all the data and WAL
 export extern 'cyber tendermint reset-state' [
 	--help(-h)		# help for reset-state
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2505,7 +2503,7 @@ export extern 'cyber tendermint reset-state' [
 # Shows this node's tendermint validator consensus address
 export extern 'cyber tendermint show-address' [
 	--help(-h)		# help for show-address
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2514,7 +2512,7 @@ export extern 'cyber tendermint show-address' [
 # Show this node's ID
 export extern 'cyber tendermint show-node-id' [
 	--help(-h)		# help for show-node-id
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2523,7 +2521,7 @@ export extern 'cyber tendermint show-node-id' [
 # Show this node's tendermint validator info
 export extern 'cyber tendermint show-validator' [
 	--help(-h)		# help for show-validator
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2533,7 +2531,7 @@ export extern 'cyber tendermint show-validator' [
 export extern 'cyber tendermint unsafe-reset-all' [
 	--help(-h)		# help for unsafe-reset-all
 	--keep-addr-book		# keep the address book intact
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2542,7 +2540,7 @@ export extern 'cyber tendermint unsafe-reset-all' [
 # Print protocols' and libraries' version numbers against which this app has been compiled.
 export extern 'cyber tendermint version' [
 	--help(-h)		# help for version
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2560,7 +2558,7 @@ export extern 'cyber testnet' [
 	--output-dir(-o): string		# Directory to store initialization data for the testnet (default "./mytestnet")
 	--starting-ip-address: string		# Starting IP address (192.168.0.1 results in persistent peers list ID0@192.168.0.1:46656, ID1@192.168.0.2:46656, ...) (default "192.168.0.1")
 	--v: int		# Number of validators to initialize the testnet with (default 4)
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2574,7 +2572,7 @@ export extern 'cyber tx authz exec' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -2592,7 +2590,7 @@ export extern 'cyber tx authz exec' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2606,10 +2604,10 @@ export extern 'cyber tx authz grant' [
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--deny-validators: string		# Deny validators addresses separated by ,
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
-	--expiration: int		# The Unix timestamp. Default is one year. (default 1696233217)
+	--expiration: int		# The Unix timestamp. Default is one year. (default 1698333304)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -2629,7 +2627,7 @@ export extern 'cyber tx authz grant' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2644,7 +2642,7 @@ export extern 'cyber tx authz revoke' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -2662,7 +2660,7 @@ export extern 'cyber tx authz revoke' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2678,7 +2676,7 @@ export extern 'cyber tx bank send' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -2696,7 +2694,7 @@ export extern 'cyber tx bank send' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2710,7 +2708,7 @@ export extern 'cyber tx broadcast' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -2728,7 +2726,7 @@ export extern 'cyber tx broadcast' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2743,7 +2741,7 @@ export extern 'cyber tx crisis invariant-broken' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -2761,7 +2759,7 @@ export extern 'cyber tx crisis invariant-broken' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2775,7 +2773,7 @@ export extern 'cyber tx decode' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -2794,7 +2792,7 @@ export extern 'cyber tx decode' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2808,7 +2806,7 @@ export extern 'cyber tx distribution fund-community-pool' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -2826,7 +2824,7 @@ export extern 'cyber tx distribution fund-community-pool' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2840,7 +2838,7 @@ export extern 'cyber tx distribution set-withdraw-addr' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -2858,7 +2856,7 @@ export extern 'cyber tx distribution set-withdraw-addr' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2871,7 +2869,7 @@ export extern 'cyber tx distribution withdraw-all-rewards' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -2890,7 +2888,7 @@ export extern 'cyber tx distribution withdraw-all-rewards' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2905,7 +2903,7 @@ export extern 'cyber tx distribution withdraw-rewards' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -2923,7 +2921,7 @@ export extern 'cyber tx distribution withdraw-rewards' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2937,7 +2935,7 @@ export extern 'cyber tx encode' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -2955,7 +2953,7 @@ export extern 'cyber tx encode' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2965,7 +2963,7 @@ export extern 'cyber tx encode' [
 export extern 'cyber tx evidence' [
 	--help(-h)		# help for evidence
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2982,7 +2980,7 @@ export extern 'cyber tx feegrant grant' [
 	--expiration: string		# The RFC 3339 timestamp after which the grant expires for the user
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -3003,7 +3001,7 @@ export extern 'cyber tx feegrant grant' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3018,7 +3016,7 @@ export extern 'cyber tx feegrant revoke' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -3036,7 +3034,7 @@ export extern 'cyber tx feegrant revoke' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3051,7 +3049,7 @@ export extern 'cyber tx gov deposit' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -3069,7 +3067,7 @@ export extern 'cyber tx gov deposit' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3084,7 +3082,7 @@ export extern 'cyber tx gov submit-proposal cancel-software-upgrade' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -3103,7 +3101,7 @@ export extern 'cyber tx gov submit-proposal cancel-software-upgrade' [
 	--title: string		# title of proposal
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3119,7 +3117,7 @@ export extern 'cyber tx gov submit-proposal clear-contract-admin' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -3140,7 +3138,7 @@ export extern 'cyber tx gov submit-proposal clear-contract-admin' [
 	--type: string		# Permission of proposal, types: store-code/instantiate/migrate/update-admin/clear-admin/text/parameter_change/software_upgrade
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3154,7 +3152,7 @@ export extern 'cyber tx gov submit-proposal community-pool-spend' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -3172,7 +3170,7 @@ export extern 'cyber tx gov submit-proposal community-pool-spend' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3190,7 +3188,7 @@ export extern 'cyber tx gov submit-proposal execute-contract' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -3212,7 +3210,7 @@ export extern 'cyber tx gov submit-proposal execute-contract' [
 	--type: string		# Permission of proposal, types: store-code/instantiate/migrate/update-admin/clear-admin/text/parameter_change/software_upgrade
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3229,7 +3227,7 @@ export extern 'cyber tx gov submit-proposal ibc-upgrade' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -3248,7 +3246,7 @@ export extern 'cyber tx gov submit-proposal ibc-upgrade' [
 	--title: string		# title of proposal
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3267,7 +3265,7 @@ export extern 'cyber tx gov submit-proposal instantiate-contract' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -3291,7 +3289,7 @@ export extern 'cyber tx gov submit-proposal instantiate-contract' [
 	--type: string		# Permission of proposal, types: store-code/instantiate/migrate/update-admin/clear-admin/text/parameter_change/software_upgrade
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3309,7 +3307,7 @@ export extern 'cyber tx gov submit-proposal migrate-contract' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -3330,7 +3328,7 @@ export extern 'cyber tx gov submit-proposal migrate-contract' [
 	--type: string		# Permission of proposal, types: store-code/instantiate/migrate/update-admin/clear-admin/text/parameter_change/software_upgrade
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3344,7 +3342,7 @@ export extern 'cyber tx gov submit-proposal param-change' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -3362,7 +3360,7 @@ export extern 'cyber tx gov submit-proposal param-change' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3378,7 +3376,7 @@ export extern 'cyber tx gov submit-proposal pin-codes' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -3399,7 +3397,7 @@ export extern 'cyber tx gov submit-proposal pin-codes' [
 	--type: string		# Permission of proposal, types: store-code/instantiate/migrate/update-admin/clear-admin/text/parameter_change/software_upgrade
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3416,7 +3414,7 @@ export extern 'cyber tx gov submit-proposal set-contract-admin' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -3437,7 +3435,7 @@ export extern 'cyber tx gov submit-proposal set-contract-admin' [
 	--type: string		# Permission of proposal, types: store-code/instantiate/migrate/update-admin/clear-admin/text/parameter_change/software_upgrade
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3453,7 +3451,7 @@ export extern 'cyber tx gov submit-proposal software-upgrade' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -3474,7 +3472,7 @@ export extern 'cyber tx gov submit-proposal software-upgrade' [
 	--upgrade-info: string		# Optional info for the planned upgrade such as commit hash, etc.
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3491,7 +3489,7 @@ export extern 'cyber tx gov submit-proposal sudo-contract' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -3512,7 +3510,7 @@ export extern 'cyber tx gov submit-proposal sudo-contract' [
 	--type: string		# Permission of proposal, types: store-code/instantiate/migrate/update-admin/clear-admin/text/parameter_change/software_upgrade
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3528,7 +3526,7 @@ export extern 'cyber tx gov submit-proposal unpin-codes' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -3549,7 +3547,7 @@ export extern 'cyber tx gov submit-proposal unpin-codes' [
 	--type: string		# Permission of proposal, types: store-code/instantiate/migrate/update-admin/clear-admin/text/parameter_change/software_upgrade
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3566,7 +3564,7 @@ export extern 'cyber tx gov submit-proposal update-client' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -3585,7 +3583,7 @@ export extern 'cyber tx gov submit-proposal update-client' [
 	--title: string		# title of proposal
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3600,7 +3598,7 @@ export extern 'cyber tx gov submit-proposal update-instantiate-config' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -3621,7 +3619,7 @@ export extern 'cyber tx gov submit-proposal update-instantiate-config' [
 	--type: string		# Permission of proposal, types: store-code/instantiate/migrate/update-admin/clear-admin/text/parameter_change/software_upgrade
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3636,7 +3634,7 @@ export extern 'cyber tx gov submit-proposal wasm-store' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -3661,7 +3659,7 @@ export extern 'cyber tx gov submit-proposal wasm-store' [
 	--type: string		# Permission of proposal, types: store-code/instantiate/migrate/update-admin/clear-admin/text/parameter_change/software_upgrade
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3676,7 +3674,7 @@ export extern 'cyber tx gov vote' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -3694,7 +3692,7 @@ export extern 'cyber tx gov vote' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3709,7 +3707,7 @@ export extern 'cyber tx gov weighted-vote' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -3727,7 +3725,7 @@ export extern 'cyber tx gov weighted-vote' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3742,7 +3740,7 @@ export extern 'cyber tx graph cyberlink' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -3760,7 +3758,7 @@ export extern 'cyber tx graph cyberlink' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3775,7 +3773,7 @@ export extern 'cyber tx grid create-route' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -3793,7 +3791,7 @@ export extern 'cyber tx grid create-route' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3807,7 +3805,7 @@ export extern 'cyber tx grid delete-route' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -3825,7 +3823,7 @@ export extern 'cyber tx grid delete-route' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3840,7 +3838,7 @@ export extern 'cyber tx grid edit-route' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -3858,7 +3856,7 @@ export extern 'cyber tx grid edit-route' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3873,7 +3871,7 @@ export extern 'cyber tx grid edit-route-name' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -3891,7 +3889,7 @@ export extern 'cyber tx grid edit-route-name' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3901,7 +3899,7 @@ export extern 'cyber tx grid edit-route-name' [
 export extern 'cyber tx ibc channel' [
 	--help(-h)		# help for channel
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3914,7 +3912,7 @@ export extern 'cyber tx ibc client create' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -3932,7 +3930,7 @@ export extern 'cyber tx ibc client create' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3942,7 +3940,7 @@ export extern 'cyber tx ibc client create' [
 export extern 'cyber tx ibc client misbehaviour' [
 	--help(-h)		# help for misbehaviour
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3953,7 +3951,7 @@ export extern 'cyber tx ibc client update' [
 	client_id: string
 	--help(-h)		# help for update
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3969,7 +3967,7 @@ export extern 'cyber tx ibc client upgrade' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -3987,7 +3985,7 @@ export extern 'cyber tx ibc client upgrade' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -4005,7 +4003,7 @@ export extern 'cyber tx ibc-transfer transfer' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -4025,7 +4023,7 @@ export extern 'cyber tx ibc-transfer transfer' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -4040,7 +4038,7 @@ export extern 'cyber tx liquidity create-pool' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -4058,7 +4056,7 @@ export extern 'cyber tx liquidity create-pool' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -4073,7 +4071,7 @@ export extern 'cyber tx liquidity deposit' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -4091,7 +4089,7 @@ export extern 'cyber tx liquidity deposit' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -4110,7 +4108,7 @@ export extern 'cyber tx liquidity swap' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -4128,7 +4126,7 @@ export extern 'cyber tx liquidity swap' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -4143,7 +4141,7 @@ export extern 'cyber tx liquidity withdraw' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -4161,7 +4159,7 @@ export extern 'cyber tx liquidity withdraw' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -4178,7 +4176,7 @@ export extern 'cyber tx multisign' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -4198,7 +4196,7 @@ export extern 'cyber tx multisign' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -4214,7 +4212,7 @@ export extern 'cyber tx multisign-batch' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -4235,7 +4233,7 @@ export extern 'cyber tx multisign-batch' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -4251,7 +4249,7 @@ export extern 'cyber tx resources investmint' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -4269,7 +4267,7 @@ export extern 'cyber tx resources investmint' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -4284,7 +4282,7 @@ export extern 'cyber tx sign' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -4306,7 +4304,7 @@ export extern 'cyber tx sign' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -4320,7 +4318,7 @@ export extern 'cyber tx sign-batch' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -4341,7 +4339,7 @@ export extern 'cyber tx sign-batch' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -4354,7 +4352,7 @@ export extern 'cyber tx slashing unjail' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -4372,7 +4370,7 @@ export extern 'cyber tx slashing unjail' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -4390,7 +4388,7 @@ export extern 'cyber tx staking create-validator' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -4416,7 +4414,7 @@ export extern 'cyber tx staking create-validator' [
 	--website: string		# The validator's (optional) website
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -4431,7 +4429,7 @@ export extern 'cyber tx staking delegate' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -4449,7 +4447,7 @@ export extern 'cyber tx staking delegate' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -4464,7 +4462,7 @@ export extern 'cyber tx staking edit-validator' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -4487,7 +4485,7 @@ export extern 'cyber tx staking edit-validator' [
 	--website: string		# The validator's (optional) website (default "[do-not-modify]")
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -4503,7 +4501,7 @@ export extern 'cyber tx staking redelegate' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -4521,7 +4519,7 @@ export extern 'cyber tx staking redelegate' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -4536,7 +4534,7 @@ export extern 'cyber tx staking unbond' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -4554,7 +4552,7 @@ export extern 'cyber tx staking unbond' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -4568,7 +4566,7 @@ export extern 'cyber tx validate-signatures' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -4586,7 +4584,7 @@ export extern 'cyber tx validate-signatures' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -4603,7 +4601,7 @@ export extern 'cyber tx vesting create-vesting-account' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -4621,7 +4619,7 @@ export extern 'cyber tx vesting create-vesting-account' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -4635,7 +4633,7 @@ export extern 'cyber tx wasm clear-contract-admin' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -4653,7 +4651,7 @@ export extern 'cyber tx wasm clear-contract-admin' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -4669,7 +4667,7 @@ export extern 'cyber tx wasm execute' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -4687,7 +4685,7 @@ export extern 'cyber tx wasm execute' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -4704,7 +4702,7 @@ export extern 'cyber tx wasm instantiate' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -4724,7 +4722,7 @@ export extern 'cyber tx wasm instantiate' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -4740,7 +4738,7 @@ export extern 'cyber tx wasm migrate' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -4758,7 +4756,7 @@ export extern 'cyber tx wasm migrate' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -4773,7 +4771,7 @@ export extern 'cyber tx wasm set-contract-admin' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -4791,7 +4789,7 @@ export extern 'cyber tx wasm set-contract-admin' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -4804,7 +4802,7 @@ export extern 'cyber tx wasm store' [
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete cyber _keys names"		# Name or address of private key with which to sign
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
 	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
 	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
@@ -4825,7 +4823,7 @@ export extern 'cyber tx wasm store' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -4835,7 +4833,7 @@ export extern 'cyber tx wasm store' [
 export extern 'cyber validate-genesis' [
 	file: string
 	--help(-h)		# help for validate-genesis
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -4846,7 +4844,7 @@ export extern 'cyber version' [
 	--help(-h)		# help for version
 	--long		# Print long version information
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
-	--home: string		# directory for config and data (default "/Users/user/.cyber")
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors

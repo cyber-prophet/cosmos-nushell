@@ -10,17 +10,17 @@ export def "nu-complete pussy _keys values" [] {
     (pussy _keys table).name | zip (pussy _keys table).address | flatten
   }
 
-def "nu-completions-pussy--acc-val-cons-" [] { ["acc", "val", "cons"] }
-def "nu-completions-pussy--text-json-" [] { ["text", "json"] }
-def "nu-completions-pussy--default-nothing-everything-custom-" [] { ["default", "nothing", "everything", "custom"] }
-def "nu-completions-pussy--json-plain-" [] { ["json", "plain"] }
 def "nu-completions-pussy--os-file-kwallet-pass-test-memory-" [] { ["os", "file", "kwallet", "pass", "test", "memory"] }
+def "nu-completions-pussy--json-plain-" [] { ["json", "plain"] }
 def "nu-completions-pussy--socket---grpc-" [] { ["socket", "grpc"] }
-def "nu-completions-pussy--sync-async-block-" [] { ["sync", "async", "block"] }
+def "nu-completions-pussy--acc-val-cons-" [] { ["acc", "val", "cons"] }
 def "nu-completions-pussy--os-file-kwallet-pass-test-" [] { ["os", "file", "kwallet", "pass", "test"] }
+def "nu-completions-pussy--sync-async-block-" [] { ["sync", "async", "block"] }
 def "nu-completions-pussy--direct-amino-json-" [] { ["direct", "amino-json"] }
 def "nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-" [] { ["trace", "debug", "info", "warn", "error", "fatal", "panic"] }
+def "nu-completions-pussy--text-json-" [] { ["text", "json"] }
 def "nu-completions-pussy--os-file-test-" [] { ["os", "file", "test"] }
+def "nu-completions-pussy--default-nothing-everything-custom-" [] { ["default", "nothing", "everything", "custom"] }
 
 # Add a genesis account to genesis.json. The provided account must specify the account address or key name and a list of initial coins. If a key name is given, the address will be looked up in the local Keybase. The list of initial tokens must contain valid denominations. Accounts may optionally be supplied with vesting parameters.
 export extern 'pussy add-genesis-account' [
@@ -35,7 +35,7 @@ export extern 'pussy add-genesis-account' [
 	--vesting-amount: string		# amount of coins for vesting accounts
 	--vesting-end-time: int		# schedule end time (unix epoch) for vesting accounts
 	--vesting-start-time: int		# schedule start time (unix epoch) for vesting accounts
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -45,7 +45,7 @@ export extern 'pussy add-genesis-account' [
 export extern 'pussy collect-gentxs' [
 	--gentx-dir: string		# override default "gentx" directory from which collect and execute genesis transactions; default [--home]/config/gentx/
 	--help(-h)		# help for collect-gentxs
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -56,7 +56,7 @@ export extern 'pussy config' [
 	key: string
 	value: string
 	--help(-h)		# help for config
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -66,7 +66,7 @@ export extern 'pussy config' [
 export extern 'pussy debug addr' [
 	address: string
 	--help(-h)		# help for addr
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -76,7 +76,7 @@ export extern 'pussy debug addr' [
 export extern 'pussy debug pubkey' [
 	pubkey: string
 	--help(-h)		# help for pubkey
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -86,7 +86,7 @@ export extern 'pussy debug pubkey' [
 export extern 'pussy debug raw-bytes' [
 	raw_bytes: string
 	--help(-h)		# help for raw-bytes
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -98,7 +98,7 @@ export extern 'pussy export' [
 	--height: int		# Export state from a particular height (-1 means latest height) (default -1)
 	--help(-h)		# help for export
 	--jail-allowed-addrs: string		# Comma-separated list of operator addresses of jailed validators to unjail
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -145,7 +145,7 @@ export extern 'pussy gentx' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--website: string		# The validator's (optional) website
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -155,7 +155,7 @@ export extern 'pussy gentx' [
 export extern 'pussy help' [
 	command: string
 	--help(-h)		# help for help
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -168,7 +168,7 @@ export extern 'pussy init' [
 	--help(-h)		# help for init
 	--overwrite(-o)		# overwrite the genesis.json file
 	--recover		# provide seed phrase to recover existing key instead of creating
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -192,7 +192,7 @@ export extern 'pussy keys add' [
 	--nosort		# Keys passed to --multisig are taken in the order they're supplied
 	--pubkey: string		# Parse a public key in JSON format and saves key info to <name> file.
 	--recover		# Provide seed phrase to recover existing key instead of creating
-	--home: string		# The application home directory (default "/.pussy")
+	--home: string		# The application home directory (default "/Users/user//.pussy")
 	--keyring-backend: string@"nu-completions-pussy--os-file-test-"		# Select keyring's backend (os|file|test) (default "os")
 	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
@@ -207,7 +207,7 @@ export extern 'pussy keys delete' [
 	--force(-f)		# Remove the key unconditionally without asking for the passphrase. Deprecated.
 	--help(-h)		# help for delete
 	--yes(-y)		# Skip confirmation prompt when deleting offline or ledger key references
-	--home: string		# The application home directory (default "/.pussy")
+	--home: string		# The application home directory (default "/Users/user//.pussy")
 	--keyring-backend: string@"nu-completions-pussy--os-file-test-"		# Select keyring's backend (os|file|test) (default "os")
 	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
@@ -222,7 +222,7 @@ export extern 'pussy keys export' [
 	--help(-h)		# help for export
 	--unarmored-hex		# Export unarmored hex privkey. Requires --unsafe.
 	--unsafe		# Enable unsafe operations. This flag must be switched on along with all unsafe operation-specific options.
-	--home: string		# The application home directory (default "/.pussy")
+	--home: string		# The application home directory (default "/Users/user//.pussy")
 	--keyring-backend: string@"nu-completions-pussy--os-file-test-"		# Select keyring's backend (os|file|test) (default "os")
 	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
@@ -236,7 +236,7 @@ export extern 'pussy keys import' [
 	name: string
 	keyfile: string
 	--help(-h)		# help for import
-	--home: string		# The application home directory (default "/.pussy")
+	--home: string		# The application home directory (default "/Users/user//.pussy")
 	--keyring-backend: string@"nu-completions-pussy--os-file-test-"		# Select keyring's backend (os|file|test) (default "os")
 	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
@@ -249,7 +249,7 @@ export extern 'pussy keys import' [
 export extern 'pussy keys list' [
 	--help(-h)		# help for list
 	--list-names(-n)		# List names only
-	--home: string		# The application home directory (default "/.pussy")
+	--home: string		# The application home directory (default "/Users/user//.pussy")
 	--keyring-backend: string@"nu-completions-pussy--os-file-test-"		# Select keyring's backend (os|file|test) (default "os")
 	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
@@ -263,7 +263,7 @@ export extern 'pussy keys migrate' [
 	old_home_dir: string
 	--dry-run		# Run migration without actually persisting any changes to the new Keybase
 	--help(-h)		# help for migrate
-	--home: string		# The application home directory (default "/.pussy")
+	--home: string		# The application home directory (default "/Users/user//.pussy")
 	--keyring-backend: string@"nu-completions-pussy--os-file-test-"		# Select keyring's backend (os|file|test) (default "os")
 	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
@@ -276,7 +276,7 @@ export extern 'pussy keys migrate' [
 export extern 'pussy keys mnemonic' [
 	--help(-h)		# help for mnemonic
 	--unsafe-entropy		# Prompt the user to supply their own entropy, instead of relying on the system
-	--home: string		# The application home directory (default "/.pussy")
+	--home: string		# The application home directory (default "/Users/user//.pussy")
 	--keyring-backend: string@"nu-completions-pussy--os-file-test-"		# Select keyring's backend (os|file|test) (default "os")
 	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
@@ -289,7 +289,7 @@ export extern 'pussy keys mnemonic' [
 export extern 'pussy keys parse' [
 	hex_or_bech32_address: string
 	--help(-h)		# help for parse
-	--home: string		# The application home directory (default "/.pussy")
+	--home: string		# The application home directory (default "/Users/user//.pussy")
 	--keyring-backend: string@"nu-completions-pussy--os-file-test-"		# Select keyring's backend (os|file|test) (default "os")
 	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
@@ -306,7 +306,7 @@ export extern 'pussy keys show' [
 	--help(-h)		# help for show
 	--multisig-threshold: int		# K out of N required signatures (default 1)
 	--pubkey(-p)		# Output the public key only (overrides --output)
-	--home: string		# The application home directory (default "/.pussy")
+	--home: string		# The application home directory (default "/Users/user//.pussy")
 	--keyring-backend: string@"nu-completions-pussy--os-file-test-"		# Select keyring's backend (os|file|test) (default "os")
 	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
@@ -322,7 +322,7 @@ export extern 'pussy migrate' [
 	--chain-id: string		# override chain_id with this flag
 	--genesis-time: string		# override genesis_time with this flag
 	--help(-h)		# help for migrate
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -336,7 +336,7 @@ export extern 'pussy query account' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -350,7 +350,7 @@ export extern 'pussy query auth account' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -369,7 +369,7 @@ export extern 'pussy query auth accounts' [
 	--page-key: string		# pagination page-key of all-accounts to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -382,7 +382,7 @@ export extern 'pussy query auth params' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -404,7 +404,7 @@ export extern 'pussy query authz grants' [
 	--page-key: string		# pagination page-key of grants to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -424,7 +424,7 @@ export extern 'pussy query authz grants-by-grantee' [
 	--page-key: string		# pagination page-key of grantee-grants to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -444,7 +444,7 @@ export extern 'pussy query authz grants-by-granter' [
 	--page-key: string		# pagination page-key of granter-grants to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -457,7 +457,7 @@ export extern 'pussy query bandwidth load' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -471,7 +471,7 @@ export extern 'pussy query bandwidth neuron' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -484,7 +484,7 @@ export extern 'pussy query bandwidth params' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -497,7 +497,7 @@ export extern 'pussy query bandwidth price' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -510,7 +510,7 @@ export extern 'pussy query bandwidth total' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -531,7 +531,7 @@ export extern 'pussy query bank balances' [
 	--page-key: string		# pagination page-key of all balances to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -545,7 +545,7 @@ export extern 'pussy query bank denom-metadata' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -565,7 +565,7 @@ export extern 'pussy query bank total' [
 	--page-key: string		# pagination page-key of all supply totals to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -577,7 +577,7 @@ export extern 'pussy query block' [
 	--help(-h)		# help for block
 	--node(-n): string		# Node to connect to (default "tcp://localhost:26657")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -591,7 +591,7 @@ export extern 'pussy query distribution commission' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -604,7 +604,7 @@ export extern 'pussy query distribution community-pool' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -617,7 +617,7 @@ export extern 'pussy query distribution params' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -632,7 +632,7 @@ export extern 'pussy query distribution rewards' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -654,7 +654,7 @@ export extern 'pussy query distribution slashes' [
 	--page-key: string		# pagination page-key of validator slashes to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -668,7 +668,7 @@ export extern 'pussy query distribution validator-outstanding-rewards' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -681,7 +681,7 @@ export extern 'pussy query dmn params' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -696,7 +696,7 @@ export extern 'pussy query dmn thought' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -711,7 +711,7 @@ export extern 'pussy query dmn thought-stats' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -724,7 +724,7 @@ export extern 'pussy query dmn thoughts' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -737,13 +737,13 @@ export extern 'pussy query dmn thoughts-stats' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
 ]
 
-# Error: couldn't make client config: mkdir /.pussy: read-only file system
+# Error: invalid evidence hash: encoding/hex: invalid byte: U+002D '-'
 export extern 'pussy query evidence' [
 	--count-total		# count total number of records in evidence to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
@@ -756,7 +756,7 @@ export extern 'pussy query evidence' [
 	--page-key: string		# pagination page-key of evidence to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -771,7 +771,7 @@ export extern 'pussy query feegrant grant' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -791,7 +791,7 @@ export extern 'pussy query feegrant grants-by-grantee' [
 	--page-key: string		# pagination page-key of grants to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -811,7 +811,7 @@ export extern 'pussy query feegrant grants-by-granter' [
 	--page-key: string		# pagination page-key of grants to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -826,7 +826,7 @@ export extern 'pussy query gov deposit' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -846,7 +846,7 @@ export extern 'pussy query gov deposits' [
 	--page-key: string		# pagination page-key of deposits to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -860,7 +860,7 @@ export extern 'pussy query gov param' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -873,7 +873,7 @@ export extern 'pussy query gov params' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -887,7 +887,7 @@ export extern 'pussy query gov proposal' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -909,7 +909,7 @@ export extern 'pussy query gov proposals' [
 	--status: string		# (optional) filter proposals by proposal status, status: deposit_period/voting_period/passed/rejected
 	--voter: string		# (optional) filter by proposals voted on by voted
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -923,7 +923,7 @@ export extern 'pussy query gov proposer' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -937,7 +937,7 @@ export extern 'pussy query gov tally' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -952,7 +952,7 @@ export extern 'pussy query gov vote' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -972,7 +972,7 @@ export extern 'pussy query gov votes' [
 	--page-key: string		# pagination page-key of votes to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -985,7 +985,7 @@ export extern 'pussy query graph stats' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -998,7 +998,7 @@ export extern 'pussy query grid params' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1013,7 +1013,7 @@ export extern 'pussy query grid route' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1027,7 +1027,7 @@ export extern 'pussy query grid routed-from' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1041,7 +1041,7 @@ export extern 'pussy query grid routed-to' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1054,7 +1054,7 @@ export extern 'pussy query grid routes' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1068,7 +1068,7 @@ export extern 'pussy query grid routes-from' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1082,7 +1082,7 @@ export extern 'pussy query grid routes-to' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1101,7 +1101,7 @@ export extern 'pussy query ibc channel channels' [
 	--page-key: string		# pagination page-key of channels to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1116,7 +1116,7 @@ export extern 'pussy query ibc channel client-state' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1136,7 +1136,7 @@ export extern 'pussy query ibc channel connections' [
 	--page-key: string		# pagination page-key of channels associated with a connection to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1152,7 +1152,7 @@ export extern 'pussy query ibc channel end' [
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--prove		# show proofs for the query results (default true)
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1168,7 +1168,7 @@ export extern 'pussy query ibc channel next-sequence-receive' [
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--prove		# show proofs for the query results (default true)
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1185,7 +1185,7 @@ export extern 'pussy query ibc channel packet-ack' [
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--prove		# show proofs for the query results (default true)
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1202,7 +1202,7 @@ export extern 'pussy query ibc channel packet-commitment' [
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--prove		# show proofs for the query results (default true)
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1223,7 +1223,7 @@ export extern 'pussy query ibc channel packet-commitments' [
 	--page-key: string		# pagination page-key of packet commitments associated with a channel to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1240,7 +1240,7 @@ export extern 'pussy query ibc channel packet-receipt' [
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--prove		# show proofs for the query results (default true)
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1256,7 +1256,7 @@ export extern 'pussy query ibc channel unreceived-acks' [
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--sequences: int		# 64Slice   comma separated list of packet sequence numbers (default [])
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1272,7 +1272,7 @@ export extern 'pussy query ibc channel unreceived-packets' [
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--sequences: int		# 64Slice   comma separated list of packet sequence numbers (default [])
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1289,7 +1289,7 @@ export extern 'pussy query ibc client consensus-state' [
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--prove		# show proofs for the query results (default true)
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1309,7 +1309,7 @@ export extern 'pussy query ibc client consensus-states' [
 	--page-key: string		# pagination page-key of consensus states to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1322,7 +1322,7 @@ export extern 'pussy query ibc client header' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1335,7 +1335,7 @@ export extern 'pussy query ibc client params' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1348,7 +1348,7 @@ export extern 'pussy query ibc client self-consensus-state' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1363,7 +1363,7 @@ export extern 'pussy query ibc client state' [
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--prove		# show proofs for the query results (default true)
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1382,7 +1382,7 @@ export extern 'pussy query ibc client states' [
 	--page-key: string		# pagination page-key of client states to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1393,7 +1393,7 @@ export extern 'pussy query ibc client status' [
 	client_id: string
 	--help(-h)		# help for status
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1412,7 +1412,7 @@ export extern 'pussy query ibc connection connections' [
 	--page-key: string		# pagination page-key of connection ends to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1427,7 +1427,7 @@ export extern 'pussy query ibc connection end' [
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--prove		# show proofs for the query results (default true)
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1442,7 +1442,7 @@ export extern 'pussy query ibc connection path' [
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--prove		# show proofs for the query results (default true)
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1456,7 +1456,7 @@ export extern 'pussy query ibc-transfer denom-hash' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1470,7 +1470,7 @@ export extern 'pussy query ibc-transfer denom-trace' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1489,7 +1489,7 @@ export extern 'pussy query ibc-transfer denom-traces' [
 	--page-key: string		# pagination page-key of denominations trace to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1502,7 +1502,7 @@ export extern 'pussy query ibc-transfer escrow-address' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1515,7 +1515,7 @@ export extern 'pussy query ibc-transfer params' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1529,7 +1529,7 @@ export extern 'pussy query liquidity batch' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1544,7 +1544,7 @@ export extern 'pussy query liquidity deposit' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1558,7 +1558,7 @@ export extern 'pussy query liquidity deposits' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1571,7 +1571,7 @@ export extern 'pussy query liquidity params' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1587,7 +1587,7 @@ export extern 'pussy query liquidity pool' [
 	--pool-coin-denom: string		# The denomination of the pool coin
 	--reserve-acc: string		# The Bech32 address of the reserve account
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1600,7 +1600,7 @@ export extern 'pussy query liquidity pools' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1615,7 +1615,7 @@ export extern 'pussy query liquidity swap' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1629,7 +1629,7 @@ export extern 'pussy query liquidity swaps' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1644,7 +1644,7 @@ export extern 'pussy query liquidity withdraw' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1658,7 +1658,7 @@ export extern 'pussy query liquidity withdraws' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1671,7 +1671,7 @@ export extern 'pussy query mint annual-provisions' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1684,7 +1684,7 @@ export extern 'pussy query mint inflation' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1697,7 +1697,7 @@ export extern 'pussy query mint params' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1712,7 +1712,7 @@ export extern 'pussy query params subspace' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1728,7 +1728,7 @@ export extern 'pussy query rank backlinks' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1744,7 +1744,7 @@ export extern 'pussy query rank is-exist' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1759,7 +1759,7 @@ export extern 'pussy query rank is-exist-any' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1773,7 +1773,7 @@ export extern 'pussy query rank karma' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1787,7 +1787,7 @@ export extern 'pussy query rank negentropy' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1800,7 +1800,7 @@ export extern 'pussy query rank params' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1814,7 +1814,7 @@ export extern 'pussy query rank rank' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1830,7 +1830,7 @@ export extern 'pussy query rank search' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1843,7 +1843,7 @@ export extern 'pussy query rank top' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1859,7 +1859,7 @@ export extern 'pussy query resources investmint' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1872,7 +1872,7 @@ export extern 'pussy query resources params' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1885,7 +1885,7 @@ export extern 'pussy query slashing params' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1899,7 +1899,7 @@ export extern 'pussy query slashing signing-info' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1918,7 +1918,7 @@ export extern 'pussy query slashing signing-infos' [
 	--page-key: string		# pagination page-key of signing infos to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1933,7 +1933,7 @@ export extern 'pussy query staking delegation' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1953,7 +1953,7 @@ export extern 'pussy query staking delegations' [
 	--page-key: string		# pagination page-key of delegations to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1973,7 +1973,7 @@ export extern 'pussy query staking delegations-to' [
 	--page-key: string		# pagination page-key of validator delegations to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -1987,7 +1987,7 @@ export extern 'pussy query staking historical-info' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2000,7 +2000,7 @@ export extern 'pussy query staking params' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2013,7 +2013,7 @@ export extern 'pussy query staking pool' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2029,7 +2029,7 @@ export extern 'pussy query staking redelegation' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2049,7 +2049,7 @@ export extern 'pussy query staking redelegations' [
 	--page-key: string		# pagination page-key of delegator redelegations to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2069,7 +2069,7 @@ export extern 'pussy query staking redelegations-from' [
 	--page-key: string		# pagination page-key of validator redelegations to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2084,7 +2084,7 @@ export extern 'pussy query staking unbonding-delegation' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2104,7 +2104,7 @@ export extern 'pussy query staking unbonding-delegations' [
 	--page-key: string		# pagination page-key of unbonding delegations to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2124,7 +2124,7 @@ export extern 'pussy query staking unbonding-delegations-from' [
 	--page-key: string		# pagination page-key of unbonding delegations to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2138,7 +2138,7 @@ export extern 'pussy query staking validator' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2157,7 +2157,7 @@ export extern 'pussy query staking validators' [
 	--page-key: string		# pagination page-key of validators to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2172,7 +2172,7 @@ export extern 'pussy query tendermint-validator-set' [
 	--node(-n): string		# Node to connect to (default "tcp://localhost:26657")
 	--page: int		# Query a specific page of paginated results (default 1)
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2187,7 +2187,7 @@ export extern 'pussy query tx' [
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--type: string		# The type to be used when querying tx, can be one of "hash", "acc_seq", "signature" (default "hash")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2203,7 +2203,7 @@ export extern 'pussy query txs' [
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--page: int		# Query a specific page of paginated results (default 1)
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2217,7 +2217,7 @@ export extern 'pussy query upgrade applied' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2230,7 +2230,7 @@ export extern 'pussy query upgrade module_versions' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2243,7 +2243,7 @@ export extern 'pussy query upgrade plan' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2257,7 +2257,7 @@ export extern 'pussy query wasm code' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2271,7 +2271,7 @@ export extern 'pussy query wasm code-info' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2285,7 +2285,7 @@ export extern 'pussy query wasm contract' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2305,7 +2305,7 @@ export extern 'pussy query wasm contract-history' [
 	--page-key: string		# pagination page-key of contract history to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2325,7 +2325,7 @@ export extern 'pussy query wasm contract-state all' [
 	--page-key: string		# pagination page-key of contract state to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2343,7 +2343,7 @@ export extern 'pussy query wasm contract-state raw' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2361,7 +2361,7 @@ export extern 'pussy query wasm contract-state smart' [
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2371,7 +2371,7 @@ export extern 'pussy query wasm contract-state smart' [
 export extern 'pussy query wasm libwasmvm-version' [
 	--help(-h)		# help for libwasmvm-version
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2390,7 +2390,7 @@ export extern 'pussy query wasm list-code' [
 	--page-key: string		# pagination page-key of list codes to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2410,7 +2410,7 @@ export extern 'pussy query wasm list-contract-by-code' [
 	--page-key: string		# pagination page-key of list contracts by code to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2429,7 +2429,7 @@ export extern 'pussy query wasm pinned' [
 	--page-key: string		# pagination page-key of list codes to query for
 	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2438,7 +2438,7 @@ export extern 'pussy query wasm pinned' [
 # A state rollback is performed to recover from an incorrect application state transition, when Tendermint has persisted an incorrect app hash and is thus unable to make progress. Rollback overwrites a state at height n with the state at height n - 1. The application also roll back to height n - 1. No blocks are removed, so upon restarting Tendermint the transactions in block n will be re-executed a
 export extern 'pussy rollback' [
 	--help(-h)		# help for rollback
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2475,7 +2475,7 @@ export extern 'pussy start' [
 	--unsafe-skip-upgrades: string		# Skip a set of upgrade heights to continue the old binary
 	--with-tendermint		# Run abci app embedded in-process with tendermint (default true)
 	--x-crisis-skip-assert-invariants		# Skip x/crisis invariants check on startup
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2485,7 +2485,7 @@ export extern 'pussy start' [
 export extern 'pussy status' [
 	--help(-h)		# help for status
 	--node(-n): string		# Node to connect to (default "tcp://localhost:26657")
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2494,7 +2494,7 @@ export extern 'pussy status' [
 # Remove all the data and WAL
 export extern 'pussy tendermint reset-state' [
 	--help(-h)		# help for reset-state
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2503,7 +2503,7 @@ export extern 'pussy tendermint reset-state' [
 # Shows this node's tendermint validator consensus address
 export extern 'pussy tendermint show-address' [
 	--help(-h)		# help for show-address
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2512,7 +2512,7 @@ export extern 'pussy tendermint show-address' [
 # Show this node's ID
 export extern 'pussy tendermint show-node-id' [
 	--help(-h)		# help for show-node-id
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2521,7 +2521,7 @@ export extern 'pussy tendermint show-node-id' [
 # Show this node's tendermint validator info
 export extern 'pussy tendermint show-validator' [
 	--help(-h)		# help for show-validator
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2531,7 +2531,7 @@ export extern 'pussy tendermint show-validator' [
 export extern 'pussy tendermint unsafe-reset-all' [
 	--help(-h)		# help for unsafe-reset-all
 	--keep-addr-book		# keep the address book intact
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2540,7 +2540,7 @@ export extern 'pussy tendermint unsafe-reset-all' [
 # Print protocols' and libraries' version numbers against which this app has been compiled.
 export extern 'pussy tendermint version' [
 	--help(-h)		# help for version
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2558,7 +2558,7 @@ export extern 'pussy testnet' [
 	--output-dir(-o): string		# Directory to store initialization data for the testnet (default "./mytestnet")
 	--starting-ip-address: string		# Starting IP address (192.168.0.1 results in persistent peers list ID0@192.168.0.1:46656, ID1@192.168.0.2:46656, ...) (default "192.168.0.1")
 	--v: int		# Number of validators to initialize the testnet with (default 4)
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2590,7 +2590,7 @@ export extern 'pussy tx authz exec' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2604,7 +2604,7 @@ export extern 'pussy tx authz grant' [
 	--broadcast-mode(-b): string@"nu-completions-pussy--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--deny-validators: string		# Deny validators addresses separated by ,
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
-	--expiration: int		# The Unix timestamp. Default is one year. (default 1696487524)
+	--expiration: int		# The Unix timestamp. Default is one year. (default 1698333231)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete pussy _keys values"		# Name or address of private key with which to sign
@@ -2627,7 +2627,7 @@ export extern 'pussy tx authz grant' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2660,7 +2660,7 @@ export extern 'pussy tx authz revoke' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2694,7 +2694,7 @@ export extern 'pussy tx bank send' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2726,7 +2726,7 @@ export extern 'pussy tx broadcast' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2759,7 +2759,7 @@ export extern 'pussy tx crisis invariant-broken' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2792,7 +2792,7 @@ export extern 'pussy tx decode' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2824,7 +2824,7 @@ export extern 'pussy tx distribution fund-community-pool' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2856,7 +2856,7 @@ export extern 'pussy tx distribution set-withdraw-addr' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2888,7 +2888,7 @@ export extern 'pussy tx distribution withdraw-all-rewards' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2921,7 +2921,7 @@ export extern 'pussy tx distribution withdraw-rewards' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2953,17 +2953,17 @@ export extern 'pussy tx encode' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
 ]
 
-# Error: couldn't make client config: mkdir /.pussy: read-only file system
+# Evidence transaction subcommands
 export extern 'pussy tx evidence' [
 	--help(-h)		# help for evidence
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3001,7 +3001,7 @@ export extern 'pussy tx feegrant grant' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3034,7 +3034,7 @@ export extern 'pussy tx feegrant revoke' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3067,7 +3067,7 @@ export extern 'pussy tx gov deposit' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3101,7 +3101,7 @@ export extern 'pussy tx gov submit-proposal cancel-software-upgrade' [
 	--title: string		# title of proposal
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3138,7 +3138,7 @@ export extern 'pussy tx gov submit-proposal clear-contract-admin' [
 	--type: string		# Permission of proposal, types: store-code/instantiate/migrate/update-admin/clear-admin/text/parameter_change/software_upgrade
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3170,7 +3170,7 @@ export extern 'pussy tx gov submit-proposal community-pool-spend' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3210,7 +3210,7 @@ export extern 'pussy tx gov submit-proposal execute-contract' [
 	--type: string		# Permission of proposal, types: store-code/instantiate/migrate/update-admin/clear-admin/text/parameter_change/software_upgrade
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3246,7 +3246,7 @@ export extern 'pussy tx gov submit-proposal ibc-upgrade' [
 	--title: string		# title of proposal
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3289,7 +3289,7 @@ export extern 'pussy tx gov submit-proposal instantiate-contract' [
 	--type: string		# Permission of proposal, types: store-code/instantiate/migrate/update-admin/clear-admin/text/parameter_change/software_upgrade
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3328,7 +3328,7 @@ export extern 'pussy tx gov submit-proposal migrate-contract' [
 	--type: string		# Permission of proposal, types: store-code/instantiate/migrate/update-admin/clear-admin/text/parameter_change/software_upgrade
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3360,7 +3360,7 @@ export extern 'pussy tx gov submit-proposal param-change' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3397,7 +3397,7 @@ export extern 'pussy tx gov submit-proposal pin-codes' [
 	--type: string		# Permission of proposal, types: store-code/instantiate/migrate/update-admin/clear-admin/text/parameter_change/software_upgrade
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3435,7 +3435,7 @@ export extern 'pussy tx gov submit-proposal set-contract-admin' [
 	--type: string		# Permission of proposal, types: store-code/instantiate/migrate/update-admin/clear-admin/text/parameter_change/software_upgrade
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3472,7 +3472,7 @@ export extern 'pussy tx gov submit-proposal software-upgrade' [
 	--upgrade-info: string		# Optional info for the planned upgrade such as commit hash, etc.
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3510,7 +3510,7 @@ export extern 'pussy tx gov submit-proposal sudo-contract' [
 	--type: string		# Permission of proposal, types: store-code/instantiate/migrate/update-admin/clear-admin/text/parameter_change/software_upgrade
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3547,7 +3547,7 @@ export extern 'pussy tx gov submit-proposal unpin-codes' [
 	--type: string		# Permission of proposal, types: store-code/instantiate/migrate/update-admin/clear-admin/text/parameter_change/software_upgrade
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3583,7 +3583,7 @@ export extern 'pussy tx gov submit-proposal update-client' [
 	--title: string		# title of proposal
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3619,7 +3619,7 @@ export extern 'pussy tx gov submit-proposal update-instantiate-config' [
 	--type: string		# Permission of proposal, types: store-code/instantiate/migrate/update-admin/clear-admin/text/parameter_change/software_upgrade
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3659,7 +3659,7 @@ export extern 'pussy tx gov submit-proposal wasm-store' [
 	--type: string		# Permission of proposal, types: store-code/instantiate/migrate/update-admin/clear-admin/text/parameter_change/software_upgrade
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3692,7 +3692,7 @@ export extern 'pussy tx gov vote' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3725,7 +3725,7 @@ export extern 'pussy tx gov weighted-vote' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3758,7 +3758,7 @@ export extern 'pussy tx graph cyberlink' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3791,7 +3791,7 @@ export extern 'pussy tx grid create-route' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3823,7 +3823,7 @@ export extern 'pussy tx grid delete-route' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3856,7 +3856,7 @@ export extern 'pussy tx grid edit-route' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3889,17 +3889,17 @@ export extern 'pussy tx grid edit-route-name' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
 ]
 
-# Error: couldn't make client config: mkdir /.pussy: read-only file system
+# IBC channel transaction subcommands
 export extern 'pussy tx ibc channel' [
 	--help(-h)		# help for channel
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3930,7 +3930,7 @@ export extern 'pussy tx ibc client create' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3940,7 +3940,7 @@ export extern 'pussy tx ibc client create' [
 export extern 'pussy tx ibc client misbehaviour' [
 	--help(-h)		# help for misbehaviour
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3951,7 +3951,7 @@ export extern 'pussy tx ibc client update' [
 	client_id: string
 	--help(-h)		# help for update
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -3985,7 +3985,7 @@ export extern 'pussy tx ibc client upgrade' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -4023,7 +4023,7 @@ export extern 'pussy tx ibc-transfer transfer' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -4056,7 +4056,7 @@ export extern 'pussy tx liquidity create-pool' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -4089,7 +4089,7 @@ export extern 'pussy tx liquidity deposit' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -4126,7 +4126,7 @@ export extern 'pussy tx liquidity swap' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -4159,7 +4159,7 @@ export extern 'pussy tx liquidity withdraw' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -4196,7 +4196,7 @@ export extern 'pussy tx multisign' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -4233,7 +4233,7 @@ export extern 'pussy tx multisign-batch' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -4267,7 +4267,7 @@ export extern 'pussy tx resources investmint' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -4304,7 +4304,7 @@ export extern 'pussy tx sign' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -4339,7 +4339,7 @@ export extern 'pussy tx sign-batch' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -4370,7 +4370,7 @@ export extern 'pussy tx slashing unjail' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -4414,7 +4414,7 @@ export extern 'pussy tx staking create-validator' [
 	--website: string		# The validator's (optional) website
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -4447,7 +4447,7 @@ export extern 'pussy tx staking delegate' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -4485,7 +4485,7 @@ export extern 'pussy tx staking edit-validator' [
 	--website: string		# The validator's (optional) website (default "[do-not-modify]")
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -4519,7 +4519,7 @@ export extern 'pussy tx staking redelegate' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -4552,7 +4552,7 @@ export extern 'pussy tx staking unbond' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -4584,7 +4584,7 @@ export extern 'pussy tx validate-signatures' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -4619,7 +4619,7 @@ export extern 'pussy tx vesting create-vesting-account' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -4651,7 +4651,7 @@ export extern 'pussy tx wasm clear-contract-admin' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -4685,7 +4685,7 @@ export extern 'pussy tx wasm execute' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -4722,7 +4722,7 @@ export extern 'pussy tx wasm instantiate' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -4756,7 +4756,7 @@ export extern 'pussy tx wasm migrate' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -4789,7 +4789,7 @@ export extern 'pussy tx wasm set-contract-admin' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -4823,7 +4823,7 @@ export extern 'pussy tx wasm store' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -4833,7 +4833,7 @@ export extern 'pussy tx wasm store' [
 export extern 'pussy validate-genesis' [
 	file: string
 	--help(-h)		# help for validate-genesis
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -4844,7 +4844,7 @@ export extern 'pussy version' [
 	--help(-h)		# help for version
 	--long		# Print long version information
 	--output(-o): string@"nu-completions-pussy--text-json-"		# Output format (text|json) (default "text")
-	--home: string		# directory for config and data (default "/.pussy")
+	--home: string		# directory for config and data (default "/Users/user//.pussy")
 	--log_format: string@"nu-completions-pussy--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors

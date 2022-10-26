@@ -29,7 +29,7 @@ Available Commands:
 
 Flags:
   -h, --help                help for pussy
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -60,7 +60,7 @@ Flags:
       --vesting-start-time int   schedule start time (unix epoch) for vesting accounts
 
 Global Flags:
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -80,7 +80,7 @@ Flags:
   -h, --help               help for collect-gentxs
 
 Global Flags:
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -99,7 +99,7 @@ Flags:
   -h, --help   help for config
 
 Global Flags:
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -121,7 +121,7 @@ Flags:
   -h, --help   help for addr
 
 Global Flags:
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -143,7 +143,7 @@ Flags:
   -h, --help   help for pubkey
 
 Global Flags:
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -165,7 +165,7 @@ Flags:
   -h, --help   help for raw-bytes
 
 Global Flags:
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -190,7 +190,7 @@ Flags:
   -h, --help   help for debug
 
 Global Flags:
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -214,7 +214,7 @@ Flags:
       --jail-allowed-addrs strings   Comma-separated list of operator addresses of jailed validators to unjail
 
 Global Flags:
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -289,7 +289,7 @@ Flags:
   -y, --yes                                 Skip tx broadcasting prompt confirmation
 
 Global Flags:
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -309,7 +309,7 @@ Flags:
   -h, --help   help for help
 
 Global Flags:
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -331,7 +331,7 @@ Flags:
       --recover           provide seed phrase to recover existing key instead of creating
 
 Global Flags:
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -381,7 +381,7 @@ Flags:
       --recover                  Provide seed phrase to recover existing key instead of creating
 
 Global Flags:
-      --home string              The application home directory (default "/.pussy")
+      --home string              The application home directory (default "/Users/user//.pussy")
       --keyring-backend string   Select keyring's backend (os|file|test) (default "os")
       --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
       --log_format string        The logging format (json|plain) (default "plain")
@@ -409,7 +409,7 @@ Flags:
   -y, --yes     Skip confirmation prompt when deleting offline or ledger key references
 
 Global Flags:
-      --home string              The application home directory (default "/.pussy")
+      --home string              The application home directory (default "/Users/user//.pussy")
       --keyring-backend string   Select keyring's backend (os|file|test) (default "os")
       --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
       --log_format string        The logging format (json|plain) (default "plain")
@@ -440,7 +440,7 @@ Flags:
       --unsafe          Enable unsafe operations. This flag must be switched on along with all unsafe operation-specific options.
 
 Global Flags:
-      --home string              The application home directory (default "/.pussy")
+      --home string              The application home directory (default "/Users/user//.pussy")
       --keyring-backend string   Select keyring's backend (os|file|test) (default "os")
       --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
       --log_format string        The logging format (json|plain) (default "plain")
@@ -462,7 +462,7 @@ Flags:
   -h, --help   help for import
 
 Global Flags:
-      --home string              The application home directory (default "/.pussy")
+      --home string              The application home directory (default "/Users/user//.pussy")
       --keyring-backend string   Select keyring's backend (os|file|test) (default "os")
       --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
       --log_format string        The logging format (json|plain) (default "plain")
@@ -486,7 +486,7 @@ Flags:
   -n, --list-names   List names only
 
 Global Flags:
-      --home string              The application home directory (default "/.pussy")
+      --home string              The application home directory (default "/Users/user//.pussy")
       --keyring-backend string   Select keyring's backend (os|file|test) (default "os")
       --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
       --log_format string        The logging format (json|plain) (default "plain")
@@ -516,7 +516,7 @@ Flags:
   -h, --help      help for migrate
 
 Global Flags:
-      --home string              The application home directory (default "/.pussy")
+      --home string              The application home directory (default "/Users/user//.pussy")
       --keyring-backend string   Select keyring's backend (os|file|test) (default "os")
       --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
       --log_format string        The logging format (json|plain) (default "plain")
@@ -539,7 +539,7 @@ Flags:
       --unsafe-entropy   Prompt the user to supply their own entropy, instead of relying on the system
 
 Global Flags:
-      --home string              The application home directory (default "/.pussy")
+      --home string              The application home directory (default "/Users/user//.pussy")
       --keyring-backend string   Select keyring's backend (os|file|test) (default "os")
       --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
       --log_format string        The logging format (json|plain) (default "plain")
@@ -562,7 +562,7 @@ Flags:
   -h, --help   help for parse
 
 Global Flags:
-      --home string              The application home directory (default "/.pussy")
+      --home string              The application home directory (default "/Users/user//.pussy")
       --keyring-backend string   Select keyring's backend (os|file|test) (default "os")
       --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
       --log_format string        The logging format (json|plain) (default "plain")
@@ -591,7 +591,7 @@ Flags:
   -p, --pubkey                   Output the public key only (overrides --output)
 
 Global Flags:
-      --home string              The application home directory (default "/.pussy")
+      --home string              The application home directory (default "/Users/user//.pussy")
       --keyring-backend string   Select keyring's backend (os|file|test) (default "os")
       --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
       --log_format string        The logging format (json|plain) (default "plain")
@@ -647,7 +647,7 @@ Flags:
       --output string            Output format (text|json) (default "text")
 
 Global Flags:
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -673,7 +673,7 @@ Flags:
   -h, --help                  help for migrate
 
 Global Flags:
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -696,7 +696,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -719,7 +719,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -748,7 +748,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -773,7 +773,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -783,7 +783,8 @@ Global Flags:
 ### pussy query auth
 
 ```
-Error: couldn't make client config: mkdir /.pussy: read-only file system
+Querying commands for the auth module
+
 Usage:
   pussy query auth [flags]
   pussy query auth [command]
@@ -798,13 +799,12 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
 
 Use "pussy query auth [command] --help" for more information about a command.
-
 
 ```
 
@@ -835,7 +835,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -869,7 +869,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -902,7 +902,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -912,7 +912,8 @@ Global Flags:
 ### pussy query authz
 
 ```
-Error: couldn't make client config: mkdir /.pussy: read-only file system
+Querying commands for the authz module
+
 Usage:
   pussy query authz [flags]
   pussy query authz [command]
@@ -927,13 +928,12 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
 
 Use "pussy query authz [command] --help" for more information about a command.
-
 
 ```
 
@@ -953,7 +953,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -976,7 +976,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -999,7 +999,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1022,7 +1022,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1045,7 +1045,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1055,7 +1055,8 @@ Global Flags:
 ### pussy query bandwidth
 
 ```
-Error: couldn't make client config: mkdir /.pussy: read-only file system
+Querying commands for the bandwidth module
+
 Usage:
   pussy query bandwidth [flags]
   pussy query bandwidth [command]
@@ -1072,13 +1073,12 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
 
 Use "pussy query bandwidth [command] --help" for more information about a command.
-
 
 ```
 
@@ -1109,7 +1109,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1140,7 +1140,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1176,7 +1176,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1186,7 +1186,8 @@ Global Flags:
 ### pussy query bank
 
 ```
-Error: couldn't make client config: mkdir /.pussy: read-only file system
+Querying commands for the bank module
+
 Usage:
   pussy query bank [flags]
   pussy query bank [command]
@@ -1201,13 +1202,12 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
 
 Use "pussy query bank [command] --help" for more information about a command.
-
 
 ```
 
@@ -1225,7 +1225,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1251,7 +1251,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1277,7 +1277,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1300,7 +1300,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1327,7 +1327,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1359,7 +1359,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1385,7 +1385,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1395,7 +1395,8 @@ Global Flags:
 ### pussy query distribution
 
 ```
-Error: couldn't make client config: mkdir /.pussy: read-only file system
+Querying commands for the distribution module
+
 Usage:
   pussy query distribution [flags]
   pussy query distribution [command]
@@ -1413,13 +1414,12 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
 
 Use "pussy query distribution [command] --help" for more information about a command.
-
 
 ```
 
@@ -1439,7 +1439,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1462,7 +1462,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1485,7 +1485,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1508,7 +1508,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1531,7 +1531,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1541,7 +1541,8 @@ Global Flags:
 ### pussy query dmn
 
 ```
-Error: couldn't make client config: mkdir /.pussy: read-only file system
+Querying commands for the dmn module
+
 Usage:
   pussy query dmn [flags]
   pussy query dmn [command]
@@ -1558,20 +1559,19 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
 
 Use "pussy query dmn [command] --help" for more information about a command.
 
-
 ```
 
 ### pussy query evidence
 
 ```
-Error: couldn't make client config: mkdir /.pussy: read-only file system
+Error: invalid evidence hash: encoding/hex: invalid byte: U+002D '-'
 Usage:
   pussy query evidence [flags]
 
@@ -1589,7 +1589,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1617,7 +1617,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1652,7 +1652,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1684,7 +1684,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1694,7 +1694,8 @@ Global Flags:
 ### pussy query feegrant
 
 ```
-Error: couldn't make client config: mkdir /.pussy: read-only file system
+Querying commands for the feegrant module
+
 Usage:
   pussy query feegrant [flags]
   pussy query feegrant [command]
@@ -1709,13 +1710,12 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
 
 Use "pussy query feegrant [command] --help" for more information about a command.
-
 
 ```
 
@@ -1738,7 +1738,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1771,7 +1771,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1799,7 +1799,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1825,7 +1825,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1852,7 +1852,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1890,7 +1890,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1916,7 +1916,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1943,7 +1943,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1969,7 +1969,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2002,7 +2002,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2012,7 +2012,8 @@ Global Flags:
 ### pussy query gov
 
 ```
-Error: couldn't make client config: mkdir /.pussy: read-only file system
+Querying commands for the governance module
+
 Usage:
   pussy query gov [flags]
   pussy query gov [command]
@@ -2034,13 +2035,12 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
 
 Use "pussy query gov [command] --help" for more information about a command.
-
 
 ```
 
@@ -2060,7 +2060,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2070,7 +2070,8 @@ Global Flags:
 ### pussy query graph
 
 ```
-Error: couldn't make client config: mkdir /.pussy: read-only file system
+Querying commands for the graph module
+
 Usage:
   pussy query graph [flags]
   pussy query graph [command]
@@ -2083,13 +2084,12 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
 
 Use "pussy query graph [command] --help" for more information about a command.
-
 
 ```
 
@@ -2109,7 +2109,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2132,7 +2132,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2155,7 +2155,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2178,7 +2178,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2201,7 +2201,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2224,7 +2224,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2247,7 +2247,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2257,7 +2257,8 @@ Global Flags:
 ### pussy query grid
 
 ```
-Error: couldn't make client config: mkdir /.pussy: read-only file system
+Querying commands for the grid module
+
 Usage:
   pussy query grid [flags]
   pussy query grid [command]
@@ -2276,13 +2277,12 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
 
 Use "pussy query grid [command] --help" for more information about a command.
-
 
 ```
 
@@ -2311,7 +2311,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2337,7 +2337,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2369,7 +2369,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2396,7 +2396,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2423,7 +2423,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2450,7 +2450,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2477,7 +2477,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2509,7 +2509,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2536,7 +2536,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2566,7 +2566,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2596,7 +2596,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2606,7 +2606,8 @@ Global Flags:
 ### pussy query ibc channel
 
 ```
-Error: couldn't make client config: mkdir /.pussy: read-only file system
+IBC channel query subcommands
+
 Usage:
   pussy query ibc channel [flags]
   pussy query ibc channel [command]
@@ -2629,13 +2630,12 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
 
 Use "pussy query ibc channel [command] --help" for more information about a command.
-
 
 ```
 
@@ -2661,7 +2661,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2693,7 +2693,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2719,7 +2719,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2745,7 +2745,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2771,7 +2771,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2798,7 +2798,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2830,7 +2830,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2853,7 +2853,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2863,7 +2863,8 @@ Global Flags:
 ### pussy query ibc client
 
 ```
-Error: couldn't make client config: mkdir /.pussy: read-only file system
+IBC client query subcommands
+
 Usage:
   pussy query ibc client [flags]
   pussy query ibc client [command]
@@ -2883,13 +2884,12 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
 
 Use "pussy query ibc client [command] --help" for more information about a command.
-
 
 ```
 
@@ -2918,7 +2918,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2945,7 +2945,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2972,7 +2972,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2997,7 +2997,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3025,7 +3025,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3051,7 +3051,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3083,7 +3083,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3109,7 +3109,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3135,7 +3135,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3162,7 +3162,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3174,7 +3174,8 @@ Use "pussy query ibc-transfer [command] --help" for more information about a com
 ### pussy query ibc
 
 ```
-Error: couldn't make client config: mkdir /.pussy: read-only file system
+Querying commands for the IBC module
+
 Usage:
   pussy query ibc [flags]
   pussy query ibc [command]
@@ -3189,13 +3190,12 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
 
 Use "pussy query ibc [command] --help" for more information about a command.
-
 
 ```
 
@@ -3217,7 +3217,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3247,7 +3247,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3276,7 +3276,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3302,7 +3302,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3335,7 +3335,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3360,7 +3360,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3390,7 +3390,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3420,7 +3420,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3450,7 +3450,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3480,7 +3480,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3490,7 +3490,8 @@ Global Flags:
 ### pussy query liquidity
 
 ```
-Error: couldn't make client config: mkdir /.pussy: read-only file system
+Querying commands for the liquidity module
+
 Usage:
   pussy query liquidity [flags]
   pussy query liquidity [command]
@@ -3512,13 +3513,12 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
 
 Use "pussy query liquidity [command] --help" for more information about a command.
-
 
 ```
 
@@ -3538,7 +3538,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3561,7 +3561,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3584,7 +3584,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3594,7 +3594,8 @@ Global Flags:
 ### pussy query mint
 
 ```
-Error: couldn't make client config: mkdir /.pussy: read-only file system
+Querying commands for the minting module
+
 Usage:
   pussy query mint [flags]
   pussy query mint [command]
@@ -3609,13 +3610,12 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
 
 Use "pussy query mint [command] --help" for more information about a command.
-
 
 ```
 
@@ -3635,7 +3635,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3645,7 +3645,8 @@ Global Flags:
 ### pussy query params
 
 ```
-Error: couldn't make client config: mkdir /.pussy: read-only file system
+Querying commands for the params module
+
 Usage:
   pussy query params [flags]
   pussy query params [command]
@@ -3658,13 +3659,12 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
 
 Use "pussy query params [command] --help" for more information about a command.
-
 
 ```
 
@@ -3684,7 +3684,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3707,7 +3707,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3730,7 +3730,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3753,7 +3753,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3776,7 +3776,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3799,7 +3799,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3822,7 +3822,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3845,7 +3845,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3868,7 +3868,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3878,7 +3878,8 @@ Global Flags:
 ### pussy query rank
 
 ```
-Error: couldn't make client config: mkdir /.pussy: read-only file system
+Querying commands for the rank module
+
 Usage:
   pussy query rank [flags]
   pussy query rank [command]
@@ -3900,13 +3901,12 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
 
 Use "pussy query rank [command] --help" for more information about a command.
-
 
 ```
 
@@ -3926,7 +3926,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3949,7 +3949,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3959,7 +3959,8 @@ Global Flags:
 ### pussy query resources
 
 ```
-Error: couldn't make client config: mkdir /.pussy: read-only file system
+Querying commands for the resources module
+
 Usage:
   pussy query resources [flags]
   pussy query resources [command]
@@ -3973,13 +3974,12 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
 
 Use "pussy query resources [command] --help" for more information about a command.
-
 
 ```
 
@@ -4001,7 +4001,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4026,7 +4026,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4057,7 +4057,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4067,7 +4067,8 @@ Global Flags:
 ### pussy query slashing
 
 ```
-Error: couldn't make client config: mkdir /.pussy: read-only file system
+Querying commands for the slashing module
+
 Usage:
   pussy query slashing [flags]
   pussy query slashing [command]
@@ -4082,13 +4083,12 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
 
 Use "pussy query slashing [command] --help" for more information about a command.
-
 
 ```
 
@@ -4111,7 +4111,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4143,7 +4143,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4175,7 +4175,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4201,7 +4201,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4227,7 +4227,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4253,7 +4253,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4279,7 +4279,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4311,7 +4311,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4343,7 +4343,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4369,7 +4369,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4401,7 +4401,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4433,7 +4433,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4459,7 +4459,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4491,7 +4491,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4501,7 +4501,8 @@ Global Flags:
 ### pussy query staking
 
 ```
-Error: couldn't make client config: mkdir /.pussy: read-only file system
+Querying commands for the staking module
+
 Usage:
   pussy query staking [flags]
   pussy query staking [command]
@@ -4527,13 +4528,12 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
 
 Use "pussy query staking [command] --help" for more information about a command.
-
 
 ```
 
@@ -4554,7 +4554,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4581,7 +4581,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4613,7 +4613,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4637,7 +4637,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4662,7 +4662,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4685,7 +4685,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4710,7 +4710,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4735,7 +4735,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4761,7 +4761,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4793,7 +4793,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4822,7 +4822,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4848,7 +4848,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4874,7 +4874,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4884,7 +4884,8 @@ Global Flags:
 ### pussy query wasm contract-state
 
 ```
-Error: couldn't make client config: mkdir /.pussy: read-only file system
+Querying commands for the wasm module
+
 Usage:
   pussy query wasm contract-state [flags]
   pussy query wasm contract-state [command]
@@ -4902,13 +4903,12 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
 
 Use "pussy query wasm contract-state [command] --help" for more information about a command.
-
 
 ```
 
@@ -4931,7 +4931,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4954,7 +4954,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4986,7 +4986,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -5018,7 +5018,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -5047,7 +5047,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -5057,7 +5057,8 @@ Global Flags:
 ### pussy query wasm
 
 ```
-Error: couldn't make client config: mkdir /.pussy: read-only file system
+Querying commands for the wasm module
+
 Usage:
   pussy query wasm [flags]
   pussy query wasm [command]
@@ -5078,20 +5079,20 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
 
 Use "pussy query wasm [command] --help" for more information about a command.
 
-
 ```
 
 ### pussy query
 
 ```
-Error: couldn't make client config: mkdir /.pussy: read-only file system
+Querying subcommands
+
 Usage:
   pussy query [flags]
   pussy query [command]
@@ -5133,13 +5134,12 @@ Flags:
   -h, --help              help for query
 
 Global Flags:
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
 
 Use "pussy query [command] --help" for more information about a command.
-
 
 ```
 
@@ -5161,7 +5161,7 @@ Flags:
   -h, --help   help for rollback
 
 Global Flags:
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -5257,7 +5257,7 @@ Flags:
       --x-crisis-skip-assert-invariants                 Skip x/crisis invariants check on startup
 
 Global Flags:
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -5277,7 +5277,7 @@ Flags:
   -n, --node string   Node to connect to (default "tcp://localhost:26657")
 
 Global Flags:
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -5296,7 +5296,7 @@ Flags:
   -h, --help   help for reset-state
 
 Global Flags:
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -5315,7 +5315,7 @@ Flags:
   -h, --help   help for show-address
 
 Global Flags:
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -5334,7 +5334,7 @@ Flags:
   -h, --help   help for show-node-id
 
 Global Flags:
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -5353,7 +5353,7 @@ Flags:
   -h, --help   help for show-validator
 
 Global Flags:
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -5376,7 +5376,7 @@ Flags:
       --keep-addr-book   keep the address book intact
 
 Global Flags:
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -5396,7 +5396,7 @@ Flags:
   -h, --help   help for version
 
 Global Flags:
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -5423,7 +5423,7 @@ Flags:
   -h, --help   help for tendermint
 
 Global Flags:
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -5459,7 +5459,7 @@ Flags:
       --v int                        Number of validators to initialize the testnet with (default 4)
 
 Global Flags:
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -5503,7 +5503,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -5528,7 +5528,7 @@ Flags:
   -b, --broadcast-mode string        Transaction broadcasting mode (sync|async|block) (default "sync")
       --deny-validators strings      Deny validators addresses separated by ,
       --dry-run                      ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
-      --expiration int               The Unix timestamp. Default is one year. (default 1696487524)
+      --expiration int               The Unix timestamp. Default is one year. (default 1698333231)
       --fee-account string           Fee account pays fees for the transaction instead of deducting from the signer
       --fees string                  Fees to pay along with transaction; eg: 10uatom
       --from string                  Name or address of private key with which to sign
@@ -5553,7 +5553,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -5596,7 +5596,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -5606,7 +5606,8 @@ Global Flags:
 ### pussy tx authz
 
 ```
-Error: couldn't make client config: mkdir /.pussy: read-only file system
+Authorize and revoke access to execute transactions on behalf of your address
+
 Usage:
   pussy tx authz [flags]
   pussy tx authz [command]
@@ -5621,13 +5622,12 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
 
 Use "pussy tx authz [command] --help" for more information about a command.
-
 
 ```
 
@@ -5666,7 +5666,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -5676,7 +5676,8 @@ Global Flags:
 ### pussy tx bank
 
 ```
-Error: couldn't make client config: mkdir /.pussy: read-only file system
+Bank transaction subcommands
+
 Usage:
   pussy tx bank [flags]
   pussy tx bank [command]
@@ -5690,13 +5691,12 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
 
 Use "pussy tx bank [command] --help" for more information about a command.
-
 
 ```
 
@@ -5739,7 +5739,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -5780,7 +5780,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -5790,7 +5790,8 @@ Global Flags:
 ### pussy tx crisis
 
 ```
-Error: couldn't make client config: mkdir /.pussy: read-only file system
+Crisis transactions subcommands
+
 Usage:
   pussy tx crisis [flags]
   pussy tx crisis [command]
@@ -5803,13 +5804,12 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
 
 Use "pussy tx crisis [command] --help" for more information about a command.
-
 
 ```
 
@@ -5848,7 +5848,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -5892,7 +5892,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -5936,7 +5936,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -5982,7 +5982,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -6029,7 +6029,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -6039,7 +6039,8 @@ Global Flags:
 ### pussy tx distribution
 
 ```
-Error: couldn't make client config: mkdir /.pussy: read-only file system
+Distribution transactions subcommands
+
 Usage:
   pussy tx distribution [flags]
   pussy tx distribution [command]
@@ -6055,13 +6056,12 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
 
 Use "pussy tx distribution [command] --help" for more information about a command.
-
 
 ```
 
@@ -6101,7 +6101,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -6111,7 +6111,8 @@ Global Flags:
 ### pussy tx evidence
 
 ```
-Error: couldn't make client config: mkdir /.pussy: read-only file system
+Evidence transaction subcommands
+
 Usage:
   pussy tx evidence [flags]
 
@@ -6120,11 +6121,10 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
-
 
 ```
 
@@ -6174,7 +6174,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -6219,7 +6219,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -6229,7 +6229,8 @@ Global Flags:
 ### pussy tx feegrant
 
 ```
-Error: couldn't make client config: mkdir /.pussy: read-only file system
+Grant and revoke fee allowance for a grantee by a granter
+
 Usage:
   pussy tx feegrant [flags]
   pussy tx feegrant [command]
@@ -6243,13 +6244,12 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
 
 Use "pussy tx feegrant [command] --help" for more information about a command.
-
 
 ```
 
@@ -6291,7 +6291,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -6335,7 +6335,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -6381,7 +6381,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -6436,7 +6436,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -6484,7 +6484,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -6538,7 +6538,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -6589,7 +6589,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -6635,7 +6635,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -6704,7 +6704,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -6750,7 +6750,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -6796,7 +6796,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -6844,7 +6844,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -6890,7 +6890,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -6936,7 +6936,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -6982,7 +6982,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -7031,7 +7031,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -7081,7 +7081,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -7163,7 +7163,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -7210,7 +7210,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -7255,7 +7255,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -7265,7 +7265,8 @@ Global Flags:
 ### pussy tx gov
 
 ```
-Error: couldn't make client config: mkdir /.pussy: read-only file system
+Governance transactions subcommands
+
 Usage:
   pussy tx gov [flags]
   pussy tx gov [command]
@@ -7281,13 +7282,12 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
 
 Use "pussy tx gov [command] --help" for more information about a command.
-
 
 ```
 
@@ -7327,7 +7327,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -7337,7 +7337,8 @@ Global Flags:
 ### pussy tx graph
 
 ```
-Error: couldn't make client config: mkdir /.pussy: read-only file system
+Graph transaction subcommands
+
 Usage:
   pussy tx graph [flags]
   pussy tx graph [command]
@@ -7350,13 +7351,12 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
 
 Use "pussy tx graph [command] --help" for more information about a command.
-
 
 ```
 
@@ -7394,7 +7394,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -7435,7 +7435,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -7476,7 +7476,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -7517,7 +7517,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -7527,7 +7527,8 @@ Global Flags:
 ### pussy tx grid
 
 ```
-Error: couldn't make client config: mkdir /.pussy: read-only file system
+grid transactions subcommands
+
 Usage:
   pussy tx grid [flags]
   pussy tx grid [command]
@@ -7543,20 +7544,20 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
 
 Use "pussy tx grid [command] --help" for more information about a command.
 
-
 ```
 
 ### pussy tx ibc channel
 
 ```
-Error: couldn't make client config: mkdir /.pussy: read-only file system
+IBC channel transaction subcommands
+
 Usage:
   pussy tx ibc channel [flags]
 
@@ -7565,11 +7566,10 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
-
 
 ```
 
@@ -7612,7 +7612,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -7635,7 +7635,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -7658,7 +7658,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -7704,7 +7704,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -7714,7 +7714,8 @@ Global Flags:
 ### pussy tx ibc client
 
 ```
-Error: couldn't make client config: mkdir /.pussy: read-only file system
+IBC client transaction subcommands
+
 Usage:
   pussy tx ibc client [flags]
   pussy tx ibc client [command]
@@ -7730,13 +7731,12 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
 
 Use "pussy tx ibc client [command] --help" for more information about a command.
-
 
 ```
 
@@ -7785,7 +7785,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -7795,7 +7795,8 @@ Global Flags:
 ### pussy tx ibc-transfer
 
 ```
-Error: couldn't make client config: mkdir /.pussy: read-only file system
+IBC fungible token transfer transaction subcommands
+
 Usage:
   pussy tx ibc-transfer [flags]
   pussy tx ibc-transfer [command]
@@ -7808,20 +7809,20 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
 
 Use "pussy tx ibc-transfer [command] --help" for more information about a command.
 
-
 ```
 
 ### pussy tx ibc
 
 ```
-Error: couldn't make client config: mkdir /.pussy: read-only file system
+IBC transaction subcommands
+
 Usage:
   pussy tx ibc [flags]
   pussy tx ibc [command]
@@ -7835,13 +7836,12 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
 
 Use "pussy tx ibc [command] --help" for more information about a command.
-
 
 ```
 
@@ -7888,7 +7888,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -7941,7 +7941,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -8009,7 +8009,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -8062,7 +8062,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -8072,7 +8072,8 @@ Global Flags:
 ### pussy tx liquidity
 
 ```
-Error: couldn't make client config: mkdir /.pussy: read-only file system
+Liquidity transaction subcommands
+
 Usage:
   pussy tx liquidity [flags]
   pussy tx liquidity [command]
@@ -8088,13 +8089,12 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
 
 Use "pussy tx liquidity [command] --help" for more information about a command.
-
 
 ```
 
@@ -8144,7 +8144,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -8204,7 +8204,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -8248,7 +8248,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -8258,7 +8258,8 @@ Global Flags:
 ### pussy tx resources
 
 ```
-Error: couldn't make client config: mkdir /.pussy: read-only file system
+resources transactions subcommands
+
 Usage:
   pussy tx resources [flags]
   pussy tx resources [command]
@@ -8271,13 +8272,12 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
 
 Use "pussy tx resources [command] --help" for more information about a command.
-
 
 ```
 
@@ -8332,7 +8332,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -8390,7 +8390,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -8433,7 +8433,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -8443,7 +8443,8 @@ Global Flags:
 ### pussy tx slashing
 
 ```
-Error: couldn't make client config: mkdir /.pussy: read-only file system
+Slashing transaction subcommands
+
 Usage:
   pussy tx slashing [flags]
   pussy tx slashing [command]
@@ -8456,13 +8457,12 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
 
 Use "pussy tx slashing [command] --help" for more information about a command.
-
 
 ```
 
@@ -8513,7 +8513,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -8557,7 +8557,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -8605,7 +8605,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -8649,7 +8649,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -8693,7 +8693,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -8703,7 +8703,8 @@ Global Flags:
 ### pussy tx staking
 
 ```
-Error: couldn't make client config: mkdir /.pussy: read-only file system
+Staking transaction subcommands
+
 Usage:
   pussy tx staking [flags]
   pussy tx staking [command]
@@ -8720,13 +8721,12 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
 
 Use "pussy tx staking [command] --help" for more information about a command.
-
 
 ```
 
@@ -8770,7 +8770,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -8816,7 +8816,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -8826,7 +8826,8 @@ Global Flags:
 ### pussy tx vesting
 
 ```
-Error: couldn't make client config: mkdir /.pussy: read-only file system
+Vesting transaction subcommands
+
 Usage:
   pussy tx vesting [flags]
   pussy tx vesting [command]
@@ -8839,13 +8840,12 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
 
 Use "pussy tx vesting [command] --help" for more information about a command.
-
 
 ```
 
@@ -8886,7 +8886,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -8931,7 +8931,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -8979,7 +8979,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -9023,7 +9023,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -9067,7 +9067,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -9114,7 +9114,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -9124,7 +9124,8 @@ Global Flags:
 ### pussy tx wasm
 
 ```
-Error: couldn't make client config: mkdir /.pussy: read-only file system
+Wasm transaction subcommands
+
 Usage:
   pussy tx wasm [flags]
   pussy tx wasm [command]
@@ -9142,20 +9143,20 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
 
 Use "pussy tx wasm [command] --help" for more information about a command.
 
-
 ```
 
 ### pussy tx
 
 ```
-Error: couldn't make client config: mkdir /.pussy: read-only file system
+Transactions subcommands
+
 Usage:
   pussy tx [flags]
   pussy tx [command]
@@ -9193,7 +9194,7 @@ Flags:
   -h, --help              help for tx
 
 Global Flags:
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -9202,7 +9203,6 @@ Additional help topics:
   pussy tx upgrade       Upgrade transaction subcommands
 
 Use "pussy tx [command] --help" for more information about a command.
-
 
 ```
 
@@ -9218,7 +9218,7 @@ Flags:
   -h, --help   help for validate-genesis
 
 Global Flags:
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -9239,7 +9239,7 @@ Flags:
   -o, --output string   Output format (text|json) (default "text")
 
 Global Flags:
-      --home string         directory for config and data (default "/.pussy")
+      --home string         directory for config and data (default "/Users/user//.pussy")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors

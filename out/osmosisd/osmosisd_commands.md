@@ -1,0 +1,11031 @@
+### osmosisd 
+
+```
+Start osmosis app
+
+Usage:
+  osmosisd [command]
+
+Available Commands:
+  add-genesis-account      Add a genesis account to genesis.json
+  add-wasm-genesis-message Wasm genesis subcommands
+  collect-gentxs           Collect genesis txs and output a genesis.json file
+  config                   Create or query an application CLI configuration file
+  debug                    Tool for helping with debugging your application
+  export                   Export state to JSON
+  export-derive-balances   Export a derive balances from a provided genesis export
+  forceprune               Example osmosisd forceprune -f 188000 -m 1000, which would keep blockchain and state data of last 188000 blocks (approximately 2 weeks) and ABCI responses of last 1000 blocks.
+  gentx                    Generate a genesis tx carrying a self delegation
+  help                     Help about any command
+  init                     Initialize private validator, p2p, genesis, and application configuration files
+  keys                     Manage your application's keys
+  migrate                  Migrate genesis to a specified target version
+  prepare-genesis          Prepare a genesis file with initial setup
+  query                    Querying subcommands
+  rollback                 rollback tendermint state by one height
+  rosetta                  spin up a rosetta server
+  start                    Run the full node
+  status                   Query remote node for status
+  tendermint               Tendermint subcommands
+  testnet                  Initialize files for a simapp testnet
+  tx                       Transactions subcommands
+  unsafe-reset-all         (unsafe) Remove all the data and WAL, reset this node's validator to genesis state
+  validate-genesis         validates the genesis file at the default location or at the location passed as an arg
+  version                  Print the application binary version information
+
+Flags:
+  -h, --help                help for osmosisd
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "osmosisd [command] --help" for more information about a command.
+
+```
+
+### osmosisd add-genesis-account
+
+```
+Add a genesis account to genesis.json. The provided account must specify
+the account address or key name and a list of initial coins. If a key name is given,
+the address will be looked up in the local Keybase. The list of initial tokens must
+contain valid denominations. Accounts may optionally be supplied with vesting parameters.
+
+Usage:
+  osmosisd add-genesis-account [address_or_key_name] [coin][,[coin]] [flags]
+
+Flags:
+      --height int               Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help                     help for add-genesis-account
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test) (default "os")
+      --node string              <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string            Output format (text|json) (default "text")
+      --vesting-amount string    amount of coins for vesting accounts
+      --vesting-end-time int     schedule end time (unix epoch) for vesting accounts
+      --vesting-start-time int   schedule start time (unix epoch) for vesting accounts
+
+Global Flags:
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd add-wasm-genesis-message execute
+
+```
+Execute a command on a wasm contract
+
+Usage:
+  osmosisd add-wasm-genesis-message execute [contract_addr_bech32] [json_encoded_send_args] --run-as [address] --amount [coins,optional] [flags]
+
+Flags:
+      --amount string            Coins to send to the contract along with command
+      --height int               Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help                     help for execute
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test) (default "os")
+      --node string              <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string            Output format (text|json) (default "text")
+      --run-as string            The address that pays the funds.
+
+Global Flags:
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd add-wasm-genesis-message instantiate-contract
+
+```
+Instantiate a wasm contract
+
+Usage:
+  osmosisd add-wasm-genesis-message instantiate-contract [code_id_int64] [json_encoded_init_args] --label [text] --run-as [address] --admin [address,optional] --amount [coins,optional] [flags]
+
+Flags:
+      --admin string             Address of an admin
+      --amount string            Coins to send to the contract during instantiation
+      --height int               Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help                     help for instantiate-contract
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test) (default "os")
+      --label string             A human-readable name for this contract in lists
+      --no-admin                 You must set this explicitly if you don't want an admin
+      --node string              <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string            Output format (text|json) (default "text")
+      --run-as string            The address that pays the init funds. It is the creator of the contract.
+
+Global Flags:
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd add-wasm-genesis-message list-codes
+
+```
+Lists all codes from genesis code dump and queued messages
+
+Usage:
+  osmosisd add-wasm-genesis-message list-codes  [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for list-codes
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd add-wasm-genesis-message list-contracts
+
+```
+Lists all contracts from genesis contract dump and queued messages
+
+Usage:
+  osmosisd add-wasm-genesis-message list-contracts  [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for list-contracts
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd add-wasm-genesis-message store
+
+```
+Upload a wasm binary
+
+Usage:
+  osmosisd add-wasm-genesis-message store [wasm file] --run-as [owner_address_or_key_name]", [flags]
+
+Flags:
+      --height int                        Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help                              help for store
+      --instantiate-everybody string      Everybody can instantiate a contract from the code, optional
+      --instantiate-nobody string         Nobody except the governance process can instantiate a contract from the code, optional
+      --instantiate-only-address string   Only this address can instantiate a contract instance from the code, optional
+      --keyring-backend string            Select keyring's backend (os|file|kwallet|pass|test) (default "os")
+      --node string                       <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string                     Output format (text|json) (default "text")
+      --run-as string                     The address that is stored as code creator
+
+Global Flags:
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd add-wasm-genesis-message
+
+```
+Wasm genesis subcommands
+
+Usage:
+  osmosisd add-wasm-genesis-message [flags]
+  osmosisd add-wasm-genesis-message [command]
+
+Available Commands:
+  execute              Execute a command on a wasm contract
+  instantiate-contract Instantiate a wasm contract
+  list-codes           Lists all codes from genesis code dump and queued messages
+  list-contracts       Lists all contracts from genesis contract dump and queued messages
+  store                Upload a wasm binary
+
+Flags:
+  -h, --help   help for add-wasm-genesis-message
+
+Global Flags:
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "osmosisd add-wasm-genesis-message [command] --help" for more information about a command.
+
+```
+
+### osmosisd collect-gentxs
+
+```
+Collect genesis txs and output a genesis.json file
+
+Usage:
+  osmosisd collect-gentxs [flags]
+
+Flags:
+      --gentx-dir string   override default "gentx" directory from which collect and execute genesis transactions; default [--home]/config/gentx/
+  -h, --help               help for collect-gentxs
+
+Global Flags:
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd config
+
+```
+Create or query an application CLI configuration file
+
+Usage:
+  osmosisd config <key> [value] [flags]
+
+Flags:
+  -h, --help   help for config
+
+Global Flags:
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd debug addr
+
+```
+Convert an address between hex encoding and bech32.
+
+Example:
+$ osmosisd debug addr cosmos1e0jnq2sun3dzjh8p2xq95kk0expwmd7shwjpfg
+
+Usage:
+  osmosisd debug addr [address] [flags]
+
+Flags:
+  -h, --help   help for addr
+
+Global Flags:
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd debug bech32-convert
+
+```
+Convert any bech32 string to the osmo prefix
+Especially useful for converting cosmos addresses to osmo addresses
+
+Example:
+	osmosisd bech32-convert cosmos1ey69r37gfxvxg62sh4r0ktpuc46pzjrmz29g45
+
+Usage:
+  osmosisd debug bech32-convert [bech32 string] [flags]
+
+Flags:
+  -h, --help            help for bech32-convert
+  -p, --prefix string   Bech32 Prefix to encode to (default "osmo")
+
+Global Flags:
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd debug pubkey-raw
+
+```
+Decode a pubkey from hex, base64, or bech32.
+Example:
+$ osmosisd debug pubkey-raw TWFuIGlzIGRpc3Rpbmd1aXNoZWQsIG5vdCBvbmx5IGJ5IGhpcyByZWFzb24sIGJ1dCBieSB0aGlz
+$ osmosisd debug pubkey-raw cosmos1e0jnq2sun3dzjh8p2xq95kk0expwmd7shwjpfg
+
+Usage:
+  osmosisd debug pubkey-raw [pubkey] -t [{ed25519, secp256k1}] [flags]
+
+Flags:
+  -h, --help          help for pubkey-raw
+  -t, --type string   Pubkey type to decode (oneof secp256k1, ed25519) (default "ed25519")
+
+Global Flags:
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd debug pubkey
+
+```
+Decode a pubkey from proto JSON and display it's address.
+
+Example:
+$ osmosisd debug pubkey '{"@type":"/cosmos.crypto.secp256k1.PubKey","key":"AurroA7jvfPd1AadmmOvWM2rJSwipXfRf8yD6pLbA2DJ"}'
+
+Usage:
+  osmosisd debug pubkey [pubkey] [flags]
+
+Flags:
+  -h, --help   help for pubkey
+
+Global Flags:
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd debug raw-bytes
+
+```
+Convert raw-bytes to hex.
+
+Example:
+$ osmosisd debug raw-bytes [72 101 108 108 111 44 32 112 108 97 121 103 114 111 117 110 100]
+
+Usage:
+  osmosisd debug raw-bytes [raw-bytes] [flags]
+
+Flags:
+  -h, --help   help for raw-bytes
+
+Global Flags:
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd debug
+
+```
+Tool for helping with debugging your application
+
+Usage:
+  osmosisd debug [flags]
+  osmosisd debug [command]
+
+Available Commands:
+  addr           Convert an address between hex and bech32
+  bech32-convert Convert any bech32 string to the osmo prefix
+  pubkey         Decode a pubkey from proto JSON
+  pubkey-raw     Decode a ED25519 or secp256k1 pubkey from hex, base64, or bech32
+  raw-bytes      Convert raw bytes output (eg. [10 21 13 255]) to hex
+
+Flags:
+  -h, --help   help for debug
+
+Global Flags:
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "osmosisd debug [command] --help" for more information about a command.
+
+```
+
+### osmosisd export-derive-balances
+
+```
+Export a derive balances from a provided genesis export
+Example:
+	osmosisd export-derive-balances ../genesis.json ../snapshot.json
+
+Usage:
+  osmosisd export-derive-balances [input-genesis-file] [output-snapshot-json] [flags]
+
+Flags:
+      --breakdown-by-pool-ids string   Output a special breakdown for amount LP'd to the provided pools. Usage --breakdown-by-pool-ids=1,2,605
+  -h, --help                           help for export-derive-balances
+
+Global Flags:
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd export
+
+```
+Export state to JSON
+
+Usage:
+  osmosisd export [flags]
+
+Flags:
+      --for-zero-height              Export state to start at height zero (perform preproccessing)
+      --height int                   Export state from a particular height (-1 means latest height) (default -1)
+  -h, --help                         help for export
+      --jail-allowed-addrs strings   Comma-separated list of operator addresses of jailed validators to unjail
+      --modules-to-export strings    Comma-separated list of modules to export. If empty, will export all modules
+
+Global Flags:
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd forceprune
+
+```
+Forceprune options prunes and compacts blockstore.db and state.db. One needs to shut down chain before running forceprune. By default it keeps last 188000 blocks (approximately 2 weeks of data) blockstore and state db (validator and consensus information) and 1000 blocks of abci responses from state.db. Everything beyond these heights in blockstore and state.db is pruned. ABCI Responses are stored in index db and so redundant especially if one is running pruned nodes. As a result we are removing ABCI data from state.db aggressively by default. One can override height for blockstore.db and state.db by using -f option and for abci response by using -m option. Example osmosisd forceprune -f 188000 -m 1000.
+
+Usage:
+  osmosisd forceprune [flags]
+
+Flags:
+  -f, --full_height string   Full height to chop to (default "188000")
+  -h, --help                 help for forceprune
+  -m, --min_height string    Min height for ABCI to chop to (default "1000")
+
+Global Flags:
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd gentx
+
+```
+Generate a genesis transaction that creates a validator with a self-delegation,
+that is signed by the key in the Keyring referenced by a given name. A node ID and Bech32 consensus
+pubkey may optionally be provided. If they are omitted, they will be retrieved from the priv_validator.json
+file. The following default parameters are included:
+    
+	delegation amount:           100000000stake
+	commission rate:             0.1
+	commission max rate:         0.2
+	commission max change rate:  0.01
+	minimum self delegation:     1
+
+
+Example:
+$ osmosisd gentx my-key-name 1000000stake --home=/path/to/home/dir --keyring-backend=os --chain-id=test-chain-1 \
+    --moniker="myvalidator" \
+    --commission-max-change-rate=0.01 \
+    --commission-max-rate=1.0 \
+    --commission-rate=0.07 \
+    --details="..." \
+    --security-contact="..." \
+    --website="..."
+
+Usage:
+  osmosisd gentx [key_name] [amount] [flags]
+
+Flags:
+  -a, --account-number uint                 The account number of the signing account (offline mode only)
+      --amount string                       Amount of coins to bond
+  -b, --broadcast-mode string               Transaction broadcasting mode (sync|async|block) (default "sync")
+      --chain-id string                     The network chain ID
+      --commission-max-change-rate string   The maximum commission change rate percentage (per day)
+      --commission-max-rate string          The maximum commission rate percentage
+      --commission-rate string              The initial commission rate percentage
+      --details string                      The validator's (optional) details
+      --dry-run                             ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string                  Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string                         Fees to pay along with transaction; eg: 10uatom
+      --from string                         Name or address of private key with which to sign
+      --gas string                          gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float                adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string                   Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only                       Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                                help for gentx
+      --identity string                     The (optional) identity signature (ex. UPort or Keybase)
+      --ip string                           The node's public IP (default "10.50.1.95")
+      --keyring-backend string              Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string                  The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                              Use a connected Ledger device
+      --min-self-delegation string          The minimum self delegation required on the validator
+      --moniker string                      The validator's (optional) moniker
+      --node string                         <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --node-id string                      The node's NodeID
+      --note string                         Note to add a description to the transaction (previously --memo)
+      --offline                             Offline mode (does not allow any online functionality
+  -o, --output string                       Output format (text|json) (default "json")
+      --output-document string              Write the genesis transaction JSON document to the given file instead of the default location
+      --pubkey string                       The validator's Protobuf JSON encoded public key
+      --security-contact string             The validator's (optional) security contact email
+  -s, --sequence uint                       The sequence number of the signing account (offline mode only)
+      --sign-mode string                    Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint                 Set a block timeout height to prevent the tx from being committed past a certain height
+      --website string                      The validator's (optional) website
+  -y, --yes                                 Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd help
+
+```
+Help provides help for any command in the application.
+Simply type osmosisd help [path to command] for full details.
+
+Usage:
+  osmosisd help [command] [flags]
+
+Flags:
+  -h, --help   help for help
+
+Global Flags:
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd init
+
+```
+Initialize validators's and node's configuration files.
+
+Usage:
+  osmosisd init [moniker] [flags]
+
+Flags:
+      --chain-id string   genesis file chain-id, if left blank will be randomly created
+  -h, --help              help for init
+  -o, --overwrite         overwrite the genesis.json file
+      --recover           provide seed phrase to recover existing key instead of creating
+
+Global Flags:
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd keys add
+
+```
+Derive a new private key and encrypt to disk.
+Optionally specify a BIP39 mnemonic, a BIP39 passphrase to further secure the mnemonic,
+and a bip32 HD path to derive a specific account. The key will be stored under the given name
+and encrypted with the given password. The only input that is required is the encryption password.
+
+If run with -i, it will prompt the user for BIP44 path, BIP39 mnemonic, and passphrase.
+The flag --recover allows one to recover a key from a seed passphrase.
+If run with --dry-run, a key would be generated (or recovered) but not stored to the
+local keystore.
+Use the --pubkey flag to add arbitrary public keys to the keystore for constructing
+multisig transactions.
+
+You can create and store a multisig key by passing the list of key names stored in a keyring
+and the minimum number of signatures required through --multisig-threshold. The keys are
+sorted by address, unless the flag --nosort is set.
+Example:
+
+    keys add mymultisig --multisig "keyname1,keyname2,keyname3" --multisig-threshold 2
+
+Usage:
+  osmosisd keys add <name> [flags]
+
+Flags:
+      --account uint32           Account number for HD derivation
+      --algo string              Key signing algorithm to generate keys for (default "secp256k1")
+      --coin-type uint32         coin type number for HD derivation (default 118)
+      --dry-run                  Perform action, but don't add key to local keystore
+      --hd-path string           Manual HD Path derivation (overrides BIP44 config)
+  -h, --help                     help for add
+      --index uint32             Address index number for HD derivation
+  -i, --interactive              Interactively prompt user for BIP39 passphrase and mnemonic
+      --ledger                   Store a local reference to a private key on a Ledger device
+      --multisig strings         List of key names stored in keyring to construct a public legacy multisig key
+      --multisig-threshold int   K out of N required signatures. For use in conjunction with --multisig (default 1)
+      --no-backup                Don't print out seed phrase (if others are watching the terminal)
+      --nosort                   Keys passed to --multisig are taken in the order they're supplied
+      --pubkey string            Parse a public key in JSON format and saves key info to <name> file.
+      --recover                  Provide seed phrase to recover existing key instead of creating
+
+Global Flags:
+      --home string              The application home directory (default "/Users/user/.osmosisd")
+      --keyring-backend string   Select keyring's backend (os|file|test) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --log_format string        The logging format (json|plain) (default "plain")
+      --log_level string         The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --output string            Output format (text|json) (default "text")
+      --trace                    print out full stack trace on errors
+
+```
+
+### osmosisd keys delete
+
+```
+Delete keys from the Keybase backend.
+
+Note that removing offline or ledger keys will remove
+only the public key references stored locally, i.e.
+private keys stored in a ledger device cannot be deleted with the CLI.
+
+Usage:
+  osmosisd keys delete <name>... [flags]
+
+Flags:
+  -f, --force   Remove the key unconditionally without asking for the passphrase. Deprecated.
+  -h, --help    help for delete
+  -y, --yes     Skip confirmation prompt when deleting offline or ledger key references
+
+Global Flags:
+      --home string              The application home directory (default "/Users/user/.osmosisd")
+      --keyring-backend string   Select keyring's backend (os|file|test) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --log_format string        The logging format (json|plain) (default "plain")
+      --log_level string         The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --output string            Output format (text|json) (default "text")
+      --trace                    print out full stack trace on errors
+
+```
+
+### osmosisd keys export
+
+```
+Export a private key from the local keyring in ASCII-armored encrypted format.
+
+When both the --unarmored-hex and --unsafe flags are selected, cryptographic
+private key material is exported in an INSECURE fashion that is designed to
+allow users to import their keys in hot wallets. This feature is for advanced
+users only that are confident about how to handle private keys work and are
+FULLY AWARE OF THE RISKS. If you are unsure, you may want to do some research
+and export your keys in ASCII-armored encrypted format.
+
+Usage:
+  osmosisd keys export <name> [flags]
+
+Flags:
+  -h, --help            help for export
+      --unarmored-hex   Export unarmored hex privkey. Requires --unsafe.
+      --unsafe          Enable unsafe operations. This flag must be switched on along with all unsafe operation-specific options.
+
+Global Flags:
+      --home string              The application home directory (default "/Users/user/.osmosisd")
+      --keyring-backend string   Select keyring's backend (os|file|test) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --log_format string        The logging format (json|plain) (default "plain")
+      --log_level string         The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --output string            Output format (text|json) (default "text")
+      --trace                    print out full stack trace on errors
+
+```
+
+### osmosisd keys import
+
+```
+Import a ASCII armored private key into the local keybase.
+
+Usage:
+  osmosisd keys import <name> <keyfile> [flags]
+
+Flags:
+  -h, --help   help for import
+
+Global Flags:
+      --home string              The application home directory (default "/Users/user/.osmosisd")
+      --keyring-backend string   Select keyring's backend (os|file|test) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --log_format string        The logging format (json|plain) (default "plain")
+      --log_level string         The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --output string            Output format (text|json) (default "text")
+      --trace                    print out full stack trace on errors
+
+```
+
+### osmosisd keys list
+
+```
+Return a list of all public keys stored by this key manager
+along with their associated name and address.
+
+Usage:
+  osmosisd keys list [flags]
+
+Flags:
+  -h, --help         help for list
+  -n, --list-names   List names only
+
+Global Flags:
+      --home string              The application home directory (default "/Users/user/.osmosisd")
+      --keyring-backend string   Select keyring's backend (os|file|test) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --log_format string        The logging format (json|plain) (default "plain")
+      --log_level string         The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --output string            Output format (text|json) (default "text")
+      --trace                    print out full stack trace on errors
+
+```
+
+### osmosisd keys migrate
+
+```
+Migrate key information from the legacy (db-based) Keybase to the new keyring-based Keyring.
+The legacy Keybase used to persist keys in a LevelDB database stored in a 'keys' sub-directory of
+the old client application's home directory, e.g. $HOME/.gaiacli/keys/.
+For each key material entry, the command will prompt if the key should be skipped or not. If the key
+is not to be skipped, the passphrase must be entered. The key will only be migrated if the passphrase
+is correct. Otherwise, the command will exit and migration must be repeated.
+
+It is recommended to run in 'dry-run' mode first to verify all key migration material.
+
+Usage:
+  osmosisd keys migrate <old_home_dir> [flags]
+
+Flags:
+      --dry-run   Run migration without actually persisting any changes to the new Keybase
+  -h, --help      help for migrate
+
+Global Flags:
+      --home string              The application home directory (default "/Users/user/.osmosisd")
+      --keyring-backend string   Select keyring's backend (os|file|test) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --log_format string        The logging format (json|plain) (default "plain")
+      --log_level string         The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --output string            Output format (text|json) (default "text")
+      --trace                    print out full stack trace on errors
+
+```
+
+### osmosisd keys mnemonic
+
+```
+Create a bip39 mnemonic, sometimes called a seed phrase, by reading from the system entropy. To pass your own entropy, use --unsafe-entropy
+
+Usage:
+  osmosisd keys mnemonic [flags]
+
+Flags:
+  -h, --help             help for mnemonic
+      --unsafe-entropy   Prompt the user to supply their own entropy, instead of relying on the system
+
+Global Flags:
+      --home string              The application home directory (default "/Users/user/.osmosisd")
+      --keyring-backend string   Select keyring's backend (os|file|test) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --log_format string        The logging format (json|plain) (default "plain")
+      --log_level string         The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --output string            Output format (text|json) (default "text")
+      --trace                    print out full stack trace on errors
+
+```
+
+### osmosisd keys parse
+
+```
+Convert and print to stdout key addresses and fingerprints from
+hexadecimal into bech32 cosmos prefixed format and vice versa.
+
+Usage:
+  osmosisd keys parse <hex-or-bech32-address> [flags]
+
+Flags:
+  -h, --help   help for parse
+
+Global Flags:
+      --home string              The application home directory (default "/Users/user/.osmosisd")
+      --keyring-backend string   Select keyring's backend (os|file|test) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --log_format string        The logging format (json|plain) (default "plain")
+      --log_level string         The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --output string            Output format (text|json) (default "text")
+      --trace                    print out full stack trace on errors
+
+```
+
+### osmosisd keys show
+
+```
+Display keys details. If multiple names or addresses are provided,
+then an ephemeral multisig key will be created under the name "multi"
+consisting of all the keys provided by name and multisig threshold.
+
+Usage:
+  osmosisd keys show [name_or_address [name_or_address...]] [flags]
+
+Flags:
+  -a, --address                  Output the address only (overrides --output)
+      --bech string              The Bech32 prefix encoding for a key (acc|val|cons) (default "acc")
+  -d, --device                   Output the address in a ledger device
+  -h, --help                     help for show
+      --multisig-threshold int   K out of N required signatures (default 1)
+  -p, --pubkey                   Output the public key only (overrides --output)
+
+Global Flags:
+      --home string              The application home directory (default "/Users/user/.osmosisd")
+      --keyring-backend string   Select keyring's backend (os|file|test) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --log_format string        The logging format (json|plain) (default "plain")
+      --log_level string         The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --output string            Output format (text|json) (default "text")
+      --trace                    print out full stack trace on errors
+
+```
+
+### osmosisd keys
+
+```
+Keyring management commands. These keys may be in any format supported by the
+Tendermint crypto library and can be used by light-clients, full nodes, or any other application
+that needs to sign with a private key.
+
+The keyring supports the following backends:
+
+    os          Uses the operating system's default credentials store.
+    file        Uses encrypted file-based keystore within the app's configuration directory.
+                This keyring will request a password each time it is accessed, which may occur
+                multiple times in a single command resulting in repeated password prompts.
+    kwallet     Uses KDE Wallet Manager as a credentials management application.
+    pass        Uses the pass command line utility to store and retrieve keys.
+    test        Stores keys insecurely to disk. It does not prompt for a password to be unlocked
+                and it should be use only for testing purposes.
+
+kwallet and pass backends depend on external tools. Refer to their respective documentation for more
+information:
+    KWallet     https://github.com/KDE/kwallet
+    pass        https://www.passwordstore.org/
+
+The pass backend requires GnuPG: https://gnupg.org/
+
+Usage:
+  osmosisd keys [command]
+
+Available Commands:
+  add         Add an encrypted private key (either newly generated or recovered), encrypt it, and save to <name> file
+  delete      Delete the given keys
+  export      Export private keys
+  import      Import private keys into the local keybase
+  list        List all keys
+  migrate     Migrate keys from the legacy (db-based) Keybase
+  mnemonic    Compute the bip39 mnemonic for some input entropy
+  parse       Parse address from hex to bech32 and vice versa
+  show        Retrieve key information by name or address
+
+Flags:
+  -h, --help                     help for keys
+      --keyring-backend string   Select keyring's backend (os|file|test) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --output string            Output format (text|json) (default "text")
+
+Global Flags:
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "osmosisd keys [command] --help" for more information about a command.
+
+```
+
+### osmosisd migrate
+
+```
+Migrate the source genesis into the target version and print to STDOUT.
+
+Example:
+$ osmosisd migrate v0.36 /path/to/genesis.json --chain-id=cosmoshub-3 --genesis-time=2019-04-22T17:00:00Z
+
+Usage:
+  osmosisd migrate [target-version] [genesis-file] [flags]
+
+Flags:
+      --chain-id string       override chain_id with this flag
+      --genesis-time string   override genesis_time with this flag
+  -h, --help                  help for migrate
+
+Global Flags:
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd prepare-genesis
+
+```
+Prepare a genesis file with initial setup.
+Examples include:
+	- Setting module initial params
+	- Setting denom metadata
+Example:
+	osmosisd prepare-genesis mainnet osmosis-1
+	- Check input genesis:
+		file is at ~/.osmosisd/config/genesis.json
+
+Usage:
+  osmosisd prepare-genesis [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for prepare-genesis
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query account
+
+```
+Query for account by address
+
+Usage:
+  osmosisd query account [address] [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for account
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query auth account
+
+```
+Query for account by address
+
+Usage:
+  osmosisd query auth account [address] [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for account
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query auth accounts
+
+```
+Query all the accounts
+
+Usage:
+  osmosisd query auth accounts [flags]
+
+Flags:
+      --count-total       count total number of records in all-accounts to query for
+      --height int        Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help              help for accounts
+      --limit uint        pagination limit of all-accounts to query for (default 100)
+      --node string       <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+      --offset uint       pagination offset of all-accounts to query for
+  -o, --output string     Output format (text|json) (default "text")
+      --page uint         pagination page of all-accounts to query for. This sets offset to a multiple of limit (default 1)
+      --page-key string   pagination page-key of all-accounts to query for
+      --reverse           results are sorted in descending order
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query auth module-accounts
+
+```
+Query all module accounts
+
+Usage:
+  osmosisd query auth module-accounts [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for module-accounts
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query auth params
+
+```
+Query the current auth parameters:
+
+$ <appd> query auth params
+
+Usage:
+  osmosisd query auth params [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for params
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query auth
+
+```
+Querying commands for the auth module
+
+Usage:
+  osmosisd query auth [flags]
+  osmosisd query auth [command]
+
+Available Commands:
+  account         Query for account by address
+  accounts        Query all the accounts
+  module-accounts Query all module accounts
+  params          Query the current auth parameters
+
+Flags:
+  -h, --help   help for auth
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "osmosisd query auth [command] --help" for more information about a command.
+
+```
+
+### osmosisd query authz grants
+
+```
+Query authorization grants for a granter-grantee pair. If msg-type-url
+is set, it will select grants only for that msg type.
+Examples:
+$ osmosisd query authz grants cosmos1skj.. cosmos1skjwj..
+$ osmosisd query authz grants cosmos1skjw.. cosmos1skjwj.. /cosmos.bank.v1beta1.MsgSend
+
+Usage:
+  osmosisd query authz grants [granter-addr] [grantee-addr] [msg-type-url]? [flags]
+
+Flags:
+      --count-total       count total number of records in grants to query for
+      --height int        Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help              help for grants
+      --limit uint        pagination limit of grants to query for (default 100)
+      --node string       <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+      --offset uint       pagination offset of grants to query for
+  -o, --output string     Output format (text|json) (default "text")
+      --page uint         pagination page of grants to query for. This sets offset to a multiple of limit (default 1)
+      --page-key string   pagination page-key of grants to query for
+      --reverse           results are sorted in descending order
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query authz
+
+```
+Querying commands for the authz module
+
+Usage:
+  osmosisd query authz [flags]
+  osmosisd query authz [command]
+
+Available Commands:
+  grants      query grants for a granter-grantee pair and optionally a msg-type-url
+
+Flags:
+  -h, --help   help for authz
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "osmosisd query authz [command] --help" for more information about a command.
+
+```
+
+### osmosisd query bank balances
+
+```
+Query the total balance of an account or of a specific denomination.
+
+Example:
+  $ osmosisd query bank balances [address]
+  $ osmosisd query bank balances [address] --denom=[denom]
+
+Usage:
+  osmosisd query bank balances [address] [flags]
+
+Flags:
+      --count-total       count total number of records in all balances to query for
+      --denom string      The specific balance denomination to query for
+      --height int        Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help              help for balances
+      --limit uint        pagination limit of all balances to query for (default 100)
+      --node string       <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+      --offset uint       pagination offset of all balances to query for
+  -o, --output string     Output format (text|json) (default "text")
+      --page uint         pagination page of all balances to query for. This sets offset to a multiple of limit (default 1)
+      --page-key string   pagination page-key of all balances to query for
+      --reverse           results are sorted in descending order
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query bank denom-metadata
+
+```
+Query the client metadata for all the registered coin denominations
+
+Example:
+  To query for the client metadata of all coin denominations use:
+  $ osmosisd query bank denom-metadata
+
+To query for the client metadata of a specific coin denomination use:
+  $ osmosisd query bank denom-metadata --denom=[denom]
+
+Usage:
+  osmosisd query bank denom-metadata [flags]
+
+Flags:
+      --denom string    The specific denomination to query client metadata for
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for denom-metadata
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query bank total
+
+```
+Query total supply of coins that are held by accounts in the chain.
+
+Example:
+  $ osmosisd query bank total
+
+To query for the total supply of a specific coin denomination use:
+  $ osmosisd query bank total --denom=[denom]
+
+Usage:
+  osmosisd query bank total [flags]
+
+Flags:
+      --denom string    The specific balance denomination to query for
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for total
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query bank
+
+```
+Querying commands for the bank module
+
+Usage:
+  osmosisd query bank [flags]
+  osmosisd query bank [command]
+
+Available Commands:
+  balances       Query for account balances by address
+  denom-metadata Query the client metadata for coin denominations
+  total          Query the total supply of coins of the chain
+
+Flags:
+  -h, --help   help for bank
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "osmosisd query bank [command] --help" for more information about a command.
+
+```
+
+### osmosisd query block
+
+```
+Get verified data for a the block at given height
+
+Usage:
+  osmosisd query block [height] [flags]
+
+Flags:
+  -h, --help          help for block
+  -n, --node string   Node to connect to (default "tcp://localhost:26657")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query distribution commission
+
+```
+Query validator commission rewards from delegators to that validator.
+
+Example:
+$ osmosisd query distribution commission osmovaloper1gghjut3ccd8ay0zduzj64hwre2fxs9ldmqhffj
+
+Usage:
+  osmosisd query distribution commission [validator] [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for commission
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query distribution community-pool
+
+```
+Query all coins in the community pool which is under Governance control.
+
+Example:
+$ osmosisd query distribution community-pool
+
+Usage:
+  osmosisd query distribution community-pool [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for community-pool
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query distribution params
+
+```
+Query distribution params
+
+Usage:
+  osmosisd query distribution params [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for params
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query distribution rewards
+
+```
+Query all rewards earned by a delegator, optionally restrict to rewards from a single validator.
+
+Example:
+$ osmosisd query distribution rewards osmo1gghjut3ccd8ay0zduzj64hwre2fxs9ld75ru9p
+$ osmosisd query distribution rewards osmo1gghjut3ccd8ay0zduzj64hwre2fxs9ld75ru9p osmovaloper1gghjut3ccd8ay0zduzj64hwre2fxs9ldmqhffj
+
+Usage:
+  osmosisd query distribution rewards [delegator-addr] [validator-addr] [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for rewards
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query distribution slashes
+
+```
+Query all slashes of a validator for a given block range.
+
+Example:
+$ osmosisd query distribution slashes osmovalopervaloper1gghjut3ccd8ay0zduzj64hwre2fxs9ldmqhffj 0 100
+
+Usage:
+  osmosisd query distribution slashes [validator] [start-height] [end-height] [flags]
+
+Flags:
+      --count-total       count total number of records in validator slashes to query for
+      --height int        Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help              help for slashes
+      --limit uint        pagination limit of validator slashes to query for (default 100)
+      --node string       <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+      --offset uint       pagination offset of validator slashes to query for
+  -o, --output string     Output format (text|json) (default "text")
+      --page uint         pagination page of validator slashes to query for. This sets offset to a multiple of limit (default 1)
+      --page-key string   pagination page-key of validator slashes to query for
+      --reverse           results are sorted in descending order
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query distribution validator-outstanding-rewards
+
+```
+Query distribution outstanding (un-withdrawn) rewards for a validator and all their delegations.
+
+Example:
+$ osmosisd query distribution validator-outstanding-rewards osmovaloper1lwjmdnks33xwnmfayc64ycprww49n33mtm92ne
+
+Usage:
+  osmosisd query distribution validator-outstanding-rewards [validator] [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for validator-outstanding-rewards
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query distribution
+
+```
+Querying commands for the distribution module
+
+Usage:
+  osmosisd query distribution [flags]
+  osmosisd query distribution [command]
+
+Available Commands:
+  commission                    Query distribution validator commission
+  community-pool                Query the amount of coins in the community pool
+  params                        Query distribution params
+  rewards                       Query all distribution delegator rewards or rewards from a particular validator
+  slashes                       Query distribution validator slashes
+  validator-outstanding-rewards Query distribution outstanding (un-withdrawn) rewards for a validator and all their delegations
+
+Flags:
+  -h, --help   help for distribution
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "osmosisd query distribution [command] --help" for more information about a command.
+
+```
+
+### osmosisd query epochs current-epoch
+
+```
+Query current epoch by specified identifier.
+
+Example:
+$ osmosisd query epochs current-epoch day
+
+Usage:
+  osmosisd query epochs current-epoch [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for current-epoch
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query epochs epoch-infos
+
+```
+Query running epoch infos.
+
+Example:
+$ osmosisd query epochs epoch-infos
+
+Usage:
+  osmosisd query epochs epoch-infos [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for epoch-infos
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query epochs
+
+```
+Querying commands for the epochs module
+
+Usage:
+  osmosisd query epochs [flags]
+  osmosisd query epochs [command]
+
+Available Commands:
+  current-epoch Query current epoch by specified identifier
+  epoch-infos   Query running epochInfos
+
+Flags:
+  -h, --help   help for epochs
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "osmosisd query epochs [command] --help" for more information about a command.
+
+```
+
+### osmosisd query evidence
+
+```
+Error: invalid evidence hash: encoding/hex: invalid byte: U+002D '-'
+
+```
+
+### osmosisd query gamm estimate-swap-exact-amount-in
+
+```
+Query estimate-swap-exact-amount-in.
+Example:
+$ osmosisd query gamm estimate-swap-exact-amount-in 1 osm11vmx8jtggpd9u7qr0t8vxclycz85u925sazglr7 stake --swap-route-pool-ids=2 --swap-route-pool-ids=3
+
+Usage:
+  osmosisd query gamm estimate-swap-exact-amount-in <poolID> <sender> <tokenIn> [flags]
+
+Flags:
+      --height int                        Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help                              help for estimate-swap-exact-amount-in
+      --node string                       <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string                     Output format (text|json) (default "text")
+      --swap-route-denoms stringArray     swap route amount
+      --swap-route-pool-ids stringArray   swap route pool id
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query gamm estimate-swap-exact-amount-out
+
+```
+Query estimate-swap-exact-amount-out.
+Example:
+$ osmosisd query gamm estimate-swap-exact-amount-out 1 osm11vmx8jtggpd9u7qr0t8vxclycz85u925sazglr7 stake --swap-route-pool-ids=2 --swap-route-pool-ids=3
+
+Usage:
+  osmosisd query gamm estimate-swap-exact-amount-out <poolID> <sender> <tokenOut> [flags]
+
+Flags:
+      --height int                        Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help                              help for estimate-swap-exact-amount-out
+      --node string                       <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string                     Output format (text|json) (default "text")
+      --swap-route-denoms stringArray     swap route amount
+      --swap-route-pool-ids stringArray   swap route pool id
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query gamm num-pools
+
+```
+Query number of pools.
+Example:
+$ osmosisd query gamm num-pools
+
+Usage:
+  osmosisd query gamm num-pools [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for num-pools
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query gamm pool-params
+
+```
+Query pool-params.
+Example:
+$ osmosisd query gamm pool-params 1
+
+Usage:
+  osmosisd query gamm pool-params <poolID> [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for pool-params
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query gamm pool
+
+```
+Query pool.
+Example:
+$ osmosisd query gamm pool 1
+
+Usage:
+  osmosisd query gamm pool <poolID> [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for pool
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query gamm pools
+
+```
+Query pools.
+Example:
+$ osmosisd query gamm pools
+
+Usage:
+  osmosisd query gamm pools [flags]
+
+Flags:
+      --count-total       count total number of records in pools to query for
+      --height int        Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help              help for pools
+      --limit uint        pagination limit of pools to query for (default 100)
+      --node string       <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+      --offset uint       pagination offset of pools to query for
+  -o, --output string     Output format (text|json) (default "text")
+      --page uint         pagination page of pools to query for. This sets offset to a multiple of limit (default 1)
+      --page-key string   pagination page-key of pools to query for
+      --reverse           results are sorted in descending order
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query gamm spot-price
+
+```
+Query spot-price
+
+Usage:
+  osmosisd query gamm spot-price <pool-ID> <base-asset-denom> <quote-asset-denom> [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for spot-price
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query gamm total-liquidity
+
+```
+Query total-liquidity.
+Example:
+$ osmosisd query gamm total-liquidity
+
+Usage:
+  osmosisd query gamm total-liquidity [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for total-liquidity
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query gamm total-share
+
+```
+Query total-share.
+Example:
+$ osmosisd query gamm total-share 1
+
+Usage:
+  osmosisd query gamm total-share <poolID> [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for total-share
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query gamm
+
+```
+Querying commands for the gamm module
+
+Usage:
+  osmosisd query gamm [flags]
+  osmosisd query gamm [command]
+
+Available Commands:
+  estimate-swap-exact-amount-in  Query estimate-swap-exact-amount-in
+  estimate-swap-exact-amount-out Query estimate-swap-exact-amount-out
+  num-pools                      Query number of pools
+  pool                           Query pool
+  pool-params                    Query pool-params
+  pools                          Query pools
+  spot-price                     Query spot-price
+  total-liquidity                Query total-liquidity
+  total-share                    Query total-share
+
+Flags:
+  -h, --help   help for gamm
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "osmosisd query gamm [command] --help" for more information about a command.
+
+```
+
+### osmosisd query gov deposit
+
+```
+Query details for a single proposal deposit on a proposal by its identifier.
+
+Example:
+$ osmosisd query gov deposit 1 cosmos1skjwj5whet0lpe65qaq4rpq03hjxlwd9nf39lk
+
+Usage:
+  osmosisd query gov deposit [proposal-id] [depositer-addr] [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for deposit
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query gov deposits
+
+```
+Query details for all deposits on a proposal.
+You can find the proposal-id by running "osmosisd query gov proposals".
+
+Example:
+$ osmosisd query gov deposits 1
+
+Usage:
+  osmosisd query gov deposits [proposal-id] [flags]
+
+Flags:
+      --count-total       count total number of records in deposits to query for
+      --height int        Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help              help for deposits
+      --limit uint        pagination limit of deposits to query for (default 100)
+      --node string       <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+      --offset uint       pagination offset of deposits to query for
+  -o, --output string     Output format (text|json) (default "text")
+      --page uint         pagination page of deposits to query for. This sets offset to a multiple of limit (default 1)
+      --page-key string   pagination page-key of deposits to query for
+      --reverse           results are sorted in descending order
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query gov param
+
+```
+Query the all the parameters for the governance process.
+
+Example:
+$ osmosisd query gov param voting
+$ osmosisd query gov param tallying
+$ osmosisd query gov param deposit
+
+Usage:
+  osmosisd query gov param [param-type] [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for param
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query gov params
+
+```
+Query the all the parameters for the governance process.
+
+Example:
+$ osmosisd query gov params
+
+Usage:
+  osmosisd query gov params [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for params
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query gov proposal
+
+```
+Query details for a proposal. You can find the
+proposal-id by running "osmosisd query gov proposals".
+
+Example:
+$ osmosisd query gov proposal 1
+
+Usage:
+  osmosisd query gov proposal [proposal-id] [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for proposal
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query gov proposals
+
+```
+Query for a all paginated proposals that match optional filters:
+
+Example:
+$ osmosisd query gov proposals --depositor cosmos1skjwj5whet0lpe65qaq4rpq03hjxlwd9nf39lk
+$ osmosisd query gov proposals --voter cosmos1skjwj5whet0lpe65qaq4rpq03hjxlwd9nf39lk
+$ osmosisd query gov proposals --status (DepositPeriod|VotingPeriod|Passed|Rejected)
+$ osmosisd query gov proposals --page=2 --limit=100
+
+Usage:
+  osmosisd query gov proposals [flags]
+
+Flags:
+      --count-total        count total number of records in proposals to query for
+      --depositor string   (optional) filter by proposals deposited on by depositor
+      --height int         Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help               help for proposals
+      --limit uint         pagination limit of proposals to query for (default 100)
+      --node string        <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+      --offset uint        pagination offset of proposals to query for
+  -o, --output string      Output format (text|json) (default "text")
+      --page uint          pagination page of proposals to query for. This sets offset to a multiple of limit (default 1)
+      --page-key string    pagination page-key of proposals to query for
+      --reverse            results are sorted in descending order
+      --status string      (optional) filter proposals by proposal status, status: deposit_period/voting_period/passed/rejected
+      --voter string       (optional) filter by proposals voted on by voted
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query gov proposer
+
+```
+Query which address proposed a proposal with a given ID.
+
+Example:
+$ osmosisd query gov proposer 1
+
+Usage:
+  osmosisd query gov proposer [proposal-id] [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for proposer
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query gov tally
+
+```
+Query tally of votes on a proposal. You can find
+the proposal-id by running "osmosisd query gov proposals".
+
+Example:
+$ osmosisd query gov tally 1
+
+Usage:
+  osmosisd query gov tally [proposal-id] [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for tally
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query gov vote
+
+```
+Query details for a single vote on a proposal given its identifier.
+
+Example:
+$ osmosisd query gov vote 1 cosmos1skjwj5whet0lpe65qaq4rpq03hjxlwd9nf39lk
+
+Usage:
+  osmosisd query gov vote [proposal-id] [voter-addr] [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for vote
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query gov votes
+
+```
+Query vote details for a single proposal by its identifier.
+
+Example:
+$ osmosisd query gov votes 1
+$ osmosisd query gov votes 1 --page=2 --limit=100
+
+Usage:
+  osmosisd query gov votes [proposal-id] [flags]
+
+Flags:
+      --count-total       count total number of records in votes to query for
+      --height int        Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help              help for votes
+      --limit uint        pagination limit of votes to query for (default 100)
+      --node string       <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+      --offset uint       pagination offset of votes to query for
+  -o, --output string     Output format (text|json) (default "text")
+      --page uint         pagination page of votes to query for. This sets offset to a multiple of limit (default 1)
+      --page-key string   pagination page-key of votes to query for
+      --reverse           results are sorted in descending order
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query gov
+
+```
+Querying commands for the governance module
+
+Usage:
+  osmosisd query gov [flags]
+  osmosisd query gov [command]
+
+Available Commands:
+  deposit     Query details of a deposit
+  deposits    Query deposits on a proposal
+  param       Query the parameters (voting|tallying|deposit) of the governance process
+  params      Query the parameters of the governance process
+  proposal    Query details of a single proposal
+  proposals   Query proposals with optional filters
+  proposer    Query the proposer of a governance proposal
+  tally       Get the tally of a proposal vote
+  vote        Query details of a single vote
+  votes       Query votes on a proposal
+
+Flags:
+  -h, --help   help for gov
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "osmosisd query gov [command] --help" for more information about a command.
+
+```
+
+### osmosisd query ibc channel channels
+
+```
+Query all channels from a chain
+
+Usage:
+  osmosisd query ibc channel channels [flags]
+
+Examples:
+osmosisd query ibc channel channels
+
+Flags:
+      --count-total       count total number of records in channels to query for
+      --height int        Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help              help for channels
+      --limit uint        pagination limit of channels to query for (default 100)
+      --node string       <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+      --offset uint       pagination offset of channels to query for
+  -o, --output string     Output format (text|json) (default "text")
+      --page uint         pagination page of channels to query for. This sets offset to a multiple of limit (default 1)
+      --page-key string   pagination page-key of channels to query for
+      --reverse           results are sorted in descending order
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query ibc channel client-state
+
+```
+Query the client state associated with a channel, by providing its port and channel identifiers.
+
+Usage:
+  osmosisd query ibc channel client-state [port-id] [channel-id] [flags]
+
+Examples:
+osmosisd query ibc channel client-state [port-id] [channel-id]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for client-state
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query ibc channel connections
+
+```
+Query all channels associated with a connection
+
+Usage:
+  osmosisd query ibc channel connections [connection-id] [flags]
+
+Examples:
+osmosisd query ibc channel connections [connection-id]
+
+Flags:
+      --count-total       count total number of records in channels associated with a connection to query for
+      --height int        Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help              help for connections
+      --limit uint        pagination limit of channels associated with a connection to query for (default 100)
+      --node string       <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+      --offset uint       pagination offset of channels associated with a connection to query for
+  -o, --output string     Output format (text|json) (default "text")
+      --page uint         pagination page of channels associated with a connection to query for. This sets offset to a multiple of limit (default 1)
+      --page-key string   pagination page-key of channels associated with a connection to query for
+      --reverse           results are sorted in descending order
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query ibc channel end
+
+```
+Query an IBC channel end from a port and channel identifiers
+
+Usage:
+  osmosisd query ibc channel end [port-id] [channel-id] [flags]
+
+Examples:
+osmosisd query ibc channel end [port-id] [channel-id]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for end
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+      --prove           show proofs for the query results (default true)
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query ibc channel next-sequence-receive
+
+```
+Query the next receive sequence for a given channel
+
+Usage:
+  osmosisd query ibc channel next-sequence-receive [port-id] [channel-id] [flags]
+
+Examples:
+osmosisd query ibc channel next-sequence-receive [port-id] [channel-id]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for next-sequence-receive
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+      --prove           show proofs for the query results (default true)
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query ibc channel packet-ack
+
+```
+Query a packet acknowledgement
+
+Usage:
+  osmosisd query ibc channel packet-ack [port-id] [channel-id] [sequence] [flags]
+
+Examples:
+osmosisd query ibc channel packet-ack [port-id] [channel-id] [sequence]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for packet-ack
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+      --prove           show proofs for the query results (default true)
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query ibc channel packet-commitment
+
+```
+Query a packet commitment
+
+Usage:
+  osmosisd query ibc channel packet-commitment [port-id] [channel-id] [sequence] [flags]
+
+Examples:
+osmosisd query ibc channel packet-commitment [port-id] [channel-id] [sequence]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for packet-commitment
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+      --prove           show proofs for the query results (default true)
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query ibc channel packet-commitments
+
+```
+Query all packet commitments associated with a channel
+
+Usage:
+  osmosisd query ibc channel packet-commitments [port-id] [channel-id] [flags]
+
+Examples:
+osmosisd query ibc channel packet-commitments [port-id] [channel-id]
+
+Flags:
+      --count-total       count total number of records in packet commitments associated with a channel to query for
+      --height int        Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help              help for packet-commitments
+      --limit uint        pagination limit of packet commitments associated with a channel to query for (default 100)
+      --node string       <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+      --offset uint       pagination offset of packet commitments associated with a channel to query for
+  -o, --output string     Output format (text|json) (default "text")
+      --page uint         pagination page of packet commitments associated with a channel to query for. This sets offset to a multiple of limit (default 1)
+      --page-key string   pagination page-key of packet commitments associated with a channel to query for
+      --reverse           results are sorted in descending order
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query ibc channel packet-receipt
+
+```
+Query a packet receipt
+
+Usage:
+  osmosisd query ibc channel packet-receipt [port-id] [channel-id] [sequence] [flags]
+
+Examples:
+osmosisd query ibc channel packet-receipt [port-id] [channel-id] [sequence]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for packet-receipt
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+      --prove           show proofs for the query results (default true)
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query ibc channel unreceived-acks
+
+```
+Given a list of acknowledgement sequences from counterparty, determine if an ack on the counterparty chain has been received on the executing chain.
+
+The return value represents:
+- Unreceived packet acknowledgement: packet commitment exists on original sending (executing) chain and ack exists on receiving chain.
+
+Usage:
+  osmosisd query ibc channel unreceived-acks [port-id] [channel-id] [flags]
+
+Examples:
+osmosisd query ibc channel unreceived-acks [port-id] [channel-id] --sequences=1,2,3
+
+Flags:
+      --height int             Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help                   help for unreceived-acks
+      --node string            <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string          Output format (text|json) (default "text")
+      --sequences int64Slice   comma separated list of packet sequence numbers (default [])
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query ibc channel unreceived-packets
+
+```
+Determine if a packet, given a list of packet commitment sequences, is unreceived.
+
+The return value represents:
+- Unreceived packet commitments: no acknowledgement exists on receiving chain for the given packet commitment sequence on sending chain.
+
+Usage:
+  osmosisd query ibc channel unreceived-packets [port-id] [channel-id] [flags]
+
+Examples:
+osmosisd query ibc channel unreceived-packets [port-id] [channel-id] --sequences=1,2,3
+
+Flags:
+      --height int             Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help                   help for unreceived-packets
+      --node string            <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string          Output format (text|json) (default "text")
+      --sequences int64Slice   comma separated list of packet sequence numbers (default [])
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query ibc channel
+
+```
+IBC channel query subcommands
+
+Usage:
+  osmosisd query ibc channel [flags]
+  osmosisd query ibc channel [command]
+
+Available Commands:
+  channels              Query all channels
+  client-state          Query the client state associated with a channel
+  connections           Query all channels associated with a connection
+  end                   Query a channel end
+  next-sequence-receive Query a next receive sequence
+  packet-ack            Query a packet acknowledgement
+  packet-commitment     Query a packet commitment
+  packet-commitments    Query all packet commitments associated with a channel
+  packet-receipt        Query a packet receipt
+  unreceived-acks       Query all the unreceived acks associated with a channel
+  unreceived-packets    Query all the unreceived packets associated with a channel
+
+Flags:
+  -h, --help   help for channel
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "osmosisd query ibc channel [command] --help" for more information about a command.
+
+```
+
+### osmosisd query ibc client consensus-state-heights
+
+```
+Query the heights of all consensus states associated with the provided client ID.
+
+Usage:
+  osmosisd query ibc client consensus-state-heights [client-id] [flags]
+
+Examples:
+osmosisd query ibc client consensus-state-heights [client-id]
+
+Flags:
+      --count-total       count total number of records in consensus state heights to query for
+      --height int        Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help              help for consensus-state-heights
+      --limit uint        pagination limit of consensus state heights to query for (default 100)
+      --node string       <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+      --offset uint       pagination offset of consensus state heights to query for
+  -o, --output string     Output format (text|json) (default "text")
+      --page uint         pagination page of consensus state heights to query for. This sets offset to a multiple of limit (default 1)
+      --page-key string   pagination page-key of consensus state heights to query for
+      --reverse           results are sorted in descending order
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query ibc client consensus-state
+
+```
+Query the consensus state for a particular light client at a given height.
+If the '--latest' flag is included, the query returns the latest consensus state, overriding the height argument.
+
+Usage:
+  osmosisd query ibc client consensus-state [client-id] [height] [flags]
+
+Examples:
+osmosisd query ibc client  consensus-state [client-id] [height]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for consensus-state
+      --latest-height   return latest stored consensus state
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+      --prove           show proofs for the query results (default true)
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query ibc client consensus-states
+
+```
+Query all the consensus states from a given client state.
+
+Usage:
+  osmosisd query ibc client consensus-states [client-id] [flags]
+
+Examples:
+osmosisd query ibc client consensus-states [client-id]
+
+Flags:
+      --count-total       count total number of records in consensus states to query for
+      --height int        Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help              help for consensus-states
+      --limit uint        pagination limit of consensus states to query for (default 100)
+      --node string       <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+      --offset uint       pagination offset of consensus states to query for
+  -o, --output string     Output format (text|json) (default "text")
+      --page uint         pagination page of consensus states to query for. This sets offset to a multiple of limit (default 1)
+      --page-key string   pagination page-key of consensus states to query for
+      --reverse           results are sorted in descending order
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query ibc client header
+
+```
+Query the latest Tendermint header of the running chain
+
+Usage:
+  osmosisd query ibc client header [flags]
+
+Examples:
+osmosisd query ibc client  header
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for header
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query ibc client params
+
+```
+Query the current ibc client parameters
+
+Usage:
+  osmosisd query ibc client params [flags]
+
+Examples:
+osmosisd query ibc client params
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for params
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query ibc client self-consensus-state
+
+```
+Query the self consensus state for this chain. This result may be used for verifying IBC clients representing this chain which are hosted on counterparty chains.
+
+Usage:
+  osmosisd query ibc client self-consensus-state [flags]
+
+Examples:
+osmosisd query ibc client self-consensus-state
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for self-consensus-state
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query ibc client state
+
+```
+Query stored client state
+
+Usage:
+  osmosisd query ibc client state [client-id] [flags]
+
+Examples:
+osmosisd query ibc client state [client-id]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for state
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+      --prove           show proofs for the query results (default true)
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query ibc client states
+
+```
+Query all available light clients
+
+Usage:
+  osmosisd query ibc client states [flags]
+
+Examples:
+osmosisd query ibc client states
+
+Flags:
+      --count-total       count total number of records in client states to query for
+      --height int        Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help              help for states
+      --limit uint        pagination limit of client states to query for (default 100)
+      --node string       <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+      --offset uint       pagination offset of client states to query for
+  -o, --output string     Output format (text|json) (default "text")
+      --page uint         pagination page of client states to query for. This sets offset to a multiple of limit (default 1)
+      --page-key string   pagination page-key of client states to query for
+      --reverse           results are sorted in descending order
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query ibc client status
+
+```
+Query client activity status. Any client without an 'Active' status is considered inactive
+
+Usage:
+  osmosisd query ibc client status [client-id] [flags]
+
+Examples:
+osmosisd query ibc client status [client-id]
+
+Flags:
+  -h, --help   help for status
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query ibc client
+
+```
+IBC client query subcommands
+
+Usage:
+  osmosisd query ibc client [flags]
+  osmosisd query ibc client [command]
+
+Available Commands:
+  consensus-state         Query the consensus state of a client at a given height
+  consensus-state-heights Query the heights of all consensus states of a client.
+  consensus-states        Query all the consensus states of a client.
+  header                  Query the latest header of the running chain
+  params                  Query the current ibc client parameters
+  self-consensus-state    Query the self consensus state for this chain
+  state                   Query a client state
+  states                  Query all available light clients
+  status                  Query client status
+
+Flags:
+  -h, --help   help for client
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "osmosisd query ibc client [command] --help" for more information about a command.
+
+```
+
+### osmosisd query ibc connection connections
+
+```
+Query all connections ends from a chain
+
+Usage:
+  osmosisd query ibc connection connections [flags]
+
+Examples:
+osmosisd query ibc connection connections
+
+Flags:
+      --count-total       count total number of records in connection ends to query for
+      --height int        Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help              help for connections
+      --limit uint        pagination limit of connection ends to query for (default 100)
+      --node string       <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+      --offset uint       pagination offset of connection ends to query for
+  -o, --output string     Output format (text|json) (default "text")
+      --page uint         pagination page of connection ends to query for. This sets offset to a multiple of limit (default 1)
+      --page-key string   pagination page-key of connection ends to query for
+      --reverse           results are sorted in descending order
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query ibc connection end
+
+```
+Query stored connection end
+
+Usage:
+  osmosisd query ibc connection end [connection-id] [flags]
+
+Examples:
+osmosisd query ibc connection end [connection-id]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for end
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+      --prove           show proofs for the query results (default true)
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query ibc connection path
+
+```
+Query stored client connection paths
+
+Usage:
+  osmosisd query ibc connection path [client-id] [flags]
+
+Examples:
+osmosisd query  ibc connection path [client-id]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for path
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+      --prove           show proofs for the query results (default true)
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query ibc connection
+
+```
+IBC connection query subcommands
+
+Usage:
+  osmosisd query ibc connection [command]
+
+Available Commands:
+  connections Query all connections
+  end         Query stored connection end
+  path        Query stored client connection paths
+
+Flags:
+  -h, --help   help for connection
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "osmosisd query ibc connection [command] --help" for more information about a command.
+
+```
+
+### osmosisd query ibc-transfer denom-hash
+
+```
+Query the denom hash info from a given denom trace
+
+Usage:
+  osmosisd query ibc-transfer denom-hash [trace] [flags]
+
+Examples:
+osmosisd query ibc-transfer denom-hash transfer/channel-0/uatom
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for denom-hash
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query ibc-transfer denom-trace
+
+```
+Query the denom trace info from a given trace hash or ibc denom
+
+Usage:
+  osmosisd query ibc-transfer denom-trace [hash/denom] [flags]
+
+Examples:
+osmosisd query ibc-transfer denom-trace 27A6394C3F9FF9C9DCF5DFFADF9BB5FE9A37C7E92B006199894CF1824DF9AC7C
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for denom-trace
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query ibc-transfer denom-traces
+
+```
+Query the trace info for all token denominations
+
+Usage:
+  osmosisd query ibc-transfer denom-traces [flags]
+
+Examples:
+osmosisd query ibc-transfer denom-traces
+
+Flags:
+      --count-total       count total number of records in denominations trace to query for
+      --height int        Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help              help for denom-traces
+      --limit uint        pagination limit of denominations trace to query for (default 100)
+      --node string       <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+      --offset uint       pagination offset of denominations trace to query for
+  -o, --output string     Output format (text|json) (default "text")
+      --page uint         pagination page of denominations trace to query for. This sets offset to a multiple of limit (default 1)
+      --page-key string   pagination page-key of denominations trace to query for
+      --reverse           results are sorted in descending order
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query ibc-transfer escrow-address
+
+```
+Get the escrow address for a channel
+
+Usage:
+  osmosisd query ibc-transfer escrow-address [flags]
+
+Examples:
+osmosisd query ibc-transfer escrow-address [port] [channel-id]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for escrow-address
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query ibc-transfer params
+
+```
+Query the current ibc-transfer parameters
+
+Usage:
+  osmosisd query ibc-transfer params [flags]
+
+Examples:
+osmosisd query ibc-transfer params
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for params
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query ibc-transfer
+
+```
+IBC fungible token transfer query subcommands
+
+Usage:
+  osmosisd query ibc-transfer [command]
+
+Available Commands:
+  denom-hash     Query the denom hash info from a given denom trace
+  denom-trace    Query the denom trace info from a given trace hash or ibc denom
+  denom-traces   Query the trace info for all token denominations
+  escrow-address Get the escrow address for a channel
+  params         Query the current ibc-transfer parameters
+
+Flags:
+  -h, --help   help for ibc-transfer
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "osmosisd query ibc-transfer [command] --help" for more information about a command.
+
+```
+
+### osmosisd query ibc
+
+```
+Querying commands for the IBC module
+
+Usage:
+  osmosisd query ibc [flags]
+  osmosisd query ibc [command]
+
+Available Commands:
+  channel     IBC channel query subcommands
+  client      IBC client query subcommands
+  connection  IBC connection query subcommands
+
+Flags:
+  -h, --help   help for ibc
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "osmosisd query ibc [command] --help" for more information about a command.
+
+```
+
+### osmosisd query incentives active-gauges-per-denom
+
+```
+Query active gauges.
+
+Example:
+$ osmosisd query incentives active-gauges-per-denom [denom]
+
+Usage:
+  osmosisd query incentives active-gauges-per-denom [denom] [flags]
+
+Flags:
+      --count-total       count total number of records in incentives to query for
+      --height int        Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help              help for active-gauges-per-denom
+      --limit uint        pagination limit of incentives to query for (default 100)
+      --node string       <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+      --offset uint       pagination offset of incentives to query for
+  -o, --output string     Output format (text|json) (default "text")
+      --page uint         pagination page of incentives to query for. This sets offset to a multiple of limit (default 1)
+      --page-key string   pagination page-key of incentives to query for
+      --reverse           results are sorted in descending order
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query incentives active-gauges
+
+```
+Query active gauges.
+
+Example:
+$ osmosisd query incentives active-gauges
+
+Usage:
+  osmosisd query incentives active-gauges [flags]
+
+Flags:
+      --count-total       count total number of records in incentives to query for
+      --height int        Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help              help for active-gauges
+      --limit uint        pagination limit of incentives to query for (default 100)
+      --node string       <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+      --offset uint       pagination offset of incentives to query for
+  -o, --output string     Output format (text|json) (default "text")
+      --page uint         pagination page of incentives to query for. This sets offset to a multiple of limit (default 1)
+      --page-key string   pagination page-key of incentives to query for
+      --reverse           results are sorted in descending order
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query incentives distributed-coins
+
+```
+Query coins distributed so far.
+
+Example:
+$ osmosisd query incentives distributed-coins
+
+Usage:
+  osmosisd query incentives distributed-coins [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for distributed-coins
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query incentives gauge-by-id
+
+```
+Query gauge by id.
+
+Example:
+$ osmosisd query incentives gauge-by-id 1
+
+Usage:
+  osmosisd query incentives gauge-by-id [id] [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for gauge-by-id
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query incentives gauges
+
+```
+Query available gauges.
+
+Example:
+$ osmosisd query incentives gauges
+
+Usage:
+  osmosisd query incentives gauges [flags]
+
+Flags:
+      --count-total       count total number of records in incentives to query for
+      --height int        Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help              help for gauges
+      --limit uint        pagination limit of incentives to query for (default 100)
+      --node string       <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+      --offset uint       pagination offset of incentives to query for
+  -o, --output string     Output format (text|json) (default "text")
+      --page uint         pagination page of incentives to query for. This sets offset to a multiple of limit (default 1)
+      --page-key string   pagination page-key of incentives to query for
+      --reverse           results are sorted in descending order
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query incentives rewards-estimation
+
+```
+Query rewards estimation.
+
+Example:
+$ osmosisd query incentives rewards-estimation
+
+Usage:
+  osmosisd query incentives rewards-estimation [flags]
+
+Flags:
+      --end-epoch int     the end epoch number to participate in rewards calculation
+      --height int        Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help              help for rewards-estimation
+      --lock-ids string   the lock ids to receive rewards, when it is empty, all lock ids of the owner are used
+      --node string       <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string     Output format (text|json) (default "text")
+      --owner string      Owner to receive rewards, optionally used when lock-ids flag is NOT set
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query incentives to-distribute-coins
+
+```
+Query coins that is going to be distributed.
+
+Example:
+$ osmosisd query incentives to-distribute-coins
+
+Usage:
+  osmosisd query incentives to-distribute-coins [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for to-distribute-coins
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query incentives upcoming-gauges-per-denom
+
+```
+Query scheduled gauges per denom
+
+Usage:
+  osmosisd query incentives upcoming-gauges-per-denom [denom] [flags]
+
+Flags:
+      --count-total       count total number of records in incentives to query for
+      --height int        Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help              help for upcoming-gauges-per-denom
+      --limit uint        pagination limit of incentives to query for (default 100)
+      --node string       <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+      --offset uint       pagination offset of incentives to query for
+  -o, --output string     Output format (text|json) (default "text")
+      --page uint         pagination page of incentives to query for. This sets offset to a multiple of limit (default 1)
+      --page-key string   pagination page-key of incentives to query for
+      --reverse           results are sorted in descending order
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query incentives upcoming-gauges
+
+```
+Query scheduled gauges.
+
+Example:
+$ osmosisd query incentives upcoming-gauges
+
+Usage:
+  osmosisd query incentives upcoming-gauges [flags]
+
+Flags:
+      --count-total       count total number of records in incentives to query for
+      --height int        Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help              help for upcoming-gauges
+      --limit uint        pagination limit of incentives to query for (default 100)
+      --node string       <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+      --offset uint       pagination offset of incentives to query for
+  -o, --output string     Output format (text|json) (default "text")
+      --page uint         pagination page of incentives to query for. This sets offset to a multiple of limit (default 1)
+      --page-key string   pagination page-key of incentives to query for
+      --reverse           results are sorted in descending order
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query incentives
+
+```
+Querying commands for the incentives module
+
+Usage:
+  osmosisd query incentives [flags]
+  osmosisd query incentives [command]
+
+Available Commands:
+  active-gauges             Query active gauges
+  active-gauges-per-denom   Query active gauges per denom
+  distributed-coins         Query coins distributed so far
+  gauge-by-id               Query gauge by id.
+  gauges                    Query available gauges
+  rewards-estimation        Query rewards estimation
+  to-distribute-coins       Query coins that is going to be distributed
+  upcoming-gauges           Query scheduled gauges
+  upcoming-gauges-per-denom Query scheduled gauges per denom
+
+Flags:
+  -h, --help   help for incentives
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "osmosisd query incentives [command] --help" for more information about a command.
+
+```
+
+### osmosisd query interchain-accounts controller interchain-account
+
+```
+Query the controller submodule for the interchain account address for a given owner on a particular connection
+
+Usage:
+  osmosisd query interchain-accounts controller interchain-account [owner] [connection-id] [flags]
+
+Examples:
+osmosisd query interchain-accounts controller interchain-account cosmos1layxcsmyye0dc0har9sdfzwckaz8sjwlfsj8zs connection-0
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for interchain-account
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query interchain-accounts controller params
+
+```
+Query the current interchain-accounts controller submodule parameters
+
+Usage:
+  osmosisd query interchain-accounts controller params [flags]
+
+Examples:
+osmosisd query interchain-accounts controller params
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for params
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query interchain-accounts controller
+
+```
+interchain-accounts controller subcommands
+
+Usage:
+  osmosisd query interchain-accounts controller [command]
+
+Available Commands:
+  interchain-account Query the interchain account address for a given owner on a particular connection
+  params             Query the current interchain-accounts controller submodule parameters
+
+Flags:
+  -h, --help   help for controller
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "osmosisd query interchain-accounts controller [command] --help" for more information about a command.
+
+```
+
+### osmosisd query interchain-accounts host packet-events
+
+```
+Query the interchain-accounts host submodule packet events for a particular channel and sequence
+
+Usage:
+  osmosisd query interchain-accounts host packet-events [channel-id] [sequence] [flags]
+
+Examples:
+osmosisd query interchain-accounts host packet-events channel-0 100
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for packet-events
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query interchain-accounts host params
+
+```
+Query the current interchain-accounts host submodule parameters
+
+Usage:
+  osmosisd query interchain-accounts host params [flags]
+
+Examples:
+osmosisd query interchain-accounts host params
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for params
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query interchain-accounts host
+
+```
+interchain-accounts host subcommands
+
+Usage:
+  osmosisd query interchain-accounts host [command]
+
+Available Commands:
+  packet-events Query the interchain-accounts host submodule packet events
+  params        Query the current interchain-accounts host submodule parameters
+
+Flags:
+  -h, --help   help for host
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "osmosisd query interchain-accounts host [command] --help" for more information about a command.
+
+```
+
+### osmosisd query interchain-accounts
+
+```
+interchain-accounts subcommands
+
+Usage:
+  osmosisd query interchain-accounts [command]
+
+Aliases:
+  interchain-accounts, ica
+
+Available Commands:
+  controller  interchain-accounts controller subcommands
+  host        interchain-accounts host subcommands
+
+Flags:
+  -h, --help   help for interchain-accounts
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "osmosisd query interchain-accounts [command] --help" for more information about a command.
+
+```
+
+### osmosisd query lockup account-locked-beforetime
+
+```
+Query account's the total unlocked records with unlock time before timestamp.
+
+Example:
+$ osmosisd query lockup account-locked-pastime <address> <timestamp>
+
+Usage:
+  osmosisd query lockup account-locked-beforetime <address> <timestamp> [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for account-locked-beforetime
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query lockup account-locked-coins
+
+```
+Query account's locked coins.
+
+Example:
+$ osmosisd query lockup account-locked-coins <address>
+
+Usage:
+  osmosisd query lockup account-locked-coins <address> [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for account-locked-coins
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query lockup account-locked-duration
+
+```
+Query account locked records with a specific duration
+
+Usage:
+  osmosisd query lockup account-locked-duration <address> <duration> [flags]
+
+Examples:
+Query account locked records with a specific duration.
+Example:
+$ osmosisd query lockup account-locked-duration osmo1yl6hdjhmkf37639730gffanpzndzdpmhxy9ep3 604800s
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for account-locked-duration
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query lockup account-locked-longer-duration-denom
+
+```
+Query account's locked records for a denom with longer duration.
+
+Example:
+$ osmosisd query lockup account-locked-pastime <address> <duration> <denom>
+
+Usage:
+  osmosisd query lockup account-locked-longer-duration-denom <address> <duration> <denom> [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for account-locked-longer-duration-denom
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query lockup account-locked-longer-duration-not-unlocking
+
+```
+Query account locked records with longer duration from unlocking only queue.
+
+Example:
+$ osmosisd query lockup account-locked-longer-duration-not-unlocking <address> <duration>
+
+Usage:
+  osmosisd query lockup account-locked-longer-duration-not-unlocking <address> <duration> [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for account-locked-longer-duration-not-unlocking
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query lockup account-locked-longer-duration
+
+```
+Query account locked records with longer duration.
+
+Example:
+$ osmosisd query lockup account-locked-longer-duration <address> <duration>
+
+Usage:
+  osmosisd query lockup account-locked-longer-duration <address> <duration> [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for account-locked-longer-duration
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query lockup account-locked-pastime-denom
+
+```
+Query account's lock records by address, timestamp, denom.
+
+Example:
+$ osmosisd query lockup account-locked-pastime-denom <address> <timestamp> <denom>
+
+Usage:
+  osmosisd query lockup account-locked-pastime-denom <address> <timestamp> <denom> [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for account-locked-pastime-denom
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query lockup account-locked-pastime-not-unlocking
+
+```
+Query locked records of an account with unlock time beyond timestamp within not unlocking queue.
+
+Example:
+$ osmosisd query lockup account-locked-pastime-not-unlocking <address> <timestamp>
+
+Usage:
+  osmosisd query lockup account-locked-pastime-not-unlocking <address> <timestamp> [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for account-locked-pastime-not-unlocking
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query lockup account-locked-pastime
+
+```
+Query locked records of an account with unlock time beyond timestamp.
+
+Example:
+$ osmosisd query lockup account-locked-pastime <address> <timestamp>
+
+Usage:
+  osmosisd query lockup account-locked-pastime <address> <timestamp> [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for account-locked-pastime
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query lockup account-unlockable-coins
+
+```
+Query account's unlockable coins.
+
+Example:
+$ osmosisd query lockup account-unlockable-coins <address>
+
+Usage:
+  osmosisd query lockup account-unlockable-coins <address> [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for account-unlockable-coins
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query lockup account-unlocking-coins
+
+```
+Query account's unlocking coins.
+
+Example:
+$ osmosisd query lockup account-unlocking-coins <address>
+
+Usage:
+  osmosisd query lockup account-unlocking-coins <address> [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for account-unlocking-coins
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query lockup lock-by-id
+
+```
+Query account's lock record by id.
+
+Example:
+$ osmosisd query lockup lock-by-id <id>
+
+Usage:
+  osmosisd query lockup lock-by-id <id> [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for lock-by-id
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query lockup module-balance
+
+```
+Query module balance.
+
+Example:
+$ osmosisd query lockup module-balance
+
+Usage:
+  osmosisd query lockup module-balance [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for module-balance
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query lockup module-locked-amount
+
+```
+Query module locked amount.
+
+Example:
+$ osmosisd query lockup module-locked-amount
+
+Usage:
+  osmosisd query lockup module-locked-amount [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for module-locked-amount
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query lockup output-all-locks
+
+```
+Output all locks into a json file.
+Example:
+$ osmosisd query lockup output-all-locks <max lock ID>
+
+Usage:
+  osmosisd query lockup output-all-locks <max lock ID> [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for output-all-locks
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query lockup synthetic-lockups-by-lock-id
+
+```
+Query synthetic lockups by lockup id.
+
+Example:
+$ osmosisd query lockup synthetic-lockups-by-lock-id <id>
+
+Usage:
+  osmosisd query lockup synthetic-lockups-by-lock-id <id> [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for synthetic-lockups-by-lock-id
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query lockup total-locked-of-denom
+
+```
+Query locked records for a specific denom bigger then duration provided.
+
+Example:
+$ osmosisd query lockup total-locked-of-denom <denom>
+
+Usage:
+  osmosisd query lockup total-locked-of-denom <denom> [flags]
+
+Flags:
+      --height int            Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help                  help for total-locked-of-denom
+      --min-duration string   The minimum duration of token bonded. e.g. 24h, 168h, 336h (default "336h")
+      --node string           <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string         Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query lockup
+
+```
+Querying commands for the lockup module
+
+Usage:
+  osmosisd query lockup [flags]
+  osmosisd query lockup [command]
+
+Available Commands:
+  account-locked-beforetime                    Query account's unlocked records before specific time
+  account-locked-coins                         Query account's locked coins
+  account-locked-duration                      Query account locked records with a specific duration
+  account-locked-longer-duration               Query account locked records with longer duration
+  account-locked-longer-duration-denom         Query locked records for a denom with longer duration
+  account-locked-longer-duration-not-unlocking Query account locked records with longer duration from unlocking only queue
+  account-locked-pastime                       Query locked records of an account with unlock time beyond timestamp
+  account-locked-pastime-denom                 Query account's lock records by address, timestamp, denom
+  account-locked-pastime-not-unlocking         Query locked records of an account with unlock time beyond timestamp within not unlocking queue
+  account-unlockable-coins                     Query account's unlockable coins
+  account-unlocking-coins                      Query account's unlocking coins
+  lock-by-id                                   Query account's lock record by id
+  module-balance                               Query module balance
+  module-locked-amount                         Query module locked amount
+  output-all-locks                             output all locks into a json file
+  synthetic-lockups-by-lock-id                 Query synthetic lockups by lockup id
+  total-locked-of-denom                        Query locked amount for a specific denom bigger then duration provided
+
+Flags:
+  -h, --help   help for lockup
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "osmosisd query lockup [command] --help" for more information about a command.
+
+```
+
+### osmosisd query mint epoch-provisions
+
+```
+Query the current minting epoch provisions value
+
+Usage:
+  osmosisd query mint epoch-provisions [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for epoch-provisions
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query mint params
+
+```
+Query the current minting parameters
+
+Usage:
+  osmosisd query mint params [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for params
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query mint
+
+```
+Querying commands for the minting module
+
+Usage:
+  osmosisd query mint [flags]
+  osmosisd query mint [command]
+
+Available Commands:
+  epoch-provisions Query the current minting epoch provisions value
+  params           Query the current minting parameters
+
+Flags:
+  -h, --help   help for mint
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "osmosisd query mint [command] --help" for more information about a command.
+
+```
+
+### osmosisd query params subspace
+
+```
+Query for raw parameters by subspace and key
+
+Usage:
+  osmosisd query params subspace [subspace] [key] [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for subspace
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query params
+
+```
+Querying commands for the params module
+
+Usage:
+  osmosisd query params [flags]
+  osmosisd query params [command]
+
+Available Commands:
+  subspace    Query for raw parameters by subspace and key
+
+Flags:
+  -h, --help   help for params
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "osmosisd query params [command] --help" for more information about a command.
+
+```
+
+### osmosisd query poolincentives distr-info
+
+```
+Query distribution info.
+
+Example:
+$ osmosisd query pool-incentives distr-info
+
+Usage:
+  osmosisd query poolincentives distr-info [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for distr-info
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query poolincentives external-incentivized-gauges
+
+```
+Query incentivized gauges.
+
+Example:
+$ osmosisd query pool-incentives external-incentivized-gauges
+
+Usage:
+  osmosisd query poolincentives external-incentivized-gauges [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for external-incentivized-gauges
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query poolincentives gauge-ids
+
+```
+Query the matching gauge ids and durations by pool id.
+
+Example:
+$ osmosisd query pool-incentives gauge-ids 1
+
+Usage:
+  osmosisd query poolincentives gauge-ids [pool-id] [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for gauge-ids
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query poolincentives incentivized-pools
+
+```
+Query incentivized pools.
+
+Example:
+$ osmosisd query pool-incentives incentivized-pools
+
+Usage:
+  osmosisd query poolincentives incentivized-pools [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for incentivized-pools
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query poolincentives lockable-durations
+
+```
+Query lockable durations.
+
+Example:
+$ osmosisd query pool-incentives lockable-durations
+
+Usage:
+  osmosisd query poolincentives lockable-durations [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for lockable-durations
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query poolincentives params
+
+```
+Query module params.
+
+Example:
+$ osmosisd query pool-incentives params
+
+Usage:
+  osmosisd query poolincentives params [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for params
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query poolincentives
+
+```
+Querying commands for the poolincentives module
+
+Usage:
+  osmosisd query poolincentives [flags]
+  osmosisd query poolincentives [command]
+
+Available Commands:
+  distr-info                   Query distribution info
+  external-incentivized-gauges Query external incentivized gauges
+  gauge-ids                    Query the matching gauge ids and durations by pool id
+  incentivized-pools           Query incentivized pools
+  lockable-durations           Query lockable durations
+  params                       Query module params
+
+Flags:
+  -h, --help   help for poolincentives
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "osmosisd query poolincentives [command] --help" for more information about a command.
+
+```
+
+### osmosisd query slashing params
+
+```
+Query genesis parameters for the slashing module:
+
+$ <appd> query slashing params
+
+Usage:
+  osmosisd query slashing params [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for params
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query slashing signing-info
+
+```
+Use a validators' consensus public key to find the signing-info for that validator:
+
+$ <appd> query slashing signing-info '{"@type":"/cosmos.crypto.ed25519.PubKey","key":"OauFcTKbN5Lx3fJL689cikXBqe+hcp6Y+x0rYUdR9Jk="}'
+
+Usage:
+  osmosisd query slashing signing-info [validator-conspub] [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for signing-info
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query slashing signing-infos
+
+```
+signing infos of validators:
+
+$ <appd> query slashing signing-infos
+
+Usage:
+  osmosisd query slashing signing-infos [flags]
+
+Flags:
+      --count-total       count total number of records in signing infos to query for
+      --height int        Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help              help for signing-infos
+      --limit uint        pagination limit of signing infos to query for (default 100)
+      --node string       <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+      --offset uint       pagination offset of signing infos to query for
+  -o, --output string     Output format (text|json) (default "text")
+      --page uint         pagination page of signing infos to query for. This sets offset to a multiple of limit (default 1)
+      --page-key string   pagination page-key of signing infos to query for
+      --reverse           results are sorted in descending order
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query slashing
+
+```
+Querying commands for the slashing module
+
+Usage:
+  osmosisd query slashing [flags]
+  osmosisd query slashing [command]
+
+Available Commands:
+  params        Query the current slashing parameters
+  signing-info  Query a validator's signing information
+  signing-infos Query signing information of all validators
+
+Flags:
+  -h, --help   help for slashing
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "osmosisd query slashing [command] --help" for more information about a command.
+
+```
+
+### osmosisd query staking delegation
+
+```
+Query delegations for an individual delegator on an individual validator.
+
+Example:
+$ osmosisd query staking delegation osmo1gghjut3ccd8ay0zduzj64hwre2fxs9ld75ru9p osmovaloper1gghjut3ccd8ay0zduzj64hwre2fxs9ldmqhffj
+
+Usage:
+  osmosisd query staking delegation [delegator-addr] [validator-addr] [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for delegation
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query staking delegations-to
+
+```
+Query delegations on an individual validator.
+
+Example:
+$ osmosisd query staking delegations-to osmovaloper1gghjut3ccd8ay0zduzj64hwre2fxs9ldmqhffj
+
+Usage:
+  osmosisd query staking delegations-to [validator-addr] [flags]
+
+Flags:
+      --count-total       count total number of records in validator delegations to query for
+      --height int        Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help              help for delegations-to
+      --limit uint        pagination limit of validator delegations to query for (default 100)
+      --node string       <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+      --offset uint       pagination offset of validator delegations to query for
+  -o, --output string     Output format (text|json) (default "text")
+      --page uint         pagination page of validator delegations to query for. This sets offset to a multiple of limit (default 1)
+      --page-key string   pagination page-key of validator delegations to query for
+      --reverse           results are sorted in descending order
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query staking delegations
+
+```
+Query delegations for an individual delegator on all validators.
+
+Example:
+$ osmosisd query staking delegations osmo1gghjut3ccd8ay0zduzj64hwre2fxs9ld75ru9p
+
+Usage:
+  osmosisd query staking delegations [delegator-addr] [flags]
+
+Flags:
+      --count-total       count total number of records in delegations to query for
+      --height int        Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help              help for delegations
+      --limit uint        pagination limit of delegations to query for (default 100)
+      --node string       <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+      --offset uint       pagination offset of delegations to query for
+  -o, --output string     Output format (text|json) (default "text")
+      --page uint         pagination page of delegations to query for. This sets offset to a multiple of limit (default 1)
+      --page-key string   pagination page-key of delegations to query for
+      --reverse           results are sorted in descending order
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query staking historical-info
+
+```
+Query historical info at given height.
+
+Example:
+$ osmosisd query staking historical-info 5
+
+Usage:
+  osmosisd query staking historical-info [height] [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for historical-info
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query staking params
+
+```
+Query values set as staking parameters.
+
+Example:
+$ osmosisd query staking params
+
+Usage:
+  osmosisd query staking params [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for params
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query staking pool
+
+```
+Query values for amounts stored in the staking pool.
+
+Example:
+$ osmosisd query staking pool
+
+Usage:
+  osmosisd query staking pool [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for pool
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query staking redelegation
+
+```
+Query a redelegation record for an individual delegator between a source and destination validator.
+
+Example:
+$ osmosisd query staking redelegation osmo1gghjut3ccd8ay0zduzj64hwre2fxs9ld75ru9p osmovaloper1l2rsakp388kuv9k8qzq6lrm9taddae7fpx59wm osmovaloper1gghjut3ccd8ay0zduzj64hwre2fxs9ldmqhffj
+
+Usage:
+  osmosisd query staking redelegation [delegator-addr] [src-validator-addr] [dst-validator-addr] [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for redelegation
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query staking redelegations-from
+
+```
+Query delegations that are redelegating _from_ a validator.
+
+Example:
+$ osmosisd query staking redelegations-from osmovaloper1gghjut3ccd8ay0zduzj64hwre2fxs9ldmqhffj
+
+Usage:
+  osmosisd query staking redelegations-from [validator-addr] [flags]
+
+Flags:
+      --count-total       count total number of records in validator redelegations to query for
+      --height int        Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help              help for redelegations-from
+      --limit uint        pagination limit of validator redelegations to query for (default 100)
+      --node string       <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+      --offset uint       pagination offset of validator redelegations to query for
+  -o, --output string     Output format (text|json) (default "text")
+      --page uint         pagination page of validator redelegations to query for. This sets offset to a multiple of limit (default 1)
+      --page-key string   pagination page-key of validator redelegations to query for
+      --reverse           results are sorted in descending order
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query staking redelegations
+
+```
+Query all redelegation records for an individual delegator.
+
+Example:
+$ osmosisd query staking redelegation osmo1gghjut3ccd8ay0zduzj64hwre2fxs9ld75ru9p
+
+Usage:
+  osmosisd query staking redelegations [delegator-addr] [flags]
+
+Flags:
+      --count-total       count total number of records in delegator redelegations to query for
+      --height int        Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help              help for redelegations
+      --limit uint        pagination limit of delegator redelegations to query for (default 100)
+      --node string       <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+      --offset uint       pagination offset of delegator redelegations to query for
+  -o, --output string     Output format (text|json) (default "text")
+      --page uint         pagination page of delegator redelegations to query for. This sets offset to a multiple of limit (default 1)
+      --page-key string   pagination page-key of delegator redelegations to query for
+      --reverse           results are sorted in descending order
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query staking unbonding-delegation
+
+```
+Query unbonding delegations for an individual delegator on an individual validator.
+
+Example:
+$ osmosisd query staking unbonding-delegation osmo1gghjut3ccd8ay0zduzj64hwre2fxs9ld75ru9p osmovaloper1gghjut3ccd8ay0zduzj64hwre2fxs9ldmqhffj
+
+Usage:
+  osmosisd query staking unbonding-delegation [delegator-addr] [validator-addr] [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for unbonding-delegation
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query staking unbonding-delegations-from
+
+```
+Query delegations that are unbonding _from_ a validator.
+
+Example:
+$ osmosisd query staking unbonding-delegations-from osmovaloper1gghjut3ccd8ay0zduzj64hwre2fxs9ldmqhffj
+
+Usage:
+  osmosisd query staking unbonding-delegations-from [validator-addr] [flags]
+
+Flags:
+      --count-total       count total number of records in unbonding delegations to query for
+      --height int        Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help              help for unbonding-delegations-from
+      --limit uint        pagination limit of unbonding delegations to query for (default 100)
+      --node string       <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+      --offset uint       pagination offset of unbonding delegations to query for
+  -o, --output string     Output format (text|json) (default "text")
+      --page uint         pagination page of unbonding delegations to query for. This sets offset to a multiple of limit (default 1)
+      --page-key string   pagination page-key of unbonding delegations to query for
+      --reverse           results are sorted in descending order
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query staking unbonding-delegations
+
+```
+Query unbonding delegations for an individual delegator.
+
+Example:
+$ osmosisd query staking unbonding-delegations osmo1gghjut3ccd8ay0zduzj64hwre2fxs9ld75ru9p
+
+Usage:
+  osmosisd query staking unbonding-delegations [delegator-addr] [flags]
+
+Flags:
+      --count-total       count total number of records in unbonding delegations to query for
+      --height int        Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help              help for unbonding-delegations
+      --limit uint        pagination limit of unbonding delegations to query for (default 100)
+      --node string       <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+      --offset uint       pagination offset of unbonding delegations to query for
+  -o, --output string     Output format (text|json) (default "text")
+      --page uint         pagination page of unbonding delegations to query for. This sets offset to a multiple of limit (default 1)
+      --page-key string   pagination page-key of unbonding delegations to query for
+      --reverse           results are sorted in descending order
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query staking validator
+
+```
+Query details about an individual validator.
+
+Example:
+$ osmosisd query staking validator osmovaloper1gghjut3ccd8ay0zduzj64hwre2fxs9ldmqhffj
+
+Usage:
+  osmosisd query staking validator [validator-addr] [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for validator
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query staking validators
+
+```
+Query details about all validators on a network.
+
+Example:
+$ osmosisd query staking validators
+
+Usage:
+  osmosisd query staking validators [flags]
+
+Flags:
+      --count-total       count total number of records in validators to query for
+      --height int        Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help              help for validators
+      --limit uint        pagination limit of validators to query for (default 100)
+      --node string       <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+      --offset uint       pagination offset of validators to query for
+  -o, --output string     Output format (text|json) (default "text")
+      --page uint         pagination page of validators to query for. This sets offset to a multiple of limit (default 1)
+      --page-key string   pagination page-key of validators to query for
+      --reverse           results are sorted in descending order
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query staking
+
+```
+Querying commands for the staking module
+
+Usage:
+  osmosisd query staking [flags]
+  osmosisd query staking [command]
+
+Available Commands:
+  delegation                 Query a delegation based on address and validator address
+  delegations                Query all delegations made by one delegator
+  delegations-to             Query all delegations made to one validator
+  historical-info            Query historical info at given height
+  params                     Query the current staking parameters information
+  pool                       Query the current staking pool values
+  redelegation               Query a redelegation record based on delegator and a source and destination validator address
+  redelegations              Query all redelegations records for one delegator
+  redelegations-from         Query all outgoing redelegatations from a validator
+  unbonding-delegation       Query an unbonding-delegation record based on delegator and validator address
+  unbonding-delegations      Query all unbonding-delegations records for one delegator
+  unbonding-delegations-from Query all unbonding delegatations from a validator
+  validator                  Query a validator
+  validators                 Query for all validators
+
+Flags:
+  -h, --help   help for staking
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "osmosisd query staking [command] --help" for more information about a command.
+
+```
+
+### osmosisd query superfluid all-intermediary-accounts
+
+```
+Query all superfluid intermediary accounts.
+
+Example:
+$ osmosisd query superfluid all-intermediary-accounts
+
+Usage:
+  osmosisd query superfluid all-intermediary-accounts [flags]
+
+Flags:
+      --count-total       count total number of records in superfluid to query for
+      --height int        Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help              help for all-intermediary-accounts
+      --limit uint        pagination limit of superfluid to query for (default 100)
+      --node string       <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+      --offset uint       pagination offset of superfluid to query for
+  -o, --output string     Output format (text|json) (default "text")
+      --page uint         pagination page of superfluid to query for. This sets offset to a multiple of limit (default 1)
+      --page-key string   pagination page-key of superfluid to query for
+      --reverse           results are sorted in descending order
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query superfluid all-superfluid-assets
+
+```
+Query all superfluid assets.
+
+Example:
+$ osmosisd query superfluid all-superfluid-assets
+
+Usage:
+  osmosisd query superfluid all-superfluid-assets [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for all-superfluid-assets
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query superfluid asset-multiplier
+
+```
+Query asset multiplier by denom.
+
+Example:
+$ osmosisd query superfluid asset-multiplier gamm/pool/1
+
+Usage:
+  osmosisd query superfluid asset-multiplier [denom] [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for asset-multiplier
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query superfluid connected-intermediary-account
+
+```
+Query connected intermediary account.
+
+Example:
+$ osmosisd query superfluid connected-intermediary-account 1
+
+Usage:
+  osmosisd query superfluid connected-intermediary-account [lock_id] [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for connected-intermediary-account
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query superfluid params
+
+```
+Query parameters for the superfluid module:
+
+$ <appd> query superfluid params
+
+Usage:
+  osmosisd query superfluid params [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for params
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query superfluid superfluid-delegation-amount
+
+```
+Query coins superfluid delegated for a delegator, validator, denom
+
+Usage:
+  osmosisd query superfluid superfluid-delegation-amount [delegator_address] [validator_address] [denom] [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for superfluid-delegation-amount
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query superfluid superfluid-delegation-by-delegator
+
+```
+Query coins superfluid delegated for the specified delegator
+
+Usage:
+  osmosisd query superfluid superfluid-delegation-by-delegator [delegator_address] [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for superfluid-delegation-by-delegator
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query superfluid superfluid-undelegation-by-delegator
+
+```
+Query coins superfluid undelegated for the specified delegator
+
+Usage:
+  osmosisd query superfluid superfluid-undelegation-by-delegator [delegator_address] [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for superfluid-undelegation-by-delegator
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query superfluid total-delegation-by-delegator
+
+```
+Query both superfluid delegation and normal delegation
+
+Usage:
+  osmosisd query superfluid total-delegation-by-delegator [delegator_address] [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for total-delegation-by-delegator
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query superfluid total-superfluid-delegations
+
+```
+Query total amount of osmo delegated via superfluid staking
+
+Usage:
+  osmosisd query superfluid total-superfluid-delegations [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for total-superfluid-delegations
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query superfluid
+
+```
+Querying commands for the superfluid module
+
+Usage:
+  osmosisd query superfluid [flags]
+  osmosisd query superfluid [command]
+
+Available Commands:
+  all-intermediary-accounts            Query all superfluid intermediary accounts
+  all-superfluid-assets                Query all superfluid assets
+  asset-multiplier                     Query asset multiplier by denom
+  connected-intermediary-account       Query connected intermediary account
+  params                               Query the current superfluid parameters
+  superfluid-delegation-amount         Query coins superfluid delegated for a delegator, validator, denom
+  superfluid-delegation-by-delegator   Query coins superfluid delegated for the specified delegator
+  superfluid-undelegation-by-delegator Query coins superfluid undelegated for the specified delegator
+  total-delegation-by-delegator        Query both superfluid delegation and normal delegation
+  total-superfluid-delegations         Query total amount of osmo delegated via superfluid staking
+
+Flags:
+  -h, --help   help for superfluid
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "osmosisd query superfluid [command] --help" for more information about a command.
+
+```
+
+### osmosisd query tendermint-validator-set
+
+```
+Get the full tendermint validator set at given height
+
+Usage:
+  osmosisd query tendermint-validator-set [height] [flags]
+
+Flags:
+  -h, --help                     help for tendermint-validator-set
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test) (default "os")
+      --limit int                Query number of results returned per page (default 100)
+  -n, --node string              Node to connect to (default "tcp://localhost:26657")
+      --page int                 Query a specific page of paginated results (default 1)
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query tokenfactory denom-authority-metadata
+
+```
+Get the authority metadata for a specific denom
+
+Usage:
+  osmosisd query tokenfactory denom-authority-metadata [denom] [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for denom-authority-metadata
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query tokenfactory denoms-from-creator
+
+```
+Returns a list of all tokens created by a specific creator address
+
+Usage:
+  osmosisd query tokenfactory denoms-from-creator [creator address] [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for denoms-from-creator
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query tokenfactory params
+
+```
+Get the params for the x/tokenfactory module
+
+Usage:
+  osmosisd query tokenfactory params [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for params
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query tokenfactory
+
+```
+Querying commands for the tokenfactory module
+
+Usage:
+  osmosisd query tokenfactory [flags]
+  osmosisd query tokenfactory [command]
+
+Available Commands:
+  denom-authority-metadata Get the authority metadata for a specific denom
+  denoms-from-creator      Returns a list of all tokens created by a specific creator address
+  params                   Get the params for the x/tokenfactory module
+
+Flags:
+  -h, --help   help for tokenfactory
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "osmosisd query tokenfactory [command] --help" for more information about a command.
+
+```
+
+### osmosisd query tx
+
+```
+Example:
+$ osmosisd query tx <hash>
+$ osmosisd query tx --type=acc_seq <addr>/<sequence>
+$ osmosisd query tx --type=signature <sig1_base64>,<sig2_base64...>
+
+Usage:
+  osmosisd query tx --type=[hash|acc_seq|signature] [hash|acc_seq|signature] [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for tx
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+      --type string     The type to be used when querying tx, can be one of "hash", "acc_seq", "signature" (default "hash")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query txfees base-denom
+
+```
+Query the base fee denom.
+
+Example:
+$ osmosisd query txfees base-denom
+
+Usage:
+  osmosisd query txfees base-denom [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for base-denom
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query txfees denom-pool-id
+
+```
+Query the pool id associated with a specific fee token
+
+Example:
+$ osmosisd query txfees denom-pool-id [denom]
+
+Usage:
+  osmosisd query txfees denom-pool-id [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for denom-pool-id
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query txfees fee-tokens
+
+```
+Query the list of non-basedenom fee tokens and their associated pool ids
+
+Example:
+$ osmosisd query txfees fee-tokens
+
+Usage:
+  osmosisd query txfees fee-tokens [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for fee-tokens
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query txfees
+
+```
+Querying commands for the txfees module
+
+Usage:
+  osmosisd query txfees [flags]
+  osmosisd query txfees [command]
+
+Available Commands:
+  base-denom    Query the base fee denom
+  denom-pool-id Query the pool id associated with a specific whitelisted fee token
+  fee-tokens    Query the list of non-basedenom fee tokens and their associated pool ids
+
+Flags:
+  -h, --help   help for txfees
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "osmosisd query txfees [command] --help" for more information about a command.
+
+```
+
+### osmosisd query txs
+
+```
+Search for transactions that match the exact given events where results are paginated.
+Each event takes the form of '{eventType}.{eventAttribute}={value}'. Please refer
+to each module's documentation for the full set of events to query for. Each module
+documents its respective events under 'xx_events.md'.
+
+Example:
+$ osmosisd query txs --events 'message.sender=cosmos1...&message.action=withdraw_delegator_reward' --page 1 --limit 30
+
+Usage:
+  osmosisd query txs [flags]
+
+Flags:
+      --events string   list of transaction events in the form of {eventType}.{eventAttribute}={value}
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for txs
+      --limit int       Query number of transactions results per page returned (default 30)
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+      --page int        Query a specific page of paginated results (default 1)
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query upgrade applied
+
+```
+If upgrade-name was previously executed on the chain, this returns the header for the block at which it was applied.
+This helps a client determine which binary was valid over a given range of blocks, as well as more context to understand past migrations.
+
+Usage:
+  osmosisd query upgrade applied [upgrade-name] [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for applied
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query upgrade module_versions
+
+```
+Gets a list of module names and their respective consensus versions.
+Following the command with a specific module name will return only
+that module's information.
+
+Usage:
+  osmosisd query upgrade module_versions [optional module_name] [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for module_versions
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query upgrade plan
+
+```
+Gets the currently scheduled upgrade plan, if one exists
+
+Usage:
+  osmosisd query upgrade plan [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for plan
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query upgrade
+
+```
+Querying commands for the upgrade module
+
+Usage:
+  osmosisd query upgrade [command]
+
+Available Commands:
+  applied         block header for height at which a completed upgrade was applied
+  module_versions get the list of module versions
+  plan            get upgrade plan (if one exists)
+
+Flags:
+  -h, --help   help for upgrade
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "osmosisd query upgrade [command] --help" for more information about a command.
+
+```
+
+### osmosisd query wasm code-info
+
+```
+Prints out metadata of a code id
+
+Usage:
+  osmosisd query wasm code-info [code_id] [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for code-info
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query wasm code
+
+```
+Downloads wasm bytecode for given code id
+
+Usage:
+  osmosisd query wasm code [code_id] [output filename] [flags]
+
+Aliases:
+  code, source-code, source
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for code
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query wasm contract-history
+
+```
+Prints out the code history for a contract given its address
+
+Usage:
+  osmosisd query wasm contract-history [bech32_address] [flags]
+
+Aliases:
+  contract-history, history, hist, ch
+
+Flags:
+      --count-total       count total number of records in contract history to query for
+      --height int        Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help              help for contract-history
+      --limit uint        pagination limit of contract history to query for (default 100)
+      --node string       <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+      --offset uint       pagination offset of contract history to query for
+  -o, --output string     Output format (text|json) (default "text")
+      --page uint         pagination page of contract history to query for. This sets offset to a multiple of limit (default 1)
+      --page-key string   pagination page-key of contract history to query for
+      --reverse           results are sorted in descending order
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query wasm contract-state all
+
+```
+Prints out all internal state of a contract given its address
+
+Usage:
+  osmosisd query wasm contract-state all [bech32_address] [flags]
+
+Flags:
+      --count-total       count total number of records in contract state to query for
+      --height int        Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help              help for all
+      --limit uint        pagination limit of contract state to query for (default 100)
+      --node string       <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+      --offset uint       pagination offset of contract state to query for
+  -o, --output string     Output format (text|json) (default "text")
+      --page uint         pagination page of contract state to query for. This sets offset to a multiple of limit (default 1)
+      --page-key string   pagination page-key of contract state to query for
+      --reverse           results are sorted in descending order
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query wasm contract-state raw
+
+```
+Prints out internal state for of a contract given its address
+
+Usage:
+  osmosisd query wasm contract-state raw [bech32_address] [key] [flags]
+
+Flags:
+      --ascii           ascii encoded key argument
+      --b64             base64 encoded key argument
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for raw
+      --hex             hex encoded  key argument
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query wasm contract-state smart
+
+```
+Calls contract with given address with query data and prints the returned result
+
+Usage:
+  osmosisd query wasm contract-state smart [bech32_address] [query] [flags]
+
+Flags:
+      --ascii           ascii encoded query argument
+      --b64             base64 encoded query argument
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for smart
+      --hex             hex encoded  query argument
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query wasm contract-state
+
+```
+Querying commands for the wasm module
+
+Usage:
+  osmosisd query wasm contract-state [flags]
+  osmosisd query wasm contract-state [command]
+
+Aliases:
+  contract-state, state, cs, s
+
+Available Commands:
+  all         Prints out all internal state of a contract given its address
+  raw         Prints out internal state for key of a contract given its address
+  smart       Calls contract with given address with query data and prints the returned result
+
+Flags:
+  -h, --help   help for contract-state
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "osmosisd query wasm contract-state [command] --help" for more information about a command.
+
+```
+
+### osmosisd query wasm contract
+
+```
+Prints out metadata of a contract given its address
+
+Usage:
+  osmosisd query wasm contract [bech32_address] [flags]
+
+Aliases:
+  contract, meta, c
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for contract
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query wasm libwasmvm-version
+
+```
+Get libwasmvm version
+
+Usage:
+  osmosisd query wasm libwasmvm-version [flags]
+
+Aliases:
+  libwasmvm-version, lib-version
+
+Flags:
+  -h, --help   help for libwasmvm-version
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query wasm list-code
+
+```
+List all wasm bytecode on the chain
+
+Usage:
+  osmosisd query wasm list-code [flags]
+
+Aliases:
+  list-code, list-codes, codes, lco
+
+Flags:
+      --count-total       count total number of records in list codes to query for
+      --height int        Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help              help for list-code
+      --limit uint        pagination limit of list codes to query for (default 100)
+      --node string       <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+      --offset uint       pagination offset of list codes to query for
+  -o, --output string     Output format (text|json) (default "text")
+      --page uint         pagination page of list codes to query for. This sets offset to a multiple of limit (default 1)
+      --page-key string   pagination page-key of list codes to query for
+      --reverse           results are sorted in descending order
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query wasm list-contract-by-code
+
+```
+List wasm all bytecode on the chain for given code id
+
+Usage:
+  osmosisd query wasm list-contract-by-code [code_id] [flags]
+
+Aliases:
+  list-contract-by-code, list-contracts-by-code, list-contracts, contracts, lca
+
+Flags:
+      --count-total       count total number of records in list contracts by code to query for
+      --height int        Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help              help for list-contract-by-code
+      --limit uint        pagination limit of list contracts by code to query for (default 100)
+      --node string       <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+      --offset uint       pagination offset of list contracts by code to query for
+  -o, --output string     Output format (text|json) (default "text")
+      --page uint         pagination page of list contracts by code to query for. This sets offset to a multiple of limit (default 1)
+      --page-key string   pagination page-key of list contracts by code to query for
+      --reverse           results are sorted in descending order
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query wasm pinned
+
+```
+		Long:    List all pinned code ids,
+
+Usage:
+  osmosisd query wasm pinned [flags]
+
+Flags:
+      --count-total       count total number of records in list codes to query for
+      --height int        Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help              help for pinned
+      --limit uint        pagination limit of list codes to query for (default 100)
+      --node string       <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+      --offset uint       pagination offset of list codes to query for
+  -o, --output string     Output format (text|json) (default "text")
+      --page uint         pagination page of list codes to query for. This sets offset to a multiple of limit (default 1)
+      --page-key string   pagination page-key of list codes to query for
+      --reverse           results are sorted in descending order
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd query wasm
+
+```
+Querying commands for the wasm module
+
+Usage:
+  osmosisd query wasm [flags]
+  osmosisd query wasm [command]
+
+Available Commands:
+  code                  Downloads wasm bytecode for given code id
+  code-info             Prints out metadata of a code id
+  contract              Prints out metadata of a contract given its address
+  contract-history      Prints out the code history for a contract given its address
+  contract-state        Querying commands for the wasm module
+  libwasmvm-version     Get libwasmvm version
+  list-code             List all wasm bytecode on the chain
+  list-contract-by-code List wasm all bytecode on the chain for given code id
+  pinned                List all pinned code ids
+
+Flags:
+  -h, --help   help for wasm
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "osmosisd query wasm [command] --help" for more information about a command.
+
+```
+
+### osmosisd query
+
+```
+Querying subcommands
+
+Usage:
+  osmosisd query [flags]
+  osmosisd query [command]
+
+Aliases:
+  query, q
+
+Available Commands:
+  account                  Query for account by address
+  auth                     Querying commands for the auth module
+  authz                    Querying commands for the authz module
+  bank                     Querying commands for the bank module
+  block                    Get verified data for a the block at given height
+  distribution             Querying commands for the distribution module
+  epochs                   Querying commands for the epochs module
+  evidence                 Query for evidence by hash or for all (paginated) submitted evidence
+  gamm                     Querying commands for the gamm module
+  gov                      Querying commands for the governance module
+  ibc                      Querying commands for the IBC module
+  ibc-transfer             IBC fungible token transfer query subcommands
+  incentives               Querying commands for the incentives module
+  interchain-accounts      interchain-accounts subcommands
+  lockup                   Querying commands for the lockup module
+  mint                     Querying commands for the minting module
+  params                   Querying commands for the params module
+  poolincentives           Querying commands for the poolincentives module
+  slashing                 Querying commands for the slashing module
+  staking                  Querying commands for the staking module
+  superfluid               Querying commands for the superfluid module
+  tendermint-validator-set Get the full tendermint validator set at given height
+  tokenfactory             Querying commands for the tokenfactory module
+  tx                       Query for a transaction by hash, "<addr>/<seq>" combination or comma-separated signatures in a committed block
+  txfees                   Querying commands for the txfees module
+  txs                      Query for paginated transactions that match a set of events
+  upgrade                  Querying commands for the upgrade module
+  wasm                     Querying commands for the wasm module
+
+Flags:
+      --chain-id string   The network chain ID
+  -h, --help              help for query
+
+Global Flags:
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "osmosisd query [command] --help" for more information about a command.
+
+```
+
+### osmosisd rollback
+
+```
+
+A state rollback is performed to recover from an incorrect application state transition,
+when Tendermint has persisted an incorrect app hash and is thus unable to make
+progress. Rollback overwrites a state at height n with the state at height n - 1.
+The application should also roll back to height n - 1. No blocks are removed, so upon
+restarting Tendermint the transactions in block n will be re-executed against the
+application.
+
+Usage:
+  osmosisd rollback [flags]
+
+Flags:
+  -h, --help   help for rollback
+
+Global Flags:
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd rosetta
+
+```
+spin up a rosetta server
+
+Usage:
+  osmosisd rosetta [flags]
+
+Flags:
+      --addr string         the address rosetta will bind to (default ":8080")
+      --blockchain string   the blockchain type (default "app")
+      --grpc string         the app gRPC endpoint (default "localhost:9090")
+  -h, --help                help for rosetta
+      --network string      the network name (default "network")
+      --offline             run rosetta only with construction API
+      --retries int         the number of retries that will be done before quitting (default 5)
+      --tendermint string   the tendermint rpc endpoint, without tcp:// (default "localhost:26657")
+
+Global Flags:
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd start
+
+```
+Run the full node application with Tendermint in or out of process. By
+default, the application will run with Tendermint in process.
+
+Pruning options can be provided via the '--pruning' flag or alternatively with '--pruning-keep-recent', and
+'pruning-interval' together.
+
+For '--pruning' the options are as follows:
+
+default: only the last 100,000 states(approximately 1 week worth of state) are kept; pruning at 100 block intervals
+nothing: all historic states will be saved, nothing will be deleted (i.e. archiving node)
+everything: all saved states will be deleted, storing only the current state; pruning at 10 block intervals
+custom: allow pruning options to be manually specified through 'pruning-keep-recent', and 'pruning-interval'
+
+Node halting configurations exist in the form of two flags: '--halt-height' and '--halt-time'. During
+the ABCI Commit phase, the node will check if the current block height is greater than or equal to
+the halt-height or if the current block time is greater than or equal to the halt-time. If so, the
+node will attempt to gracefully shutdown and the block will not be committed. In addition, the node
+will not be able to commit subsequent blocks.
+
+For profiling and benchmarking purposes, CPU profiling can be enabled via the '--cpu-profile' flag
+which accepts a path for the resulting pprof file.
+
+Usage:
+  osmosisd start [flags]
+
+Flags:
+      --abci string                                     specify abci transport (socket | grpc) (default "socket")
+      --address string                                  Listen address (default "tcp://0.0.0.0:26658")
+      --consensus.create_empty_blocks                   set this to false to only produce blocks when there are txs or when the AppHash changes (default true)
+      --consensus.create_empty_blocks_interval string   the possible interval between empty blocks (default "0s")
+      --consensus.double_sign_check_height int          how many blocks to look back to check existence of the node's consensus votes before joining consensus
+      --cpu-profile string                              Enable CPU profiling and write to the provided file
+      --db_backend string                               database backend: goleveldb | cleveldb | boltdb | rocksdb | badgerdb (default "goleveldb")
+      --db_dir string                                   database directory (default "data")
+      --fast_sync                                       fast blockchain syncing (default true)
+      --genesis_hash bytesHex                           optional SHA-256 hash of the genesis file
+      --grpc-web.address string                         The gRPC-Web server address to listen on (default "0.0.0.0:9091")
+      --grpc-web.enable                                 Define if the gRPC-Web server should be enabled. (Note: gRPC must also be enabled.) (default true)
+      --grpc.address string                             the gRPC server address to listen on (default "0.0.0.0:9090")
+      --grpc.enable                                     Define if the gRPC server should be enabled (default true)
+      --halt-height uint                                Block height at which to gracefully halt the chain and shutdown the node
+      --halt-time uint                                  Minimum block time (in Unix seconds) at which to gracefully halt the chain and shutdown the node
+  -h, --help                                            help for start
+      --inter-block-cache                               Enable inter-block caching (default true)
+      --inv-check-period uint                           Assert registered invariants every N blocks
+      --min-retain-blocks uint                          Minimum block height offset during ABCI commit to prune Tendermint blocks
+      --minimum-gas-prices string                       Minimum gas prices to accept for transactions; Any fee in a tx must meet this minimum (e.g. 0.01photino;0.0001stake)
+      --moniker string                                  node name (default "Pro16.local")
+      --p2p.external-address string                     ip:port address to advertise to peers for them to dial
+      --p2p.laddr string                                node listen address. (0.0.0.0:0 means any interface, any port) (default "tcp://0.0.0.0:26656")
+      --p2p.persistent_peers string                     comma-delimited ID@host:port persistent peers
+      --p2p.pex                                         enable/disable Peer-Exchange (default true)
+      --p2p.private_peer_ids string                     comma-delimited private peer IDs
+      --p2p.seed_mode                                   enable/disable seed mode
+      --p2p.seeds string                                comma-delimited ID@host:port seed nodes
+      --p2p.unconditional_peer_ids string               comma-delimited IDs of unconditional peers
+      --p2p.upnp                                        enable/disable UPNP port forwarding
+      --priv_validator_laddr string                     socket address to listen on for connections from external priv_validator process
+      --proxy_app string                                proxy app address, or one of: 'kvstore', 'persistent_kvstore', 'counter', 'e2e' or 'noop' for local testing. (default "tcp://127.0.0.1:26658")
+      --pruning string                                  Pruning strategy (default|nothing|everything|custom) (default "default")
+      --pruning-interval uint                           Height interval at which pruned heights are removed from disk (ignored if pruning is not 'custom')
+      --pruning-keep-recent uint                        Number of recent heights to keep on disk (ignored if pruning is not 'custom')
+      --rpc.grpc_laddr string                           GRPC listen address (BroadcastTx only). Port required
+      --rpc.laddr string                                RPC listen address. Port required (default "tcp://127.0.0.1:26657")
+      --rpc.pprof_laddr string                          pprof listen address (https://golang.org/pkg/net/http/pprof)
+      --rpc.unsafe                                      enabled unsafe rpc methods
+      --state-sync.snapshot-interval uint               State sync snapshot interval
+      --state-sync.snapshot-keep-recent uint32          State sync snapshot to keep (default 2)
+      --trace-store string                              Enable KVStore tracing to an output file
+      --transport string                                Transport protocol: socket, grpc (default "socket")
+      --unsafe-skip-upgrades ints                       Skip a set of upgrade heights to continue the old binary
+      --wasm.memory_cache_size uint32                   Sets the size in MiB (NOT bytes) of an in-memory cache for Wasm modules. Set to 0 to disable. (default 100)
+      --wasm.query_gas_limit uint                       Set the max gas that can be spent on executing a query with a Wasm contract (default 3000000)
+      --wasm.simulation_gas_limit string                Set the max gas that can be spent when executing a simulation TX
+      --with-tendermint                                 Run abci app embedded in-process with tendermint (default true)
+      --x-crisis-skip-assert-invariants                 Skip x/crisis invariants check on startup
+
+Global Flags:
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd status
+
+```
+Query remote node for status
+
+Usage:
+  osmosisd status [flags]
+
+Flags:
+  -h, --help          help for status
+  -n, --node string   Node to connect to (default "tcp://localhost:26657")
+
+Global Flags:
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tendermint reset-state
+
+```
+Remove all the data and WAL
+
+Usage:
+  osmosisd tendermint reset-state [flags]
+
+Flags:
+  -h, --help   help for reset-state
+
+Global Flags:
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tendermint show-address
+
+```
+Shows this node's tendermint validator consensus address
+
+Usage:
+  osmosisd tendermint show-address [flags]
+
+Flags:
+  -h, --help   help for show-address
+
+Global Flags:
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tendermint show-node-id
+
+```
+Show this node's ID
+
+Usage:
+  osmosisd tendermint show-node-id [flags]
+
+Flags:
+  -h, --help   help for show-node-id
+
+Global Flags:
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tendermint show-validator
+
+```
+Show this node's tendermint validator info
+
+Usage:
+  osmosisd tendermint show-validator [flags]
+
+Flags:
+  -h, --help   help for show-validator
+
+Global Flags:
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tendermint unsafe-reset-all
+
+```
+(unsafe) Remove all the data and WAL, reset this node's validator to genesis state
+
+Usage:
+  osmosisd unsafe-reset-all [flags]
+
+Aliases:
+  unsafe-reset-all, unsafe_reset_all
+
+Flags:
+  -h, --help             help for unsafe-reset-all
+      --keep-addr-book   keep the address book intact
+
+Global Flags:
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tendermint unsafe-reset-priv-validator
+
+```
+(unsafe) Reset this node's validator to genesis state
+
+Usage:
+  osmosisd tendermint unsafe-reset-priv-validator [flags]
+
+Aliases:
+  unsafe-reset-priv-validator, unsafe_reset_priv_validator
+
+Flags:
+  -h, --help   help for unsafe-reset-priv-validator
+
+Global Flags:
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tendermint version
+
+```
+Print protocols' and libraries' version numbers
+against which this app has been compiled.
+
+Usage:
+  osmosisd tendermint version [flags]
+
+Flags:
+  -h, --help   help for version
+
+Global Flags:
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tendermint
+
+```
+Tendermint subcommands
+
+Usage:
+  osmosisd tendermint [command]
+
+Available Commands:
+  reset-state                 Remove all the data and WAL
+  show-address                Shows this node's tendermint validator consensus address
+  show-node-id                Show this node's ID
+  show-validator              Show this node's tendermint validator info
+  unsafe-reset-all         (unsafe) Remove all the data and WAL, reset this node's validator to genesis state
+  unsafe-reset-priv-validator (unsafe) Reset this node's validator to genesis state
+  version                     Print tendermint libraries' version
+
+Flags:
+  -h, --help   help for tendermint
+
+Global Flags:
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "osmosisd tendermint [command] --help" for more information about a command.
+
+```
+
+### osmosisd testnet
+
+```
+testnet will create "v" number of directories and populate each with
+necessary files (private validator, genesis, config, etc.).
+
+Note, strict routability for addresses is turned off in the config file.
+
+Example:
+	osmosisd testnet --v 4 --output-dir ./output --starting-ip-address 192.168.10.2
+
+Usage:
+  osmosisd testnet [flags]
+
+Flags:
+      --algo string                  Key signing algorithm to generate keys for (default "secp256k1")
+      --chain-id string              genesis file chain-id, if left blank will be randomly created
+  -h, --help                         help for testnet
+      --keyring-backend string       Select keyring's backend (os|file|test) (default "os")
+      --minimum-gas-prices string    Minimum gas prices to accept for transactions; All fees in a tx must meet this minimum (e.g. 0.01photino,0.001stake) (default "0.000006uosmo")
+      --node-daemon-home string      Home directory of the node's daemon configuration (default "osmosisd")
+      --node-dir-prefix string       Prefix the directory name for each node with (node results in node0, node1, ...) (default "node")
+  -o, --output-dir string            Directory to store initialization data for the testnet (default "./mytestnet")
+      --starting-ip-address string   Starting IP address (192.168.0.1 results in persistent peers list ID0@192.168.0.1:46656, ID1@192.168.0.2:46656, ...) (default "192.168.0.1")
+      --v int                        Number of validators to initialize the testnet with (default 4)
+
+Global Flags:
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx authz exec
+
+```
+execute tx on behalf of granter account:
+Example:
+ $ osmosisd tx authz exec tx.json --from grantee
+ $ osmosisd tx bank send <granter> <recipient> --from <granter> --chain-id <chain-id> --generate-only > tx.json && osmosisd tx authz exec tx.json --from grantee
+
+Usage:
+  osmosisd tx authz exec [msg_tx_json_file] --from [grantee] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for exec
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx authz grant
+
+```
+create a new grant authorization to an address to execute a transaction on your behalf:
+
+Examples:
+ $ osmosisd tx authz grant cosmos1skjw.. send /cosmos.bank.v1beta1.MsgSend --spend-limit=1000stake --from=cosmos1skl..
+ $ osmosisd tx authz grant cosmos1skjw.. generic --msg-type=/cosmos.gov.v1beta1.MsgVote --from=cosmos1sk..
+
+Usage:
+  osmosisd tx authz grant <grantee> <authorization_type="send"|"generic"|"delegate"|"unbond"|"redelegate"> --from <granter> [flags]
+
+Flags:
+  -a, --account-number uint          The account number of the signing account (offline mode only)
+      --allowed-validators strings   Allowed validators addresses separated by ,
+  -b, --broadcast-mode string        Transaction broadcasting mode (sync|async|block) (default "sync")
+      --deny-validators strings      Deny validators addresses separated by ,
+      --dry-run                      ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --expiration int               The Unix timestamp. Default is one year. (default 1698333430)
+      --fee-account string           Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string                  Fees to pay along with transaction; eg: 10uatom
+      --from string                  Name or address of private key with which to sign
+      --gas string                   gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float         adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string            Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only                Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                         help for grant
+      --keyring-backend string       Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string           The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                       Use a connected Ledger device
+      --msg-type string              The Msg method name for which we are creating a GenericAuthorization
+      --node string                  <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string                  Note to add a description to the transaction (previously --memo)
+      --offline                      Offline mode (does not allow any online functionality
+  -o, --output string                Output format (text|json) (default "json")
+  -s, --sequence uint                The sequence number of the signing account (offline mode only)
+      --sign-mode string             Choose sign mode (direct|amino-json), this is an advanced feature
+      --spend-limit string           SpendLimit for Send Authorization, an array of Coins allowed spend
+      --timeout-height uint          Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                          Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx authz revoke
+
+```
+revoke authorization from a granter to a grantee:
+Example:
+ $ osmosisd tx authz revoke cosmos1skj.. /cosmos.bank.v1beta1.MsgSend --from=cosmos1skj..
+
+Usage:
+  osmosisd tx authz revoke [grantee] [msg_type] --from=[granter] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for revoke
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx authz
+
+```
+Authorize and revoke access to execute transactions on behalf of your address
+
+Usage:
+  osmosisd tx authz [flags]
+  osmosisd tx authz [command]
+
+Available Commands:
+  exec        execute tx on behalf of granter account
+  grant       Grant authorization to an address
+  revoke      revoke authorization
+
+Flags:
+  -h, --help   help for authz
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "osmosisd tx authz [command] --help" for more information about a command.
+
+```
+
+### osmosisd tx bank send
+
+```
+Send funds from one account to another. Note, the'--from' flag is
+ignored as it is implied from [from_key_or_address].
+
+Usage:
+  osmosisd tx bank send [from_key_or_address] [to_address] [amount] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for send
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx bank
+
+```
+Bank transaction subcommands
+
+Usage:
+  osmosisd tx bank [flags]
+  osmosisd tx bank [command]
+
+Available Commands:
+  send        Send funds from one account to another. Note, the'--from' flag is
+ignored as it is implied from [from_key_or_address].
+
+Flags:
+  -h, --help   help for bank
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "osmosisd tx bank [command] --help" for more information about a command.
+
+```
+
+### osmosisd tx broadcast
+
+```
+Broadcast transactions created with the --generate-only
+flag and signed with the sign command. Read a transaction from [file_path] and
+broadcast it to a node. If you supply a dash (-) argument in place of an input
+filename, the command reads from standard input.
+
+$ <appd> tx broadcast ./mytxn.json
+
+Usage:
+  osmosisd tx broadcast [file_path] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for broadcast
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx crisis invariant-broken
+
+```
+Submit proof that an invariant broken to halt the chain
+
+Usage:
+  osmosisd tx crisis invariant-broken [module-name] [invariant-route] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for invariant-broken
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx crisis
+
+```
+Crisis transactions subcommands
+
+Usage:
+  osmosisd tx crisis [flags]
+  osmosisd tx crisis [command]
+
+Available Commands:
+  invariant-broken Submit proof that an invariant broken to halt the chain
+
+Flags:
+  -h, --help   help for crisis
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "osmosisd tx crisis [command] --help" for more information about a command.
+
+```
+
+### osmosisd tx decode
+
+```
+Decode a binary encoded transaction string
+
+Usage:
+  osmosisd tx decode [amino-byte-string] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for decode
+  -x, --hex                      Treat input as hexadecimal instead of base64
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx distribution fund-community-pool
+
+```
+Funds the community pool with the specified amount
+
+Example:
+$ osmosisd tx distribution fund-community-pool 100uatom --from mykey
+
+Usage:
+  osmosisd tx distribution fund-community-pool [amount] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for fund-community-pool
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx distribution set-withdraw-addr
+
+```
+Set the withdraw address for rewards associated with a delegator address.
+
+Example:
+$ osmosisd tx distribution set-withdraw-addr osmo1gghjut3ccd8ay0zduzj64hwre2fxs9ld75ru9p --from mykey
+
+Usage:
+  osmosisd tx distribution set-withdraw-addr [withdraw-addr] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for set-withdraw-addr
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx distribution withdraw-all-rewards
+
+```
+Withdraw all rewards for a single delegator.
+Note that if you use this command with --broadcast-mode=sync or --broadcast-mode=async, the max-msgs flag will automatically be set to 0.
+
+Example:
+$ osmosisd tx distribution withdraw-all-rewards --from mykey
+
+Usage:
+  osmosisd tx distribution withdraw-all-rewards [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for withdraw-all-rewards
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --max-msgs int             Limit the number of messages per tx (0 for unlimited)
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx distribution withdraw-rewards
+
+```
+Withdraw rewards from a given delegation address,
+and optionally withdraw validator commission if the delegation address given is a validator operator.
+
+Example:
+$ osmosisd tx distribution withdraw-rewards osmovaloper1gghjut3ccd8ay0zduzj64hwre2fxs9ldmqhffj --from mykey
+$ osmosisd tx distribution withdraw-rewards osmovaloper1gghjut3ccd8ay0zduzj64hwre2fxs9ldmqhffj --from mykey --commission
+
+Usage:
+  osmosisd tx distribution withdraw-rewards [validator-addr] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --commission               Withdraw the validator's commission in addition to the rewards
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for withdraw-rewards
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx distribution
+
+```
+Distribution transactions subcommands
+
+Usage:
+  osmosisd tx distribution [flags]
+  osmosisd tx distribution [command]
+
+Available Commands:
+  fund-community-pool  Funds the community pool with the specified amount
+  set-withdraw-addr    change the default withdraw address for rewards associated with an address
+  withdraw-all-rewards withdraw all delegations rewards for a delegator
+  withdraw-rewards     Withdraw rewards from a given delegation address, and optionally withdraw validator commission if the delegation address given is a validator operator
+
+Flags:
+  -h, --help   help for distribution
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "osmosisd tx distribution [command] --help" for more information about a command.
+
+```
+
+### osmosisd tx encode
+
+```
+Encode transactions created with the --generate-only flag and signed with the sign command.
+Read a transaction from <file>, serialize it to the Amino wire protocol, and output it as base64.
+If you supply a dash (-) argument in place of an input filename, the command reads from standard input.
+
+Usage:
+  osmosisd tx encode [file] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for encode
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx epochs
+
+```
+epochs transactions subcommands
+
+Usage:
+  osmosisd tx epochs [flags]
+
+Flags:
+  -h, --help   help for epochs
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx evidence
+
+```
+Evidence transaction subcommands
+
+Usage:
+  osmosisd tx evidence [flags]
+
+Flags:
+  -h, --help   help for evidence
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx gamm create-pool
+
+```
+Must provide path to a pool JSON file (--pool-file) describing the pool to be created
+
+Usage:
+  osmosisd tx gamm create-pool [flags]
+
+Examples:
+Sample pool JSON file contents:
+{
+	"weights": "4uatom,4osmo,2uakt",
+	"initial-deposit": "100uatom,5osmo,20uakt",
+	"swap-fee": "0.01",
+	"exit-fee": "0.01",
+	"future-governor": "168h"
+}
+
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for create-pool
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+      --pool-file string         Pool json file path (if this path is given, other create pool flags should not be used)
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx gamm exit-pool
+
+```
+exit a new pool and withdraw the liquidity from it
+
+Usage:
+  osmosisd tx gamm exit-pool [flags]
+
+Flags:
+  -a, --account-number uint           The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string         Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                       ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string            Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string                   Fees to pay along with transaction; eg: 10uatom
+      --from string                   Name or address of private key with which to sign
+      --gas string                    gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float          adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string             Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only                 Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                          help for exit-pool
+      --keyring-backend string        Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string            The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                        Use a connected Ledger device
+      --min-amounts-out stringArray   TODO: add description
+      --node string                   <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string                   Note to add a description to the transaction (previously --memo)
+      --offline                       Offline mode (does not allow any online functionality
+  -o, --output string                 Output format (text|json) (default "json")
+      --pool-id uint                  The id of pool
+  -s, --sequence uint                 The sequence number of the signing account (offline mode only)
+      --share-amount-in string        TODO: add description
+      --sign-mode string              Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint           Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                           Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx gamm exit-swap-extern-amount-out
+
+```
+exit swap extern amount out
+
+Usage:
+  osmosisd tx gamm exit-swap-extern-amount-out [token-out] [share-in-max-amount] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for exit-swap-extern-amount-out
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+      --pool-id uint             The id of pool
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx gamm exit-swap-share-amount-in
+
+```
+exit swap share amount in
+
+Usage:
+  osmosisd tx gamm exit-swap-share-amount-in [token-out-denom] [share-in-amount] [token-out-min-amount] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for exit-swap-share-amount-in
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+      --pool-id uint             The id of pool
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx gamm join-pool
+
+```
+join a new pool and provide the liquidity to it
+
+Usage:
+  osmosisd tx gamm join-pool [flags]
+
+Flags:
+  -a, --account-number uint          The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string        Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                      ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string           Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string                  Fees to pay along with transaction; eg: 10uatom
+      --from string                  Name or address of private key with which to sign
+      --gas string                   gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float         adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string            Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only                Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                         help for join-pool
+      --keyring-backend string       Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string           The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                       Use a connected Ledger device
+      --max-amounts-in stringArray   Maximum amount of each denom to send into the pool (specify multiple denoms with: --max-amounts-in=1uosmo --max-amounts-in=1uion)
+      --node string                  <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string                  Note to add a description to the transaction (previously --memo)
+      --offline                      Offline mode (does not allow any online functionality
+  -o, --output string                Output format (text|json) (default "json")
+      --pool-id uint                 The id of pool
+  -s, --sequence uint                The sequence number of the signing account (offline mode only)
+      --share-amount-out string      Minimum amount of Gamm tokens to receive
+      --sign-mode string             Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint          Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                          Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx gamm join-swap-extern-amount-in
+
+```
+join swap extern amount in
+
+Usage:
+  osmosisd tx gamm join-swap-extern-amount-in [token-in] [share-out-min-amount] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for join-swap-extern-amount-in
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+      --pool-id uint             The id of pool
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx gamm join-swap-share-amount-out
+
+```
+join swap share amount out
+
+Usage:
+  osmosisd tx gamm join-swap-share-amount-out [token-in-denom] [token-in-max-amount] [share-out-amount] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for join-swap-share-amount-out
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+      --pool-id uint             The id of pool
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx gamm swap-exact-amount-in
+
+```
+swap exact amount in
+
+Usage:
+  osmosisd tx gamm swap-exact-amount-in [token-in] [token-out-min-amount] [flags]
+
+Flags:
+  -a, --account-number uint               The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string             Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                           ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string                Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string                       Fees to pay along with transaction; eg: 10uatom
+      --from string                       Name or address of private key with which to sign
+      --gas string                        gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float              adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string                 Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only                     Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                              help for swap-exact-amount-in
+      --keyring-backend string            Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string                The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                            Use a connected Ledger device
+      --node string                       <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string                       Note to add a description to the transaction (previously --memo)
+      --offline                           Offline mode (does not allow any online functionality
+  -o, --output string                     Output format (text|json) (default "json")
+  -s, --sequence uint                     The sequence number of the signing account (offline mode only)
+      --sign-mode string                  Choose sign mode (direct|amino-json), this is an advanced feature
+      --swap-route-denoms stringArray     swap route amount
+      --swap-route-pool-ids stringArray   swap route pool id
+      --timeout-height uint               Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                               Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx gamm swap-exact-amount-out
+
+```
+swap exact amount out
+
+Usage:
+  osmosisd tx gamm swap-exact-amount-out [token-out] [token-in-max-amount] [flags]
+
+Flags:
+  -a, --account-number uint               The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string             Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                           ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string                Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string                       Fees to pay along with transaction; eg: 10uatom
+      --from string                       Name or address of private key with which to sign
+      --gas string                        gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float              adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string                 Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only                     Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                              help for swap-exact-amount-out
+      --keyring-backend string            Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string                The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                            Use a connected Ledger device
+      --node string                       <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string                       Note to add a description to the transaction (previously --memo)
+      --offline                           Offline mode (does not allow any online functionality
+  -o, --output string                     Output format (text|json) (default "json")
+  -s, --sequence uint                     The sequence number of the signing account (offline mode only)
+      --sign-mode string                  Choose sign mode (direct|amino-json), this is an advanced feature
+      --swap-route-denoms stringArray     swap route denoms
+      --swap-route-pool-ids stringArray   swap route pool ids
+      --timeout-height uint               Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                               Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx gamm
+
+```
+Generalized automated market maker transaction subcommands
+
+Usage:
+  osmosisd tx gamm [flags]
+  osmosisd tx gamm [command]
+
+Available Commands:
+  create-pool                 create a new pool and provide the liquidity to it
+  exit-pool                   exit a new pool and withdraw the liquidity from it
+  exit-swap-extern-amount-out exit swap extern amount out
+  exit-swap-share-amount-in   exit swap share amount in
+  join-pool                   join a new pool and provide the liquidity to it
+  join-swap-extern-amount-in  join swap extern amount in
+  join-swap-share-amount-out  join swap share amount out
+  swap-exact-amount-in        swap exact amount in
+  swap-exact-amount-out       swap exact amount out
+
+Flags:
+  -h, --help   help for gamm
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "osmosisd tx gamm [command] --help" for more information about a command.
+
+```
+
+### osmosisd tx gov deposit
+
+```
+Submit a deposit for an active proposal. You can
+find the proposal-id by running "osmosisd query gov proposals".
+
+Example:
+$ osmosisd tx gov deposit 1 10stake --from mykey
+
+Usage:
+  osmosisd tx gov deposit [proposal-id] [deposit] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for deposit
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx gov submit-proposal cancel-software-upgrade
+
+```
+Cancel a software upgrade along with an initial deposit.
+
+Usage:
+  osmosisd tx gov submit-proposal cancel-software-upgrade [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --deposit string           deposit of proposal
+      --description string       description of proposal
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for cancel-software-upgrade
+      --is-expedited             flag indicating whether a proposal is expedited
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+      --title string             title of proposal
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx gov submit-proposal clear-contract-admin
+
+```
+Submit a clear admin for a contract to prevent further migrations proposal
+
+Usage:
+  osmosisd tx gov submit-proposal clear-contract-admin [contract_addr_bech32] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --deposit string           Deposit of proposal
+      --description string       Description of proposal
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for clear-contract-admin
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+      --proposal string          Proposal file path (if this path is given, other proposal flags are ignored)
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+      --title string             Title of proposal
+      --type string              Permission of proposal, types: store-code/instantiate/migrate/update-admin/clear-admin/text/parameter_change/software_upgrade
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx gov submit-proposal community-pool-spend
+
+```
+Submit a community pool spend proposal along with an initial deposit.
+The proposal details must be supplied via a JSON file.
+
+Example:
+$ osmosisd tx gov submit-proposal community-pool-spend <path/to/proposal.json> --from=<key_or_address> --is-expedited=false
+
+Where proposal.json contains:
+
+{
+  "title": "Community Pool Spend",
+  "description": "Pay me some Atoms!",
+  "recipient": "osmo1s5afhd6gxevu37mkqcvvsj8qeylhn0rz46zdlq",
+  "amount": "1000stake",
+  "deposit": "1000stake"
+}
+
+Usage:
+  osmosisd tx gov submit-proposal community-pool-spend [proposal-file] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for community-pool-spend
+      --is-expedited             If true, makes the proposal an expedited one
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx gov submit-proposal execute-contract
+
+```
+Submit a execute wasm contract proposal (run by any address)
+
+Usage:
+  osmosisd tx gov submit-proposal execute-contract [contract_addr_bech32] [json_encoded_migration_args] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+      --amount string            Coins to send to the contract during instantiation
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --deposit string           Deposit of proposal
+      --description string       Description of proposal
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for execute-contract
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+      --proposal string          Proposal file path (if this path is given, other proposal flags are ignored)
+      --run-as string            The address that is passed as sender to the contract on proposal execution
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+      --title string             Title of proposal
+      --type string              Permission of proposal, types: store-code/instantiate/migrate/update-admin/clear-admin/text/parameter_change/software_upgrade
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx gov submit-proposal ibc-upgrade
+
+```
+Submit an IBC client breaking upgrade proposal along with an initial deposit.
+The client state specified is the upgraded client state representing the upgraded chain
+Example Upgraded Client State JSON: 
+{
+	"@type":"/ibc.lightclients.tendermint.v1.ClientState",
+ 	"chain_id":"testchain1",
+	"unbonding_period":"1814400s",
+	"latest_height":{"revision_number":"0","revision_height":"2"},
+	"proof_specs":[{"leaf_spec":{"hash":"SHA256","prehash_key":"NO_HASH","prehash_value":"SHA256","length":"VAR_PROTO","prefix":"AA=="},"inner_spec":{"child_order":[0,1],"child_size":33,"min_prefix_length":4,"max_prefix_length":12,"empty_child":null,"hash":"SHA256"},"max_depth":0,"min_depth":0},{"leaf_spec":{"hash":"SHA256","prehash_key":"NO_HASH","prehash_value":"SHA256","length":"VAR_PROTO","prefix":"AA=="},"inner_spec":{"child_order":[0,1],"child_size":32,"min_prefix_length":1,"max_prefix_length":1,"empty_child":null,"hash":"SHA256"},"max_depth":0,"min_depth":0}],
+	"upgrade_path":["upgrade","upgradedIBCState"],
+}
+
+Usage:
+  osmosisd tx gov submit-proposal ibc-upgrade [name] [height] [path/to/upgraded_client_state.json] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --deposit string           deposit of proposal
+      --description string       description of proposal
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for ibc-upgrade
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+      --title string             title of proposal
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx gov submit-proposal instantiate-contract
+
+```
+Submit an instantiate wasm contract proposal
+
+Usage:
+  osmosisd tx gov submit-proposal instantiate-contract [code_id_int64] [json_encoded_init_args] --label [text] --title [text] --description [text] --run-as [address] --admin [address,optional] --amount [coins,optional] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+      --admin string             Address of an admin
+      --amount string            Coins to send to the contract during instantiation
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --deposit string           Deposit of proposal
+      --description string       Description of proposal
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for instantiate-contract
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --label string             A human-readable name for this contract in lists
+      --ledger                   Use a connected Ledger device
+      --no-admin                 You must set this explicitly if you don't want an admin
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+      --proposal string          Proposal file path (if this path is given, other proposal flags are ignored)
+      --run-as string            The address that pays the init funds. It is the creator of the contract and passed to the contract as sender on proposal execution
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+      --title string             Title of proposal
+      --type string              Permission of proposal, types: store-code/instantiate/migrate/update-admin/clear-admin/text/parameter_change/software_upgrade
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx gov submit-proposal migrate-contract
+
+```
+Submit a migrate wasm contract to a new code version proposal
+
+Usage:
+  osmosisd tx gov submit-proposal migrate-contract [contract_addr_bech32] [new_code_id_int64] [json_encoded_migration_args] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --deposit string           Deposit of proposal
+      --description string       Description of proposal
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for migrate-contract
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+      --proposal string          Proposal file path (if this path is given, other proposal flags are ignored)
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+      --title string             Title of proposal
+      --type string              Permission of proposal, types: store-code/instantiate/migrate/update-admin/clear-admin/text/parameter_change/software_upgrade
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx gov submit-proposal param-change
+
+```
+Submit a parameter proposal along with an initial deposit.
+The proposal details must be supplied via a JSON file. For values that contains
+objects, only non-empty fields will be updated.
+
+IMPORTANT: Currently parameter changes are evaluated but not validated, so it is
+very important that any "value" change is valid (ie. correct type and within bounds)
+for its respective parameter, eg. "MaxValidators" should be an integer and not a decimal.
+
+Proper vetting of a parameter change proposal should prevent this from happening
+(no deposits should occur during the governance process), but it should be noted
+regardless.
+
+Example:
+$ osmosisd tx gov submit-proposal param-change <path/to/proposal.json> --from=<key_or_address> is-expedited=true
+
+Where proposal.json contains:
+
+{
+  "title": "Staking Param Change",
+  "description": "Update max validators",
+  "changes": [
+    {
+      "subspace": "staking",
+      "key": "MaxValidators",
+      "value": 105
+    }
+  ],
+  "deposit": "1000stake"
+}
+
+Usage:
+  osmosisd tx gov submit-proposal param-change [proposal-file] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for param-change
+      --is-expedited             If true, makes the proposal an expedited one
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx gov submit-proposal pin-codes
+
+```
+Submit a pin code proposal for pinning a code to cache
+
+Usage:
+  osmosisd tx gov submit-proposal pin-codes [code-ids] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --deposit string           Deposit of proposal
+      --description string       Description of proposal
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for pin-codes
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+      --proposal string          Proposal file path (if this path is given, other proposal flags are ignored)
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+      --title string             Title of proposal
+      --type string              Permission of proposal, types: store-code/instantiate/migrate/update-admin/clear-admin/text/parameter_change/software_upgrade
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx gov submit-proposal remove-superfluid-assets-proposal
+
+```
+Submit a superfluid asset remove proposal
+
+Usage:
+  osmosisd tx gov submit-proposal remove-superfluid-assets-proposal [flags]
+
+Flags:
+  -a, --account-number uint        The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string      Transaction broadcasting mode (sync|async|block) (default "sync")
+      --deposit string             deposit of proposal
+      --description string         description of proposal
+      --dry-run                    ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string         Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string                Fees to pay along with transaction; eg: 10uatom
+      --from string                Name or address of private key with which to sign
+      --gas string                 gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float       adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string          Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only              Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                       help for remove-superfluid-assets-proposal
+      --keyring-backend string     Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string         The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                     Use a connected Ledger device
+      --node string                <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string                Note to add a description to the transaction (previously --memo)
+      --offline                    Offline mode (does not allow any online functionality
+  -o, --output string              Output format (text|json) (default "json")
+  -s, --sequence uint              The sequence number of the signing account (offline mode only)
+      --sign-mode string           Choose sign mode (direct|amino-json), this is an advanced feature
+      --superfluid-assets string   The superfluid asset array
+      --timeout-height uint        Set a block timeout height to prevent the tx from being committed past a certain height
+      --title string               title of proposal
+  -y, --yes                        Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx gov submit-proposal replace-pool-incentives
+
+```
+Submit a full replacement to the records for pool incentives
+
+Usage:
+  osmosisd tx gov submit-proposal replace-pool-incentives [gaugeIds] [weights] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --deposit string           The proposal deposit
+      --description string       The proposal description
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for replace-pool-incentives
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+      --proposal string          Proposal file path (if this path is given, other proposal flags are ignored)
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+      --title string             The proposal title
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx gov submit-proposal set-contract-admin
+
+```
+Submit a new admin for a contract proposal
+
+Usage:
+  osmosisd tx gov submit-proposal set-contract-admin [contract_addr_bech32] [new_admin_addr_bech32] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --deposit string           Deposit of proposal
+      --description string       Description of proposal
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for set-contract-admin
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+      --proposal string          Proposal file path (if this path is given, other proposal flags are ignored)
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+      --title string             Title of proposal
+      --type string              Permission of proposal, types: store-code/instantiate/migrate/update-admin/clear-admin/text/parameter_change/software_upgrade
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx gov submit-proposal set-superfluid-assets-proposal
+
+```
+Submit a superfluid asset set proposal
+
+Usage:
+  osmosisd tx gov submit-proposal set-superfluid-assets-proposal [flags]
+
+Flags:
+  -a, --account-number uint        The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string      Transaction broadcasting mode (sync|async|block) (default "sync")
+      --deposit string             deposit of proposal
+      --description string         description of proposal
+      --dry-run                    ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string         Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string                Fees to pay along with transaction; eg: 10uatom
+      --from string                Name or address of private key with which to sign
+      --gas string                 gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float       adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string          Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only              Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                       help for set-superfluid-assets-proposal
+      --keyring-backend string     Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string         The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                     Use a connected Ledger device
+      --node string                <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string                Note to add a description to the transaction (previously --memo)
+      --offline                    Offline mode (does not allow any online functionality
+  -o, --output string              Output format (text|json) (default "json")
+  -s, --sequence uint              The sequence number of the signing account (offline mode only)
+      --sign-mode string           Choose sign mode (direct|amino-json), this is an advanced feature
+      --superfluid-assets string   The superfluid asset array
+      --timeout-height uint        Set a block timeout height to prevent the tx from being committed past a certain height
+      --title string               title of proposal
+  -y, --yes                        Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx gov submit-proposal software-upgrade
+
+```
+Submit a software upgrade along with an initial deposit.
+Please specify a unique name and height for the upgrade to take effect.
+You may include info to reference a binary download link, in a format compatible with: https://github.com/cosmos/cosmos-sdk/tree/master/cosmovisor
+
+Usage:
+  osmosisd tx gov submit-proposal software-upgrade [name] (--upgrade-height [height]) (--upgrade-info [info]) [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --deposit string           deposit of proposal
+      --description string       description of proposal
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for software-upgrade
+      --is-expedited             flag indicating whether a proposal is expedited
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+      --title string             title of proposal
+      --upgrade-height int       The height at which the upgrade must happen
+      --upgrade-info string      Optional info for the planned upgrade such as commit hash, etc.
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx gov submit-proposal sudo-contract
+
+```
+Submit a sudo wasm contract proposal (to call privileged commands)
+
+Usage:
+  osmosisd tx gov submit-proposal sudo-contract [contract_addr_bech32] [json_encoded_migration_args] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --deposit string           Deposit of proposal
+      --description string       Description of proposal
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for sudo-contract
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+      --proposal string          Proposal file path (if this path is given, other proposal flags are ignored)
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+      --title string             Title of proposal
+      --type string              Permission of proposal, types: store-code/instantiate/migrate/update-admin/clear-admin/text/parameter_change/software_upgrade
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx gov submit-proposal unpin-codes
+
+```
+Submit a unpin code proposal for unpinning a code to cache
+
+Usage:
+  osmosisd tx gov submit-proposal unpin-codes [code-ids] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --deposit string           Deposit of proposal
+      --description string       Description of proposal
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for unpin-codes
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+      --proposal string          Proposal file path (if this path is given, other proposal flags are ignored)
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+      --title string             Title of proposal
+      --type string              Permission of proposal, types: store-code/instantiate/migrate/update-admin/clear-admin/text/parameter_change/software_upgrade
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx gov submit-proposal update-client
+
+```
+Submit an update IBC client proposal along with an initial deposit.
+Please specify a subject client identifier you want to update..
+Please specify the substitute client the subject client will be updated to.
+
+Usage:
+  osmosisd tx gov submit-proposal update-client [subject-client-id] [substitute-client-id] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --deposit string           deposit of proposal
+      --description string       description of proposal
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for update-client
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+      --title string             title of proposal
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx gov submit-proposal update-instantiate-config
+
+```
+Submit an update instantiate config  proposal for multiple code ids.
+
+Example: 
+$ osmosisd tx gov submit-proposal update-instantiate-config 1,nobody 2,everybody 3,osmo1l2rsakp388kuv9k8qzq6lrm9taddae7fpx59wm
+
+Usage:
+  osmosisd tx gov submit-proposal update-instantiate-config [code-id,permission]... [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --deposit string           Deposit of proposal
+      --description string       Description of proposal
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for update-instantiate-config
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+      --proposal string          Proposal file path (if this path is given, other proposal flags are ignored)
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+      --title string             Title of proposal
+      --type string              Permission of proposal, types: store-code/instantiate/migrate/update-admin/clear-admin/text/parameter_change/software_upgrade
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx gov submit-proposal update-pool-incentives
+
+```
+Submit an update to the records for pool incentives
+
+Usage:
+  osmosisd tx gov submit-proposal update-pool-incentives [gaugeIds] [weights] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --deposit string           The proposal deposit
+      --description string       The proposal description
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for update-pool-incentives
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+      --proposal string          Proposal file path (if this path is given, other proposal flags are ignored)
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+      --title string             The proposal title
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx gov submit-proposal wasm-store
+
+```
+Submit a wasm binary proposal
+
+Usage:
+  osmosisd tx gov submit-proposal wasm-store [wasm file] --title [text] --description [text] --run-as [address] [flags]
+
+Flags:
+  -a, --account-number uint               The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string             Transaction broadcasting mode (sync|async|block) (default "sync")
+      --deposit string                    Deposit of proposal
+      --description string                Description of proposal
+      --dry-run                           ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string                Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string                       Fees to pay along with transaction; eg: 10uatom
+      --from string                       Name or address of private key with which to sign
+      --gas string                        gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float              adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string                 Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only                     Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                              help for wasm-store
+      --instantiate-everybody string      Everybody can instantiate a contract from the code, optional
+      --instantiate-nobody string         Nobody except the governance process can instantiate a contract from the code, optional
+      --instantiate-only-address string   Only this address can instantiate a contract instance from the code, optional
+      --keyring-backend string            Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string                The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                            Use a connected Ledger device
+      --node string                       <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string                       Note to add a description to the transaction (previously --memo)
+      --offline                           Offline mode (does not allow any online functionality
+  -o, --output string                     Output format (text|json) (default "json")
+      --proposal string                   Proposal file path (if this path is given, other proposal flags are ignored)
+      --run-as string                     The address that is stored as code creator
+  -s, --sequence uint                     The sequence number of the signing account (offline mode only)
+      --sign-mode string                  Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint               Set a block timeout height to prevent the tx from being committed past a certain height
+      --title string                      Title of proposal
+      --type string                       Permission of proposal, types: store-code/instantiate/migrate/update-admin/clear-admin/text/parameter_change/software_upgrade
+  -y, --yes                               Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx gov submit-proposal
+
+```
+Submit a proposal along with an initial deposit.
+Proposal title, description, type and deposit can be given directly or through a proposal JSON file.
+
+Example:
+$ osmosisd tx gov submit-proposal --proposal="path/to/proposal.json" --from mykey
+
+Where proposal.json contains:
+
+{
+  "title": "Test Proposal",
+  "description": "My awesome proposal",
+  "type": "Text",
+  "deposit": "10test"
+}
+
+Which is equivalent to:
+
+$ osmosisd tx gov submit-proposal --title="Test Proposal" --description="My awesome proposal" --type="Text" --deposit="10test" --is-expedited=true --from mykey
+
+Usage:
+  osmosisd tx gov submit-proposal [flags]
+  osmosisd tx gov submit-proposal [command]
+
+Available Commands:
+  cancel-software-upgrade           Cancel the current software upgrade proposal
+  clear-contract-admin              Submit a clear admin for a contract to prevent further migrations proposal
+  community-pool-spend              Submit a community pool spend proposal
+  execute-contract                  Submit a execute wasm contract proposal (run by any address)
+  ibc-upgrade                       Submit an IBC upgrade proposal
+  instantiate-contract              Submit an instantiate wasm contract proposal
+  migrate-contract                  Submit a migrate wasm contract to a new code version proposal
+  param-change                      Submit a parameter change proposal
+  pin-codes                         Submit a pin code proposal for pinning a code to cache
+  remove-superfluid-assets-proposal Submit a superfluid asset remove proposal
+  replace-pool-incentives           Submit a full replacement to the records for pool incentives
+  set-contract-admin                Submit a new admin for a contract proposal
+  set-superfluid-assets-proposal    Submit a superfluid asset set proposal
+  software-upgrade                  Submit a software upgrade proposal
+  sudo-contract                     Submit a sudo wasm contract proposal (to call privileged commands)
+  unpin-codes                       Submit a unpin code proposal for unpinning a code to cache
+  update-client                     Submit an update IBC client proposal
+  update-instantiate-config         Submit an update instantiate config proposal.
+  update-pool-incentives            Submit an update to the records for pool incentives
+  wasm-store                        Submit a wasm binary proposal
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --deposit string           The proposal deposit
+      --description string       The proposal description
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for submit-proposal
+      --is-expedited             If true, makes the proposal an expedited one
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+      --proposal string          Proposal file path (if this path is given, other proposal flags are ignored)
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+      --title string             The proposal title
+      --type string              The proposal Type
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "osmosisd tx gov submit-proposal [command] --help" for more information about a command.
+
+```
+
+### osmosisd tx gov vote
+
+```
+Submit a vote for an active proposal. You can
+find the proposal-id by running "osmosisd query gov proposals".
+
+Example:
+$ osmosisd tx gov vote 1 yes --from mykey
+
+Usage:
+  osmosisd tx gov vote [proposal-id] [option] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for vote
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx gov weighted-vote
+
+```
+Submit a vote for an active proposal. You can
+find the proposal-id by running "osmosisd query gov proposals".
+
+Example:
+$ osmosisd tx gov weighted-vote 1 yes=0.6,no=0.3,abstain=0.05,no_with_veto=0.05 --from mykey
+
+Usage:
+  osmosisd tx gov weighted-vote [proposal-id] [weighted-options] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for weighted-vote
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx gov
+
+```
+Governance transactions subcommands
+
+Usage:
+  osmosisd tx gov [flags]
+  osmosisd tx gov [command]
+
+Available Commands:
+  deposit         Deposit tokens for an active proposal
+  submit-proposal Submit a proposal along with an initial deposit
+  vote            Vote for an active proposal, options: yes/no/no_with_veto/abstain
+  weighted-vote   Vote for an active proposal, options: yes/no/no_with_veto/abstain
+
+Flags:
+  -h, --help   help for gov
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "osmosisd tx gov [command] --help" for more information about a command.
+
+```
+
+### osmosisd tx ibc channel
+
+```
+IBC channel transaction subcommands
+
+Usage:
+  osmosisd tx ibc channel [flags]
+
+Flags:
+  -h, --help   help for channel
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx ibc client create
+
+```
+create a new IBC client with the specified client state and consensus state
+	- ClientState JSON example: {"@type":"/ibc.lightclients.solomachine.v1.ClientState","sequence":"1","frozen_sequence":"0","consensus_state":{"public_key":{"@type":"/cosmos.crypto.secp256k1.PubKey","key":"AtK50+5pJOoaa04qqAqrnyAqsYrwrR/INnA6UPIaYZlp"},"diversifier":"testing","timestamp":"10"},"allow_update_after_proposal":false}
+	- ConsensusState JSON example: {"@type":"/ibc.lightclients.solomachine.v1.ConsensusState","public_key":{"@type":"/cosmos.crypto.secp256k1.PubKey","key":"AtK50+5pJOoaa04qqAqrnyAqsYrwrR/INnA6UPIaYZlp"},"diversifier":"testing","timestamp":"10"}
+
+Usage:
+  osmosisd tx ibc client create [path/to/client_state.json] [path/to/consensus_state.json] [flags]
+
+Examples:
+osmosisd tx ibc client create [path/to/client_state.json] [path/to/consensus_state.json] --from node0 --home ../node0/<app>cli --chain-id $CID
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for create
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx ibc client misbehaviour
+
+```
+submit a client misbehaviour to prevent future updates
+
+Usage:
+  osmosisd tx ibc client misbehaviour [path/to/misbehaviour.json] [flags]
+
+Examples:
+osmosisd tx ibc client misbehaviour [path/to/misbehaviour.json] --from node0 --home ../node0/<app>cli --chain-id $CID
+
+Flags:
+  -h, --help   help for misbehaviour
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx ibc client update
+
+```
+update existing client with a header
+
+Usage:
+  osmosisd tx ibc client update [client-id] [path/to/header.json] [flags]
+
+Examples:
+osmosisd tx ibc client update [client-id] [path/to/header.json] --from node0 --home ../node0/<app>cli --chain-id $CID
+
+Flags:
+  -h, --help   help for update
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx ibc client upgrade
+
+```
+upgrade the IBC client associated with the provided client identifier while providing proof committed by the counterparty chain to the new client and consensus states
+	- ClientState JSON example: {"@type":"/ibc.lightclients.solomachine.v1.ClientState","sequence":"1","frozen_sequence":"0","consensus_state":{"public_key":{"@type":"/cosmos.crypto.secp256k1.PubKey","key":"AtK50+5pJOoaa04qqAqrnyAqsYrwrR/INnA6UPIaYZlp"},"diversifier":"testing","timestamp":"10"},"allow_update_after_proposal":false}
+	- ConsensusState JSON example: {"@type":"/ibc.lightclients.solomachine.v1.ConsensusState","public_key":{"@type":"/cosmos.crypto.secp256k1.PubKey","key":"AtK50+5pJOoaa04qqAqrnyAqsYrwrR/INnA6UPIaYZlp"},"diversifier":"testing","timestamp":"10"}
+
+Usage:
+  osmosisd tx ibc client upgrade [client-identifier] [path/to/client_state.json] [path/to/consensus_state.json] [upgrade-client-proof] [upgrade-consensus-state-proof] [flags]
+
+Examples:
+osmosisd tx ibc client upgrade [client-identifier] [path/to/client_state.json] [path/to/consensus_state.json] [client-state-proof] [consensus-state-proof] --from node0 --home ../node0/<app>cli --chain-id $CID
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for upgrade
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx ibc client
+
+```
+IBC client transaction subcommands
+
+Usage:
+  osmosisd tx ibc client [flags]
+  osmosisd tx ibc client [command]
+
+Available Commands:
+  create       create new IBC client
+  misbehaviour submit a client misbehaviour
+  update       update existing client with a header
+  upgrade      upgrade an IBC client
+
+Flags:
+  -h, --help   help for client
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "osmosisd tx ibc client [command] --help" for more information about a command.
+
+```
+
+### osmosisd tx ibc-transfer transfer
+
+```
+Transfer a fungible token through IBC. Timeouts can be specified
+as absolute or relative using the "absolute-timeouts" flag. Timeout height can be set by passing in the height string
+in the form {revision}-{height} using the "packet-timeout-height" flag. Relative timeout height is added to the block
+height queried from the latest consensus state corresponding to the counterparty channel. Relative timeout timestamp 
+is added to the greater value of the local clock time and the block timestamp queried from the latest consensus state 
+corresponding to the counterparty channel. Any timeout set to 0 is disabled.
+
+Usage:
+  osmosisd tx ibc-transfer transfer [src-port] [src-channel] [receiver] [amount] [flags]
+
+Examples:
+osmosisd tx ibc-transfer transfer [src-port] [src-channel] [receiver] [amount]
+
+Flags:
+      --absolute-timeouts               Timeout flags are used as absolute timeouts.
+  -a, --account-number uint             The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string           Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                         ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string              Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string                     Fees to pay along with transaction; eg: 10uatom
+      --from string                     Name or address of private key with which to sign
+      --gas string                      gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float            adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string               Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only                   Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                            help for transfer
+      --keyring-backend string          Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string              The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                          Use a connected Ledger device
+      --node string                     <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string                     Note to add a description to the transaction (previously --memo)
+      --offline                         Offline mode (does not allow any online functionality
+  -o, --output string                   Output format (text|json) (default "json")
+      --packet-timeout-height string    Packet timeout block height. The timeout is disabled when set to 0-0. (default "0-1000")
+      --packet-timeout-timestamp uint   Packet timeout timestamp in nanoseconds from now. Default is 10 minutes. The timeout is disabled when set to 0. (default 600000000000)
+  -s, --sequence uint                   The sequence number of the signing account (offline mode only)
+      --sign-mode string                Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint             Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                             Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx ibc-transfer
+
+```
+IBC fungible token transfer transaction subcommands
+
+Usage:
+  osmosisd tx ibc-transfer [flags]
+  osmosisd tx ibc-transfer [command]
+
+Available Commands:
+  transfer    Transfer a fungible token through IBC
+
+Flags:
+  -h, --help   help for ibc-transfer
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "osmosisd tx ibc-transfer [command] --help" for more information about a command.
+
+```
+
+### osmosisd tx ibc
+
+```
+IBC transaction subcommands
+
+Usage:
+  osmosisd tx ibc [flags]
+  osmosisd tx ibc [command]
+
+Available Commands:
+  channel     IBC channel transaction subcommands
+  client      IBC client transaction subcommands
+
+Flags:
+  -h, --help   help for ibc
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "osmosisd tx ibc [command] --help" for more information about a command.
+
+```
+
+### osmosisd tx incentives add-to-gauge
+
+```
+add coins to gauge to distribute more rewards to users
+
+Usage:
+  osmosisd tx incentives add-to-gauge [gauge_id] [rewards] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --duration duration        The duration token to be locked, default 1d(24h). Other examples are 7d(168h), 14d(336h). Maximum unit is hour. (default 24h0m0s)
+      --epochs uint              Total epochs to distribute tokens
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for add-to-gauge
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+      --perpetual                Perpetual distribution
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --start-time string        Timestamp to begin distribution
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx incentives create-gauge
+
+```
+create a gauge to distribute rewards to users
+
+Usage:
+  osmosisd tx incentives create-gauge [lockup_denom] [reward] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --duration duration        The duration token to be locked, default 1d(24h). Other examples are 7d(168h), 14d(336h). Maximum unit is hour. (default 24h0m0s)
+      --epochs uint              Total epochs to distribute tokens
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for create-gauge
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+      --perpetual                Perpetual distribution
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --start-time string        Timestamp to begin distribution
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx incentives
+
+```
+incentives transactions subcommands
+
+Usage:
+  osmosisd tx incentives [flags]
+  osmosisd tx incentives [command]
+
+Available Commands:
+  add-to-gauge add coins to gauge to distribute more rewards to users
+  create-gauge create a gauge to distribute rewards to users
+
+Flags:
+  -h, --help   help for incentives
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "osmosisd tx incentives [command] --help" for more information about a command.
+
+```
+
+### osmosisd tx lockup begin-unlock-by-id
+
+```
+begin unlock individual period lock by ID
+
+Usage:
+  osmosisd tx lockup begin-unlock-by-id [id] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+      --amount string            The amount to be unlocked. e.g. 1osmo
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for begin-unlock-by-id
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx lockup begin-unlock-tokens
+
+```
+begin unlock not unlocking tokens from lockup pool for an account
+
+Usage:
+  osmosisd tx lockup begin-unlock-tokens [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for begin-unlock-tokens
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx lockup lock-tokens
+
+```
+lock tokens into lockup pool from user account
+
+Usage:
+  osmosisd tx lockup lock-tokens [tokens] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --duration string          The duration token to be locked. e.g. 24h, 168h, 336h (default "24h")
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for lock-tokens
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx lockup
+
+```
+lockup transactions subcommands
+
+Usage:
+  osmosisd tx lockup [flags]
+  osmosisd tx lockup [command]
+
+Available Commands:
+  begin-unlock-by-id  begin unlock individual period lock by ID
+  begin-unlock-tokens begin unlock not unlocking tokens from lockup pool for an account
+  lock-tokens         lock tokens into lockup pool from user account
+
+Flags:
+  -h, --help   help for lockup
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "osmosisd tx lockup [command] --help" for more information about a command.
+
+```
+
+### osmosisd tx multisign
+
+```
+Sign transactions created with the --generate-only flag that require multisig signatures.
+
+Read one or more signatures from one or more [signature] file, generate a multisig signature compliant to the
+multisig key [name], and attach the key name to the transaction read from [file].
+
+Example:
+$ osmosisd tx multisign transaction.json k1k2k3 k1sig.json k2sig.json k3sig.json
+
+If --signature-only flag is on, output a JSON representation
+of only the generated signature.
+
+If the --offline flag is on, the client will not reach out to an external node.
+Account number or sequence number lookups are not performed so you must
+set these parameters manually.
+
+The current multisig implementation defaults to amino-json sign mode.
+The SIGN_MODE_DIRECT sign mode is not supported.'
+
+Usage:
+  osmosisd tx multisign [file] [name] [[signature]...] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+      --amino                    Generate Amino-encoded JSON suitable for submitting to the txs REST endpoint
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for multisign
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+      --output-document string   The document is written to the given file instead of STDOUT
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --signature-only           Print only the generated signature, then exit
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx sign-batch
+
+```
+Sign batch files of transactions generated with --generate-only.
+The command processes list of transactions from file (one StdTx each line), generate
+signed transactions or signatures and print their JSON encoding, delimited by '\n'.
+As the signatures are generated, the command updates the account sequence number accordingly.
+
+If the --signature-only flag is set, it will output the signature parts only.
+
+The --offline flag makes sure that the client will not reach out to full node.
+As a result, the account and the sequence number queries will not be performed and
+it is required to set such parameters manually. Note, invalid values will cause
+the transaction to fail. The sequence will be incremented automatically for each
+transaction that is signed.
+
+The --multisig=<multisig_key> flag generates a signature on behalf of a multisig
+account key. It implies --signature-only.
+
+Usage:
+  osmosisd tx sign-batch [file] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for sign-batch
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --multisig string          Address or key name of the multisig account on behalf of which the transaction shall be signed
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+      --output-document string   The document will be written to the given file instead of STDOUT
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --signature-only           Print only the generated signature, then exit (default true)
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx sign
+
+```
+Sign a transaction created with the --generate-only flag.
+It will read a transaction from [file], sign it, and print its JSON encoding.
+
+If the --signature-only flag is set, it will output the signature parts only.
+
+The --offline flag makes sure that the client will not reach out to full node.
+As a result, the account and sequence number queries will not be performed and
+it is required to set such parameters manually. Note, invalid values will cause
+the transaction to fail.
+
+The --multisig=<multisig_key> flag generates a signature on behalf of a multisig account
+key. It implies --signature-only. Full multisig signed transactions may eventually
+be generated via the 'multisign' command.
+
+Usage:
+  osmosisd tx sign [file] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+      --amino                    Generate Amino encoded JSON suitable for submiting to the txs REST endpoint
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for sign
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --multisig string          Address or key name of the multisig account on behalf of which the transaction shall be signed
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+      --output-document string   The document will be written to the given file instead of STDOUT
+      --overwrite                Overwrite existing signatures with a new one. If disabled, new signature will be appended
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --signature-only           Print only the signatures
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx slashing unjail
+
+```
+unjail a jailed validator:
+
+$ <appd> tx slashing unjail --from mykey
+
+Usage:
+  osmosisd tx slashing unjail [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for unjail
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx slashing
+
+```
+Slashing transaction subcommands
+
+Usage:
+  osmosisd tx slashing [flags]
+  osmosisd tx slashing [command]
+
+Available Commands:
+  unjail      unjail validator previously jailed for downtime
+
+Flags:
+  -h, --help   help for slashing
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "osmosisd tx slashing [command] --help" for more information about a command.
+
+```
+
+### osmosisd tx staking create-validator
+
+```
+create new validator initialized with a self-delegation to it
+
+Usage:
+  osmosisd tx staking create-validator [flags]
+
+Flags:
+  -a, --account-number uint                 The account number of the signing account (offline mode only)
+      --amount string                       Amount of coins to bond
+  -b, --broadcast-mode string               Transaction broadcasting mode (sync|async|block) (default "sync")
+      --commission-max-change-rate string   The maximum commission change rate percentage (per day)
+      --commission-max-rate string          The maximum commission rate percentage
+      --commission-rate string              The initial commission rate percentage
+      --details string                      The validator's (optional) details
+      --dry-run                             ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string                  Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string                         Fees to pay along with transaction; eg: 10uatom
+      --from string                         Name or address of private key with which to sign
+      --gas string                          gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float                adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string                   Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only                       Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                                help for create-validator
+      --identity string                     The optional identity signature (ex. UPort or Keybase)
+      --ip string                           The node's public IP. It takes effect only when used in combination with --generate-only
+      --keyring-backend string              Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string                  The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                              Use a connected Ledger device
+      --min-self-delegation string          The minimum self delegation required on the validator
+      --moniker string                      The validator's name
+      --node string                         <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --node-id string                      The node's ID
+      --note string                         Note to add a description to the transaction (previously --memo)
+      --offline                             Offline mode (does not allow any online functionality
+  -o, --output string                       Output format (text|json) (default "json")
+      --pubkey string                       The validator's Protobuf JSON encoded public key
+      --security-contact string             The validator's (optional) security contact email
+  -s, --sequence uint                       The sequence number of the signing account (offline mode only)
+      --sign-mode string                    Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint                 Set a block timeout height to prevent the tx from being committed past a certain height
+      --website string                      The validator's (optional) website
+  -y, --yes                                 Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx staking delegate
+
+```
+Delegate an amount of liquid coins to a validator from your wallet.
+
+Example:
+$ osmosisd tx staking delegate osmovaloper1l2rsakp388kuv9k8qzq6lrm9taddae7fpx59wm 1000stake --from mykey
+
+Usage:
+  osmosisd tx staking delegate [validator-addr] [amount] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for delegate
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx staking edit-validator
+
+```
+edit an existing validator account
+
+Usage:
+  osmosisd tx staking edit-validator [flags]
+
+Flags:
+  -a, --account-number uint          The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string        Transaction broadcasting mode (sync|async|block) (default "sync")
+      --commission-rate string       The new commission rate percentage
+      --details string               The validator's (optional) details (default "[do-not-modify]")
+      --dry-run                      ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string           Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string                  Fees to pay along with transaction; eg: 10uatom
+      --from string                  Name or address of private key with which to sign
+      --gas string                   gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float         adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string            Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only                Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                         help for edit-validator
+      --identity string              The (optional) identity signature (ex. UPort or Keybase) (default "[do-not-modify]")
+      --keyring-backend string       Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string           The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                       Use a connected Ledger device
+      --min-self-delegation string   The minimum self delegation required on the validator
+      --moniker string               The validator's name (default "[do-not-modify]")
+      --node string                  <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string                  Note to add a description to the transaction (previously --memo)
+      --offline                      Offline mode (does not allow any online functionality
+  -o, --output string                Output format (text|json) (default "json")
+      --security-contact string      The validator's (optional) security contact email (default "[do-not-modify]")
+  -s, --sequence uint                The sequence number of the signing account (offline mode only)
+      --sign-mode string             Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint          Set a block timeout height to prevent the tx from being committed past a certain height
+      --website string               The validator's (optional) website (default "[do-not-modify]")
+  -y, --yes                          Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx staking redelegate
+
+```
+Redelegate an amount of illiquid staking tokens from one validator to another.
+
+Example:
+$ osmosisd tx staking redelegate osmovaloper1gghjut3ccd8ay0zduzj64hwre2fxs9ldmqhffj osmovaloper1l2rsakp388kuv9k8qzq6lrm9taddae7fpx59wm 100stake --from mykey
+
+Usage:
+  osmosisd tx staking redelegate [src-validator-addr] [dst-validator-addr] [amount] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for redelegate
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx staking unbond
+
+```
+Unbond an amount of bonded shares from a validator.
+
+Example:
+$ osmosisd tx staking unbond osmovaloper1gghjut3ccd8ay0zduzj64hwre2fxs9ldmqhffj 100stake --from mykey
+
+Usage:
+  osmosisd tx staking unbond [validator-addr] [amount] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for unbond
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx staking
+
+```
+Staking transaction subcommands
+
+Usage:
+  osmosisd tx staking [flags]
+  osmosisd tx staking [command]
+
+Available Commands:
+  create-validator create new validator initialized with a self-delegation to it
+  delegate         Delegate liquid tokens to a validator
+  edit-validator   edit an existing validator account
+  redelegate       Redelegate illiquid tokens from one validator to another
+  unbond           Unbond shares from a validator
+
+Flags:
+  -h, --help   help for staking
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "osmosisd tx staking [command] --help" for more information about a command.
+
+```
+
+### osmosisd tx superfluid delegate
+
+```
+superfluid delegate a lock to a validator
+
+Usage:
+  osmosisd tx superfluid delegate [lock_id] [val_addr] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for delegate
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx superfluid lock-and-superfluid-delegate
+
+```
+lock and superfluid delegate
+
+Usage:
+  osmosisd tx superfluid lock-and-superfluid-delegate [tokens] [val_addr] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for lock-and-superfluid-delegate
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx superfluid unbond-lock
+
+```
+unbond lock that has been superfluid staked
+
+Usage:
+  osmosisd tx superfluid unbond-lock [lock_id] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for unbond-lock
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx superfluid undelegate
+
+```
+superfluid undelegate a lock from a validator
+
+Usage:
+  osmosisd tx superfluid undelegate [lock_id] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for undelegate
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx superfluid unpool-whitelisted-pool
+
+```
+unpool whitelisted pool
+
+Usage:
+  osmosisd tx superfluid unpool-whitelisted-pool [pool_id] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for unpool-whitelisted-pool
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx superfluid
+
+```
+superfluid transactions subcommands
+
+Usage:
+  osmosisd tx superfluid [flags]
+  osmosisd tx superfluid [command]
+
+Available Commands:
+  delegate                     superfluid delegate a lock to a validator
+  lock-and-superfluid-delegate lock and superfluid delegate
+  unbond-lock                  unbond lock that has been superfluid staked
+  undelegate                   superfluid undelegate a lock from a validator
+  unpool-whitelisted-pool      unpool whitelisted pool
+
+Flags:
+  -h, --help   help for superfluid
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "osmosisd tx superfluid [command] --help" for more information about a command.
+
+```
+
+### osmosisd tx tokenfactory burn
+
+```
+Burn tokens from an address. Must have admin authority to do so.
+
+Usage:
+  osmosisd tx tokenfactory burn [amount] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for burn
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx tokenfactory change-admin
+
+```
+Changes the admin address for a factory-created denom. Must have admin authority to do so.
+
+Usage:
+  osmosisd tx tokenfactory change-admin [denom] [new-admin-address] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for change-admin
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx tokenfactory create-denom
+
+```
+create a new denom from an account
+
+Usage:
+  osmosisd tx tokenfactory create-denom [subdenom] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for create-denom
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx tokenfactory mint
+
+```
+Mint a denom to an address. Must have admin authority to do so.
+
+Usage:
+  osmosisd tx tokenfactory mint [amount] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for mint
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx tokenfactory
+
+```
+tokenfactory transactions subcommands
+
+Usage:
+  osmosisd tx tokenfactory [flags]
+  osmosisd tx tokenfactory [command]
+
+Available Commands:
+  burn         Burn tokens from an address. Must have admin authority to do so.
+  change-admin Changes the admin address for a factory-created denom. Must have admin authority to do so.
+  create-denom create a new denom from an account
+  mint         Mint a denom to an address. Must have admin authority to do so.
+
+Flags:
+  -h, --help   help for tokenfactory
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "osmosisd tx tokenfactory [command] --help" for more information about a command.
+
+```
+
+### osmosisd tx txfees update-fee-token
+
+```
+Submit an update to a fee token to be usable for tx fees
+
+Usage:
+  osmosisd tx txfees update-fee-token [denom] [poolId] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --deposit string           deposit of proposal
+      --description string       description of proposal
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for update-fee-token
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+      --title string             title of proposal
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx txfees
+
+```
+txfees transaction subcommands
+
+Usage:
+  osmosisd tx txfees [flags]
+  osmosisd tx txfees [command]
+
+Available Commands:
+  update-fee-token Submit an update to a fee token to be usable for tx fees
+
+Flags:
+  -h, --help   help for txfees
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "osmosisd tx txfees [command] --help" for more information about a command.
+
+```
+
+### osmosisd tx validate-signatures
+
+```
+Print the addresses that must sign the transaction, those who have already
+signed it, and make sure that signatures are in the correct order.
+
+The command would check whether all required signers have signed the transactions, whether
+the signatures were collected in the right order, and if the signature is valid over the
+given transaction. If the --offline flag is also set, signature validation over the
+transaction will be not be performed as that will require RPC communication with a full node.
+
+Usage:
+  osmosisd tx validate-signatures [file] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for validate-signatures
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx vesting clawback
+
+```
+Must be requested by the original funder address (--from).
+		May provide a destination address (--dest), otherwise the coins return to the funder.
+		Delegated or undelegating staking tokens will be transferred in the delegated (undelegating) state.
+		The recipient is vulnerable to slashing, and must act to unbond the tokens if desired.
+
+Usage:
+  osmosisd tx vesting clawback [address] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dest string              Address of destination (defaults to funder)
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for clawback
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx vesting create-clawback-vesting-account
+
+```
+Must provide a lockup periods file (--lockup), a vesting periods file (--vesting), or both.
+If both files are given, they must describe schedules for the same total amount.
+If one file is omitted, it will default to a schedule that immediately unlocks or vests the entire amount.
+The described amount of coins will be transferred from the --from address to the vesting account.
+Unvested coins may be "clawed back" by the funder with the clawback command.
+Coins may not be transferred out of the account if they are locked or unvested, but may be staked.
+Staking rewards are subject to a proportional vesting encumbrance.
+
+A periods file is a JSON object describing a sequence of unlocking or vesting events,
+with a start time and an array of coins strings and durations relative to the start or previous event.
+
+Usage:
+  osmosisd tx vesting create-clawback-vesting-account [to_address] [flags]
+
+Examples:
+Sample period file contents:
+{
+  "start_time": 1625204910,
+  "periods": [
+    {
+      "coins": "10test",
+      "length": 2592000 // 30 days
+    },
+    {
+      "coins": "10test",
+      "length": 2592000 // 30 days
+    }
+  ]
+}
+
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for create-clawback-vesting-account
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --lockup string            Path to file containing unlocking periods
+      --merge                    Merge new amount and schedule with existing ClawbackVestingAccount, if any
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+      --vesting string           Path to file containing vesting periods
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx vesting create-cliff-vesting-account
+
+```
+Create a new delayed vesting account funded with an allocation of tokens. All vesting accouts created will have their start time
+set by the committed block's time. The cliff duration should be specified in hours.
+
+Usage:
+  osmosisd tx vesting create-cliff-vesting-account [to_address] [amount] [cliff_duration] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for create-cliff-vesting-account
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx vesting create-vesting-account
+
+```
+Create a new vesting account funded with an allocation of tokens. The
+account can either be a delayed or continuous vesting account, which is determined
+by the '--delayed' flag. All vesting accouts created will have their start time
+set by the committed block's time. The end_time must be provided as a UNIX epoch
+timestamp.
+
+Usage:
+  osmosisd tx vesting create-vesting-account [to_address] [amount] [end_time] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --delayed                  Create a delayed vesting account if true
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for create-vesting-account
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx vesting
+
+```
+Vesting transaction subcommands
+
+Usage:
+  osmosisd tx vesting [flags]
+  osmosisd tx vesting [command]
+
+Available Commands:
+  clawback                        Transfer unvested amount out of a ClawbackVestingAccount.
+  create-clawback-vesting-account Create a new vesting account funded with an allocation of tokens, subject to clawback.
+  create-cliff-vesting-account    Create a new cliff vesting account funded with an allocation of tokens.
+  create-vesting-account          Create a new vesting account funded with an allocation of tokens.
+
+Flags:
+  -h, --help   help for vesting
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "osmosisd tx vesting [command] --help" for more information about a command.
+
+```
+
+### osmosisd tx wasm clear-contract-admin
+
+```
+Clears admin for a contract to prevent further migrations
+
+Usage:
+  osmosisd tx wasm clear-contract-admin [contract_addr_bech32] [flags]
+
+Aliases:
+  clear-contract-admin, clear-admin, clr-adm
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for clear-contract-admin
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx wasm execute
+
+```
+Execute a command on a wasm contract
+
+Usage:
+  osmosisd tx wasm execute [contract_addr_bech32] [json_encoded_send_args] --amount [coins,optional] [flags]
+
+Aliases:
+  execute, run, call, exec, ex, e
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+      --amount string            Coins to send to the contract along with command
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for execute
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx wasm instantiate
+
+```
+Instantiate a wasm contract
+
+Usage:
+  osmosisd tx wasm instantiate [code_id_int64] [json_encoded_init_args] --label [text] --admin [address,optional] --amount [coins,optional] [flags]
+
+Aliases:
+  instantiate, start, init, inst, i
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+      --admin string             Address of an admin
+      --amount string            Coins to send to the contract during instantiation
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for instantiate
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --label string             A human-readable name for this contract in lists
+      --ledger                   Use a connected Ledger device
+      --no-admin                 You must set this explicitly if you don't want an admin
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx wasm migrate
+
+```
+Migrate a wasm contract to a new code version
+
+Usage:
+  osmosisd tx wasm migrate [contract_addr_bech32] [new_code_id_int64] [json_encoded_migration_args] [flags]
+
+Aliases:
+  migrate, update, mig, m
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for migrate
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx wasm set-contract-admin
+
+```
+Set new admin for a contract
+
+Usage:
+  osmosisd tx wasm set-contract-admin [contract_addr_bech32] [new_admin_addr_bech32] [flags]
+
+Aliases:
+  set-contract-admin, new-admin, admin, set-adm, sa
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for set-contract-admin
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx wasm store
+
+```
+Upload a wasm binary
+
+Usage:
+  osmosisd tx wasm store [wasm file] [flags]
+
+Aliases:
+  store, upload, st, s
+
+Flags:
+  -a, --account-number uint               The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string             Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                           ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --fee-account string                Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string                       Fees to pay along with transaction; eg: 10uatom
+      --from string                       Name or address of private key with which to sign
+      --gas string                        gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 350000)
+      --gas-adjustment float              adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string                 Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only                     Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                              help for store
+      --instantiate-everybody string      Everybody can instantiate a contract from the code, optional
+      --instantiate-nobody string         Nobody except the governance process can instantiate a contract from the code, optional
+      --instantiate-only-address string   Only this address can instantiate a contract instance from the code, optional
+      --keyring-backend string            Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string                The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                            Use a connected Ledger device
+      --node string                       <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string                       Note to add a description to the transaction (previously --memo)
+      --offline                           Offline mode (does not allow any online functionality
+  -o, --output string                     Output format (text|json) (default "json")
+  -s, --sequence uint                     The sequence number of the signing account (offline mode only)
+      --sign-mode string                  Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint               Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                               Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd tx wasm
+
+```
+Wasm transaction subcommands
+
+Usage:
+  osmosisd tx wasm [flags]
+  osmosisd tx wasm [command]
+
+Available Commands:
+  clear-contract-admin Clears admin for a contract to prevent further migrations
+  execute              Execute a command on a wasm contract
+  instantiate          Instantiate a wasm contract
+  migrate              Migrate a wasm contract to a new code version
+  set-contract-admin   Set new admin for a contract
+  store                Upload a wasm binary
+
+Flags:
+  -h, --help   help for wasm
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "osmosisd tx wasm [command] --help" for more information about a command.
+
+```
+
+### osmosisd tx
+
+```
+Transactions subcommands
+
+Usage:
+  osmosisd tx [flags]
+  osmosisd tx [command]
+
+Available Commands:
+                      
+  authz               Authorization transactions subcommands
+  bank                Bank transaction subcommands
+  broadcast           Broadcast transactions generated offline
+  crisis              Crisis transactions subcommands
+  decode              Decode a binary encoded transaction string
+  distribution        Distribution transactions subcommands
+  encode              Encode transactions generated offline
+  epochs              epochs transactions subcommands
+  evidence            Evidence transaction subcommands
+  gamm                Generalized automated market maker transaction subcommands
+  gov                 Governance transactions subcommands
+  ibc                 IBC transaction subcommands
+  ibc-transfer        IBC fungible token transfer transaction subcommands
+  incentives          incentives transactions subcommands
+  lockup              lockup transactions subcommands
+  multisign           Generate multisig signatures for transactions generated offline
+  sign                Sign a transaction generated offline
+  sign-batch          Sign transaction batch files
+  slashing            Slashing transaction subcommands
+  staking             Staking transaction subcommands
+  superfluid          superfluid transactions subcommands
+  tokenfactory        tokenfactory transactions subcommands
+  txfees              txfees transaction subcommands
+  validate-signatures validate transactions signatures
+  vesting             Vesting transaction subcommands
+  wasm                Wasm transaction subcommands
+
+Flags:
+      --chain-id string   The network chain ID
+  -h, --help              help for tx
+
+Global Flags:
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Additional help topics:
+  osmosisd tx upgrade    Upgrade transaction subcommands
+
+Use "osmosisd tx [command] --help" for more information about a command.
+
+```
+
+### osmosisd unsafe-reset-all
+
+```
+(unsafe) Remove all the data and WAL, reset this node's validator to genesis state
+
+Usage:
+  osmosisd unsafe-reset-all [flags]
+
+Aliases:
+  unsafe-reset-all, unsafe_reset_all
+
+Flags:
+  -h, --help             help for unsafe-reset-all
+      --keep-addr-book   keep the address book intact
+
+Global Flags:
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd validate-genesis
+
+```
+validates the genesis file at the default location or at the location passed as an arg
+
+Usage:
+  osmosisd validate-genesis [file] [flags]
+
+Flags:
+  -h, --help   help for validate-genesis
+
+Global Flags:
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### osmosisd version
+
+```
+Print the application binary version information
+
+Usage:
+  osmosisd version [flags]
+
+Flags:
+  -h, --help            help for version
+      --long            Print long version information
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --home string         directory for config and data (default "/Users/user/.osmosisd")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+

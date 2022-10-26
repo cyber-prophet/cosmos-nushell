@@ -29,7 +29,7 @@ Available Commands:
 
 Flags:
   -h, --help                help for cyber
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -60,7 +60,7 @@ Flags:
       --vesting-start-time int   schedule start time (unix epoch) for vesting accounts
 
 Global Flags:
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -80,7 +80,7 @@ Flags:
   -h, --help               help for collect-gentxs
 
 Global Flags:
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -99,7 +99,7 @@ Flags:
   -h, --help   help for config
 
 Global Flags:
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -121,7 +121,7 @@ Flags:
   -h, --help   help for addr
 
 Global Flags:
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -143,7 +143,7 @@ Flags:
   -h, --help   help for pubkey
 
 Global Flags:
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -165,7 +165,7 @@ Flags:
   -h, --help   help for raw-bytes
 
 Global Flags:
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -190,7 +190,7 @@ Flags:
   -h, --help   help for debug
 
 Global Flags:
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -214,7 +214,7 @@ Flags:
       --jail-allowed-addrs strings   Comma-separated list of operator addresses of jailed validators to unjail
 
 Global Flags:
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -289,7 +289,7 @@ Flags:
   -y, --yes                                 Skip tx broadcasting prompt confirmation
 
 Global Flags:
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -309,7 +309,7 @@ Flags:
   -h, --help   help for help
 
 Global Flags:
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -331,7 +331,7 @@ Flags:
       --recover           provide seed phrase to recover existing key instead of creating
 
 Global Flags:
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -381,7 +381,7 @@ Flags:
       --recover                  Provide seed phrase to recover existing key instead of creating
 
 Global Flags:
-      --home string              The application home directory (default "/Users/user/.cyber")
+      --home string              The application home directory (default "/Users/user//.cyber")
       --keyring-backend string   Select keyring's backend (os|file|test) (default "os")
       --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
       --log_format string        The logging format (json|plain) (default "plain")
@@ -409,7 +409,7 @@ Flags:
   -y, --yes     Skip confirmation prompt when deleting offline or ledger key references
 
 Global Flags:
-      --home string              The application home directory (default "/Users/user/.cyber")
+      --home string              The application home directory (default "/Users/user//.cyber")
       --keyring-backend string   Select keyring's backend (os|file|test) (default "os")
       --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
       --log_format string        The logging format (json|plain) (default "plain")
@@ -440,7 +440,7 @@ Flags:
       --unsafe          Enable unsafe operations. This flag must be switched on along with all unsafe operation-specific options.
 
 Global Flags:
-      --home string              The application home directory (default "/Users/user/.cyber")
+      --home string              The application home directory (default "/Users/user//.cyber")
       --keyring-backend string   Select keyring's backend (os|file|test) (default "os")
       --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
       --log_format string        The logging format (json|plain) (default "plain")
@@ -462,7 +462,7 @@ Flags:
   -h, --help   help for import
 
 Global Flags:
-      --home string              The application home directory (default "/Users/user/.cyber")
+      --home string              The application home directory (default "/Users/user//.cyber")
       --keyring-backend string   Select keyring's backend (os|file|test) (default "os")
       --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
       --log_format string        The logging format (json|plain) (default "plain")
@@ -486,7 +486,7 @@ Flags:
   -n, --list-names   List names only
 
 Global Flags:
-      --home string              The application home directory (default "/Users/user/.cyber")
+      --home string              The application home directory (default "/Users/user//.cyber")
       --keyring-backend string   Select keyring's backend (os|file|test) (default "os")
       --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
       --log_format string        The logging format (json|plain) (default "plain")
@@ -516,7 +516,7 @@ Flags:
   -h, --help      help for migrate
 
 Global Flags:
-      --home string              The application home directory (default "/Users/user/.cyber")
+      --home string              The application home directory (default "/Users/user//.cyber")
       --keyring-backend string   Select keyring's backend (os|file|test) (default "os")
       --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
       --log_format string        The logging format (json|plain) (default "plain")
@@ -539,7 +539,7 @@ Flags:
       --unsafe-entropy   Prompt the user to supply their own entropy, instead of relying on the system
 
 Global Flags:
-      --home string              The application home directory (default "/Users/user/.cyber")
+      --home string              The application home directory (default "/Users/user//.cyber")
       --keyring-backend string   Select keyring's backend (os|file|test) (default "os")
       --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
       --log_format string        The logging format (json|plain) (default "plain")
@@ -562,7 +562,7 @@ Flags:
   -h, --help   help for parse
 
 Global Flags:
-      --home string              The application home directory (default "/Users/user/.cyber")
+      --home string              The application home directory (default "/Users/user//.cyber")
       --keyring-backend string   Select keyring's backend (os|file|test) (default "os")
       --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
       --log_format string        The logging format (json|plain) (default "plain")
@@ -591,7 +591,7 @@ Flags:
   -p, --pubkey                   Output the public key only (overrides --output)
 
 Global Flags:
-      --home string              The application home directory (default "/Users/user/.cyber")
+      --home string              The application home directory (default "/Users/user//.cyber")
       --keyring-backend string   Select keyring's backend (os|file|test) (default "os")
       --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
       --log_format string        The logging format (json|plain) (default "plain")
@@ -647,7 +647,7 @@ Flags:
       --output string            Output format (text|json) (default "text")
 
 Global Flags:
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -673,7 +673,7 @@ Flags:
   -h, --help                  help for migrate
 
 Global Flags:
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -696,7 +696,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -719,7 +719,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -748,7 +748,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -773,7 +773,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -799,7 +799,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -835,7 +835,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -869,7 +869,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -902,7 +902,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -928,7 +928,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -953,7 +953,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -976,7 +976,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -999,7 +999,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1022,7 +1022,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1045,7 +1045,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1073,7 +1073,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1109,7 +1109,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1140,7 +1140,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1176,7 +1176,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1202,7 +1202,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1225,7 +1225,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1251,7 +1251,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1277,7 +1277,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1300,7 +1300,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1327,7 +1327,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1359,7 +1359,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1385,7 +1385,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1414,7 +1414,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1439,7 +1439,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1462,7 +1462,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1485,7 +1485,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1508,7 +1508,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1531,7 +1531,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1559,7 +1559,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1589,7 +1589,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1617,7 +1617,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1652,7 +1652,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1684,7 +1684,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1710,7 +1710,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1738,7 +1738,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1771,7 +1771,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1799,7 +1799,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1825,7 +1825,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1852,7 +1852,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1890,7 +1890,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1916,7 +1916,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1943,7 +1943,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -1969,7 +1969,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2002,7 +2002,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2035,7 +2035,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2060,7 +2060,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2084,7 +2084,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2109,7 +2109,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2132,7 +2132,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2155,7 +2155,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2178,7 +2178,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2201,7 +2201,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2224,7 +2224,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2247,7 +2247,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2277,7 +2277,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2311,7 +2311,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2337,7 +2337,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2369,7 +2369,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2396,7 +2396,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2423,7 +2423,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2450,7 +2450,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2477,7 +2477,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2509,7 +2509,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2536,7 +2536,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2566,7 +2566,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2596,7 +2596,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2630,7 +2630,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2661,7 +2661,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2693,7 +2693,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2719,7 +2719,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2745,7 +2745,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2771,7 +2771,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2798,7 +2798,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2830,7 +2830,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2853,7 +2853,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2884,7 +2884,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2918,7 +2918,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2945,7 +2945,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2972,7 +2972,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -2997,7 +2997,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3025,7 +3025,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3051,7 +3051,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3083,7 +3083,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3109,7 +3109,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3135,7 +3135,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3162,7 +3162,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3190,7 +3190,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3217,7 +3217,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3247,7 +3247,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3276,7 +3276,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3302,7 +3302,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3335,7 +3335,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3360,7 +3360,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3390,7 +3390,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3420,7 +3420,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3450,7 +3450,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3480,7 +3480,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3513,7 +3513,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3538,7 +3538,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3561,7 +3561,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3584,7 +3584,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3610,7 +3610,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3635,7 +3635,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3659,7 +3659,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3684,7 +3684,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3707,7 +3707,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3730,7 +3730,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3753,7 +3753,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3776,7 +3776,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3799,7 +3799,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3822,7 +3822,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3845,7 +3845,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3868,7 +3868,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3901,7 +3901,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3926,7 +3926,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3949,7 +3949,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -3974,7 +3974,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4001,7 +4001,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4026,7 +4026,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4057,7 +4057,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4083,7 +4083,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4111,7 +4111,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4143,7 +4143,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4175,7 +4175,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4201,7 +4201,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4227,7 +4227,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4253,7 +4253,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4279,7 +4279,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4311,7 +4311,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4343,7 +4343,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4369,7 +4369,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4401,7 +4401,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4433,7 +4433,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4459,7 +4459,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4491,7 +4491,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4528,7 +4528,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4554,7 +4554,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4581,7 +4581,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4613,7 +4613,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4637,7 +4637,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4662,7 +4662,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4685,7 +4685,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4710,7 +4710,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4735,7 +4735,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4761,7 +4761,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4793,7 +4793,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4822,7 +4822,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4848,7 +4848,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4874,7 +4874,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4903,7 +4903,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4931,7 +4931,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4954,7 +4954,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -4986,7 +4986,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -5018,7 +5018,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -5047,7 +5047,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -5079,7 +5079,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -5134,7 +5134,7 @@ Flags:
   -h, --help              help for query
 
 Global Flags:
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -5161,7 +5161,7 @@ Flags:
   -h, --help   help for rollback
 
 Global Flags:
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -5225,7 +5225,7 @@ Flags:
       --inv-check-period uint                           Assert registered invariants every N blocks
       --min-retain-blocks uint                          Minimum block height offset during ABCI commit to prune Tendermint blocks
       --minimum-gas-prices string                       Minimum gas prices to accept for transactions; Any fee in a tx must meet this minimum (e.g. 0.01photino;0.0001stake)
-      --moniker string                                  node name (default "Pro16")
+      --moniker string                                  node name (default "Pro16.local")
       --p2p.laddr string                                node listen address. (0.0.0.0:0 means any interface, any port) (default "tcp://0.0.0.0:26656")
       --p2p.persistent_peers string                     comma-delimited ID@host:port persistent peers
       --p2p.pex                                         enable/disable Peer-Exchange (default true)
@@ -5257,7 +5257,7 @@ Flags:
       --x-crisis-skip-assert-invariants                 Skip x/crisis invariants check on startup
 
 Global Flags:
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -5277,7 +5277,7 @@ Flags:
   -n, --node string   Node to connect to (default "tcp://localhost:26657")
 
 Global Flags:
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -5296,7 +5296,7 @@ Flags:
   -h, --help   help for reset-state
 
 Global Flags:
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -5315,7 +5315,7 @@ Flags:
   -h, --help   help for show-address
 
 Global Flags:
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -5334,7 +5334,7 @@ Flags:
   -h, --help   help for show-node-id
 
 Global Flags:
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -5353,7 +5353,7 @@ Flags:
   -h, --help   help for show-validator
 
 Global Flags:
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -5376,7 +5376,7 @@ Flags:
       --keep-addr-book   keep the address book intact
 
 Global Flags:
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -5396,7 +5396,7 @@ Flags:
   -h, --help   help for version
 
 Global Flags:
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -5423,7 +5423,7 @@ Flags:
   -h, --help   help for tendermint
 
 Global Flags:
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -5459,7 +5459,7 @@ Flags:
       --v int                        Number of validators to initialize the testnet with (default 4)
 
 Global Flags:
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -5503,7 +5503,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -5528,7 +5528,7 @@ Flags:
   -b, --broadcast-mode string        Transaction broadcasting mode (sync|async|block) (default "sync")
       --deny-validators strings      Deny validators addresses separated by ,
       --dry-run                      ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
-      --expiration int               The Unix timestamp. Default is one year. (default 1695571985)
+      --expiration int               The Unix timestamp. Default is one year. (default 1698333304)
       --fee-account string           Fee account pays fees for the transaction instead of deducting from the signer
       --fees string                  Fees to pay along with transaction; eg: 10uatom
       --from string                  Name or address of private key with which to sign
@@ -5553,7 +5553,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -5596,7 +5596,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -5622,7 +5622,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -5666,7 +5666,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -5691,7 +5691,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -5739,7 +5739,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -5780,7 +5780,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -5804,7 +5804,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -5848,7 +5848,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -5892,7 +5892,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -5936,7 +5936,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -5982,7 +5982,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -6029,7 +6029,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -6056,7 +6056,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -6101,7 +6101,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -6121,7 +6121,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -6174,7 +6174,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -6219,7 +6219,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -6244,7 +6244,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -6291,7 +6291,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -6335,7 +6335,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -6381,7 +6381,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -6436,7 +6436,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -6484,7 +6484,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -6538,7 +6538,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -6589,7 +6589,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -6635,7 +6635,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -6704,7 +6704,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -6750,7 +6750,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -6796,7 +6796,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -6844,7 +6844,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -6890,7 +6890,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -6936,7 +6936,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -6982,7 +6982,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -7031,7 +7031,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -7081,7 +7081,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -7163,7 +7163,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -7210,7 +7210,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -7255,7 +7255,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -7282,7 +7282,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -7327,7 +7327,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -7351,7 +7351,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -7394,7 +7394,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -7435,7 +7435,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -7476,7 +7476,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -7517,7 +7517,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -7544,7 +7544,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -7566,7 +7566,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -7612,7 +7612,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -7635,7 +7635,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -7658,7 +7658,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -7704,7 +7704,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -7731,7 +7731,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -7785,7 +7785,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -7809,7 +7809,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -7836,7 +7836,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -7888,7 +7888,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -7941,7 +7941,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -8009,7 +8009,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -8062,7 +8062,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -8089,7 +8089,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -8144,7 +8144,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -8204,7 +8204,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -8217,7 +8217,7 @@ Global Flags:
 Long.
 
 Example:
-$  tx resources investmint 1000000000hydrogen millivolt 2500000 --from <key>
+$ 0.3.2-4-ge784b12 tx resources investmint 1000000000hydrogen millivolt 2500000 --from <key>
 
 Usage:
   cyber tx resources investmint [amount] [resource] [length] [flags]
@@ -8248,7 +8248,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -8272,7 +8272,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -8332,7 +8332,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -8390,7 +8390,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -8433,7 +8433,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -8457,7 +8457,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -8513,7 +8513,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -8557,7 +8557,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -8605,7 +8605,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -8649,7 +8649,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -8693,7 +8693,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -8721,7 +8721,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -8770,7 +8770,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -8816,7 +8816,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -8840,7 +8840,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -8886,7 +8886,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -8931,7 +8931,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -8979,7 +8979,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -9023,7 +9023,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -9067,7 +9067,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -9114,7 +9114,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -9143,7 +9143,7 @@ Flags:
 
 Global Flags:
       --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -9194,7 +9194,7 @@ Flags:
   -h, --help              help for tx
 
 Global Flags:
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -9218,7 +9218,7 @@ Flags:
   -h, --help   help for validate-genesis
 
 Global Flags:
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -9239,7 +9239,7 @@ Flags:
   -o, --output string   Output format (text|json) (default "text")
 
 Global Flags:
-      --home string         directory for config and data (default "/Users/user/.cyber")
+      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
