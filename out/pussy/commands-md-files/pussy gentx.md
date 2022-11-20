@@ -42,7 +42,7 @@ Flags:
       --generate-only                       Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
   -h, --help                                help for gentx
       --identity string                     The (optional) identity signature (ex. UPort or Keybase)
-      --ip string                           The node's public IP (default "10.50.1.95")
+      --ip string                           The node's public IP (default "10.0.0.66")
       --keyring-backend string              Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
       --keyring-dir string                  The client Keyring directory; if omitted, the default 'home' directory will be used
       --ledger                              Use a connected Ledger device

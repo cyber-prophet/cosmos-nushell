@@ -1,26 +1,29 @@
 
+
+# gaiad keys in a form of table
 export def "gaiad _keys table" [] {
-	gaiad keys list | lines | window 5 -s 5 | 
+	gaiad keys list --output text | lines | window 5 -s 5 | 
     each {|it| ($it| parse -r '(?P<col>\w+):(?P<value>.*)')} | 
     each {|it| ($it| transpose -r)} | reduce {|it, acc| $it | append $acc} | 
     select name type address 
 }
 
+# Helper function to use addresses for completions in --from parameter
 export def "nu-complete gaiad _keys values" [] {
     (gaiad _keys table).name | zip (gaiad _keys table).address | flatten
   }
 
 def "nu-completions-gaiad--os-file-kwallet-pass-test-memory-" [] { ["os", "file", "kwallet", "pass", "test", "memory"] }
 def "nu-completions-gaiad--json-plain-" [] { ["json", "plain"] }
-def "nu-completions-gaiad--socket---grpc-" [] { ["socket", "grpc"] }
-def "nu-completions-gaiad--acc-val-cons-" [] { ["acc", "val", "cons"] }
-def "nu-completions-gaiad--os-file-kwallet-pass-test-" [] { ["os", "file", "kwallet", "pass", "test"] }
-def "nu-completions-gaiad--sync-async-block-" [] { ["sync", "async", "block"] }
-def "nu-completions-gaiad--direct-amino-json-" [] { ["direct", "amino-json"] }
 def "nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-" [] { ["trace", "debug", "info", "warn", "error", "fatal", "panic"] }
 def "nu-completions-gaiad--text-json-" [] { ["text", "json"] }
-def "nu-completions-gaiad--os-file-test-" [] { ["os", "file", "test"] }
 def "nu-completions-gaiad--default-nothing-everything-custom-" [] { ["default", "nothing", "everything", "custom"] }
+def "nu-completions-gaiad--sync-async-block-" [] { ["sync", "async", "block"] }
+def "nu-completions-gaiad--os-file-test-" [] { ["os", "file", "test"] }
+def "nu-completions-gaiad--socket---grpc-" [] { ["socket", "grpc"] }
+def "nu-completions-gaiad--acc-val-cons-" [] { ["acc", "val", "cons"] }
+def "nu-completions-gaiad--direct-amino-json-" [] { ["direct", "amino-json"] }
+def "nu-completions-gaiad--os-file-kwallet-pass-test-" [] { ["os", "file", "kwallet", "pass", "test"] }
 
 # Add a genesis account to genesis.json. The provided account must specify the account address or key name and a list of initial coins. If a key name is given, the address will be looked up in the local Keybase. The list of initial tokens must contain valid denominations. Accounts may optionally be supplied with vesting parameters.
 export extern 'gaiad add-genesis-account' [
@@ -126,7 +129,7 @@ export extern 'gaiad gentx' [
 	--generate-only		# Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
 	--help(-h)		# help for gentx
 	--identity: string		# The (optional) identity signature (ex. UPort or Keybase)
-	--ip: string		# The node's public IP (default "10.50.1.95")
+	--ip: string		# The node's public IP (default "10.0.0.66")
 	--keyring-backend: string@"nu-completions-gaiad--os-file-kwallet-pass-test-memory-"		# Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
 	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
 	--ledger		# Use a connected Ledger device
@@ -588,25 +591,6 @@ export extern 'gaiad query distribution validator-outstanding-rewards' [
 	--help(-h)		# help for validator-outstanding-rewards
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "text")
-	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.gaia")
-	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
-	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
-	--trace		# print out full stack trace on errors
-]
-
-# Error: invalid evidence hash: encoding/hex: invalid byte: U+002D '-'
-export extern 'gaiad query evidence' [
-	--count-total		# count total number of records in evidence to query for
-	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
-	--help(-h)		# help for evidence
-	--limit: int		# pagination limit of evidence to query for (default 100)
-	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
-	--offset: int		# pagination offset of evidence to query for
-	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "text")
-	--page: int		# pagination page of evidence to query for. This sets offset to a multiple of limit (default 1)
-	--page-key: string		# pagination page-key of evidence to query for
-	--reverse		# results are sorted in descending order
 	--chain-id: string		# The network chain ID
 	--home: string		# directory for config and data (default "/Users/user/.gaia")
 	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
@@ -2052,7 +2036,7 @@ export extern 'gaiad tx authz grant' [
 	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--deny-validators: string		# Deny validators addresses separated by ,
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
-	--expiration: int		# The Unix timestamp. Default is one year. (default 1698333364)
+	--expiration: int		# The Unix timestamp. Default is one year. (default 1700482346)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign

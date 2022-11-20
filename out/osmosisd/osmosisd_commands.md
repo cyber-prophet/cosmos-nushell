@@ -520,7 +520,7 @@ Flags:
       --generate-only                       Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
   -h, --help                                help for gentx
       --identity string                     The (optional) identity signature (ex. UPort or Keybase)
-      --ip string                           The node's public IP (default "10.50.1.95")
+      --ip string                           The node's public IP (default "10.0.0.66")
       --keyring-backend string              Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
       --keyring-dir string                  The client Keyring directory; if omitted, the default 'home' directory will be used
       --ledger                              Use a connected Ledger device
@@ -6484,7 +6484,7 @@ Flags:
   -b, --broadcast-mode string        Transaction broadcasting mode (sync|async|block) (default "sync")
       --deny-validators strings      Deny validators addresses separated by ,
       --dry-run                      ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
-      --expiration int               The Unix timestamp. Default is one year. (default 1698333430)
+      --expiration int               The Unix timestamp. Default is one year. (default 1700482324)
       --fee-account string           Fee account pays fees for the transaction instead of deducting from the signer
       --fees string                  Fees to pay along with transaction; eg: 10uatom
       --from string                  Name or address of private key with which to sign
