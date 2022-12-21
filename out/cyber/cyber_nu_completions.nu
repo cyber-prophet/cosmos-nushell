@@ -13,23 +13,23 @@ export def "nu-complete cyber _keys values" [] {
     (cyber _keys table).name | zip (cyber _keys table).address | flatten
   }
 
-def "nu-completions-cyber--os-file-kwallet-pass-test-memory-" [] { ["os", "file", "kwallet", "pass", "test", "memory"] }
 def "nu-completions-cyber--json-plain-" [] { ["json", "plain"] }
-def "nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-" [] { ["trace", "debug", "info", "warn", "error", "fatal", "panic"] }
-def "nu-completions-cyber--text-json-" [] { ["text", "json"] }
+def "nu-completions-cyber--os-file-test-" [] { ["os", "file", "test"] }
 def "nu-completions-cyber--default-nothing-everything-custom-" [] { ["default", "nothing", "everything", "custom"] }
 def "nu-completions-cyber--sync-async-block-" [] { ["sync", "async", "block"] }
-def "nu-completions-cyber--os-file-test-" [] { ["os", "file", "test"] }
-def "nu-completions-cyber--socket---grpc-" [] { ["socket", "grpc"] }
-def "nu-completions-cyber--acc-val-cons-" [] { ["acc", "val", "cons"] }
 def "nu-completions-cyber--direct-amino-json-" [] { ["direct", "amino-json"] }
+def "nu-completions-cyber--text-json-" [] { ["text", "json"] }
+def "nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-" [] { ["trace", "debug", "info", "warn", "error", "fatal", "panic"] }
+def "nu-completions-cyber--socket---grpc-" [] { ["socket", "grpc"] }
+def "nu-completions-cyber--os-file-kwallet-pass-test-memory-" [] { ["os", "file", "kwallet", "pass", "test", "memory"] }
 def "nu-completions-cyber--os-file-kwallet-pass-test-" [] { ["os", "file", "kwallet", "pass", "test"] }
+def "nu-completions-cyber--acc-val-cons-" [] { ["acc", "val", "cons"] }
 
 # Add a genesis account to genesis.json. The provided account must specify the account address or key name and a list of initial coins. If a key name is given, the address will be looked up in the local Keybase. The list of initial tokens must contain valid denominations. Accounts may optionally be supplied with vesting parameters.
 export extern 'cyber add-genesis-account' [
-	address_or_key_name: string
-	coin: string
-	coin: string
+	address_or_key_name?: string
+	coin?: string
+	coin?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for add-genesis-account
 	--keyring-backend: string@"nu-completions-cyber--os-file-kwallet-pass-test-"		# Select keyring's backend (os|file|kwallet|pass|test) (default "os")
@@ -56,8 +56,8 @@ export extern 'cyber collect-gentxs' [
 
 # Create or query an application CLI configuration file
 export extern 'cyber config' [
-	key: string
-	value: string
+	key?: string
+	value?: string
 	--help(-h)		# help for config
 	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
@@ -67,7 +67,7 @@ export extern 'cyber config' [
 
 # Convert an address between hex encoding and bech32.
 export extern 'cyber debug addr' [
-	address: string
+	address?: string
 	--help(-h)		# help for addr
 	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
@@ -77,7 +77,7 @@ export extern 'cyber debug addr' [
 
 # Decode a pubkey from proto JSON and display it's address.
 export extern 'cyber debug pubkey' [
-	pubkey: string
+	pubkey?: string
 	--help(-h)		# help for pubkey
 	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
@@ -87,7 +87,7 @@ export extern 'cyber debug pubkey' [
 
 # Convert raw-bytes to hex.
 export extern 'cyber debug raw-bytes' [
-	raw_bytes: string
+	raw_bytes?: string
 	--help(-h)		# help for raw-bytes
 	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
@@ -109,8 +109,8 @@ export extern 'cyber export' [
 
 # Generate a genesis transaction that creates a validator with a self-delegation, that is signed by the key in the Keyring referenced by a given name. A node ID and Bech32 consensus pubkey may optionally be provided. If they are omitted, they will be retrieved from the priv_validator.json file. The following default parameters are included:      	delegation amount:           100000000stake 	commissi
 export extern 'cyber gentx' [
-	key_name: string
-	amount: string
+	key_name?: string
+	amount?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--amount: string		# Amount of coins to bond
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
@@ -129,7 +129,7 @@ export extern 'cyber gentx' [
 	--generate-only		# Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
 	--help(-h)		# help for gentx
 	--identity: string		# The (optional) identity signature (ex. UPort or Keybase)
-	--ip: string		# The node's public IP (default "10.0.0.66")
+	--ip: string		# The node's public IP (default "192.168.1.44")
 	--keyring-backend: string@"nu-completions-cyber--os-file-kwallet-pass-test-memory-"		# Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
 	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
 	--ledger		# Use a connected Ledger device
@@ -156,7 +156,7 @@ export extern 'cyber gentx' [
 
 # Help provides help for any command in the application. Simply type cyber help [path to command] for full details.
 export extern 'cyber help' [
-	command: string
+	command?: string
 	--help(-h)		# help for help
 	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
@@ -166,7 +166,7 @@ export extern 'cyber help' [
 
 # Initialize validators's and node's configuration files.
 export extern 'cyber init' [
-	moniker: string
+	moniker?: string
 	--chain-id: string		# genesis file chain-id, if left blank will be randomly created
 	--help(-h)		# help for init
 	--overwrite(-o)		# overwrite the genesis.json file
@@ -179,7 +179,7 @@ export extern 'cyber init' [
 
 # Derive a new private key and encrypt to disk. Optionally specify a BIP39 mnemonic, a BIP39 passphrase to further secure the mnemonic, and a bip32 HD path to derive a specific account. The key will be stored under the given name and encrypted with the given password. The only input that is required is the encryption password. If run with -i, it will prompt the user for BIP44 path, BIP39 mnemonic, a
 export extern 'cyber keys add' [
-	name: string
+	name?: string
 	--account: int		# Account number for HD derivation
 	--algo: string		# Key signing algorithm to generate keys for (default "secp256k1")
 	--coin-type: int		# coin type number for HD derivation (default 118)
@@ -206,7 +206,7 @@ export extern 'cyber keys add' [
 
 # Delete keys from the Keybase backend. Note that removing offline or ledger keys will remove only the public key references stored locally, i.e. private keys stored in a ledger device cannot be deleted with the CLI.
 export extern 'cyber keys delete' [
-	name: string
+	name?: string
 	--force(-f)		# Remove the key unconditionally without asking for the passphrase. Deprecated.
 	--help(-h)		# help for delete
 	--yes(-y)		# Skip confirmation prompt when deleting offline or ledger key references
@@ -221,7 +221,7 @@ export extern 'cyber keys delete' [
 
 # Export a private key from the local keyring in ASCII-armored encrypted format. When both the --unarmored-hex and --unsafe flags are selected, cryptographic private key material is exported in an INSECURE fashion that is designed to allow users to import their keys in hot wallets. This feature is for advanced users only that are confident about how to handle private keys work and are FULLY AWARE OF
 export extern 'cyber keys export' [
-	name: string
+	name?: string
 	--help(-h)		# help for export
 	--unarmored-hex		# Export unarmored hex privkey. Requires --unsafe.
 	--unsafe		# Enable unsafe operations. This flag must be switched on along with all unsafe operation-specific options.
@@ -236,8 +236,8 @@ export extern 'cyber keys export' [
 
 # Import a ASCII armored private key into the local keybase.
 export extern 'cyber keys import' [
-	name: string
-	keyfile: string
+	name?: string
+	keyfile?: string
 	--help(-h)		# help for import
 	--home: string		# The application home directory (default "/Users/user//.cyber")
 	--keyring-backend: string@"nu-completions-cyber--os-file-test-"		# Select keyring's backend (os|file|test) (default "os")
@@ -263,7 +263,7 @@ export extern 'cyber keys list' [
 
 # Migrate key information from the legacy (db-based) Keybase to the new keyring-based Keyring. The legacy Keybase used to persist keys in a LevelDB database stored in a 'keys' sub-directory of the old client application's home directory, e.g. $HOME/.gaiacli/keys/. For each key material entry, the command will prompt if the key should be skipped or not. If the key is not to be skipped, the passphrase
 export extern 'cyber keys migrate' [
-	old_home_dir: string
+	old_home_dir?: string
 	--dry-run		# Run migration without actually persisting any changes to the new Keybase
 	--help(-h)		# help for migrate
 	--home: string		# The application home directory (default "/Users/user//.cyber")
@@ -290,7 +290,7 @@ export extern 'cyber keys mnemonic' [
 
 # Convert and print to stdout key addresses and fingerprints from hexadecimal into bech32 cosmos prefixed format and vice versa.
 export extern 'cyber keys parse' [
-	hex_or_bech32_address: string
+	hex_or_bech32_address?: string
 	--help(-h)		# help for parse
 	--home: string		# The application home directory (default "/Users/user//.cyber")
 	--keyring-backend: string@"nu-completions-cyber--os-file-test-"		# Select keyring's backend (os|file|test) (default "os")
@@ -320,8 +320,8 @@ export extern 'cyber keys show' [
 
 # Migrate the source genesis into the target version and print to STDOUT.
 export extern 'cyber migrate' [
-	target_version: string
-	genesis_file: string
+	target_version?: string
+	genesis_file?: string
 	--chain-id: string		# override chain_id with this flag
 	--genesis-time: string		# override genesis_time with this flag
 	--help(-h)		# help for migrate
@@ -333,7 +333,7 @@ export extern 'cyber migrate' [
 
 # Query for account by address
 export extern 'cyber query account' [
-	address: string
+	address?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for account
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -347,7 +347,7 @@ export extern 'cyber query account' [
 
 # Query for account by address
 export extern 'cyber query auth account' [
-	address: string
+	address?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for account
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -393,9 +393,9 @@ export extern 'cyber query auth params' [
 
 # Query authorization grants for a granter-grantee pair. If msg-type-url is set, it will select grants only for that msg type.
 export extern 'cyber query authz grants' [
-	granter_addr: string
-	grantee_addr: string
-	msg_type_url_: string
+	granter_addr?: string
+	grantee_addr?: string
+	msg_type_url_?: string
 	--count-total		# count total number of records in grants to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for grants
@@ -415,7 +415,7 @@ export extern 'cyber query authz grants' [
 
 # Query authorization grants granted to a grantee.
 export extern 'cyber query authz grants-by-grantee' [
-	grantee_addr: string
+	grantee_addr?: string
 	--count-total		# count total number of records in grantee-grants to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for grants-by-grantee
@@ -435,7 +435,7 @@ export extern 'cyber query authz grants-by-grantee' [
 
 # Query authorization grants granted by granter.
 export extern 'cyber query authz grants-by-granter' [
-	granter_addr: string
+	granter_addr?: string
 	--count-total		# count total number of records in granter-grants to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for grants-by-granter
@@ -468,7 +468,7 @@ export extern 'cyber query bandwidth load' [
 
 # Query the neuron bandwidth [address]
 export extern 'cyber query bandwidth neuron' [
-	address: string
+	address?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for neuron
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -521,7 +521,7 @@ export extern 'cyber query bandwidth total' [
 
 # Query the total balance of an account or of a specific denomination.
 export extern 'cyber query bank balances' [
-	address: string
+	address?: string
 	--count-total		# count total number of records in all balances to query for
 	--denom: string		# The specific balance denomination to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
@@ -576,7 +576,7 @@ export extern 'cyber query bank total' [
 
 # Get verified data for a the block at given height
 export extern 'cyber query block' [
-	height: string
+	height?: string
 	--help(-h)		# help for block
 	--node(-n): string		# Node to connect to (default "tcp://localhost:26657")
 	--chain-id: string		# The network chain ID
@@ -588,7 +588,7 @@ export extern 'cyber query block' [
 
 # Query validator commission rewards from delegators to that validator.
 export extern 'cyber query distribution commission' [
-	validator: string
+	validator?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for commission
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -628,8 +628,8 @@ export extern 'cyber query distribution params' [
 
 # Query all rewards earned by a delegator, optionally restrict to rewards from a single validator.
 export extern 'cyber query distribution rewards' [
-	delegator_addr: string
-	validator_addr: string
+	delegator_addr?: string
+	validator_addr?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for rewards
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -643,9 +643,9 @@ export extern 'cyber query distribution rewards' [
 
 # Query all slashes of a validator for a given block range.
 export extern 'cyber query distribution slashes' [
-	validator: string
-	start_height: string
-	end_height: string
+	validator?: string
+	start_height?: string
+	end_height?: string
 	--count-total		# count total number of records in validator slashes to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for slashes
@@ -665,7 +665,7 @@ export extern 'cyber query distribution slashes' [
 
 # Query distribution outstanding (un-withdrawn) rewards for a validator and all their delegations.
 export extern 'cyber query distribution validator-outstanding-rewards' [
-	validator: string
+	validator?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for validator-outstanding-rewards
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -692,8 +692,8 @@ export extern 'cyber query dmn params' [
 
 # Query thought
 export extern 'cyber query dmn thought' [
-	program: string
-	name: string
+	program?: string
+	name?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for thought
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -707,8 +707,8 @@ export extern 'cyber query dmn thought' [
 
 # Query thought stats
 export extern 'cyber query dmn thought-stats' [
-	program: string
-	name: string
+	program?: string
+	name?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for thought-stats
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -748,8 +748,8 @@ export extern 'cyber query dmn thoughts-stats' [
 
 # Query details for a grant.  You can find the fee-grant of a granter and grantee.
 export extern 'cyber query feegrant grant' [
-	granter: string
-	grantee: string
+	granter?: string
+	grantee?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for grant
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -763,7 +763,7 @@ export extern 'cyber query feegrant grant' [
 
 # Queries all the grants for a grantee address.
 export extern 'cyber query feegrant grants-by-grantee' [
-	grantee: string
+	grantee?: string
 	--count-total		# count total number of records in grants to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for grants-by-grantee
@@ -783,7 +783,7 @@ export extern 'cyber query feegrant grants-by-grantee' [
 
 # Queries all the grants issued for a granter address.
 export extern 'cyber query feegrant grants-by-granter' [
-	granter: string
+	granter?: string
 	--count-total		# count total number of records in grants to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for grants-by-granter
@@ -803,8 +803,8 @@ export extern 'cyber query feegrant grants-by-granter' [
 
 # Query details for a single proposal deposit on a proposal by its identifier.
 export extern 'cyber query gov deposit' [
-	proposal_id: string
-	depositer_addr: string
+	proposal_id?: string
+	depositer_addr?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for deposit
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -818,7 +818,7 @@ export extern 'cyber query gov deposit' [
 
 # Query details for all deposits on a proposal. You can find the proposal-id by running "cyber query gov proposals".
 export extern 'cyber query gov deposits' [
-	proposal_id: string
+	proposal_id?: string
 	--count-total		# count total number of records in deposits to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for deposits
@@ -838,7 +838,7 @@ export extern 'cyber query gov deposits' [
 
 # Query the all the parameters for the governance process.
 export extern 'cyber query gov param' [
-	param_type: string
+	param_type?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for param
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -865,7 +865,7 @@ export extern 'cyber query gov params' [
 
 # Query details for a proposal. You can find the proposal-id by running "cyber query gov proposals".
 export extern 'cyber query gov proposal' [
-	proposal_id: string
+	proposal_id?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for proposal
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -901,7 +901,7 @@ export extern 'cyber query gov proposals' [
 
 # Query which address proposed a proposal with a given ID.
 export extern 'cyber query gov proposer' [
-	proposal_id: string
+	proposal_id?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for proposer
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -915,7 +915,7 @@ export extern 'cyber query gov proposer' [
 
 # Query tally of votes on a proposal. You can find the proposal-id by running "cyber query gov proposals".
 export extern 'cyber query gov tally' [
-	proposal_id: string
+	proposal_id?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for tally
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -929,8 +929,8 @@ export extern 'cyber query gov tally' [
 
 # Query details for a single vote on a proposal given its identifier.
 export extern 'cyber query gov vote' [
-	proposal_id: string
-	voter_addr: string
+	proposal_id?: string
+	voter_addr?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for vote
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -944,7 +944,7 @@ export extern 'cyber query gov vote' [
 
 # Query vote details for a single proposal by its identifier.
 export extern 'cyber query gov votes' [
-	proposal_id: string
+	proposal_id?: string
 	--count-total		# count total number of records in votes to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for votes
@@ -990,8 +990,8 @@ export extern 'cyber query grid params' [
 
 # Query grid route that routes for given source and destination accounts
 export extern 'cyber query grid route' [
-	source: string
-	destination: string
+	source?: string
+	destination?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for route
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1005,7 +1005,7 @@ export extern 'cyber query grid route' [
 
 # Query grid value that routed from source account
 export extern 'cyber query grid routed-from' [
-	source: string
+	source?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for routed-from
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1019,7 +1019,7 @@ export extern 'cyber query grid routed-from' [
 
 # Query grid value that routed to destination account
 export extern 'cyber query grid routed-to' [
-	destination: string
+	destination?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for routed-to
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1046,7 +1046,7 @@ export extern 'cyber query grid routes' [
 
 # Query all grid routes that made from source account
 export extern 'cyber query grid routes-from' [
-	source: string
+	source?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for routes-from
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1060,7 +1060,7 @@ export extern 'cyber query grid routes-from' [
 
 # Query all grid routes that routed to destination account
 export extern 'cyber query grid routes-to' [
-	destination: string
+	destination?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for routes-to
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1093,8 +1093,8 @@ export extern 'cyber query ibc channel channels' [
 
 # Query the client state associated with a channel, by providing its port and channel identifiers.
 export extern 'cyber query ibc channel client-state' [
-	port_id: string
-	channel_id: string
+	port_id?: string
+	channel_id?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for client-state
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1108,7 +1108,7 @@ export extern 'cyber query ibc channel client-state' [
 
 # Query all channels associated with a connection
 export extern 'cyber query ibc channel connections' [
-	connection_id: string
+	connection_id?: string
 	--count-total		# count total number of records in channels associated with a connection to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for connections
@@ -1128,8 +1128,8 @@ export extern 'cyber query ibc channel connections' [
 
 # Query an IBC channel end from a port and channel identifiers
 export extern 'cyber query ibc channel end' [
-	port_id: string
-	channel_id: string
+	port_id?: string
+	channel_id?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for end
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1144,8 +1144,8 @@ export extern 'cyber query ibc channel end' [
 
 # Query the next receive sequence for a given channel
 export extern 'cyber query ibc channel next-sequence-receive' [
-	port_id: string
-	channel_id: string
+	port_id?: string
+	channel_id?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for next-sequence-receive
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1160,9 +1160,9 @@ export extern 'cyber query ibc channel next-sequence-receive' [
 
 # Query a packet acknowledgement
 export extern 'cyber query ibc channel packet-ack' [
-	port_id: string
-	channel_id: string
-	sequence: string
+	port_id?: string
+	channel_id?: string
+	sequence?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for packet-ack
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1177,9 +1177,9 @@ export extern 'cyber query ibc channel packet-ack' [
 
 # Query a packet commitment
 export extern 'cyber query ibc channel packet-commitment' [
-	port_id: string
-	channel_id: string
-	sequence: string
+	port_id?: string
+	channel_id?: string
+	sequence?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for packet-commitment
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1194,8 +1194,8 @@ export extern 'cyber query ibc channel packet-commitment' [
 
 # Query all packet commitments associated with a channel
 export extern 'cyber query ibc channel packet-commitments' [
-	port_id: string
-	channel_id: string
+	port_id?: string
+	channel_id?: string
 	--count-total		# count total number of records in packet commitments associated with a channel to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for packet-commitments
@@ -1215,9 +1215,9 @@ export extern 'cyber query ibc channel packet-commitments' [
 
 # Query a packet receipt
 export extern 'cyber query ibc channel packet-receipt' [
-	port_id: string
-	channel_id: string
-	sequence: string
+	port_id?: string
+	channel_id?: string
+	sequence?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for packet-receipt
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1232,8 +1232,8 @@ export extern 'cyber query ibc channel packet-receipt' [
 
 # Given a list of acknowledgement sequences from counterparty, determine if an ack on the counterparty chain has been received on the executing chain. The return value represents: - Unreceived packet acknowledgement: packet commitment exists on original sending (executing) chain and ack exists on receiving chain.
 export extern 'cyber query ibc channel unreceived-acks' [
-	port_id: string
-	channel_id: string
+	port_id?: string
+	channel_id?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for unreceived-acks
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1248,8 +1248,8 @@ export extern 'cyber query ibc channel unreceived-acks' [
 
 # Determine if a packet, given a list of packet commitment sequences, is unreceived. The return value represents: - Unreceived packet commitments: no acknowledgement exists on receiving chain for the given packet commitment sequence on sending chain.
 export extern 'cyber query ibc channel unreceived-packets' [
-	port_id: string
-	channel_id: string
+	port_id?: string
+	channel_id?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for unreceived-packets
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1264,8 +1264,8 @@ export extern 'cyber query ibc channel unreceived-packets' [
 
 # Query the consensus state for a particular light client at a given height. If the '--latest' flag is included, the query returns the latest consensus state, overriding the height argument.
 export extern 'cyber query ibc client consensus-state' [
-	client_id: string
-	height: string
+	client_id?: string
+	height?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for consensus-state
 	--latest-height		# return latest stored consensus state
@@ -1281,7 +1281,7 @@ export extern 'cyber query ibc client consensus-state' [
 
 # Query all the consensus states from a given client state.
 export extern 'cyber query ibc client consensus-states' [
-	client_id: string
+	client_id?: string
 	--count-total		# count total number of records in consensus states to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for consensus-states
@@ -1340,7 +1340,7 @@ export extern 'cyber query ibc client self-consensus-state' [
 
 # Query stored client state
 export extern 'cyber query ibc client state' [
-	client_id: string
+	client_id?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for state
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1374,7 +1374,7 @@ export extern 'cyber query ibc client states' [
 
 # Query client activity status. Any client without an 'Active' status is considered inactive
 export extern 'cyber query ibc client status' [
-	client_id: string
+	client_id?: string
 	--help(-h)		# help for status
 	--chain-id: string		# The network chain ID
 	--home: string		# directory for config and data (default "/Users/user//.cyber")
@@ -1404,7 +1404,7 @@ export extern 'cyber query ibc connection connections' [
 
 # Query stored connection end
 export extern 'cyber query ibc connection end' [
-	connection_id: string
+	connection_id?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for end
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1419,7 +1419,7 @@ export extern 'cyber query ibc connection end' [
 
 # Query stored client connection paths
 export extern 'cyber query ibc connection path' [
-	client_id: string
+	client_id?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for path
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1434,7 +1434,7 @@ export extern 'cyber query ibc connection path' [
 
 # Query the denom hash info from a given denom trace
 export extern 'cyber query ibc-transfer denom-hash' [
-	trace: string
+	trace?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for denom-hash
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1448,7 +1448,7 @@ export extern 'cyber query ibc-transfer denom-hash' [
 
 # Query the denom trace info from a given trace hash
 export extern 'cyber query ibc-transfer denom-trace' [
-	hash: string
+	hash?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for denom-trace
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1507,7 +1507,7 @@ export extern 'cyber query ibc-transfer params' [
 
 # Query details of a liquidity pool batch
 export extern 'cyber query liquidity batch' [
-	pool_id: string
+	pool_id?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for batch
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1521,8 +1521,8 @@ export extern 'cyber query liquidity batch' [
 
 # Query the deposit messages on the liquidity pool batch for the specified pool-id and msg-index If batch messages are normally processed from the endblock, the resulting state is applied and the messages are removed from the beginning of the next block. To query for past blocks, query the block height using the REST/gRPC API of a node that is not pruned.
 export extern 'cyber query liquidity deposit' [
-	pool_id: string
-	msg_index: string
+	pool_id?: string
+	msg_index?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for deposit
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1536,7 +1536,7 @@ export extern 'cyber query liquidity deposit' [
 
 # Query all deposit messages of the liquidity pool batch on the specified pool If batch messages are normally processed from the endblock, the resulting state is applied and the messages are removed in the beginning of next block. To query for past blocks, query the block height using the REST/gRPC API of a node that is not pruned.
 export extern 'cyber query liquidity deposits' [
-	pool_id: string
+	pool_id?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for deposits
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1563,7 +1563,7 @@ export extern 'cyber query liquidity params' [
 
 # Query details of a liquidity pool
 export extern 'cyber query liquidity pool' [
-	pool_id: string
+	pool_id?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for pool
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1592,8 +1592,8 @@ export extern 'cyber query liquidity pools' [
 
 # Query for the swap message on the batch of the liquidity pool specified pool-id and msg-index If the batch message are normally processed and from the endblock, the resulting state is applied and the messages are removed in the beginning of next block. To query for past blocks, query the block height using the REST/gRPC API of a node that is not pruned.
 export extern 'cyber query liquidity swap' [
-	pool_id: string
-	msg_index: string
+	pool_id?: string
+	msg_index?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for swap
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1607,7 +1607,7 @@ export extern 'cyber query liquidity swap' [
 
 # Query all swap messages in the liquidity pool batch for the specified pool-id If batch messages are normally processed from the endblock, the resulting state is applied and the messages are removed in the beginning of next block. To query for past blocks, query the block height using the REST/gRPC API of a node that is not pruned.
 export extern 'cyber query liquidity swaps' [
-	pool_id: string
+	pool_id?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for swaps
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1621,8 +1621,8 @@ export extern 'cyber query liquidity swaps' [
 
 # Query the withdraw messages in the liquidity pool batch for the specified pool-id and msg-index if the batch message are normally processed from the endblock, the resulting state is applied and the messages are removed in the beginning of next block. To query for past blocks, query the block height using the REST/gRPC API of a node that is not pruned.
 export extern 'cyber query liquidity withdraw' [
-	pool_id: string
-	msg_index: string
+	pool_id?: string
+	msg_index?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for withdraw
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1636,7 +1636,7 @@ export extern 'cyber query liquidity withdraw' [
 
 # Query all withdraw messages on the liquidity pool batch for the specified pool-id If batch messages are normally processed from the endblock, the resulting state is applied and the messages are removed in the beginning of next block. To query for past blocks, query the block height using the REST/gRPC API of a node that is not pruned.
 export extern 'cyber query liquidity withdraws' [
-	pool_id: string
+	pool_id?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for withdraws
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1689,8 +1689,8 @@ export extern 'cyber query mint params' [
 
 # Query for raw parameters by subspace and key
 export extern 'cyber query params subspace' [
-	subspace: string
-	key: string
+	subspace?: string
+	key?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for subspace
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1704,9 +1704,9 @@ export extern 'cyber query params subspace' [
 
 # Query backlinks of given particle
 export extern 'cyber query rank backlinks' [
-	particle: string
-	page: string
-	limit: string
+	particle?: string
+	page?: string
+	limit?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for backlinks
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1720,9 +1720,9 @@ export extern 'cyber query rank backlinks' [
 
 # Query is link exist between particles for given account
 export extern 'cyber query rank is-exist' [
-	from: string
-	to: string
-	account: string
+	from?: string
+	to?: string
+	account?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for is-exist
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1736,8 +1736,8 @@ export extern 'cyber query rank is-exist' [
 
 # Query is any link exist between particles
 export extern 'cyber query rank is-exist-any' [
-	from: string
-	to: string
+	from?: string
+	to?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for is-exist-any
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1751,7 +1751,7 @@ export extern 'cyber query rank is-exist-any' [
 
 # Query the current karma of given neuron
 export extern 'cyber query rank karma' [
-	neuron: string
+	neuron?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for karma
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1765,7 +1765,7 @@ export extern 'cyber query rank karma' [
 
 # Query the current negentropy of given particle
 export extern 'cyber query rank negentropy' [
-	particle: string
+	particle?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for negentropy
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1792,7 +1792,7 @@ export extern 'cyber query rank params' [
 
 # Query the current rank of given particle
 export extern 'cyber query rank rank' [
-	particle: string
+	particle?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for rank
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1806,9 +1806,9 @@ export extern 'cyber query rank rank' [
 
 # Query search of given particle
 export extern 'cyber query rank search' [
-	particle: string
-	page: string
-	limit: string
+	particle?: string
+	page?: string
+	limit?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for search
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1835,9 +1835,9 @@ export extern 'cyber query rank top' [
 
 # Query resources return on investmint
 export extern 'cyber query resources investmint' [
-	amount: string
-	resource: string
-	length: string
+	amount?: string
+	resource?: string
+	length?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for investmint
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1877,7 +1877,7 @@ export extern 'cyber query slashing params' [
 
 # Use a validators' consensus public key to find the signing-info for that validator: $ <appd> query slashing signing-info '{"@type":"/cosmos.crypto.ed25519.PubKey","key":"OauFcTKbN5Lx3fJL689cikXBqe+hcp6Y+x0rYUdR9Jk="}'
 export extern 'cyber query slashing signing-info' [
-	validator_conspub: string
+	validator_conspub?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for signing-info
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1910,8 +1910,8 @@ export extern 'cyber query slashing signing-infos' [
 
 # Query delegations for an individual delegator on an individual validator.
 export extern 'cyber query staking delegation' [
-	delegator_addr: string
-	validator_addr: string
+	delegator_addr?: string
+	validator_addr?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for delegation
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1925,7 +1925,7 @@ export extern 'cyber query staking delegation' [
 
 # Query delegations for an individual delegator on all validators.
 export extern 'cyber query staking delegations' [
-	delegator_addr: string
+	delegator_addr?: string
 	--count-total		# count total number of records in delegations to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for delegations
@@ -1945,7 +1945,7 @@ export extern 'cyber query staking delegations' [
 
 # Query delegations on an individual validator.
 export extern 'cyber query staking delegations-to' [
-	validator_addr: string
+	validator_addr?: string
 	--count-total		# count total number of records in validator delegations to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for delegations-to
@@ -1965,7 +1965,7 @@ export extern 'cyber query staking delegations-to' [
 
 # Query historical info at given height.
 export extern 'cyber query staking historical-info' [
-	height: string
+	height?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for historical-info
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -2005,9 +2005,9 @@ export extern 'cyber query staking pool' [
 
 # Query a redelegation record for an individual delegator between a source and destination validator.
 export extern 'cyber query staking redelegation' [
-	delegator_addr: string
-	src_validator_addr: string
-	dst_validator_addr: string
+	delegator_addr?: string
+	src_validator_addr?: string
+	dst_validator_addr?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for redelegation
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -2021,7 +2021,7 @@ export extern 'cyber query staking redelegation' [
 
 # Query all redelegation records for an individual delegator.
 export extern 'cyber query staking redelegations' [
-	delegator_addr: string
+	delegator_addr?: string
 	--count-total		# count total number of records in delegator redelegations to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for redelegations
@@ -2041,7 +2041,7 @@ export extern 'cyber query staking redelegations' [
 
 # Query delegations that are redelegating _from_ a validator.
 export extern 'cyber query staking redelegations-from' [
-	validator_addr: string
+	validator_addr?: string
 	--count-total		# count total number of records in validator redelegations to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for redelegations-from
@@ -2061,8 +2061,8 @@ export extern 'cyber query staking redelegations-from' [
 
 # Query unbonding delegations for an individual delegator on an individual validator.
 export extern 'cyber query staking unbonding-delegation' [
-	delegator_addr: string
-	validator_addr: string
+	delegator_addr?: string
+	validator_addr?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for unbonding-delegation
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -2076,7 +2076,7 @@ export extern 'cyber query staking unbonding-delegation' [
 
 # Query unbonding delegations for an individual delegator.
 export extern 'cyber query staking unbonding-delegations' [
-	delegator_addr: string
+	delegator_addr?: string
 	--count-total		# count total number of records in unbonding delegations to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for unbonding-delegations
@@ -2096,7 +2096,7 @@ export extern 'cyber query staking unbonding-delegations' [
 
 # Query delegations that are unbonding _from_ a validator.
 export extern 'cyber query staking unbonding-delegations-from' [
-	validator_addr: string
+	validator_addr?: string
 	--count-total		# count total number of records in unbonding delegations to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for unbonding-delegations-from
@@ -2116,7 +2116,7 @@ export extern 'cyber query staking unbonding-delegations-from' [
 
 # Query details about an individual validator.
 export extern 'cyber query staking validator' [
-	validator_addr: string
+	validator_addr?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for validator
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -2149,7 +2149,7 @@ export extern 'cyber query staking validators' [
 
 # Get the full tendermint validator set at given height
 export extern 'cyber query tendermint-validator-set' [
-	height: string
+	height?: string
 	--help(-h)		# help for tendermint-validator-set
 	--keyring-backend: string@"nu-completions-cyber--os-file-kwallet-pass-test-"		# Select keyring's backend (os|file|kwallet|pass|test) (default "os")
 	--limit: int		# Query number of results returned per page (default 100)
@@ -2164,7 +2164,7 @@ export extern 'cyber query tendermint-validator-set' [
 
 # 
 export extern 'cyber query tx' [
-	hash_acc_seq_signature: string
+	hash_acc_seq_signature?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for tx
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -2195,7 +2195,7 @@ export extern 'cyber query txs' [
 
 # If upgrade-name was previously executed on the chain, this returns the header for the block at which it was applied. This helps a client determine which binary was valid over a given range of blocks, as well as more context to understand past migrations.
 export extern 'cyber query upgrade applied' [
-	upgrade_name: string
+	upgrade_name?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for applied
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -2235,7 +2235,7 @@ export extern 'cyber query upgrade plan' [
 
 # Downloads wasm bytecode for given code id
 export extern 'cyber query wasm code' [
-	code_id: string
+	code_id?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for code
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -2249,7 +2249,7 @@ export extern 'cyber query wasm code' [
 
 # Prints out metadata of a code id
 export extern 'cyber query wasm code-info' [
-	code_id: string
+	code_id?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for code-info
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -2263,7 +2263,7 @@ export extern 'cyber query wasm code-info' [
 
 # Prints out metadata of a contract given its address
 export extern 'cyber query wasm contract' [
-	bech32_address: string
+	bech32_address?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for contract
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -2277,7 +2277,7 @@ export extern 'cyber query wasm contract' [
 
 # Prints out the code history for a contract given its address
 export extern 'cyber query wasm contract-history' [
-	bech32_address: string
+	bech32_address?: string
 	--count-total		# count total number of records in contract history to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for contract-history
@@ -2297,7 +2297,7 @@ export extern 'cyber query wasm contract-history' [
 
 # Prints out all internal state of a contract given its address
 export extern 'cyber query wasm contract-state all' [
-	bech32_address: string
+	bech32_address?: string
 	--count-total		# count total number of records in contract state to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for all
@@ -2317,8 +2317,8 @@ export extern 'cyber query wasm contract-state all' [
 
 # Prints out internal state for of a contract given its address
 export extern 'cyber query wasm contract-state raw' [
-	bech32_address: string
-	key: string
+	bech32_address?: string
+	key?: string
 	--ascii		# ascii encoded key argument
 	--b64		# base64 encoded key argument
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
@@ -2335,8 +2335,8 @@ export extern 'cyber query wasm contract-state raw' [
 
 # Calls contract with given address with query data and prints the returned result
 export extern 'cyber query wasm contract-state smart' [
-	bech32_address: string
-	query: string
+	bech32_address?: string
+	query?: string
 	--ascii		# ascii encoded query argument
 	--b64		# base64 encoded query argument
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
@@ -2382,7 +2382,7 @@ export extern 'cyber query wasm list-code' [
 
 # List wasm all bytecode on the chain for given code id
 export extern 'cyber query wasm list-contract-by-code' [
-	code_id: string
+	code_id?: string
 	--count-total		# count total number of records in list contracts by code to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for list-contract-by-code
@@ -2550,7 +2550,7 @@ export extern 'cyber testnet' [
 
 # execute tx on behalf of granter account:
 export extern 'cyber tx authz exec' [
-	msg_tx_json_file: string
+	msg_tx_json_file?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -2582,13 +2582,13 @@ export extern 'cyber tx authz exec' [
 
 # grant authorization to an address to execute a transaction on your behalf:
 export extern 'cyber tx authz grant' [
-	grantee: string
+	grantee?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--allowed-validators: string		# Allowed validators addresses separated by ,
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--deny-validators: string		# Deny validators addresses separated by ,
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
-	--expiration: int		# The Unix timestamp. Default is one year. (default 1700482147)
+	--expiration: int		# The Unix timestamp. Default is one year. (default 1703179250)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -2619,8 +2619,8 @@ export extern 'cyber tx authz grant' [
 
 # revoke authorization from a granter to a grantee:
 export extern 'cyber tx authz revoke' [
-	grantee: string
-	msg_type: string
+	grantee?: string
+	msg_type?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -2652,9 +2652,9 @@ export extern 'cyber tx authz revoke' [
 
 # Send funds from one account to another. Note, the'--from' flag is ignored as it is implied from [from_key_or_address].
 export extern 'cyber tx bank send' [
-	from_key_or_address: string
-	to_address: string
-	amount: string
+	from_key_or_address?: string
+	to_address?: string
+	amount?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -2686,7 +2686,7 @@ export extern 'cyber tx bank send' [
 
 # Broadcast transactions created with the --generate-only flag and signed with the sign command. Read a transaction from [file_path] and broadcast it to a node. If you supply a dash (-) argument in place of an input filename, the command reads from standard input. $ <appd> tx broadcast ./mytxn.json
 export extern 'cyber tx broadcast' [
-	file_path: string
+	file_path?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -2718,8 +2718,8 @@ export extern 'cyber tx broadcast' [
 
 # Submit proof that an invariant broken to halt the chain
 export extern 'cyber tx crisis invariant-broken' [
-	module_name: string
-	invariant_route: string
+	module_name?: string
+	invariant_route?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -2751,7 +2751,7 @@ export extern 'cyber tx crisis invariant-broken' [
 
 # Decode a binary encoded transaction string
 export extern 'cyber tx decode' [
-	amino_byte_string: string
+	amino_byte_string?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -2784,7 +2784,7 @@ export extern 'cyber tx decode' [
 
 # Funds the community pool with the specified amount
 export extern 'cyber tx distribution fund-community-pool' [
-	amount: string
+	amount?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -2816,7 +2816,7 @@ export extern 'cyber tx distribution fund-community-pool' [
 
 # Set the withdraw address for rewards associated with a delegator address.
 export extern 'cyber tx distribution set-withdraw-addr' [
-	withdraw_addr: string
+	withdraw_addr?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -2880,7 +2880,7 @@ export extern 'cyber tx distribution withdraw-all-rewards' [
 
 # Withdraw rewards from a given delegation address, and optionally withdraw validator commission if the delegation address given is a validator operator.
 export extern 'cyber tx distribution withdraw-rewards' [
-	validator_addr: string
+	validator_addr?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--commission		# Withdraw the validator's commission in addition to the rewards
@@ -2913,7 +2913,7 @@ export extern 'cyber tx distribution withdraw-rewards' [
 
 # Encode transactions created with the --generate-only flag and signed with the sign command. Read a transaction from <file>, serialize it to the Amino wire protocol, and output it as base64. If you supply a dash (-) argument in place of an input filename, the command reads from standard input.
 export extern 'cyber tx encode' [
-	file: string
+	file?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -2955,8 +2955,8 @@ export extern 'cyber tx evidence' [
 
 # Grant authorization to pay fees from your address. Note, the'--from' flag is 				ignored as it is implied from [granter].
 export extern 'cyber tx feegrant grant' [
-	granter_key_or_address: string
-	grantee: string
+	granter_key_or_address?: string
+	grantee?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--allowed-messages: string		# Set of allowed messages for fee allowance
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
@@ -2993,8 +2993,8 @@ export extern 'cyber tx feegrant grant' [
 
 # revoke fee grant from a granter to a grantee. Note, the'--from' flag is 			ignored as it is implied from [granter].
 export extern 'cyber tx feegrant revoke' [
-	granter: string
-	grantee: string
+	granter?: string
+	grantee?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -3026,8 +3026,8 @@ export extern 'cyber tx feegrant revoke' [
 
 # Submit a deposit for an active proposal. You can find the proposal-id by running "cyber query gov proposals".
 export extern 'cyber tx gov deposit' [
-	proposal_id: string
-	deposit: string
+	proposal_id?: string
+	deposit?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -3093,7 +3093,7 @@ export extern 'cyber tx gov submit-proposal cancel-software-upgrade' [
 
 # Submit a clear admin for a contract to prevent further migrations proposal
 export extern 'cyber tx gov submit-proposal clear-contract-admin' [
-	contract_addr_bech32: string
+	contract_addr_bech32?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--deposit: string		# Deposit of proposal
@@ -3130,7 +3130,7 @@ export extern 'cyber tx gov submit-proposal clear-contract-admin' [
 
 # Submit a community pool spend proposal along with an initial deposit. The proposal details must be supplied via a JSON file.
 export extern 'cyber tx gov submit-proposal community-pool-spend' [
-	proposal_file: string
+	proposal_file?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -3162,8 +3162,8 @@ export extern 'cyber tx gov submit-proposal community-pool-spend' [
 
 # Submit a execute wasm contract proposal (run by any address)
 export extern 'cyber tx gov submit-proposal execute-contract' [
-	contract_addr_bech32: string
-	json_encoded_migration_args: string
+	contract_addr_bech32?: string
+	json_encoded_migration_args?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--amount: string		# Coins to send to the contract during instantiation
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
@@ -3202,8 +3202,8 @@ export extern 'cyber tx gov submit-proposal execute-contract' [
 
 # Submit an IBC client breaking upgrade proposal along with an initial deposit. The client state specified is the upgraded client state representing the upgraded chain Example Upgraded Client State JSON:  { 	"@type":"/ibc.lightclients.tendermint.v1.ClientState",  	"chain_id":"testchain1", 	"unbonding_period":"1814400s", 	"latest_height":{"revision_number":"0","revision_height":"2"}, 	"proof_specs":[
 export extern 'cyber tx gov submit-proposal ibc-upgrade' [
-	name: string
-	height: string
+	name?: string
+	height?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--deposit: string		# deposit of proposal
@@ -3238,8 +3238,8 @@ export extern 'cyber tx gov submit-proposal ibc-upgrade' [
 
 # Submit an instantiate wasm contract proposal
 export extern 'cyber tx gov submit-proposal instantiate-contract' [
-	code_id_int64: string
-	json_encoded_init_args: string
+	code_id_int64?: string
+	json_encoded_init_args?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--admin: string		# Address of an admin
 	--amount: string		# Coins to send to the contract during instantiation
@@ -3281,9 +3281,9 @@ export extern 'cyber tx gov submit-proposal instantiate-contract' [
 
 # Submit a migrate wasm contract to a new code version proposal
 export extern 'cyber tx gov submit-proposal migrate-contract' [
-	contract_addr_bech32: string
-	new_code_id_int64: string
-	json_encoded_migration_args: string
+	contract_addr_bech32?: string
+	new_code_id_int64?: string
+	json_encoded_migration_args?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--deposit: string		# Deposit of proposal
@@ -3320,7 +3320,7 @@ export extern 'cyber tx gov submit-proposal migrate-contract' [
 
 # Submit a parameter proposal along with an initial deposit. The proposal details must be supplied via a JSON file. For values that contains objects, only non-empty fields will be updated. IMPORTANT: Currently parameter changes are evaluated but not validated, so it is very important that any "value" change is valid (ie. correct type and within bounds) for its respective parameter, eg. "MaxValidator
 export extern 'cyber tx gov submit-proposal param-change' [
-	proposal_file: string
+	proposal_file?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -3352,7 +3352,7 @@ export extern 'cyber tx gov submit-proposal param-change' [
 
 # Submit a pin code proposal for pinning a code to cache
 export extern 'cyber tx gov submit-proposal pin-codes' [
-	code_ids: string
+	code_ids?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--deposit: string		# Deposit of proposal
@@ -3389,8 +3389,8 @@ export extern 'cyber tx gov submit-proposal pin-codes' [
 
 # Submit a new admin for a contract proposal
 export extern 'cyber tx gov submit-proposal set-contract-admin' [
-	contract_addr_bech32: string
-	new_admin_addr_bech32: string
+	contract_addr_bech32?: string
+	new_admin_addr_bech32?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--deposit: string		# Deposit of proposal
@@ -3427,7 +3427,7 @@ export extern 'cyber tx gov submit-proposal set-contract-admin' [
 
 # Submit a software upgrade along with an initial deposit. Please specify a unique name and height for the upgrade to take effect. You may include info to reference a binary download link, in a format compatible with: https://github.com/cosmos/cosmos-sdk/tree/master/cosmovisor
 export extern 'cyber tx gov submit-proposal software-upgrade' [
-	name: string
+	name?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--deposit: string		# deposit of proposal
@@ -3464,8 +3464,8 @@ export extern 'cyber tx gov submit-proposal software-upgrade' [
 
 # Submit a sudo wasm contract proposal (to call privileged commands)
 export extern 'cyber tx gov submit-proposal sudo-contract' [
-	contract_addr_bech32: string
-	json_encoded_migration_args: string
+	contract_addr_bech32?: string
+	json_encoded_migration_args?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--deposit: string		# Deposit of proposal
@@ -3502,7 +3502,7 @@ export extern 'cyber tx gov submit-proposal sudo-contract' [
 
 # Submit a unpin code proposal for unpinning a code to cache
 export extern 'cyber tx gov submit-proposal unpin-codes' [
-	code_ids: string
+	code_ids?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--deposit: string		# Deposit of proposal
@@ -3539,8 +3539,8 @@ export extern 'cyber tx gov submit-proposal unpin-codes' [
 
 # Submit an update IBC client proposal along with an initial deposit. Please specify a subject client identifier you want to update.. Please specify the substitute client the subject client will be updated to.
 export extern 'cyber tx gov submit-proposal update-client' [
-	subject_client_id: string
-	substitute_client_id: string
+	subject_client_id?: string
+	substitute_client_id?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--deposit: string		# deposit of proposal
@@ -3651,8 +3651,8 @@ export extern 'cyber tx gov submit-proposal wasm-store' [
 
 # Submit a vote for an active proposal. You can find the proposal-id by running "cyber query gov proposals".
 export extern 'cyber tx gov vote' [
-	proposal_id: string
-	option: string
+	proposal_id?: string
+	option?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -3684,8 +3684,8 @@ export extern 'cyber tx gov vote' [
 
 # Submit a vote for an active proposal. You can find the proposal-id by running "cyber query gov proposals".
 export extern 'cyber tx gov weighted-vote' [
-	proposal_id: string
-	weighted_options: string
+	proposal_id?: string
+	weighted_options?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -3717,8 +3717,8 @@ export extern 'cyber tx gov weighted-vote' [
 
 # Create cyberlink.
 export extern 'cyber tx graph cyberlink' [
-	cid_from: string
-	cid_to: string
+	cid_from?: string
+	cid_to?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -3750,8 +3750,8 @@ export extern 'cyber tx graph cyberlink' [
 
 # Create grid route from your address to destination address with provided name
 export extern 'cyber tx grid create-route' [
-	destination: string
-	name: string
+	destination?: string
+	name?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -3783,7 +3783,7 @@ export extern 'cyber tx grid create-route' [
 
 # Delete your grid route to given destination address
 export extern 'cyber tx grid delete-route' [
-	destination: string
+	destination?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -3815,8 +3815,8 @@ export extern 'cyber tx grid delete-route' [
 
 # Set value of grid route to destination address
 export extern 'cyber tx grid edit-route' [
-	destination: string
-	value: string
+	destination?: string
+	value?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -3848,8 +3848,8 @@ export extern 'cyber tx grid edit-route' [
 
 # Edit name of grid route to given destination address
 export extern 'cyber tx grid edit-route-name' [
-	destination: string
-	name: string
+	destination?: string
+	name?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -3932,7 +3932,7 @@ export extern 'cyber tx ibc client misbehaviour' [
 
 # update existing client with a header
 export extern 'cyber tx ibc client update' [
-	client_id: string
+	client_id?: string
 	--help(-h)		# help for update
 	--chain-id: string		# The network chain ID
 	--home: string		# directory for config and data (default "/Users/user//.cyber")
@@ -3943,9 +3943,9 @@ export extern 'cyber tx ibc client update' [
 
 # upgrade the IBC client associated with the provided client identifier while providing proof committed by the counterparty chain to the new client and consensus states 	- ClientState JSON example: {"@type":"/ibc.lightclients.solomachine.v1.ClientState","sequence":"1","frozen_sequence":"0","consensus_state":{"public_key":{"@type":"/cosmos.crypto.secp256k1.PubKey","key":"AtK50+5pJOoaa04qqAqrnyAqsYrwr
 export extern 'cyber tx ibc client upgrade' [
-	client_identifier: string
-	upgrade_client_proof: string
-	upgrade_consensus_state_proof: string
+	client_identifier?: string
+	upgrade_client_proof?: string
+	upgrade_consensus_state_proof?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -3977,10 +3977,10 @@ export extern 'cyber tx ibc client upgrade' [
 
 # Transfer a fungible token through IBC. Timeouts can be specified as absolute or relative using the "absolute-timeouts" flag. Timeout height can be set by passing in the height string in the form {revision}-{height} using the "packet-timeout-height" flag. Relative timeout height is added to the block height queried from the latest consensus state corresponding to the counterparty channel. Relative 
 export extern 'cyber tx ibc-transfer transfer' [
-	src_port: string
-	src_channel: string
-	receiver: string
-	amount: string
+	src_port?: string
+	src_channel?: string
+	receiver?: string
+	amount?: string
 	--absolute-timeouts		# Timeout flags are used as absolute timeouts.
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
@@ -4015,8 +4015,8 @@ export extern 'cyber tx ibc-transfer transfer' [
 
 # Create liquidity pool and deposit coins.
 export extern 'cyber tx liquidity create-pool' [
-	pool_type: string
-	deposit_coins: string
+	pool_type?: string
+	deposit_coins?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -4048,8 +4048,8 @@ export extern 'cyber tx liquidity create-pool' [
 
 # Deposit coins a liquidity pool. This deposit request is not processed immediately since it is accumulated in the liquidity pool batch. All requests in a batch are treated equally and executed at the same swap price.
 export extern 'cyber tx liquidity deposit' [
-	pool_id: string
-	deposit_coins: string
+	pool_id?: string
+	deposit_coins?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -4081,12 +4081,12 @@ export extern 'cyber tx liquidity deposit' [
 
 # Swap offer coin with demand coin from the liquidity pool with the given order price. This swap request is not processed immediately since it is accumulated in the liquidity pool batch. All requests in a batch are treated equally and executed at the same swap price. The order of swap requests is ignored since the universal swap price is calculated in every batch to prevent front running. The reques
 export extern 'cyber tx liquidity swap' [
-	pool_id: string
-	swap_type: string
-	offer_coin: string
-	demand_coin_denom: string
-	order_price: string
-	swap_fee_rate: string
+	pool_id?: string
+	swap_type?: string
+	offer_coin?: string
+	demand_coin_denom?: string
+	order_price?: string
+	swap_fee_rate?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -4118,8 +4118,8 @@ export extern 'cyber tx liquidity swap' [
 
 # Withdraw pool coin from the specified liquidity pool. This swap request is not processed immediately since it is accumulated in the liquidity pool batch. All requests in a batch are treated equally and executed at the same swap price.
 export extern 'cyber tx liquidity withdraw' [
-	pool_id: string
-	pool_coin: string
+	pool_id?: string
+	pool_coin?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -4151,9 +4151,9 @@ export extern 'cyber tx liquidity withdraw' [
 
 # Sign transactions created with the --generate-only flag that require multisig signatures. Read one or more signatures from one or more [signature] file, generate a multisig signature compliant to the multisig key [name], and attach the key name to the transaction read from [file].
 export extern 'cyber tx multisign' [
-	file: string
-	name: string
-	signature: string
+	file?: string
+	name?: string
+	signature?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--amino		# Generate Amino-encoded JSON suitable for submitting to the txs REST endpoint
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
@@ -4188,9 +4188,9 @@ export extern 'cyber tx multisign' [
 
 # Assemble a batch of multisig transactions generated by batch sign command. Read one or more signatures from one or more [signature] file, generate a multisig signature compliant to the multisig key [name], and attach the key name to the transaction read from [file].
 export extern 'cyber tx multisign-batch' [
-	file: string
-	name: string
-	signature_file: string
+	file?: string
+	name?: string
+	signature_file?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -4225,9 +4225,9 @@ export extern 'cyber tx multisign-batch' [
 
 # Long.
 export extern 'cyber tx resources investmint' [
-	amount: string
-	resource: string
-	length: string
+	amount?: string
+	resource?: string
+	length?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -4259,7 +4259,7 @@ export extern 'cyber tx resources investmint' [
 
 # Sign a transaction created with the --generate-only flag. It will read a transaction from [file], sign it, and print its JSON encoding. If the --signature-only flag is set, it will output the signature parts only. The --offline flag makes sure that the client will not reach out to full node. As a result, the account and sequence number queries will not be performed and it is required to set such p
 export extern 'cyber tx sign' [
-	file: string
+	file?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--amino		# Generate Amino encoded JSON suitable for submiting to the txs REST endpoint
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
@@ -4296,7 +4296,7 @@ export extern 'cyber tx sign' [
 
 # Sign batch files of transactions generated with --generate-only. The command processes list of transactions from file (one StdTx each line), generate signed transactions or signatures and print their JSON encoding, delimited by '\n'. As the signatures are generated, the command updates the account sequence number accordingly. If the --signature-only flag is set, it will output the signature parts 
 export extern 'cyber tx sign-batch' [
-	file: string
+	file?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -4406,8 +4406,8 @@ export extern 'cyber tx staking create-validator' [
 
 # Delegate an amount of liquid coins to a validator from your wallet.
 export extern 'cyber tx staking delegate' [
-	validator_addr: string
-	amount: string
+	validator_addr?: string
+	amount?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -4477,9 +4477,9 @@ export extern 'cyber tx staking edit-validator' [
 
 # Redelegate an amount of illiquid staking tokens from one validator to another.
 export extern 'cyber tx staking redelegate' [
-	src_validator_addr: string
-	dst_validator_addr: string
-	amount: string
+	src_validator_addr?: string
+	dst_validator_addr?: string
+	amount?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -4511,8 +4511,8 @@ export extern 'cyber tx staking redelegate' [
 
 # Unbond an amount of bonded shares from a validator.
 export extern 'cyber tx staking unbond' [
-	validator_addr: string
-	amount: string
+	validator_addr?: string
+	amount?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -4544,7 +4544,7 @@ export extern 'cyber tx staking unbond' [
 
 # Print the addresses that must sign the transaction, those who have already signed it, and make sure that signatures are in the correct order. The command would check whether all required signers have signed the transactions, whether the signatures were collected in the right order, and if the signature is valid over the given transaction. If the --offline flag is also set, signature validation ove
 export extern 'cyber tx validate-signatures' [
-	file: string
+	file?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -4576,9 +4576,9 @@ export extern 'cyber tx validate-signatures' [
 
 # Create a new vesting account funded with an allocation of tokens. The account can either be a delayed or continuous vesting account, which is determined by the '--delayed' flag. All vesting accouts created will have their start time set by the committed block's time. The end_time must be provided as a UNIX epoch timestamp.
 export extern 'cyber tx vesting create-vesting-account' [
-	to_address: string
-	amount: string
-	end_time: string
+	to_address?: string
+	amount?: string
+	end_time?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--delayed		# Create a delayed vesting account if true
@@ -4611,7 +4611,7 @@ export extern 'cyber tx vesting create-vesting-account' [
 
 # Clears admin for a contract to prevent further migrations
 export extern 'cyber tx wasm clear-contract-admin' [
-	contract_addr_bech32: string
+	contract_addr_bech32?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -4643,8 +4643,8 @@ export extern 'cyber tx wasm clear-contract-admin' [
 
 # Execute a command on a wasm contract
 export extern 'cyber tx wasm execute' [
-	contract_addr_bech32: string
-	json_encoded_send_args: string
+	contract_addr_bech32?: string
+	json_encoded_send_args?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--amount: string		# Coins to send to the contract along with command
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
@@ -4677,8 +4677,8 @@ export extern 'cyber tx wasm execute' [
 
 # Instantiate a wasm contract
 export extern 'cyber tx wasm instantiate' [
-	code_id_int64: string
-	json_encoded_init_args: string
+	code_id_int64?: string
+	json_encoded_init_args?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--admin: string		# Address of an admin
 	--amount: string		# Coins to send to the contract during instantiation
@@ -4714,9 +4714,9 @@ export extern 'cyber tx wasm instantiate' [
 
 # Migrate a wasm contract to a new code version
 export extern 'cyber tx wasm migrate' [
-	contract_addr_bech32: string
-	new_code_id_int64: string
-	json_encoded_migration_args: string
+	contract_addr_bech32?: string
+	new_code_id_int64?: string
+	json_encoded_migration_args?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -4748,8 +4748,8 @@ export extern 'cyber tx wasm migrate' [
 
 # Set new admin for a contract
 export extern 'cyber tx wasm set-contract-admin' [
-	contract_addr_bech32: string
-	new_admin_addr_bech32: string
+	contract_addr_bech32?: string
+	new_admin_addr_bech32?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -4815,7 +4815,7 @@ export extern 'cyber tx wasm store' [
 
 # validates the genesis file at the default location or at the location passed as an arg
 export extern 'cyber validate-genesis' [
-	file: string
+	file?: string
 	--help(-h)		# help for validate-genesis
 	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")

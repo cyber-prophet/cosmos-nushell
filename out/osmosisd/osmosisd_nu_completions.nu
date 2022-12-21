@@ -13,23 +13,23 @@ export def "nu-complete osmosisd _keys values" [] {
     (osmosisd _keys table).name | zip (osmosisd _keys table).address | flatten
   }
 
-def "nu-completions-osmosisd--os-file-kwallet-pass-test-memory-" [] { ["os", "file", "kwallet", "pass", "test", "memory"] }
 def "nu-completions-osmosisd--json-plain-" [] { ["json", "plain"] }
-def "nu-completions-osmosisd--trace-debug-info-warn-error-fatal-panic-" [] { ["trace", "debug", "info", "warn", "error", "fatal", "panic"] }
-def "nu-completions-osmosisd--text-json-" [] { ["text", "json"] }
+def "nu-completions-osmosisd--os-file-test-" [] { ["os", "file", "test"] }
 def "nu-completions-osmosisd--default-nothing-everything-custom-" [] { ["default", "nothing", "everything", "custom"] }
 def "nu-completions-osmosisd--sync-async-block-" [] { ["sync", "async", "block"] }
-def "nu-completions-osmosisd--os-file-test-" [] { ["os", "file", "test"] }
-def "nu-completions-osmosisd--socket---grpc-" [] { ["socket", "grpc"] }
-def "nu-completions-osmosisd--acc-val-cons-" [] { ["acc", "val", "cons"] }
 def "nu-completions-osmosisd--direct-amino-json-" [] { ["direct", "amino-json"] }
+def "nu-completions-osmosisd--text-json-" [] { ["text", "json"] }
+def "nu-completions-osmosisd--trace-debug-info-warn-error-fatal-panic-" [] { ["trace", "debug", "info", "warn", "error", "fatal", "panic"] }
+def "nu-completions-osmosisd--socket---grpc-" [] { ["socket", "grpc"] }
+def "nu-completions-osmosisd--os-file-kwallet-pass-test-memory-" [] { ["os", "file", "kwallet", "pass", "test", "memory"] }
 def "nu-completions-osmosisd--os-file-kwallet-pass-test-" [] { ["os", "file", "kwallet", "pass", "test"] }
+def "nu-completions-osmosisd--acc-val-cons-" [] { ["acc", "val", "cons"] }
 
 # Add a genesis account to genesis.json. The provided account must specify the account address or key name and a list of initial coins. If a key name is given, the address will be looked up in the local Keybase. The list of initial tokens must contain valid denominations. Accounts may optionally be supplied with vesting parameters.
 export extern 'osmosisd add-genesis-account' [
-	address_or_key_name: string
-	coin: string
-	coin: string
+	address_or_key_name?: string
+	coin?: string
+	coin?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for add-genesis-account
 	--keyring-backend: string@"nu-completions-osmosisd--os-file-kwallet-pass-test-"		# Select keyring's backend (os|file|kwallet|pass|test) (default "os")
@@ -46,8 +46,8 @@ export extern 'osmosisd add-genesis-account' [
 
 # Execute a command on a wasm contract
 export extern 'osmosisd add-wasm-genesis-message execute' [
-	contract_addr_bech32: string
-	json_encoded_send_args: string
+	contract_addr_bech32?: string
+	json_encoded_send_args?: string
 	--amount: string		# Coins to send to the contract along with command
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for execute
@@ -63,8 +63,8 @@ export extern 'osmosisd add-wasm-genesis-message execute' [
 
 # Instantiate a wasm contract
 export extern 'osmosisd add-wasm-genesis-message instantiate-contract' [
-	code_id_int64: string
-	json_encoded_init_args: string
+	code_id_int64?: string
+	json_encoded_init_args?: string
 	--admin: string		# Address of an admin
 	--amount: string		# Coins to send to the contract during instantiation
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
@@ -134,8 +134,8 @@ export extern 'osmosisd collect-gentxs' [
 
 # Create or query an application CLI configuration file
 export extern 'osmosisd config' [
-	key: string
-	value: string
+	key?: string
+	value?: string
 	--help(-h)		# help for config
 	--home: string		# directory for config and data (default "/Users/user/.osmosisd")
 	--log_format: string@"nu-completions-osmosisd--json-plain-"		# The logging format (json|plain) (default "plain")
@@ -145,7 +145,7 @@ export extern 'osmosisd config' [
 
 # Convert an address between hex encoding and bech32.
 export extern 'osmosisd debug addr' [
-	address: string
+	address?: string
 	--help(-h)		# help for addr
 	--home: string		# directory for config and data (default "/Users/user/.osmosisd")
 	--log_format: string@"nu-completions-osmosisd--json-plain-"		# The logging format (json|plain) (default "plain")
@@ -165,7 +165,7 @@ export extern 'osmosisd debug bech32-convert' [
 
 # Decode a pubkey from proto JSON and display it's address.
 export extern 'osmosisd debug pubkey' [
-	pubkey: string
+	pubkey?: string
 	--help(-h)		# help for pubkey
 	--home: string		# directory for config and data (default "/Users/user/.osmosisd")
 	--log_format: string@"nu-completions-osmosisd--json-plain-"		# The logging format (json|plain) (default "plain")
@@ -175,7 +175,7 @@ export extern 'osmosisd debug pubkey' [
 
 # Decode a pubkey from hex, base64, or bech32.
 export extern 'osmosisd debug pubkey-raw' [
-	pubkey: string
+	pubkey?: string
 	--help(-h)		# help for pubkey-raw
 	--type(-t): string		# Pubkey type to decode (oneof secp256k1, ed25519) (default "ed25519")
 	--home: string		# directory for config and data (default "/Users/user/.osmosisd")
@@ -186,7 +186,7 @@ export extern 'osmosisd debug pubkey-raw' [
 
 # Convert raw-bytes to hex.
 export extern 'osmosisd debug raw-bytes' [
-	raw_bytes: string
+	raw_bytes?: string
 	--help(-h)		# help for raw-bytes
 	--home: string		# directory for config and data (default "/Users/user/.osmosisd")
 	--log_format: string@"nu-completions-osmosisd--json-plain-"		# The logging format (json|plain) (default "plain")
@@ -209,8 +209,8 @@ export extern 'osmosisd export' [
 
 # Export a derive balances from a provided genesis export
 export extern 'osmosisd export-derive-balances' [
-	input_genesis_file: string
-	output_snapshot_json: string
+	input_genesis_file?: string
+	output_snapshot_json?: string
 	--breakdown-by-pool-ids: string		# Output a special breakdown for amount LP'd to the provided pools. Usage --breakdown-by-pool-ids=1,2,605
 	--help(-h)		# help for export-derive-balances
 	--home: string		# directory for config and data (default "/Users/user/.osmosisd")
@@ -232,8 +232,8 @@ export extern 'osmosisd forceprune' [
 
 # Generate a genesis transaction that creates a validator with a self-delegation, that is signed by the key in the Keyring referenced by a given name. A node ID and Bech32 consensus pubkey may optionally be provided. If they are omitted, they will be retrieved from the priv_validator.json file. The following default parameters are included:      	delegation amount:           100000000stake 	commissi
 export extern 'osmosisd gentx' [
-	key_name: string
-	amount: string
+	key_name?: string
+	amount?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--amount: string		# Amount of coins to bond
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
@@ -252,7 +252,7 @@ export extern 'osmosisd gentx' [
 	--generate-only		# Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
 	--help(-h)		# help for gentx
 	--identity: string		# The (optional) identity signature (ex. UPort or Keybase)
-	--ip: string		# The node's public IP (default "10.0.0.66")
+	--ip: string		# The node's public IP (default "192.168.1.44")
 	--keyring-backend: string@"nu-completions-osmosisd--os-file-kwallet-pass-test-memory-"		# Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
 	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
 	--ledger		# Use a connected Ledger device
@@ -279,7 +279,7 @@ export extern 'osmosisd gentx' [
 
 # Help provides help for any command in the application. Simply type osmosisd help [path to command] for full details.
 export extern 'osmosisd help' [
-	command: string
+	command?: string
 	--help(-h)		# help for help
 	--home: string		# directory for config and data (default "/Users/user/.osmosisd")
 	--log_format: string@"nu-completions-osmosisd--json-plain-"		# The logging format (json|plain) (default "plain")
@@ -289,7 +289,7 @@ export extern 'osmosisd help' [
 
 # Initialize validators's and node's configuration files.
 export extern 'osmosisd init' [
-	moniker: string
+	moniker?: string
 	--chain-id: string		# genesis file chain-id, if left blank will be randomly created
 	--help(-h)		# help for init
 	--overwrite(-o)		# overwrite the genesis.json file
@@ -302,7 +302,7 @@ export extern 'osmosisd init' [
 
 # Derive a new private key and encrypt to disk. Optionally specify a BIP39 mnemonic, a BIP39 passphrase to further secure the mnemonic, and a bip32 HD path to derive a specific account. The key will be stored under the given name and encrypted with the given password. The only input that is required is the encryption password. If run with -i, it will prompt the user for BIP44 path, BIP39 mnemonic, a
 export extern 'osmosisd keys add' [
-	name: string
+	name?: string
 	--account: int		# Account number for HD derivation
 	--algo: string		# Key signing algorithm to generate keys for (default "secp256k1")
 	--coin-type: int		# coin type number for HD derivation (default 118)
@@ -329,7 +329,7 @@ export extern 'osmosisd keys add' [
 
 # Delete keys from the Keybase backend. Note that removing offline or ledger keys will remove only the public key references stored locally, i.e. private keys stored in a ledger device cannot be deleted with the CLI.
 export extern 'osmosisd keys delete' [
-	name: string
+	name?: string
 	--force(-f)		# Remove the key unconditionally without asking for the passphrase. Deprecated.
 	--help(-h)		# help for delete
 	--yes(-y)		# Skip confirmation prompt when deleting offline or ledger key references
@@ -344,7 +344,7 @@ export extern 'osmosisd keys delete' [
 
 # Export a private key from the local keyring in ASCII-armored encrypted format. When both the --unarmored-hex and --unsafe flags are selected, cryptographic private key material is exported in an INSECURE fashion that is designed to allow users to import their keys in hot wallets. This feature is for advanced users only that are confident about how to handle private keys work and are FULLY AWARE OF
 export extern 'osmosisd keys export' [
-	name: string
+	name?: string
 	--help(-h)		# help for export
 	--unarmored-hex		# Export unarmored hex privkey. Requires --unsafe.
 	--unsafe		# Enable unsafe operations. This flag must be switched on along with all unsafe operation-specific options.
@@ -359,8 +359,8 @@ export extern 'osmosisd keys export' [
 
 # Import a ASCII armored private key into the local keybase.
 export extern 'osmosisd keys import' [
-	name: string
-	keyfile: string
+	name?: string
+	keyfile?: string
 	--help(-h)		# help for import
 	--home: string		# The application home directory (default "/Users/user/.osmosisd")
 	--keyring-backend: string@"nu-completions-osmosisd--os-file-test-"		# Select keyring's backend (os|file|test) (default "os")
@@ -386,7 +386,7 @@ export extern 'osmosisd keys list' [
 
 # Migrate key information from the legacy (db-based) Keybase to the new keyring-based Keyring. The legacy Keybase used to persist keys in a LevelDB database stored in a 'keys' sub-directory of the old client application's home directory, e.g. $HOME/.gaiacli/keys/. For each key material entry, the command will prompt if the key should be skipped or not. If the key is not to be skipped, the passphrase
 export extern 'osmosisd keys migrate' [
-	old_home_dir: string
+	old_home_dir?: string
 	--dry-run		# Run migration without actually persisting any changes to the new Keybase
 	--help(-h)		# help for migrate
 	--home: string		# The application home directory (default "/Users/user/.osmosisd")
@@ -413,7 +413,7 @@ export extern 'osmosisd keys mnemonic' [
 
 # Convert and print to stdout key addresses and fingerprints from hexadecimal into bech32 cosmos prefixed format and vice versa.
 export extern 'osmosisd keys parse' [
-	hex_or_bech32_address: string
+	hex_or_bech32_address?: string
 	--help(-h)		# help for parse
 	--home: string		# The application home directory (default "/Users/user/.osmosisd")
 	--keyring-backend: string@"nu-completions-osmosisd--os-file-test-"		# Select keyring's backend (os|file|test) (default "os")
@@ -443,8 +443,8 @@ export extern 'osmosisd keys show' [
 
 # Migrate the source genesis into the target version and print to STDOUT.
 export extern 'osmosisd migrate' [
-	target_version: string
-	genesis_file: string
+	target_version?: string
+	genesis_file?: string
 	--chain-id: string		# override chain_id with this flag
 	--genesis-time: string		# override genesis_time with this flag
 	--help(-h)		# help for migrate
@@ -468,7 +468,7 @@ export extern 'osmosisd prepare-genesis' [
 
 # Query for account by address
 export extern 'osmosisd query account' [
-	address: string
+	address?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for account
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -482,7 +482,7 @@ export extern 'osmosisd query account' [
 
 # Query for account by address
 export extern 'osmosisd query auth account' [
-	address: string
+	address?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for account
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -541,9 +541,9 @@ export extern 'osmosisd query auth params' [
 
 # Query authorization grants for a granter-grantee pair. If msg-type-url is set, it will select grants only for that msg type.
 export extern 'osmosisd query authz grants' [
-	granter_addr: string
-	grantee_addr: string
-	msg_type_url_: string
+	granter_addr?: string
+	grantee_addr?: string
+	msg_type_url_?: string
 	--count-total		# count total number of records in grants to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for grants
@@ -563,7 +563,7 @@ export extern 'osmosisd query authz grants' [
 
 # Query the total balance of an account or of a specific denomination.
 export extern 'osmosisd query bank balances' [
-	address: string
+	address?: string
 	--count-total		# count total number of records in all balances to query for
 	--denom: string		# The specific balance denomination to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
@@ -612,7 +612,7 @@ export extern 'osmosisd query bank total' [
 
 # Get verified data for a the block at given height
 export extern 'osmosisd query block' [
-	height: string
+	height?: string
 	--help(-h)		# help for block
 	--node(-n): string		# Node to connect to (default "tcp://localhost:26657")
 	--chain-id: string		# The network chain ID
@@ -624,7 +624,7 @@ export extern 'osmosisd query block' [
 
 # Query validator commission rewards from delegators to that validator.
 export extern 'osmosisd query distribution commission' [
-	validator: string
+	validator?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for commission
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -664,8 +664,8 @@ export extern 'osmosisd query distribution params' [
 
 # Query all rewards earned by a delegator, optionally restrict to rewards from a single validator.
 export extern 'osmosisd query distribution rewards' [
-	delegator_addr: string
-	validator_addr: string
+	delegator_addr?: string
+	validator_addr?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for rewards
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -679,9 +679,9 @@ export extern 'osmosisd query distribution rewards' [
 
 # Query all slashes of a validator for a given block range.
 export extern 'osmosisd query distribution slashes' [
-	validator: string
-	start_height: string
-	end_height: string
+	validator?: string
+	start_height?: string
+	end_height?: string
 	--count-total		# count total number of records in validator slashes to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for slashes
@@ -701,7 +701,7 @@ export extern 'osmosisd query distribution slashes' [
 
 # Query distribution outstanding (un-withdrawn) rewards for a validator and all their delegations.
 export extern 'osmosisd query distribution validator-outstanding-rewards' [
-	validator: string
+	validator?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for validator-outstanding-rewards
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -741,9 +741,9 @@ export extern 'osmosisd query epochs epoch-infos' [
 
 # Query estimate-swap-exact-amount-in.
 export extern 'osmosisd query gamm estimate-swap-exact-amount-in' [
-	poolID: string
-	sender: string
-	tokenIn: string
+	poolID?: string
+	sender?: string
+	tokenIn?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for estimate-swap-exact-amount-in
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -759,9 +759,9 @@ export extern 'osmosisd query gamm estimate-swap-exact-amount-in' [
 
 # Query estimate-swap-exact-amount-out.
 export extern 'osmosisd query gamm estimate-swap-exact-amount-out' [
-	poolID: string
-	sender: string
-	tokenOut: string
+	poolID?: string
+	sender?: string
+	tokenOut?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for estimate-swap-exact-amount-out
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -790,7 +790,7 @@ export extern 'osmosisd query gamm num-pools' [
 
 # Query pool.
 export extern 'osmosisd query gamm pool' [
-	poolID: string
+	poolID?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for pool
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -804,7 +804,7 @@ export extern 'osmosisd query gamm pool' [
 
 # Query pool-params.
 export extern 'osmosisd query gamm pool-params' [
-	poolID: string
+	poolID?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for pool-params
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -837,9 +837,9 @@ export extern 'osmosisd query gamm pools' [
 
 # Query spot-price
 export extern 'osmosisd query gamm spot-price' [
-	pool_ID: string
-	base_asset_denom: string
-	quote_asset_denom: string
+	pool_ID?: string
+	base_asset_denom?: string
+	quote_asset_denom?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for spot-price
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -866,7 +866,7 @@ export extern 'osmosisd query gamm total-liquidity' [
 
 # Query total-share.
 export extern 'osmosisd query gamm total-share' [
-	poolID: string
+	poolID?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for total-share
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -880,8 +880,8 @@ export extern 'osmosisd query gamm total-share' [
 
 # Query details for a single proposal deposit on a proposal by its identifier.
 export extern 'osmosisd query gov deposit' [
-	proposal_id: string
-	depositer_addr: string
+	proposal_id?: string
+	depositer_addr?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for deposit
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -895,7 +895,7 @@ export extern 'osmosisd query gov deposit' [
 
 # Query details for all deposits on a proposal. You can find the proposal-id by running "osmosisd query gov proposals".
 export extern 'osmosisd query gov deposits' [
-	proposal_id: string
+	proposal_id?: string
 	--count-total		# count total number of records in deposits to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for deposits
@@ -915,7 +915,7 @@ export extern 'osmosisd query gov deposits' [
 
 # Query the all the parameters for the governance process.
 export extern 'osmosisd query gov param' [
-	param_type: string
+	param_type?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for param
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -942,7 +942,7 @@ export extern 'osmosisd query gov params' [
 
 # Query details for a proposal. You can find the proposal-id by running "osmosisd query gov proposals".
 export extern 'osmosisd query gov proposal' [
-	proposal_id: string
+	proposal_id?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for proposal
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -978,7 +978,7 @@ export extern 'osmosisd query gov proposals' [
 
 # Query which address proposed a proposal with a given ID.
 export extern 'osmosisd query gov proposer' [
-	proposal_id: string
+	proposal_id?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for proposer
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -992,7 +992,7 @@ export extern 'osmosisd query gov proposer' [
 
 # Query tally of votes on a proposal. You can find the proposal-id by running "osmosisd query gov proposals".
 export extern 'osmosisd query gov tally' [
-	proposal_id: string
+	proposal_id?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for tally
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1006,8 +1006,8 @@ export extern 'osmosisd query gov tally' [
 
 # Query details for a single vote on a proposal given its identifier.
 export extern 'osmosisd query gov vote' [
-	proposal_id: string
-	voter_addr: string
+	proposal_id?: string
+	voter_addr?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for vote
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1021,7 +1021,7 @@ export extern 'osmosisd query gov vote' [
 
 # Query vote details for a single proposal by its identifier.
 export extern 'osmosisd query gov votes' [
-	proposal_id: string
+	proposal_id?: string
 	--count-total		# count total number of records in votes to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for votes
@@ -1060,8 +1060,8 @@ export extern 'osmosisd query ibc channel channels' [
 
 # Query the client state associated with a channel, by providing its port and channel identifiers.
 export extern 'osmosisd query ibc channel client-state' [
-	port_id: string
-	channel_id: string
+	port_id?: string
+	channel_id?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for client-state
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1075,7 +1075,7 @@ export extern 'osmosisd query ibc channel client-state' [
 
 # Query all channels associated with a connection
 export extern 'osmosisd query ibc channel connections' [
-	connection_id: string
+	connection_id?: string
 	--count-total		# count total number of records in channels associated with a connection to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for connections
@@ -1095,8 +1095,8 @@ export extern 'osmosisd query ibc channel connections' [
 
 # Query an IBC channel end from a port and channel identifiers
 export extern 'osmosisd query ibc channel end' [
-	port_id: string
-	channel_id: string
+	port_id?: string
+	channel_id?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for end
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1111,8 +1111,8 @@ export extern 'osmosisd query ibc channel end' [
 
 # Query the next receive sequence for a given channel
 export extern 'osmosisd query ibc channel next-sequence-receive' [
-	port_id: string
-	channel_id: string
+	port_id?: string
+	channel_id?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for next-sequence-receive
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1127,9 +1127,9 @@ export extern 'osmosisd query ibc channel next-sequence-receive' [
 
 # Query a packet acknowledgement
 export extern 'osmosisd query ibc channel packet-ack' [
-	port_id: string
-	channel_id: string
-	sequence: string
+	port_id?: string
+	channel_id?: string
+	sequence?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for packet-ack
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1144,9 +1144,9 @@ export extern 'osmosisd query ibc channel packet-ack' [
 
 # Query a packet commitment
 export extern 'osmosisd query ibc channel packet-commitment' [
-	port_id: string
-	channel_id: string
-	sequence: string
+	port_id?: string
+	channel_id?: string
+	sequence?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for packet-commitment
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1161,8 +1161,8 @@ export extern 'osmosisd query ibc channel packet-commitment' [
 
 # Query all packet commitments associated with a channel
 export extern 'osmosisd query ibc channel packet-commitments' [
-	port_id: string
-	channel_id: string
+	port_id?: string
+	channel_id?: string
 	--count-total		# count total number of records in packet commitments associated with a channel to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for packet-commitments
@@ -1182,9 +1182,9 @@ export extern 'osmosisd query ibc channel packet-commitments' [
 
 # Query a packet receipt
 export extern 'osmosisd query ibc channel packet-receipt' [
-	port_id: string
-	channel_id: string
-	sequence: string
+	port_id?: string
+	channel_id?: string
+	sequence?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for packet-receipt
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1199,8 +1199,8 @@ export extern 'osmosisd query ibc channel packet-receipt' [
 
 # Given a list of acknowledgement sequences from counterparty, determine if an ack on the counterparty chain has been received on the executing chain. The return value represents: - Unreceived packet acknowledgement: packet commitment exists on original sending (executing) chain and ack exists on receiving chain.
 export extern 'osmosisd query ibc channel unreceived-acks' [
-	port_id: string
-	channel_id: string
+	port_id?: string
+	channel_id?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for unreceived-acks
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1215,8 +1215,8 @@ export extern 'osmosisd query ibc channel unreceived-acks' [
 
 # Determine if a packet, given a list of packet commitment sequences, is unreceived. The return value represents: - Unreceived packet commitments: no acknowledgement exists on receiving chain for the given packet commitment sequence on sending chain.
 export extern 'osmosisd query ibc channel unreceived-packets' [
-	port_id: string
-	channel_id: string
+	port_id?: string
+	channel_id?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for unreceived-packets
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1231,8 +1231,8 @@ export extern 'osmosisd query ibc channel unreceived-packets' [
 
 # Query the consensus state for a particular light client at a given height. If the '--latest' flag is included, the query returns the latest consensus state, overriding the height argument.
 export extern 'osmosisd query ibc client consensus-state' [
-	client_id: string
-	height: string
+	client_id?: string
+	height?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for consensus-state
 	--latest-height		# return latest stored consensus state
@@ -1248,7 +1248,7 @@ export extern 'osmosisd query ibc client consensus-state' [
 
 # Query the heights of all consensus states associated with the provided client ID.
 export extern 'osmosisd query ibc client consensus-state-heights' [
-	client_id: string
+	client_id?: string
 	--count-total		# count total number of records in consensus state heights to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for consensus-state-heights
@@ -1268,7 +1268,7 @@ export extern 'osmosisd query ibc client consensus-state-heights' [
 
 # Query all the consensus states from a given client state.
 export extern 'osmosisd query ibc client consensus-states' [
-	client_id: string
+	client_id?: string
 	--count-total		# count total number of records in consensus states to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for consensus-states
@@ -1327,7 +1327,7 @@ export extern 'osmosisd query ibc client self-consensus-state' [
 
 # Query stored client state
 export extern 'osmosisd query ibc client state' [
-	client_id: string
+	client_id?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for state
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1361,7 +1361,7 @@ export extern 'osmosisd query ibc client states' [
 
 # Query client activity status. Any client without an 'Active' status is considered inactive
 export extern 'osmosisd query ibc client status' [
-	client_id: string
+	client_id?: string
 	--help(-h)		# help for status
 	--chain-id: string		# The network chain ID
 	--home: string		# directory for config and data (default "/Users/user/.osmosisd")
@@ -1391,7 +1391,7 @@ export extern 'osmosisd query ibc connection connections' [
 
 # Query stored connection end
 export extern 'osmosisd query ibc connection end' [
-	connection_id: string
+	connection_id?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for end
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1406,7 +1406,7 @@ export extern 'osmosisd query ibc connection end' [
 
 # Query stored client connection paths
 export extern 'osmosisd query ibc connection path' [
-	client_id: string
+	client_id?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for path
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1421,7 +1421,7 @@ export extern 'osmosisd query ibc connection path' [
 
 # Query the denom hash info from a given denom trace
 export extern 'osmosisd query ibc-transfer denom-hash' [
-	trace: string
+	trace?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for denom-hash
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1512,7 +1512,7 @@ export extern 'osmosisd query incentives active-gauges' [
 
 # Query active gauges.
 export extern 'osmosisd query incentives active-gauges-per-denom' [
-	denom: string
+	denom?: string
 	--count-total		# count total number of records in incentives to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for active-gauges-per-denom
@@ -1545,7 +1545,7 @@ export extern 'osmosisd query incentives distributed-coins' [
 
 # Query gauge by id.
 export extern 'osmosisd query incentives gauge-by-id' [
-	id: string
+	id?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for gauge-by-id
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1626,7 +1626,7 @@ export extern 'osmosisd query incentives upcoming-gauges' [
 
 # Query scheduled gauges per denom
 export extern 'osmosisd query incentives upcoming-gauges-per-denom' [
-	denom: string
+	denom?: string
 	--count-total		# count total number of records in incentives to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for upcoming-gauges-per-denom
@@ -1646,8 +1646,8 @@ export extern 'osmosisd query incentives upcoming-gauges-per-denom' [
 
 # Query the controller submodule for the interchain account address for a given owner on a particular connection
 export extern 'osmosisd query interchain-accounts controller interchain-account' [
-	owner: string
-	connection_id: string
+	owner?: string
+	connection_id?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for interchain-account
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1674,8 +1674,8 @@ export extern 'osmosisd query interchain-accounts controller params' [
 
 # Query the interchain-accounts host submodule packet events for a particular channel and sequence
 export extern 'osmosisd query interchain-accounts host packet-events' [
-	channel_id: string
-	sequence: string
+	channel_id?: string
+	sequence?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for packet-events
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1702,8 +1702,8 @@ export extern 'osmosisd query interchain-accounts host params' [
 
 # Query account's the total unlocked records with unlock time before timestamp.
 export extern 'osmosisd query lockup account-locked-beforetime' [
-	address: string
-	timestamp: string
+	address?: string
+	timestamp?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for account-locked-beforetime
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1717,7 +1717,7 @@ export extern 'osmosisd query lockup account-locked-beforetime' [
 
 # Query account's locked coins.
 export extern 'osmosisd query lockup account-locked-coins' [
-	address: string
+	address?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for account-locked-coins
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1731,8 +1731,8 @@ export extern 'osmosisd query lockup account-locked-coins' [
 
 # Query account locked records with a specific duration
 export extern 'osmosisd query lockup account-locked-duration' [
-	address: string
-	duration: string
+	address?: string
+	duration?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for account-locked-duration
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1746,8 +1746,8 @@ export extern 'osmosisd query lockup account-locked-duration' [
 
 # Query account locked records with longer duration.
 export extern 'osmosisd query lockup account-locked-longer-duration' [
-	address: string
-	duration: string
+	address?: string
+	duration?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for account-locked-longer-duration
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1761,9 +1761,9 @@ export extern 'osmosisd query lockup account-locked-longer-duration' [
 
 # Query account's locked records for a denom with longer duration.
 export extern 'osmosisd query lockup account-locked-longer-duration-denom' [
-	address: string
-	duration: string
-	denom: string
+	address?: string
+	duration?: string
+	denom?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for account-locked-longer-duration-denom
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1777,8 +1777,8 @@ export extern 'osmosisd query lockup account-locked-longer-duration-denom' [
 
 # Query account locked records with longer duration from unlocking only queue.
 export extern 'osmosisd query lockup account-locked-longer-duration-not-unlocking' [
-	address: string
-	duration: string
+	address?: string
+	duration?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for account-locked-longer-duration-not-unlocking
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1792,8 +1792,8 @@ export extern 'osmosisd query lockup account-locked-longer-duration-not-unlockin
 
 # Query locked records of an account with unlock time beyond timestamp.
 export extern 'osmosisd query lockup account-locked-pastime' [
-	address: string
-	timestamp: string
+	address?: string
+	timestamp?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for account-locked-pastime
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1807,9 +1807,9 @@ export extern 'osmosisd query lockup account-locked-pastime' [
 
 # Query account's lock records by address, timestamp, denom.
 export extern 'osmosisd query lockup account-locked-pastime-denom' [
-	address: string
-	timestamp: string
-	denom: string
+	address?: string
+	timestamp?: string
+	denom?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for account-locked-pastime-denom
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1823,8 +1823,8 @@ export extern 'osmosisd query lockup account-locked-pastime-denom' [
 
 # Query locked records of an account with unlock time beyond timestamp within not unlocking queue.
 export extern 'osmosisd query lockup account-locked-pastime-not-unlocking' [
-	address: string
-	timestamp: string
+	address?: string
+	timestamp?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for account-locked-pastime-not-unlocking
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1838,7 +1838,7 @@ export extern 'osmosisd query lockup account-locked-pastime-not-unlocking' [
 
 # Query account's unlockable coins.
 export extern 'osmosisd query lockup account-unlockable-coins' [
-	address: string
+	address?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for account-unlockable-coins
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1852,7 +1852,7 @@ export extern 'osmosisd query lockup account-unlockable-coins' [
 
 # Query account's unlocking coins.
 export extern 'osmosisd query lockup account-unlocking-coins' [
-	address: string
+	address?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for account-unlocking-coins
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1866,7 +1866,7 @@ export extern 'osmosisd query lockup account-unlocking-coins' [
 
 # Query account's lock record by id.
 export extern 'osmosisd query lockup lock-by-id' [
-	id: string
+	id?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for lock-by-id
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1919,7 +1919,7 @@ export extern 'osmosisd query lockup output-all-locks' [
 
 # Query synthetic lockups by lockup id.
 export extern 'osmosisd query lockup synthetic-lockups-by-lock-id' [
-	id: string
+	id?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for synthetic-lockups-by-lock-id
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1933,7 +1933,7 @@ export extern 'osmosisd query lockup synthetic-lockups-by-lock-id' [
 
 # Query locked records for a specific denom bigger then duration provided.
 export extern 'osmosisd query lockup total-locked-of-denom' [
-	denom: string
+	denom?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for total-locked-of-denom
 	--min-duration: string		# The minimum duration of token bonded. e.g. 24h, 168h, 336h (default "336h")
@@ -1974,8 +1974,8 @@ export extern 'osmosisd query mint params' [
 
 # Query for raw parameters by subspace and key
 export extern 'osmosisd query params subspace' [
-	subspace: string
-	key: string
+	subspace?: string
+	key?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for subspace
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -2015,7 +2015,7 @@ export extern 'osmosisd query poolincentives external-incentivized-gauges' [
 
 # Query the matching gauge ids and durations by pool id.
 export extern 'osmosisd query poolincentives gauge-ids' [
-	pool_id: string
+	pool_id?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for gauge-ids
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -2081,7 +2081,7 @@ export extern 'osmosisd query slashing params' [
 
 # Use a validators' consensus public key to find the signing-info for that validator: $ <appd> query slashing signing-info '{"@type":"/cosmos.crypto.ed25519.PubKey","key":"OauFcTKbN5Lx3fJL689cikXBqe+hcp6Y+x0rYUdR9Jk="}'
 export extern 'osmosisd query slashing signing-info' [
-	validator_conspub: string
+	validator_conspub?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for signing-info
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -2114,8 +2114,8 @@ export extern 'osmosisd query slashing signing-infos' [
 
 # Query delegations for an individual delegator on an individual validator.
 export extern 'osmosisd query staking delegation' [
-	delegator_addr: string
-	validator_addr: string
+	delegator_addr?: string
+	validator_addr?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for delegation
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -2129,7 +2129,7 @@ export extern 'osmosisd query staking delegation' [
 
 # Query delegations for an individual delegator on all validators.
 export extern 'osmosisd query staking delegations' [
-	delegator_addr: string
+	delegator_addr?: string
 	--count-total		# count total number of records in delegations to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for delegations
@@ -2149,7 +2149,7 @@ export extern 'osmosisd query staking delegations' [
 
 # Query delegations on an individual validator.
 export extern 'osmosisd query staking delegations-to' [
-	validator_addr: string
+	validator_addr?: string
 	--count-total		# count total number of records in validator delegations to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for delegations-to
@@ -2169,7 +2169,7 @@ export extern 'osmosisd query staking delegations-to' [
 
 # Query historical info at given height.
 export extern 'osmosisd query staking historical-info' [
-	height: string
+	height?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for historical-info
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -2209,9 +2209,9 @@ export extern 'osmosisd query staking pool' [
 
 # Query a redelegation record for an individual delegator between a source and destination validator.
 export extern 'osmosisd query staking redelegation' [
-	delegator_addr: string
-	src_validator_addr: string
-	dst_validator_addr: string
+	delegator_addr?: string
+	src_validator_addr?: string
+	dst_validator_addr?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for redelegation
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -2225,7 +2225,7 @@ export extern 'osmosisd query staking redelegation' [
 
 # Query all redelegation records for an individual delegator.
 export extern 'osmosisd query staking redelegations' [
-	delegator_addr: string
+	delegator_addr?: string
 	--count-total		# count total number of records in delegator redelegations to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for redelegations
@@ -2245,7 +2245,7 @@ export extern 'osmosisd query staking redelegations' [
 
 # Query delegations that are redelegating _from_ a validator.
 export extern 'osmosisd query staking redelegations-from' [
-	validator_addr: string
+	validator_addr?: string
 	--count-total		# count total number of records in validator redelegations to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for redelegations-from
@@ -2265,8 +2265,8 @@ export extern 'osmosisd query staking redelegations-from' [
 
 # Query unbonding delegations for an individual delegator on an individual validator.
 export extern 'osmosisd query staking unbonding-delegation' [
-	delegator_addr: string
-	validator_addr: string
+	delegator_addr?: string
+	validator_addr?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for unbonding-delegation
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -2280,7 +2280,7 @@ export extern 'osmosisd query staking unbonding-delegation' [
 
 # Query unbonding delegations for an individual delegator.
 export extern 'osmosisd query staking unbonding-delegations' [
-	delegator_addr: string
+	delegator_addr?: string
 	--count-total		# count total number of records in unbonding delegations to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for unbonding-delegations
@@ -2300,7 +2300,7 @@ export extern 'osmosisd query staking unbonding-delegations' [
 
 # Query delegations that are unbonding _from_ a validator.
 export extern 'osmosisd query staking unbonding-delegations-from' [
-	validator_addr: string
+	validator_addr?: string
 	--count-total		# count total number of records in unbonding delegations to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for unbonding-delegations-from
@@ -2320,7 +2320,7 @@ export extern 'osmosisd query staking unbonding-delegations-from' [
 
 # Query details about an individual validator.
 export extern 'osmosisd query staking validator' [
-	validator_addr: string
+	validator_addr?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for validator
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -2385,7 +2385,7 @@ export extern 'osmosisd query superfluid all-superfluid-assets' [
 
 # Query asset multiplier by denom.
 export extern 'osmosisd query superfluid asset-multiplier' [
-	denom: string
+	denom?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for asset-multiplier
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -2399,7 +2399,7 @@ export extern 'osmosisd query superfluid asset-multiplier' [
 
 # Query connected intermediary account.
 export extern 'osmosisd query superfluid connected-intermediary-account' [
-	lock_id: string
+	lock_id?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for connected-intermediary-account
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -2426,9 +2426,9 @@ export extern 'osmosisd query superfluid params' [
 
 # Query coins superfluid delegated for a delegator, validator, denom
 export extern 'osmosisd query superfluid superfluid-delegation-amount' [
-	delegator_address: string
-	validator_address: string
-	denom: string
+	delegator_address?: string
+	validator_address?: string
+	denom?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for superfluid-delegation-amount
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -2442,7 +2442,7 @@ export extern 'osmosisd query superfluid superfluid-delegation-amount' [
 
 # Query coins superfluid delegated for the specified delegator
 export extern 'osmosisd query superfluid superfluid-delegation-by-delegator' [
-	delegator_address: string
+	delegator_address?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for superfluid-delegation-by-delegator
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -2456,7 +2456,7 @@ export extern 'osmosisd query superfluid superfluid-delegation-by-delegator' [
 
 # Query coins superfluid undelegated for the specified delegator
 export extern 'osmosisd query superfluid superfluid-undelegation-by-delegator' [
-	delegator_address: string
+	delegator_address?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for superfluid-undelegation-by-delegator
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -2470,7 +2470,7 @@ export extern 'osmosisd query superfluid superfluid-undelegation-by-delegator' [
 
 # Query both superfluid delegation and normal delegation
 export extern 'osmosisd query superfluid total-delegation-by-delegator' [
-	delegator_address: string
+	delegator_address?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for total-delegation-by-delegator
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -2497,7 +2497,7 @@ export extern 'osmosisd query superfluid total-superfluid-delegations' [
 
 # Get the full tendermint validator set at given height
 export extern 'osmosisd query tendermint-validator-set' [
-	height: string
+	height?: string
 	--help(-h)		# help for tendermint-validator-set
 	--keyring-backend: string@"nu-completions-osmosisd--os-file-kwallet-pass-test-"		# Select keyring's backend (os|file|kwallet|pass|test) (default "os")
 	--limit: int		# Query number of results returned per page (default 100)
@@ -2512,7 +2512,7 @@ export extern 'osmosisd query tendermint-validator-set' [
 
 # Get the authority metadata for a specific denom
 export extern 'osmosisd query tokenfactory denom-authority-metadata' [
-	denom: string
+	denom?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for denom-authority-metadata
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -2552,7 +2552,7 @@ export extern 'osmosisd query tokenfactory params' [
 
 # 
 export extern 'osmosisd query tx' [
-	hash_acc_seq_signature: string
+	hash_acc_seq_signature?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for tx
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -2622,7 +2622,7 @@ export extern 'osmosisd query txs' [
 
 # If upgrade-name was previously executed on the chain, this returns the header for the block at which it was applied. This helps a client determine which binary was valid over a given range of blocks, as well as more context to understand past migrations.
 export extern 'osmosisd query upgrade applied' [
-	upgrade_name: string
+	upgrade_name?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for applied
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -2662,7 +2662,7 @@ export extern 'osmosisd query upgrade plan' [
 
 # Downloads wasm bytecode for given code id
 export extern 'osmosisd query wasm code' [
-	code_id: string
+	code_id?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for code
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -2676,7 +2676,7 @@ export extern 'osmosisd query wasm code' [
 
 # Prints out metadata of a code id
 export extern 'osmosisd query wasm code-info' [
-	code_id: string
+	code_id?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for code-info
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -2690,7 +2690,7 @@ export extern 'osmosisd query wasm code-info' [
 
 # Prints out metadata of a contract given its address
 export extern 'osmosisd query wasm contract' [
-	bech32_address: string
+	bech32_address?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for contract
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -2704,7 +2704,7 @@ export extern 'osmosisd query wasm contract' [
 
 # Prints out the code history for a contract given its address
 export extern 'osmosisd query wasm contract-history' [
-	bech32_address: string
+	bech32_address?: string
 	--count-total		# count total number of records in contract history to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for contract-history
@@ -2724,7 +2724,7 @@ export extern 'osmosisd query wasm contract-history' [
 
 # Prints out all internal state of a contract given its address
 export extern 'osmosisd query wasm contract-state all' [
-	bech32_address: string
+	bech32_address?: string
 	--count-total		# count total number of records in contract state to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for all
@@ -2744,8 +2744,8 @@ export extern 'osmosisd query wasm contract-state all' [
 
 # Prints out internal state for of a contract given its address
 export extern 'osmosisd query wasm contract-state raw' [
-	bech32_address: string
-	key: string
+	bech32_address?: string
+	key?: string
 	--ascii		# ascii encoded key argument
 	--b64		# base64 encoded key argument
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
@@ -2762,8 +2762,8 @@ export extern 'osmosisd query wasm contract-state raw' [
 
 # Calls contract with given address with query data and prints the returned result
 export extern 'osmosisd query wasm contract-state smart' [
-	bech32_address: string
-	query: string
+	bech32_address?: string
+	query?: string
 	--ascii		# ascii encoded query argument
 	--b64		# base64 encoded query argument
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
@@ -2809,7 +2809,7 @@ export extern 'osmosisd query wasm list-code' [
 
 # List wasm all bytecode on the chain for given code id
 export extern 'osmosisd query wasm list-contract-by-code' [
-	code_id: string
+	code_id?: string
 	--count-total		# count total number of records in list contracts by code to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for list-contract-by-code
@@ -2998,7 +2998,7 @@ export extern 'osmosisd testnet' [
 
 # execute tx on behalf of granter account:
 export extern 'osmosisd tx authz exec' [
-	msg_tx_json_file: string
+	msg_tx_json_file?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -3030,13 +3030,13 @@ export extern 'osmosisd tx authz exec' [
 
 # create a new grant authorization to an address to execute a transaction on your behalf:
 export extern 'osmosisd tx authz grant' [
-	grantee: string
+	grantee?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--allowed-validators: string		# Allowed validators addresses separated by ,
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--deny-validators: string		# Deny validators addresses separated by ,
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
-	--expiration: int		# The Unix timestamp. Default is one year. (default 1700482324)
+	--expiration: int		# The Unix timestamp. Default is one year. (default 1703179322)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete osmosisd _keys values"		# Name or address of private key with which to sign
@@ -3067,8 +3067,8 @@ export extern 'osmosisd tx authz grant' [
 
 # revoke authorization from a granter to a grantee:
 export extern 'osmosisd tx authz revoke' [
-	grantee: string
-	msg_type: string
+	grantee?: string
+	msg_type?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -3100,9 +3100,9 @@ export extern 'osmosisd tx authz revoke' [
 
 # Send funds from one account to another. Note, the'--from' flag is ignored as it is implied from [from_key_or_address].
 export extern 'osmosisd tx bank send' [
-	from_key_or_address: string
-	to_address: string
-	amount: string
+	from_key_or_address?: string
+	to_address?: string
+	amount?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -3134,7 +3134,7 @@ export extern 'osmosisd tx bank send' [
 
 # Broadcast transactions created with the --generate-only flag and signed with the sign command. Read a transaction from [file_path] and broadcast it to a node. If you supply a dash (-) argument in place of an input filename, the command reads from standard input. $ <appd> tx broadcast ./mytxn.json
 export extern 'osmosisd tx broadcast' [
-	file_path: string
+	file_path?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -3166,8 +3166,8 @@ export extern 'osmosisd tx broadcast' [
 
 # Submit proof that an invariant broken to halt the chain
 export extern 'osmosisd tx crisis invariant-broken' [
-	module_name: string
-	invariant_route: string
+	module_name?: string
+	invariant_route?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -3199,7 +3199,7 @@ export extern 'osmosisd tx crisis invariant-broken' [
 
 # Decode a binary encoded transaction string
 export extern 'osmosisd tx decode' [
-	amino_byte_string: string
+	amino_byte_string?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -3232,7 +3232,7 @@ export extern 'osmosisd tx decode' [
 
 # Funds the community pool with the specified amount
 export extern 'osmosisd tx distribution fund-community-pool' [
-	amount: string
+	amount?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -3264,7 +3264,7 @@ export extern 'osmosisd tx distribution fund-community-pool' [
 
 # Set the withdraw address for rewards associated with a delegator address.
 export extern 'osmosisd tx distribution set-withdraw-addr' [
-	withdraw_addr: string
+	withdraw_addr?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -3328,7 +3328,7 @@ export extern 'osmosisd tx distribution withdraw-all-rewards' [
 
 # Withdraw rewards from a given delegation address, and optionally withdraw validator commission if the delegation address given is a validator operator.
 export extern 'osmosisd tx distribution withdraw-rewards' [
-	validator_addr: string
+	validator_addr?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--commission		# Withdraw the validator's commission in addition to the rewards
@@ -3361,7 +3361,7 @@ export extern 'osmosisd tx distribution withdraw-rewards' [
 
 # Encode transactions created with the --generate-only flag and signed with the sign command. Read a transaction from <file>, serialize it to the Amino wire protocol, and output it as base64. If you supply a dash (-) argument in place of an input filename, the command reads from standard input.
 export extern 'osmosisd tx encode' [
-	file: string
+	file?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -3479,8 +3479,8 @@ export extern 'osmosisd tx gamm exit-pool' [
 
 # exit swap extern amount out
 export extern 'osmosisd tx gamm exit-swap-extern-amount-out' [
-	token_out: string
-	share_in_max_amount: string
+	token_out?: string
+	share_in_max_amount?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -3513,9 +3513,9 @@ export extern 'osmosisd tx gamm exit-swap-extern-amount-out' [
 
 # exit swap share amount in
 export extern 'osmosisd tx gamm exit-swap-share-amount-in' [
-	token_out_denom: string
-	share_in_amount: string
-	token_out_min_amount: string
+	token_out_denom?: string
+	share_in_amount?: string
+	token_out_min_amount?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -3582,8 +3582,8 @@ export extern 'osmosisd tx gamm join-pool' [
 
 # join swap extern amount in
 export extern 'osmosisd tx gamm join-swap-extern-amount-in' [
-	token_in: string
-	share_out_min_amount: string
+	token_in?: string
+	share_out_min_amount?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -3616,9 +3616,9 @@ export extern 'osmosisd tx gamm join-swap-extern-amount-in' [
 
 # join swap share amount out
 export extern 'osmosisd tx gamm join-swap-share-amount-out' [
-	token_in_denom: string
-	token_in_max_amount: string
-	share_out_amount: string
+	token_in_denom?: string
+	token_in_max_amount?: string
+	share_out_amount?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -3651,8 +3651,8 @@ export extern 'osmosisd tx gamm join-swap-share-amount-out' [
 
 # swap exact amount in
 export extern 'osmosisd tx gamm swap-exact-amount-in' [
-	token_in: string
-	token_out_min_amount: string
+	token_in?: string
+	token_out_min_amount?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -3686,8 +3686,8 @@ export extern 'osmosisd tx gamm swap-exact-amount-in' [
 
 # swap exact amount out
 export extern 'osmosisd tx gamm swap-exact-amount-out' [
-	token_out: string
-	token_in_max_amount: string
+	token_out?: string
+	token_in_max_amount?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -3721,8 +3721,8 @@ export extern 'osmosisd tx gamm swap-exact-amount-out' [
 
 # Submit a deposit for an active proposal. You can find the proposal-id by running "osmosisd query gov proposals".
 export extern 'osmosisd tx gov deposit' [
-	proposal_id: string
-	deposit: string
+	proposal_id?: string
+	deposit?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -3789,7 +3789,7 @@ export extern 'osmosisd tx gov submit-proposal cancel-software-upgrade' [
 
 # Submit a clear admin for a contract to prevent further migrations proposal
 export extern 'osmosisd tx gov submit-proposal clear-contract-admin' [
-	contract_addr_bech32: string
+	contract_addr_bech32?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--deposit: string		# Deposit of proposal
@@ -3826,7 +3826,7 @@ export extern 'osmosisd tx gov submit-proposal clear-contract-admin' [
 
 # Submit a community pool spend proposal along with an initial deposit. The proposal details must be supplied via a JSON file.
 export extern 'osmosisd tx gov submit-proposal community-pool-spend' [
-	proposal_file: string
+	proposal_file?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -3859,8 +3859,8 @@ export extern 'osmosisd tx gov submit-proposal community-pool-spend' [
 
 # Submit a execute wasm contract proposal (run by any address)
 export extern 'osmosisd tx gov submit-proposal execute-contract' [
-	contract_addr_bech32: string
-	json_encoded_migration_args: string
+	contract_addr_bech32?: string
+	json_encoded_migration_args?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--amount: string		# Coins to send to the contract during instantiation
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
@@ -3899,8 +3899,8 @@ export extern 'osmosisd tx gov submit-proposal execute-contract' [
 
 # Submit an IBC client breaking upgrade proposal along with an initial deposit. The client state specified is the upgraded client state representing the upgraded chain Example Upgraded Client State JSON:  { 	"@type":"/ibc.lightclients.tendermint.v1.ClientState",  	"chain_id":"testchain1", 	"unbonding_period":"1814400s", 	"latest_height":{"revision_number":"0","revision_height":"2"}, 	"proof_specs":[
 export extern 'osmosisd tx gov submit-proposal ibc-upgrade' [
-	name: string
-	height: string
+	name?: string
+	height?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--deposit: string		# deposit of proposal
@@ -3935,8 +3935,8 @@ export extern 'osmosisd tx gov submit-proposal ibc-upgrade' [
 
 # Submit an instantiate wasm contract proposal
 export extern 'osmosisd tx gov submit-proposal instantiate-contract' [
-	code_id_int64: string
-	json_encoded_init_args: string
+	code_id_int64?: string
+	json_encoded_init_args?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--admin: string		# Address of an admin
 	--amount: string		# Coins to send to the contract during instantiation
@@ -3978,9 +3978,9 @@ export extern 'osmosisd tx gov submit-proposal instantiate-contract' [
 
 # Submit a migrate wasm contract to a new code version proposal
 export extern 'osmosisd tx gov submit-proposal migrate-contract' [
-	contract_addr_bech32: string
-	new_code_id_int64: string
-	json_encoded_migration_args: string
+	contract_addr_bech32?: string
+	new_code_id_int64?: string
+	json_encoded_migration_args?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--deposit: string		# Deposit of proposal
@@ -4017,7 +4017,7 @@ export extern 'osmosisd tx gov submit-proposal migrate-contract' [
 
 # Submit a parameter proposal along with an initial deposit. The proposal details must be supplied via a JSON file. For values that contains objects, only non-empty fields will be updated. IMPORTANT: Currently parameter changes are evaluated but not validated, so it is very important that any "value" change is valid (ie. correct type and within bounds) for its respective parameter, eg. "MaxValidator
 export extern 'osmosisd tx gov submit-proposal param-change' [
-	proposal_file: string
+	proposal_file?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -4050,7 +4050,7 @@ export extern 'osmosisd tx gov submit-proposal param-change' [
 
 # Submit a pin code proposal for pinning a code to cache
 export extern 'osmosisd tx gov submit-proposal pin-codes' [
-	code_ids: string
+	code_ids?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--deposit: string		# Deposit of proposal
@@ -4122,8 +4122,8 @@ export extern 'osmosisd tx gov submit-proposal remove-superfluid-assets-proposal
 
 # Submit a full replacement to the records for pool incentives
 export extern 'osmosisd tx gov submit-proposal replace-pool-incentives' [
-	gaugeIds: string
-	weights: string
+	gaugeIds?: string
+	weights?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--deposit: string		# The proposal deposit
@@ -4159,8 +4159,8 @@ export extern 'osmosisd tx gov submit-proposal replace-pool-incentives' [
 
 # Submit a new admin for a contract proposal
 export extern 'osmosisd tx gov submit-proposal set-contract-admin' [
-	contract_addr_bech32: string
-	new_admin_addr_bech32: string
+	contract_addr_bech32?: string
+	new_admin_addr_bech32?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--deposit: string		# Deposit of proposal
@@ -4232,7 +4232,7 @@ export extern 'osmosisd tx gov submit-proposal set-superfluid-assets-proposal' [
 
 # Submit a software upgrade along with an initial deposit. Please specify a unique name and height for the upgrade to take effect. You may include info to reference a binary download link, in a format compatible with: https://github.com/cosmos/cosmos-sdk/tree/master/cosmovisor
 export extern 'osmosisd tx gov submit-proposal software-upgrade' [
-	name: string
+	name?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--deposit: string		# deposit of proposal
@@ -4270,8 +4270,8 @@ export extern 'osmosisd tx gov submit-proposal software-upgrade' [
 
 # Submit a sudo wasm contract proposal (to call privileged commands)
 export extern 'osmosisd tx gov submit-proposal sudo-contract' [
-	contract_addr_bech32: string
-	json_encoded_migration_args: string
+	contract_addr_bech32?: string
+	json_encoded_migration_args?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--deposit: string		# Deposit of proposal
@@ -4308,7 +4308,7 @@ export extern 'osmosisd tx gov submit-proposal sudo-contract' [
 
 # Submit a unpin code proposal for unpinning a code to cache
 export extern 'osmosisd tx gov submit-proposal unpin-codes' [
-	code_ids: string
+	code_ids?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--deposit: string		# Deposit of proposal
@@ -4345,8 +4345,8 @@ export extern 'osmosisd tx gov submit-proposal unpin-codes' [
 
 # Submit an update IBC client proposal along with an initial deposit. Please specify a subject client identifier you want to update.. Please specify the substitute client the subject client will be updated to.
 export extern 'osmosisd tx gov submit-proposal update-client' [
-	subject_client_id: string
-	substitute_client_id: string
+	subject_client_id?: string
+	substitute_client_id?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--deposit: string		# deposit of proposal
@@ -4417,8 +4417,8 @@ export extern 'osmosisd tx gov submit-proposal update-instantiate-config' [
 
 # Submit an update to the records for pool incentives
 export extern 'osmosisd tx gov submit-proposal update-pool-incentives' [
-	gaugeIds: string
-	weights: string
+	gaugeIds?: string
+	weights?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--deposit: string		# The proposal deposit
@@ -4494,8 +4494,8 @@ export extern 'osmosisd tx gov submit-proposal wasm-store' [
 
 # Submit a vote for an active proposal. You can find the proposal-id by running "osmosisd query gov proposals".
 export extern 'osmosisd tx gov vote' [
-	proposal_id: string
-	option: string
+	proposal_id?: string
+	option?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -4527,8 +4527,8 @@ export extern 'osmosisd tx gov vote' [
 
 # Submit a vote for an active proposal. You can find the proposal-id by running "osmosisd query gov proposals".
 export extern 'osmosisd tx gov weighted-vote' [
-	proposal_id: string
-	weighted_options: string
+	proposal_id?: string
+	weighted_options?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -4611,7 +4611,7 @@ export extern 'osmosisd tx ibc client misbehaviour' [
 
 # update existing client with a header
 export extern 'osmosisd tx ibc client update' [
-	client_id: string
+	client_id?: string
 	--help(-h)		# help for update
 	--chain-id: string		# The network chain ID
 	--home: string		# directory for config and data (default "/Users/user/.osmosisd")
@@ -4622,9 +4622,9 @@ export extern 'osmosisd tx ibc client update' [
 
 # upgrade the IBC client associated with the provided client identifier while providing proof committed by the counterparty chain to the new client and consensus states 	- ClientState JSON example: {"@type":"/ibc.lightclients.solomachine.v1.ClientState","sequence":"1","frozen_sequence":"0","consensus_state":{"public_key":{"@type":"/cosmos.crypto.secp256k1.PubKey","key":"AtK50+5pJOoaa04qqAqrnyAqsYrwr
 export extern 'osmosisd tx ibc client upgrade' [
-	client_identifier: string
-	upgrade_client_proof: string
-	upgrade_consensus_state_proof: string
+	client_identifier?: string
+	upgrade_client_proof?: string
+	upgrade_consensus_state_proof?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -4656,10 +4656,10 @@ export extern 'osmosisd tx ibc client upgrade' [
 
 # Transfer a fungible token through IBC. Timeouts can be specified as absolute or relative using the "absolute-timeouts" flag. Timeout height can be set by passing in the height string in the form {revision}-{height} using the "packet-timeout-height" flag. Relative timeout height is added to the block height queried from the latest consensus state corresponding to the counterparty channel. Relative 
 export extern 'osmosisd tx ibc-transfer transfer' [
-	src_port: string
-	src_channel: string
-	receiver: string
-	amount: string
+	src_port?: string
+	src_channel?: string
+	receiver?: string
+	amount?: string
 	--absolute-timeouts		# Timeout flags are used as absolute timeouts.
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
@@ -4694,8 +4694,8 @@ export extern 'osmosisd tx ibc-transfer transfer' [
 
 # add coins to gauge to distribute more rewards to users
 export extern 'osmosisd tx incentives add-to-gauge' [
-	gauge_id: string
-	rewards: string
+	gauge_id?: string
+	rewards?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -4731,8 +4731,8 @@ export extern 'osmosisd tx incentives add-to-gauge' [
 
 # create a gauge to distribute rewards to users
 export extern 'osmosisd tx incentives create-gauge' [
-	lockup_denom: string
-	reward: string
+	lockup_denom?: string
+	reward?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -4768,7 +4768,7 @@ export extern 'osmosisd tx incentives create-gauge' [
 
 # begin unlock individual period lock by ID
 export extern 'osmosisd tx lockup begin-unlock-by-id' [
-	id: string
+	id?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--amount: string		# The amount to be unlocked. e.g. 1osmo
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
@@ -4832,7 +4832,7 @@ export extern 'osmosisd tx lockup begin-unlock-tokens' [
 
 # lock tokens into lockup pool from user account
 export extern 'osmosisd tx lockup lock-tokens' [
-	tokens: string
+	tokens?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -4865,9 +4865,9 @@ export extern 'osmosisd tx lockup lock-tokens' [
 
 # Sign transactions created with the --generate-only flag that require multisig signatures. Read one or more signatures from one or more [signature] file, generate a multisig signature compliant to the multisig key [name], and attach the key name to the transaction read from [file].
 export extern 'osmosisd tx multisign' [
-	file: string
-	name: string
-	signature: string
+	file?: string
+	name?: string
+	signature?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--amino		# Generate Amino-encoded JSON suitable for submitting to the txs REST endpoint
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
@@ -4902,7 +4902,7 @@ export extern 'osmosisd tx multisign' [
 
 # Sign a transaction created with the --generate-only flag. It will read a transaction from [file], sign it, and print its JSON encoding. If the --signature-only flag is set, it will output the signature parts only. The --offline flag makes sure that the client will not reach out to full node. As a result, the account and sequence number queries will not be performed and it is required to set such p
 export extern 'osmosisd tx sign' [
-	file: string
+	file?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--amino		# Generate Amino encoded JSON suitable for submiting to the txs REST endpoint
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
@@ -4939,7 +4939,7 @@ export extern 'osmosisd tx sign' [
 
 # Sign batch files of transactions generated with --generate-only. The command processes list of transactions from file (one StdTx each line), generate signed transactions or signatures and print their JSON encoding, delimited by '\n'. As the signatures are generated, the command updates the account sequence number accordingly. If the --signature-only flag is set, it will output the signature parts 
 export extern 'osmosisd tx sign-batch' [
-	file: string
+	file?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -5049,8 +5049,8 @@ export extern 'osmosisd tx staking create-validator' [
 
 # Delegate an amount of liquid coins to a validator from your wallet.
 export extern 'osmosisd tx staking delegate' [
-	validator_addr: string
-	amount: string
+	validator_addr?: string
+	amount?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -5120,9 +5120,9 @@ export extern 'osmosisd tx staking edit-validator' [
 
 # Redelegate an amount of illiquid staking tokens from one validator to another.
 export extern 'osmosisd tx staking redelegate' [
-	src_validator_addr: string
-	dst_validator_addr: string
-	amount: string
+	src_validator_addr?: string
+	dst_validator_addr?: string
+	amount?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -5154,8 +5154,8 @@ export extern 'osmosisd tx staking redelegate' [
 
 # Unbond an amount of bonded shares from a validator.
 export extern 'osmosisd tx staking unbond' [
-	validator_addr: string
-	amount: string
+	validator_addr?: string
+	amount?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -5187,8 +5187,8 @@ export extern 'osmosisd tx staking unbond' [
 
 # superfluid delegate a lock to a validator
 export extern 'osmosisd tx superfluid delegate' [
-	lock_id: string
-	val_addr: string
+	lock_id?: string
+	val_addr?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -5220,8 +5220,8 @@ export extern 'osmosisd tx superfluid delegate' [
 
 # lock and superfluid delegate
 export extern 'osmosisd tx superfluid lock-and-superfluid-delegate' [
-	tokens: string
-	val_addr: string
+	tokens?: string
+	val_addr?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -5253,7 +5253,7 @@ export extern 'osmosisd tx superfluid lock-and-superfluid-delegate' [
 
 # unbond lock that has been superfluid staked
 export extern 'osmosisd tx superfluid unbond-lock' [
-	lock_id: string
+	lock_id?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -5285,7 +5285,7 @@ export extern 'osmosisd tx superfluid unbond-lock' [
 
 # superfluid undelegate a lock from a validator
 export extern 'osmosisd tx superfluid undelegate' [
-	lock_id: string
+	lock_id?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -5317,7 +5317,7 @@ export extern 'osmosisd tx superfluid undelegate' [
 
 # unpool whitelisted pool
 export extern 'osmosisd tx superfluid unpool-whitelisted-pool' [
-	pool_id: string
+	pool_id?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -5349,7 +5349,7 @@ export extern 'osmosisd tx superfluid unpool-whitelisted-pool' [
 
 # Burn tokens from an address. Must have admin authority to do so.
 export extern 'osmosisd tx tokenfactory burn' [
-	amount: string
+	amount?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -5381,8 +5381,8 @@ export extern 'osmosisd tx tokenfactory burn' [
 
 # Changes the admin address for a factory-created denom. Must have admin authority to do so.
 export extern 'osmosisd tx tokenfactory change-admin' [
-	denom: string
-	new_admin_address: string
+	denom?: string
+	new_admin_address?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -5414,7 +5414,7 @@ export extern 'osmosisd tx tokenfactory change-admin' [
 
 # create a new denom from an account
 export extern 'osmosisd tx tokenfactory create-denom' [
-	subdenom: string
+	subdenom?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -5446,7 +5446,7 @@ export extern 'osmosisd tx tokenfactory create-denom' [
 
 # Mint a denom to an address. Must have admin authority to do so.
 export extern 'osmosisd tx tokenfactory mint' [
-	amount: string
+	amount?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -5478,8 +5478,8 @@ export extern 'osmosisd tx tokenfactory mint' [
 
 # Submit an update to a fee token to be usable for tx fees
 export extern 'osmosisd tx txfees update-fee-token' [
-	denom: string
-	poolId: string
+	denom?: string
+	poolId?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--deposit: string		# deposit of proposal
@@ -5514,7 +5514,7 @@ export extern 'osmosisd tx txfees update-fee-token' [
 
 # Print the addresses that must sign the transaction, those who have already signed it, and make sure that signatures are in the correct order. The command would check whether all required signers have signed the transactions, whether the signatures were collected in the right order, and if the signature is valid over the given transaction. If the --offline flag is also set, signature validation ove
 export extern 'osmosisd tx validate-signatures' [
-	file: string
+	file?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -5546,7 +5546,7 @@ export extern 'osmosisd tx validate-signatures' [
 
 # Must be requested by the original funder address (--from). 		May provide a destination address (--dest), otherwise the coins return to the funder. 		Delegated or undelegating staking tokens will be transferred in the delegated (undelegating) state. 		The recipient is vulnerable to slashing, and must act to unbond the tokens if desired.
 export extern 'osmosisd tx vesting clawback' [
-	address: string
+	address?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dest: string		# Address of destination (defaults to funder)
@@ -5579,7 +5579,7 @@ export extern 'osmosisd tx vesting clawback' [
 
 # Must provide a lockup periods file (--lockup), a vesting periods file (--vesting), or both. If both files are given, they must describe schedules for the same total amount. If one file is omitted, it will default to a schedule that immediately unlocks or vests the entire amount. The described amount of coins will be transferred from the --from address to the vesting account. Unvested coins may be 
 export extern 'osmosisd tx vesting create-clawback-vesting-account' [
-	to_address: string
+	to_address?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -5614,9 +5614,9 @@ export extern 'osmosisd tx vesting create-clawback-vesting-account' [
 
 # Create a new delayed vesting account funded with an allocation of tokens. All vesting accouts created will have their start time set by the committed block's time. The cliff duration should be specified in hours.
 export extern 'osmosisd tx vesting create-cliff-vesting-account' [
-	to_address: string
-	amount: string
-	cliff_duration: string
+	to_address?: string
+	amount?: string
+	cliff_duration?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -5648,9 +5648,9 @@ export extern 'osmosisd tx vesting create-cliff-vesting-account' [
 
 # Create a new vesting account funded with an allocation of tokens. The account can either be a delayed or continuous vesting account, which is determined by the '--delayed' flag. All vesting accouts created will have their start time set by the committed block's time. The end_time must be provided as a UNIX epoch timestamp.
 export extern 'osmosisd tx vesting create-vesting-account' [
-	to_address: string
-	amount: string
-	end_time: string
+	to_address?: string
+	amount?: string
+	end_time?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--delayed		# Create a delayed vesting account if true
@@ -5683,7 +5683,7 @@ export extern 'osmosisd tx vesting create-vesting-account' [
 
 # Clears admin for a contract to prevent further migrations
 export extern 'osmosisd tx wasm clear-contract-admin' [
-	contract_addr_bech32: string
+	contract_addr_bech32?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -5715,8 +5715,8 @@ export extern 'osmosisd tx wasm clear-contract-admin' [
 
 # Execute a command on a wasm contract
 export extern 'osmosisd tx wasm execute' [
-	contract_addr_bech32: string
-	json_encoded_send_args: string
+	contract_addr_bech32?: string
+	json_encoded_send_args?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--amount: string		# Coins to send to the contract along with command
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
@@ -5749,8 +5749,8 @@ export extern 'osmosisd tx wasm execute' [
 
 # Instantiate a wasm contract
 export extern 'osmosisd tx wasm instantiate' [
-	code_id_int64: string
-	json_encoded_init_args: string
+	code_id_int64?: string
+	json_encoded_init_args?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--admin: string		# Address of an admin
 	--amount: string		# Coins to send to the contract during instantiation
@@ -5786,9 +5786,9 @@ export extern 'osmosisd tx wasm instantiate' [
 
 # Migrate a wasm contract to a new code version
 export extern 'osmosisd tx wasm migrate' [
-	contract_addr_bech32: string
-	new_code_id_int64: string
-	json_encoded_migration_args: string
+	contract_addr_bech32?: string
+	new_code_id_int64?: string
+	json_encoded_migration_args?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -5820,8 +5820,8 @@ export extern 'osmosisd tx wasm migrate' [
 
 # Set new admin for a contract
 export extern 'osmosisd tx wasm set-contract-admin' [
-	contract_addr_bech32: string
-	new_admin_addr_bech32: string
+	contract_addr_bech32?: string
+	new_admin_addr_bech32?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-osmosisd--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -5897,7 +5897,7 @@ export extern 'osmosisd unsafe-reset-all' [
 
 # validates the genesis file at the default location or at the location passed as an arg
 export extern 'osmosisd validate-genesis' [
-	file: string
+	file?: string
 	--help(-h)		# help for validate-genesis
 	--home: string		# directory for config and data (default "/Users/user/.osmosisd")
 	--log_format: string@"nu-completions-osmosisd--json-plain-"		# The logging format (json|plain) (default "plain")
