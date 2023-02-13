@@ -2,10 +2,7 @@
 
 # cyber keys in a form of table
 export def "cyber _keys table" [] {
-	cyber keys list --output text | lines | window 5 -s 5 | 
-    each {|it| ($it| parse -r '(?P<col>\w+):(?P<value>.*)')} | 
-    each {|it| ($it| transpose -r)} | reduce {|it, acc| $it | append $acc} | 
-    select name type address 
+	cyber keys list --output json | from json | select name type address 
 }
 
 # Helper function to use addresses for completions in --from parameter
@@ -13,17 +10,17 @@ export def "nu-complete cyber _keys values" [] {
     (cyber _keys table).name | zip (cyber _keys table).address | flatten
   }
 
-def "nu-completions-cyber--json-plain-" [] { ["json", "plain"] }
-def "nu-completions-cyber--os-file-test-" [] { ["os", "file", "test"] }
-def "nu-completions-cyber--default-nothing-everything-custom-" [] { ["default", "nothing", "everything", "custom"] }
-def "nu-completions-cyber--sync-async-block-" [] { ["sync", "async", "block"] }
-def "nu-completions-cyber--direct-amino-json-" [] { ["direct", "amino-json"] }
-def "nu-completions-cyber--text-json-" [] { ["text", "json"] }
 def "nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-" [] { ["trace", "debug", "info", "warn", "error", "fatal", "panic"] }
-def "nu-completions-cyber--socket---grpc-" [] { ["socket", "grpc"] }
 def "nu-completions-cyber--os-file-kwallet-pass-test-memory-" [] { ["os", "file", "kwallet", "pass", "test", "memory"] }
-def "nu-completions-cyber--os-file-kwallet-pass-test-" [] { ["os", "file", "kwallet", "pass", "test"] }
 def "nu-completions-cyber--acc-val-cons-" [] { ["acc", "val", "cons"] }
+def "nu-completions-cyber--os-file-test-" [] { ["os", "file", "test"] }
+def "nu-completions-cyber--text-json-" [] { ["text", "json"] }
+def "nu-completions-cyber--os-file-kwallet-pass-test-" [] { ["os", "file", "kwallet", "pass", "test"] }
+def "nu-completions-cyber--default-nothing-everything-custom-" [] { ["default", "nothing", "everything", "custom"] }
+def "nu-completions-cyber--json-plain-" [] { ["json", "plain"] }
+def "nu-completions-cyber--direct-amino-json-" [] { ["direct", "amino-json"] }
+def "nu-completions-cyber--socket---grpc-" [] { ["socket", "grpc"] }
+def "nu-completions-cyber--sync-async-block-" [] { ["sync", "async", "block"] }
 
 # Add a genesis account to genesis.json. The provided account must specify the account address or key name and a list of initial coins. If a key name is given, the address will be looked up in the local Keybase. The list of initial tokens must contain valid denominations. Accounts may optionally be supplied with vesting parameters.
 export extern 'cyber add-genesis-account' [
@@ -129,7 +126,7 @@ export extern 'cyber gentx' [
 	--generate-only		# Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
 	--help(-h)		# help for gentx
 	--identity: string		# The (optional) identity signature (ex. UPort or Keybase)
-	--ip: string		# The node's public IP (default "192.168.1.44")
+	--ip: string		# The node's public IP (default "192.168.1.105")
 	--keyring-backend: string@"nu-completions-cyber--os-file-kwallet-pass-test-memory-"		# Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
 	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
 	--ledger		# Use a connected Ledger device
@@ -2442,6 +2439,7 @@ export extern 'cyber start' [
 	--halt-height: int		# Block height at which to gracefully halt the chain and shutdown the node
 	--halt-time: int		# Minimum block time (in Unix seconds) at which to gracefully halt the chain and shutdown the node
 	--help(-h)		# help for start
+	--iavl-disable-fastnode		# Enable fast node for IAVL tree (default true)
 	--inter-block-cache		# Enable inter-block caching (default true)
 	--inv-check-period: int		# Assert registered invariants every N blocks
 	--min-retain-blocks: int		# Minimum block height offset during ABCI commit to prune Tendermint blocks
@@ -2588,7 +2586,7 @@ export extern 'cyber tx authz grant' [
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--deny-validators: string		# Deny validators addresses separated by ,
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
-	--expiration: int		# The Unix timestamp. Default is one year. (default 1703179250)
+	--expiration: int		# The Unix timestamp. Default is one year. (default 1707826934)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -4457,7 +4455,7 @@ export extern 'cyber tx staking edit-validator' [
 	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
 	--ledger		# Use a connected Ledger device
 	--min-self-delegation: string		# The minimum self delegation required on the validator
-	--moniker: string		# The validator's name (default "[do-not-modify]")
+	--new-moniker: string		# The validator's name (default "[do-not-modify]")
 	--node: string		# <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
 	--note: string		# Note to add a description to the transaction (previously --memo)
 	--offline		# Offline mode (does not allow any online functionality
