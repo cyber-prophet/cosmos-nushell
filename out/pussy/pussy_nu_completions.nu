@@ -2,10 +2,7 @@
 
 # pussy keys in a form of table
 export def "pussy _keys table" [] {
-	pussy keys list --output text | lines | window 5 -s 5 | 
-    each {|it| ($it| parse -r '(?P<col>\w+):(?P<value>.*)')} | 
-    each {|it| ($it| transpose -r)} | reduce {|it, acc| $it | append $acc} | 
-    select name type address 
+	pussy keys list --output json | from json | select name type address 
 }
 
 # Helper function to use addresses for completions in --from parameter
@@ -13,17 +10,17 @@ export def "nu-complete pussy _keys values" [] {
     (pussy _keys table).name | zip (pussy _keys table).address | flatten
   }
 
+def "nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-" [] { ["trace", "debug", "info", "warn", "error", "fatal", "panic"] }
+def "nu-completions-pussy--os-file-kwallet-pass-test-memory-" [] { ["os", "file", "kwallet", "pass", "test", "memory"] }
+def "nu-completions-pussy--acc-val-cons-" [] { ["acc", "val", "cons"] }
 def "nu-completions-pussy--os-file-test-" [] { ["os", "file", "test"] }
-def "nu-completions-pussy--json-plain-" [] { ["json", "plain"] }
 def "nu-completions-pussy--text-json-" [] { ["text", "json"] }
 def "nu-completions-pussy--os-file-kwallet-pass-test-" [] { ["os", "file", "kwallet", "pass", "test"] }
 def "nu-completions-pussy--default-nothing-everything-custom-" [] { ["default", "nothing", "everything", "custom"] }
-def "nu-completions-pussy--sync-async-block-" [] { ["sync", "async", "block"] }
-def "nu-completions-pussy--trace-debug-info-warn-error-fatal-panic-" [] { ["trace", "debug", "info", "warn", "error", "fatal", "panic"] }
-def "nu-completions-pussy--acc-val-cons-" [] { ["acc", "val", "cons"] }
-def "nu-completions-pussy--socket---grpc-" [] { ["socket", "grpc"] }
-def "nu-completions-pussy--os-file-kwallet-pass-test-memory-" [] { ["os", "file", "kwallet", "pass", "test", "memory"] }
+def "nu-completions-pussy--json-plain-" [] { ["json", "plain"] }
 def "nu-completions-pussy--direct-amino-json-" [] { ["direct", "amino-json"] }
+def "nu-completions-pussy--socket---grpc-" [] { ["socket", "grpc"] }
+def "nu-completions-pussy--sync-async-block-" [] { ["sync", "async", "block"] }
 
 # Add a genesis account to genesis.json. The provided account must specify the account address or key name and a list of initial coins. If a key name is given, the address will be looked up in the local Keybase. The list of initial tokens must contain valid denominations. Accounts may optionally be supplied with vesting parameters.
 export extern 'pussy add-genesis-account' [
@@ -129,7 +126,7 @@ export extern 'pussy gentx' [
 	--generate-only		# Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
 	--help(-h)		# help for gentx
 	--identity: string		# The (optional) identity signature (ex. UPort or Keybase)
-	--ip: string		# The node's public IP (default "10.0.0.120")
+	--ip: string		# The node's public IP (default "192.168.1.105")
 	--keyring-backend: string@"nu-completions-pussy--os-file-kwallet-pass-test-memory-"		# Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
 	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
 	--ledger		# Use a connected Ledger device
@@ -2588,7 +2585,7 @@ export extern 'pussy tx authz grant' [
 	--broadcast-mode(-b): string@"nu-completions-pussy--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--deny-validators: string		# Deny validators addresses separated by ,
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
-	--expiration: int		# The Unix timestamp. Default is one year. (default 1701532958)
+	--expiration: int		# The Unix timestamp. Default is one year. (default 1707826841)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete pussy _keys values"		# Name or address of private key with which to sign
