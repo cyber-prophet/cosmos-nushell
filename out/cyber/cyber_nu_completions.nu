@@ -1,6 +1,6 @@
 
 
-# cyber keys in a form of table
+# cyber keys in a form of a table
 export def "cyber _keys table" [] {
 	cyber keys list --output json | from json | select name type address 
 }
@@ -10,21 +10,21 @@ export def "nu-complete cyber _keys values" [] {
     (cyber _keys table).name | zip (cyber _keys table).address | flatten
   }
 
-def "nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-" [] { ["trace", "debug", "info", "warn", "error", "fatal", "panic"] }
-def "nu-completions-cyber--os-file-kwallet-pass-test-memory-" [] { ["os", "file", "kwallet", "pass", "test", "memory"] }
-def "nu-completions-cyber--acc-val-cons-" [] { ["acc", "val", "cons"] }
-def "nu-completions-cyber--os-file-test-" [] { ["os", "file", "test"] }
-def "nu-completions-cyber--text-json-" [] { ["text", "json"] }
 def "nu-completions-cyber--os-file-kwallet-pass-test-" [] { ["os", "file", "kwallet", "pass", "test"] }
 def "nu-completions-cyber--default-nothing-everything-custom-" [] { ["default", "nothing", "everything", "custom"] }
-def "nu-completions-cyber--json-plain-" [] { ["json", "plain"] }
-def "nu-completions-cyber--direct-amino-json-" [] { ["direct", "amino-json"] }
-def "nu-completions-cyber--socket---grpc-" [] { ["socket", "grpc"] }
+def "nu-completions-cyber--os-file-kwallet-pass-test-memory-" [] { ["os", "file", "kwallet", "pass", "test", "memory"] }
+def "nu-completions-cyber--os-file-test-" [] { ["os", "file", "test"] }
+def "nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-" [] { ["trace", "debug", "info", "warn", "error", "fatal", "panic"] }
 def "nu-completions-cyber--sync-async-block-" [] { ["sync", "async", "block"] }
+def "nu-completions-cyber--socket---grpc-" [] { ["socket", "grpc"] }
+def "nu-completions-cyber--text-json-" [] { ["text", "json"] }
+def "nu-completions-cyber--json-plain-" [] { ["json", "plain"] }
+def "nu-completions-cyber--acc-val-cons-" [] { ["acc", "val", "cons"] }
+def "nu-completions-cyber--direct-amino-json-" [] { ["direct", "amino-json"] }
 
 # Add a genesis account to genesis.json. The provided account must specify the account address or key name and a list of initial coins. If a key name is given, the address will be looked up in the local Keybase. The list of initial tokens must contain valid denominations. Accounts may optionally be supplied with vesting parameters.
 export extern 'cyber add-genesis-account' [
-	address_or_key_name?: string
+	address_or_key_name?: string@"nu-complete cyber _keys values"
 	coin?: string
 	coin?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
@@ -64,7 +64,7 @@ export extern 'cyber config' [
 
 # Convert an address between hex encoding and bech32.
 export extern 'cyber debug addr' [
-	address?: string
+	address?: string@"nu-complete cyber _keys values"
 	--help(-h)		# help for addr
 	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
@@ -330,7 +330,7 @@ export extern 'cyber migrate' [
 
 # Query for account by address
 export extern 'cyber query account' [
-	address?: string
+	address?: string@"nu-complete cyber _keys values"
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for account
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -344,7 +344,7 @@ export extern 'cyber query account' [
 
 # Query for account by address
 export extern 'cyber query auth account' [
-	address?: string
+	address?: string@"nu-complete cyber _keys values"
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for account
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -390,8 +390,8 @@ export extern 'cyber query auth params' [
 
 # Query authorization grants for a granter-grantee pair. If msg-type-url is set, it will select grants only for that msg type.
 export extern 'cyber query authz grants' [
-	granter_addr?: string
-	grantee_addr?: string
+	granter_addr?: string@"nu-complete cyber _keys values"
+	grantee_addr?: string@"nu-complete cyber _keys values"
 	msg_type_url_?: string
 	--count-total		# count total number of records in grants to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
@@ -412,7 +412,7 @@ export extern 'cyber query authz grants' [
 
 # Query authorization grants granted to a grantee.
 export extern 'cyber query authz grants-by-grantee' [
-	grantee_addr?: string
+	grantee_addr?: string@"nu-complete cyber _keys values"
 	--count-total		# count total number of records in grantee-grants to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for grants-by-grantee
@@ -432,7 +432,7 @@ export extern 'cyber query authz grants-by-grantee' [
 
 # Query authorization grants granted by granter.
 export extern 'cyber query authz grants-by-granter' [
-	granter_addr?: string
+	granter_addr?: string@"nu-complete cyber _keys values"
 	--count-total		# count total number of records in granter-grants to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for grants-by-granter
@@ -465,7 +465,7 @@ export extern 'cyber query bandwidth load' [
 
 # Query the neuron bandwidth [address]
 export extern 'cyber query bandwidth neuron' [
-	address?: string
+	address?: string@"nu-complete cyber _keys values"
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for neuron
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -518,7 +518,7 @@ export extern 'cyber query bandwidth total' [
 
 # Query the total balance of an account or of a specific denomination.
 export extern 'cyber query bank balances' [
-	address?: string
+	address?: string@"nu-complete cyber _keys values"
 	--count-total		# count total number of records in all balances to query for
 	--denom: string		# The specific balance denomination to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
@@ -625,7 +625,7 @@ export extern 'cyber query distribution params' [
 
 # Query all rewards earned by a delegator, optionally restrict to rewards from a single validator.
 export extern 'cyber query distribution rewards' [
-	delegator_addr?: string
+	delegator_addr?: string@"nu-complete cyber _keys values"
 	validator_addr?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for rewards
@@ -745,8 +745,8 @@ export extern 'cyber query dmn thoughts-stats' [
 
 # Query details for a grant.  You can find the fee-grant of a granter and grantee.
 export extern 'cyber query feegrant grant' [
-	granter?: string
-	grantee?: string
+	granter?: string@"nu-complete cyber _keys values"
+	grantee?: string@"nu-complete cyber _keys values"
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for grant
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -760,7 +760,7 @@ export extern 'cyber query feegrant grant' [
 
 # Queries all the grants for a grantee address.
 export extern 'cyber query feegrant grants-by-grantee' [
-	grantee?: string
+	grantee?: string@"nu-complete cyber _keys values"
 	--count-total		# count total number of records in grants to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for grants-by-grantee
@@ -780,7 +780,7 @@ export extern 'cyber query feegrant grants-by-grantee' [
 
 # Queries all the grants issued for a granter address.
 export extern 'cyber query feegrant grants-by-granter' [
-	granter?: string
+	granter?: string@"nu-complete cyber _keys values"
 	--count-total		# count total number of records in grants to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for grants-by-granter
@@ -1719,7 +1719,7 @@ export extern 'cyber query rank backlinks' [
 export extern 'cyber query rank is-exist' [
 	from?: string
 	to?: string
-	account?: string
+	account?: string@"nu-complete cyber _keys values"
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for is-exist
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1748,7 +1748,7 @@ export extern 'cyber query rank is-exist-any' [
 
 # Query the current karma of given neuron
 export extern 'cyber query rank karma' [
-	neuron?: string
+	neuron?: string@"nu-complete cyber _keys values"
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for karma
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1907,7 +1907,7 @@ export extern 'cyber query slashing signing-infos' [
 
 # Query delegations for an individual delegator on an individual validator.
 export extern 'cyber query staking delegation' [
-	delegator_addr?: string
+	delegator_addr?: string@"nu-complete cyber _keys values"
 	validator_addr?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for delegation
@@ -1922,7 +1922,7 @@ export extern 'cyber query staking delegation' [
 
 # Query delegations for an individual delegator on all validators.
 export extern 'cyber query staking delegations' [
-	delegator_addr?: string
+	delegator_addr?: string@"nu-complete cyber _keys values"
 	--count-total		# count total number of records in delegations to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for delegations
@@ -2002,7 +2002,7 @@ export extern 'cyber query staking pool' [
 
 # Query a redelegation record for an individual delegator between a source and destination validator.
 export extern 'cyber query staking redelegation' [
-	delegator_addr?: string
+	delegator_addr?: string@"nu-complete cyber _keys values"
 	src_validator_addr?: string
 	dst_validator_addr?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
@@ -2018,7 +2018,7 @@ export extern 'cyber query staking redelegation' [
 
 # Query all redelegation records for an individual delegator.
 export extern 'cyber query staking redelegations' [
-	delegator_addr?: string
+	delegator_addr?: string@"nu-complete cyber _keys values"
 	--count-total		# count total number of records in delegator redelegations to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for redelegations
@@ -2058,7 +2058,7 @@ export extern 'cyber query staking redelegations-from' [
 
 # Query unbonding delegations for an individual delegator on an individual validator.
 export extern 'cyber query staking unbonding-delegation' [
-	delegator_addr?: string
+	delegator_addr?: string@"nu-complete cyber _keys values"
 	validator_addr?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for unbonding-delegation
@@ -2073,7 +2073,7 @@ export extern 'cyber query staking unbonding-delegation' [
 
 # Query unbonding delegations for an individual delegator.
 export extern 'cyber query staking unbonding-delegations' [
-	delegator_addr?: string
+	delegator_addr?: string@"nu-complete cyber _keys values"
 	--count-total		# count total number of records in unbonding delegations to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for unbonding-delegations
@@ -2580,13 +2580,13 @@ export extern 'cyber tx authz exec' [
 
 # grant authorization to an address to execute a transaction on your behalf:
 export extern 'cyber tx authz grant' [
-	grantee?: string
+	grantee?: string@"nu-complete cyber _keys values"
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--allowed-validators: string		# Allowed validators addresses separated by ,
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--deny-validators: string		# Deny validators addresses separated by ,
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
-	--expiration: int		# The Unix timestamp. Default is one year. (default 1707826934)
+	--expiration: int		# The Unix timestamp. Default is one year. (default 1707841670)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -2617,7 +2617,7 @@ export extern 'cyber tx authz grant' [
 
 # revoke authorization from a granter to a grantee:
 export extern 'cyber tx authz revoke' [
-	grantee?: string
+	grantee?: string@"nu-complete cyber _keys values"
 	msg_type?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
@@ -2650,8 +2650,8 @@ export extern 'cyber tx authz revoke' [
 
 # Send funds from one account to another. Note, the'--from' flag is ignored as it is implied from [from_key_or_address].
 export extern 'cyber tx bank send' [
-	from_key_or_address?: string
-	to_address?: string
+	from_key_or_address?: string@"nu-complete cyber _keys values"
+	to_address?: string@"nu-complete cyber _keys values"
 	amount?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
@@ -2814,7 +2814,7 @@ export extern 'cyber tx distribution fund-community-pool' [
 
 # Set the withdraw address for rewards associated with a delegator address.
 export extern 'cyber tx distribution set-withdraw-addr' [
-	withdraw_addr?: string
+	withdraw_addr?: string@"nu-complete cyber _keys values"
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -2953,8 +2953,8 @@ export extern 'cyber tx evidence' [
 
 # Grant authorization to pay fees from your address. Note, the'--from' flag is 				ignored as it is implied from [granter].
 export extern 'cyber tx feegrant grant' [
-	granter_key_or_address?: string
-	grantee?: string
+	granter_key_or_address?: string@"nu-complete cyber _keys values"
+	grantee?: string@"nu-complete cyber _keys values"
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--allowed-messages: string		# Set of allowed messages for fee allowance
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
@@ -2991,8 +2991,8 @@ export extern 'cyber tx feegrant grant' [
 
 # revoke fee grant from a granter to a grantee. Note, the'--from' flag is 			ignored as it is implied from [granter].
 export extern 'cyber tx feegrant revoke' [
-	granter?: string
-	grantee?: string
+	granter?: string@"nu-complete cyber _keys values"
+	grantee?: string@"nu-complete cyber _keys values"
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
@@ -4574,7 +4574,7 @@ export extern 'cyber tx validate-signatures' [
 
 # Create a new vesting account funded with an allocation of tokens. The account can either be a delayed or continuous vesting account, which is determined by the '--delayed' flag. All vesting accouts created will have their start time set by the committed block's time. The end_time must be provided as a UNIX epoch timestamp.
 export extern 'cyber tx vesting create-vesting-account' [
-	to_address?: string
+	to_address?: string@"nu-complete cyber _keys values"
 	amount?: string
 	end_time?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
