@@ -16,14 +16,15 @@ Available Commands:
   distribution             Querying commands for the distribution module
   evidence                 Query for evidence by hash or for all (paginated) submitted evidence
   feegrant                 Querying commands for the feegrant module
+  globalfee                Querying commands for the global fee module
   gov                      Querying commands for the governance module
   ibc                      Querying commands for the IBC module
   ibc-router               
   ibc-transfer             IBC fungible token transfer query subcommands
   interchain-accounts      interchain-accounts subcommands
-  liquidity                Querying commands for the liquidity module
   mint                     Querying commands for the minting module
   params                   Querying commands for the params module
+  provider                 Querying commands for the ccv provider module
   slashing                 Querying commands for the slashing module
   staking                  Querying commands for the staking module
   tendermint-validator-set Get the full tendermint validator set at given height

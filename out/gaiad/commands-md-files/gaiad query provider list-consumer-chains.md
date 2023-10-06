@@ -1,18 +1,11 @@
-Query the deposit messages on the liquidity pool batch for the specified pool-id and msg-index
-
-If batch messages are normally processed from the endblock,
-the resulting state is applied and the messages are removed from the beginning of the next block.
-To query for past blocks, query the block height using the REST/gRPC API of a node that is not pruned.
-
-Example:
-$ gaiad query liquidity deposit 1 20
+Query active consumer chains for provider chain.
 
 Usage:
-  gaiad query liquidity deposit [pool-id] [msg-index] [flags]
+  gaiad query provider list-consumer-chains [flags]
 
 Flags:
       --height int      Use a specific height to query state at (this can error if the node is pruning state)
-  -h, --help            help for deposit
+  -h, --help            help for list-consumer-chains
       --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
   -o, --output string   Output format (text|json) (default "text")
 

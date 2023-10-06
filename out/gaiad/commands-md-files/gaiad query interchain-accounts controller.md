@@ -4,7 +4,8 @@ Usage:
   gaiad query interchain-accounts controller [command]
 
 Available Commands:
-  params      Query the current interchain-accounts controller submodule parameters
+  interchain-account Query the interchain account address for a given owner on a particular connection
+  params             Query the current interchain-accounts controller submodule parameters
 
 Flags:
   -h, --help   help for controller

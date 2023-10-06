@@ -15,6 +15,7 @@ Available Commands:
   keys                Manage your application's keys
   query               Querying subcommands
   rollback            rollback cosmos-sdk and tendermint state by one height
+  rosetta             spin up a rosetta server
   start               Run the full node
   status              Query remote node for status
   tendermint          Tendermint subcommands

@@ -18,6 +18,7 @@ Available Commands:
   keys                Manage your application's keys
   query               Querying subcommands
   rollback            rollback cosmos-sdk and tendermint state by one height
+  rosetta             spin up a rosetta server
   start               Run the full node
   status              Query remote node for status
   tendermint          Tendermint subcommands
@@ -51,6 +52,7 @@ Usage:
 Flags:
       --height int               Use a specific height to query state at (this can error if the node is pruning state)
   -h, --help                     help for add-genesis-account
+      --home string              The application home directory (default "/Users/user/.gaia")
       --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test) (default "os")
       --node string              <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
   -o, --output string            Output format (text|json) (default "text")
@@ -59,7 +61,6 @@ Flags:
       --vesting-start-time int   schedule start time (unix epoch) for vesting accounts
 
 Global Flags:
-      --home string         directory for config and data (default "/Users/user/.gaia")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -77,9 +78,9 @@ Usage:
 Flags:
       --gentx-dir string   override default "gentx" directory from which collect and execute genesis transactions; default [--home]/config/gentx/
   -h, --help               help for collect-gentxs
+      --home string        The application home directory (default "/Users/user/.gaia")
 
 Global Flags:
-      --home string         directory for config and data (default "/Users/user/.gaia")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -181,9 +182,10 @@ Usage:
   gaiad debug [command]
 
 Available Commands:
-  addr        Convert an address between hex and bech32
-  pubkey      Decode a pubkey from proto JSON
-  raw-bytes   Convert raw bytes output (eg. [10 21 13 255]) to hex
+  addr           Convert an address between hex and bech32
+  bech32-convert Convert any bech32 string to the cosmos prefix
+  pubkey         Decode a pubkey from proto JSON
+  raw-bytes      Convert raw bytes output (eg. [10 21 13 255]) to hex
 
 Flags:
   -h, --help   help for debug
@@ -210,10 +212,10 @@ Flags:
       --for-zero-height              Export state to start at height zero (perform preproccessing)
       --height int                   Export state from a particular height (-1 means latest height) (default -1)
   -h, --help                         help for export
+      --home string                  The application home directory (default "/Users/user/.gaia")
       --jail-allowed-addrs strings   Comma-separated list of operator addresses of jailed validators to unjail
 
 Global Flags:
-      --home string         directory for config and data (default "/Users/user/.gaia")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -232,7 +234,6 @@ file. The following default parameters are included:
 	commission rate:             0.1
 	commission max rate:         0.2
 	commission max change rate:  0.01
-	minimum self delegation:     1
 
 
 Example:
@@ -257,7 +258,7 @@ Flags:
       --commission-max-rate string          The maximum commission rate percentage
       --commission-rate string              The initial commission rate percentage
       --details string                      The validator's (optional) details
-      --dry-run                             ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                             ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string                  Fee account pays fees for the transaction instead of deducting from the signer
       --fees string                         Fees to pay along with transaction; eg: 10uatom
       --from string                         Name or address of private key with which to sign
@@ -266,12 +267,12 @@ Flags:
       --gas-prices string                   Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
       --generate-only                       Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
   -h, --help                                help for gentx
+      --home string                         The application home directory (default "/Users/user/.gaia")
       --identity string                     The (optional) identity signature (ex. UPort or Keybase)
-      --ip string                           The node's public IP (default "10.0.0.66")
+      --ip string                           The node's public IP (default "192.168.1.8")
       --keyring-backend string              Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
       --keyring-dir string                  The client Keyring directory; if omitted, the default 'home' directory will be used
       --ledger                              Use a connected Ledger device
-      --min-self-delegation string          The minimum self delegation required on the validator
       --moniker string                      The validator's (optional) moniker
       --node string                         <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
       --node-id string                      The node's NodeID
@@ -288,7 +289,6 @@ Flags:
   -y, --yes                                 Skip tx broadcasting prompt confirmation
 
 Global Flags:
-      --home string         directory for config and data (default "/Users/user/.gaia")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -326,11 +326,11 @@ Usage:
 Flags:
       --chain-id string   genesis file chain-id, if left blank will be randomly created
   -h, --help              help for init
+      --home string       node's home directory (default "/Users/user/.gaia")
   -o, --overwrite         overwrite the genesis.json file
       --recover           provide seed phrase to recover existing key instead of creating
 
 Global Flags:
-      --home string         directory for config and data (default "/Users/user/.gaia")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -641,12 +641,12 @@ Available Commands:
 
 Flags:
   -h, --help                     help for keys
+      --home string              The application home directory (default "/Users/user/.gaia")
       --keyring-backend string   Select keyring's backend (os|file|test) (default "os")
       --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
       --output string            Output format (text|json) (default "text")
 
 Global Flags:
-      --home string         directory for config and data (default "/Users/user/.gaia")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -730,6 +730,32 @@ Global Flags:
 
 ```
 
+### gaiad query auth module-account
+
+```
+Query module account info by module name
+
+Usage:
+  gaiad query auth module-account [module-name] [flags]
+
+Examples:
+gaiad q auth module-account auth
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for module-account
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.gaia")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
 ### gaiad query auth params
 
 ```
@@ -765,9 +791,10 @@ Usage:
   gaiad query auth [command]
 
 Available Commands:
-  account     Query for account by address
-  accounts    Query all the accounts
-  params      Query the current auth parameters
+  account        Query for account by address
+  accounts       Query all the accounts
+  module-account Query module account info by module name
+  params         Query the current auth parameters
 
 Flags:
   -h, --help   help for auth
@@ -1196,6 +1223,32 @@ Global Flags:
 
 ```
 
+### gaiad query distribution tokenize-share-record-rewards
+
+```
+Query the query tokenize share record rewards.
+
+Example:
+$ gaiad query distribution tokenize-share-record-rewards cosmos1gghjut3ccd8ay0zduzj64hwre2fxs9ldmqhffj
+
+Usage:
+  gaiad query distribution tokenize-share-record-rewards [owner] [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for tokenize-share-record-rewards
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.gaia")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
 ### gaiad query distribution validator-outstanding-rewards
 
 ```
@@ -1237,6 +1290,7 @@ Available Commands:
   params                        Query distribution params
   rewards                       Query all distribution delegator rewards or rewards from a particular validator
   slashes                       Query distribution validator slashes
+  tokenize-share-record-rewards Query distribution tokenize share record rewards
   validator-outstanding-rewards Query distribution outstanding (un-withdrawn) rewards for a validator and all their delegations
 
 Flags:
@@ -1401,6 +1455,55 @@ Global Flags:
       --trace               print out full stack trace on errors
 
 Use "gaiad query feegrant [command] --help" for more information about a command.
+
+```
+
+### gaiad query globalfee params
+
+```
+Show globalfee requirement: minimum_gas_prices, bypass_min_fee_msg_types, max_total_bypass_minFee_msg_gas_usage
+
+Usage:
+  gaiad query globalfee params [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for params
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.gaia")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### gaiad query globalfee
+
+```
+Querying commands for the global fee module
+
+Usage:
+  gaiad query globalfee [flags]
+  gaiad query globalfee [command]
+
+Available Commands:
+  params      Show globalfee params
+
+Flags:
+  -h, --help   help for globalfee
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.gaia")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "gaiad query globalfee [command] --help" for more information about a command.
 
 ```
 
@@ -2082,6 +2185,38 @@ Use "gaiad query ibc channel [command] --help" for more information about a comm
 
 ```
 
+### gaiad query ibc client consensus-state-heights
+
+```
+Query the heights of all consensus states associated with the provided client ID.
+
+Usage:
+  gaiad query ibc client consensus-state-heights [client-id] [flags]
+
+Examples:
+gaiad query ibc client consensus-state-heights [client-id]
+
+Flags:
+      --count-total       count total number of records in consensus state heights to query for
+      --height int        Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help              help for consensus-state-heights
+      --limit uint        pagination limit of consensus state heights to query for (default 100)
+      --node string       <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+      --offset uint       pagination offset of consensus state heights to query for
+  -o, --output string     Output format (text|json) (default "text")
+      --page uint         pagination page of consensus state heights to query for. This sets offset to a multiple of limit (default 1)
+      --page-key string   pagination page-key of consensus state heights to query for
+      --reverse           results are sorted in descending order
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.gaia")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
 ### gaiad query ibc client consensus-state
 
 ```
@@ -2313,14 +2448,15 @@ Usage:
   gaiad query ibc client [command]
 
 Available Commands:
-  consensus-state      Query the consensus state of a client at a given height
-  consensus-states     Query all the consensus states of a client.
-  header               Query the latest header of the running chain
-  params               Query the current ibc client parameters
-  self-consensus-state Query the self consensus state for this chain
-  state                Query a client state
-  states               Query all available light clients
-  status               Query client status
+  consensus-state         Query the consensus state of a client at a given height
+  consensus-state-heights Query the heights of all consensus states of a client.
+  consensus-states        Query all the consensus states of a client.
+  header                  Query the latest header of the running chain
+  params                  Query the current ibc client parameters
+  self-consensus-state    Query the self consensus state for this chain
+  state                   Query a client state
+  states                  Query all available light clients
+  status                  Query client status
 
 Flags:
   -h, --help   help for client
@@ -2507,7 +2643,7 @@ Usage:
   gaiad query ibc-transfer denom-hash [trace] [flags]
 
 Examples:
-gaiad query ibc-transfer denom-hash [denom_trace]
+gaiad query ibc-transfer denom-hash transfer/channel-0/uatom
 
 Flags:
       --height int      Use a specific height to query state at (this can error if the node is pruning state)
@@ -2527,13 +2663,13 @@ Global Flags:
 ### gaiad query ibc-transfer denom-trace
 
 ```
-Query the denom trace info from a given trace hash
+Query the denom trace info from a given trace hash or ibc denom
 
 Usage:
-  gaiad query ibc-transfer denom-trace [hash] [flags]
+  gaiad query ibc-transfer denom-trace [hash/denom] [flags]
 
 Examples:
-gaiad query ibc-transfer denom-trace [hash]
+gaiad query ibc-transfer denom-trace 27A6394C3F9FF9C9DCF5DFFADF9BB5FE9A37C7E92B006199894CF1824DF9AC7C
 
 Flags:
       --height int      Use a specific height to query state at (this can error if the node is pruning state)
@@ -2644,7 +2780,7 @@ Usage:
 
 Available Commands:
   denom-hash     Query the denom hash info from a given denom trace
-  denom-trace    Query the denom trace info from a given trace hash
+  denom-trace    Query the denom trace info from a given trace hash or ibc denom
   denom-traces   Query the trace info for all token denominations
   escrow-address Get the escrow address for a channel
   params         Query the current ibc-transfer parameters
@@ -2691,6 +2827,32 @@ Use "gaiad query ibc [command] --help" for more information about a command.
 
 ```
 
+### gaiad query interchain-accounts controller interchain-account
+
+```
+Query the controller submodule for the interchain account address for a given owner on a particular connection
+
+Usage:
+  gaiad query interchain-accounts controller interchain-account [owner] [connection-id] [flags]
+
+Examples:
+gaiad query interchain-accounts controller interchain-account cosmos1layxcsmyye0dc0har9sdfzwckaz8sjwlfsj8zs connection-0
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for interchain-account
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.gaia")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
 ### gaiad query interchain-accounts controller params
 
 ```
@@ -2726,7 +2888,8 @@ Usage:
   gaiad query interchain-accounts controller [command]
 
 Available Commands:
-  params      Query the current interchain-accounts controller submodule parameters
+  interchain-account Query the interchain account address for a given owner on a particular connection
+  params             Query the current interchain-accounts controller submodule parameters
 
 Flags:
   -h, --help   help for controller
@@ -2846,329 +3009,6 @@ Global Flags:
       --trace               print out full stack trace on errors
 
 Use "gaiad query interchain-accounts [command] --help" for more information about a command.
-
-```
-
-### gaiad query liquidity batch
-
-```
-Query details of a liquidity pool batch
-Example:
-$ gaiad query liquidity batch 1
-
-Usage:
-  gaiad query liquidity batch [pool-id] [flags]
-
-Flags:
-      --height int      Use a specific height to query state at (this can error if the node is pruning state)
-  -h, --help            help for batch
-      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
-  -o, --output string   Output format (text|json) (default "text")
-
-Global Flags:
-      --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.gaia")
-      --log_format string   The logging format (json|plain) (default "plain")
-      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
-      --trace               print out full stack trace on errors
-
-```
-
-### gaiad query liquidity deposit
-
-```
-Query the deposit messages on the liquidity pool batch for the specified pool-id and msg-index
-
-If batch messages are normally processed from the endblock,
-the resulting state is applied and the messages are removed from the beginning of the next block.
-To query for past blocks, query the block height using the REST/gRPC API of a node that is not pruned.
-
-Example:
-$ gaiad query liquidity deposit 1 20
-
-Usage:
-  gaiad query liquidity deposit [pool-id] [msg-index] [flags]
-
-Flags:
-      --height int      Use a specific height to query state at (this can error if the node is pruning state)
-  -h, --help            help for deposit
-      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
-  -o, --output string   Output format (text|json) (default "text")
-
-Global Flags:
-      --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.gaia")
-      --log_format string   The logging format (json|plain) (default "plain")
-      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
-      --trace               print out full stack trace on errors
-
-```
-
-### gaiad query liquidity deposits
-
-```
-Query all deposit messages of the liquidity pool batch on the specified pool
-
-If batch messages are normally processed from the endblock, the resulting state is applied and the messages are removed in the beginning of next block.
-To query for past blocks, query the block height using the REST/gRPC API of a node that is not pruned.
-
-Example:
-$ gaiad query liquidity deposits 1
-
-Usage:
-  gaiad query liquidity deposits [pool-id] [flags]
-
-Flags:
-      --height int      Use a specific height to query state at (this can error if the node is pruning state)
-  -h, --help            help for deposits
-      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
-  -o, --output string   Output format (text|json) (default "text")
-
-Global Flags:
-      --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.gaia")
-      --log_format string   The logging format (json|plain) (default "plain")
-      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
-      --trace               print out full stack trace on errors
-
-```
-
-### gaiad query liquidity params
-
-```
-Query values set as liquidity parameters.
-
-Example:
-$ gaiad query liquidity params
-
-Usage:
-  gaiad query liquidity params [flags]
-
-Flags:
-      --height int      Use a specific height to query state at (this can error if the node is pruning state)
-  -h, --help            help for params
-      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
-  -o, --output string   Output format (text|json) (default "text")
-
-Global Flags:
-      --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.gaia")
-      --log_format string   The logging format (json|plain) (default "plain")
-      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
-      --trace               print out full stack trace on errors
-
-```
-
-### gaiad query liquidity pool
-
-```
-Query details of a liquidity pool
-Example:
-$ gaiad query liquidity pool 1
-
-Example (with pool coin denom):
-$ gaiad query liquidity pool --pool-coin-denom=[denom]
-
-Example (with reserve acc):
-$ gaiad query liquidity pool --reserve-acc=[address]
-
-Usage:
-  gaiad query liquidity pool [pool-id] [flags]
-
-Flags:
-      --height int               Use a specific height to query state at (this can error if the node is pruning state)
-  -h, --help                     help for pool
-      --node string              <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
-  -o, --output string            Output format (text|json) (default "text")
-      --pool-coin-denom string   The denomination of the pool coin
-      --reserve-acc string       The Bech32 address of the reserve account
-
-Global Flags:
-      --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.gaia")
-      --log_format string   The logging format (json|plain) (default "plain")
-      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
-      --trace               print out full stack trace on errors
-
-```
-
-### gaiad query liquidity pools
-
-```
-Query details about all liquidity pools on a network.
-Example:
-$ gaiad query liquidity pools
-
-Usage:
-  gaiad query liquidity pools [flags]
-
-Flags:
-      --height int      Use a specific height to query state at (this can error if the node is pruning state)
-  -h, --help            help for pools
-      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
-  -o, --output string   Output format (text|json) (default "text")
-
-Global Flags:
-      --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.gaia")
-      --log_format string   The logging format (json|plain) (default "plain")
-      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
-      --trace               print out full stack trace on errors
-
-```
-
-### gaiad query liquidity swap
-
-```
-Query for the swap message on the batch of the liquidity pool specified pool-id and msg-index
-
-If the batch message are normally processed and from the endblock,
-the resulting state is applied and the messages are removed in the beginning of next block.
-To query for past blocks, query the block height using the REST/gRPC API of a node that is not pruned.
-
-Example:
-$ gaiad query liquidity swap 1 20
-
-Usage:
-  gaiad query liquidity swap [pool-id] [msg-index] [flags]
-
-Flags:
-      --height int      Use a specific height to query state at (this can error if the node is pruning state)
-  -h, --help            help for swap
-      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
-  -o, --output string   Output format (text|json) (default "text")
-
-Global Flags:
-      --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.gaia")
-      --log_format string   The logging format (json|plain) (default "plain")
-      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
-      --trace               print out full stack trace on errors
-
-```
-
-### gaiad query liquidity swaps
-
-```
-Query all swap messages in the liquidity pool batch for the specified pool-id
-
-If batch messages are normally processed from the endblock,
-the resulting state is applied and the messages are removed in the beginning of next block.
-To query for past blocks, query the block height using the REST/gRPC API of a node that is not pruned.
-
-Example:
-$ gaiad query liquidity swaps 1
-
-Usage:
-  gaiad query liquidity swaps [pool-id] [flags]
-
-Flags:
-      --height int      Use a specific height to query state at (this can error if the node is pruning state)
-  -h, --help            help for swaps
-      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
-  -o, --output string   Output format (text|json) (default "text")
-
-Global Flags:
-      --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.gaia")
-      --log_format string   The logging format (json|plain) (default "plain")
-      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
-      --trace               print out full stack trace on errors
-
-```
-
-### gaiad query liquidity withdraw
-
-```
-Query the withdraw messages in the liquidity pool batch for the specified pool-id and msg-index
-
-if the batch message are normally processed from the endblock,
-the resulting state is applied and the messages are removed in the beginning of next block.
-To query for past blocks, query the block height using the REST/gRPC API of a node that is not pruned.
-
-Example:
-$ gaiad query liquidity withdraw 1 20
-
-Usage:
-  gaiad query liquidity withdraw [pool-id] [msg-index] [flags]
-
-Flags:
-      --height int      Use a specific height to query state at (this can error if the node is pruning state)
-  -h, --help            help for withdraw
-      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
-  -o, --output string   Output format (text|json) (default "text")
-
-Global Flags:
-      --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.gaia")
-      --log_format string   The logging format (json|plain) (default "plain")
-      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
-      --trace               print out full stack trace on errors
-
-```
-
-### gaiad query liquidity withdraws
-
-```
-Query all withdraw messages on the liquidity pool batch for the specified pool-id
-
-If batch messages are normally processed from the endblock,
-the resulting state is applied and the messages are removed in the beginning of next block.
-To query for past blocks, query the block height using the REST/gRPC API of a node that is not pruned.
-
-Example:
-$ gaiad query liquidity withdraws 1
-
-Usage:
-  gaiad query liquidity withdraws [pool-id] [flags]
-
-Flags:
-      --height int      Use a specific height to query state at (this can error if the node is pruning state)
-  -h, --help            help for withdraws
-      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
-  -o, --output string   Output format (text|json) (default "text")
-
-Global Flags:
-      --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.gaia")
-      --log_format string   The logging format (json|plain) (default "plain")
-      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
-      --trace               print out full stack trace on errors
-
-```
-
-### gaiad query liquidity
-
-```
-Querying commands for the liquidity module
-
-Usage:
-  gaiad query liquidity [flags]
-  gaiad query liquidity [command]
-
-Available Commands:
-  batch       Query details of a liquidity pool batch
-  deposit     Query the deposit messages on the liquidity pool batch
-  deposits    Query all deposit messages of the liquidity pool batch
-  params      Query the values set as liquidity parameters
-  pool        Query details of a liquidity pool
-  pools       Query for all liquidity pools
-  swap        Query for the swap message on the batch of the liquidity pool specified pool-id and msg-index
-  swaps       Query all swap messages in the liquidity pool batch
-  withdraw    Query the withdraw messages in the liquidity pool batch
-  withdraws   Query for all withdraw messages on the liquidity pool batch
-
-Flags:
-  -h, --help   help for liquidity
-
-Global Flags:
-      --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.gaia")
-      --log_format string   The logging format (json|plain) (default "plain")
-      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
-      --trace               print out full stack trace on errors
-
-Use "gaiad query liquidity [command] --help" for more information about a command.
 
 ```
 
@@ -3318,6 +3158,264 @@ Use "gaiad query params [command] --help" for more information about a command.
 
 ```
 
+### gaiad query provider consumer-genesis
+
+```
+Query for consumer chain genesis state by chain id
+
+Usage:
+  gaiad query provider consumer-genesis [chainid] [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for consumer-genesis
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.gaia")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### gaiad query provider list-consumer-chains
+
+```
+Query active consumer chains for provider chain.
+
+Usage:
+  gaiad query provider list-consumer-chains [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for list-consumer-chains
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.gaia")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### gaiad query provider list-start-proposals
+
+```
+Query mature and pending consumer chains start proposals on provider chain.
+		Matured proposals will be executed on the next block - their spawn_time has passed
+		Pending proposals are waiting for their spawn_time to pass.
+
+Usage:
+  gaiad query provider list-start-proposals [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for list-start-proposals
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.gaia")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### gaiad query provider list-stop-proposals
+
+```
+Query mature and pending consumer chains stop proposals on provider chain.
+		Matured proposals will be executed on the next block - their stop_time has passed
+		Pending proposals are waiting for their stop_time to pass.
+
+Usage:
+  gaiad query provider list-stop-proposals [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for list-stop-proposals
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.gaia")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### gaiad query provider registered-consumer-reward-denoms
+
+```
+Returns the registered consumer reward denoms.
+Example:
+$ gaiad query provider registered-consumer-reward-denoms
+
+Usage:
+  gaiad query provider registered-consumer-reward-denoms [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for registered-consumer-reward-denoms
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.gaia")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### gaiad query provider throttle-state
+
+```
+Returns state relevant to throttled slash packet queue on the provider chain.
+			Queue is ordered by time of arrival.
+Example:
+$ gaiad query provider throttle-state
+
+Usage:
+  gaiad query provider throttle-state [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for throttle-state
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.gaia")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### gaiad query provider throttled-consumer-packet-data
+
+```
+Returns the current pending VSCMatured and slash packet data instances for a consumer chainId.
+			Queue is ordered by ibc sequence number. 
+Example:
+$ gaiad query provider throttled-consumer-packet-data foochain
+
+Usage:
+  gaiad query provider throttled-consumer-packet-data [chainid] [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for throttled-consumer-packet-data
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.gaia")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### gaiad query provider validator-consumer-key
+
+```
+Returns the currently assigned validator consensus public key for a
+consumer chain, if one has been assigned.
+Example:
+$ gaiad query provider validator-consumer-key foochain cosmosvalcons1gghjut3ccd8ay0zduzj64hwre2fxs9ldmqhffj
+
+Usage:
+  gaiad query provider validator-consumer-key [chainid] [provider-validator-address] [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for validator-consumer-key
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.gaia")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### gaiad query provider validator-provider-key
+
+```
+Returns the currently assigned validator consensus public key for the provider chain.
+Example:
+$ gaiad query provider validator-provider-key foochain cosmosvalcons1gghjut3ccd8ay0zduzj64hwre2fxs9ldmqhffj
+
+Usage:
+  gaiad query provider validator-provider-key [chainid] [consumer-validator-address] [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for validator-provider-key
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.gaia")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### gaiad query provider
+
+```
+Querying commands for the ccv provider module
+
+Usage:
+  gaiad query provider [flags]
+  gaiad query provider [command]
+
+Available Commands:
+  consumer-genesis                  Query for consumer chain genesis state by chain id
+  list-consumer-chains              Query active consumer chains for provider chain.
+  list-start-proposals              Query consumer chains start proposals on provider chain.
+  list-stop-proposals               Query consumer chains stop proposals on provider chain.
+  registered-consumer-reward-denoms Query registered consumer reward denoms
+  throttle-state                    Query on-chain state relevant to slash packet throttling
+  throttled-consumer-packet-data    Query pending VSCMatured and slash packet data for a consumer chainId
+  validator-consumer-key            Query assigned validator consensus public key for a consumer chain
+  validator-provider-key            Query validator consensus public key for the provider chain
+
+Flags:
+  -h, --help   help for provider
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.gaia")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "gaiad query provider [command] --help" for more information about a command.
+
+```
+
 ### gaiad query slashing params
 
 ```
@@ -3427,6 +3525,38 @@ Use "gaiad query slashing [command] --help" for more information about a command
 
 ```
 
+### gaiad query staking all-tokenize-share-records
+
+```
+Query for all tokenize share records.
+
+Example:
+$ gaiad query staking all-tokenize-share-records
+
+Usage:
+  gaiad query staking all-tokenize-share-records [flags]
+
+Flags:
+      --count-total       count total number of records in tokenize share records to query for
+      --height int        Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help              help for all-tokenize-share-records
+      --limit uint        pagination limit of tokenize share records to query for (default 100)
+      --node string       <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+      --offset uint       pagination offset of tokenize share records to query for
+  -o, --output string     Output format (text|json) (default "text")
+      --page uint         pagination page of tokenize share records to query for. This sets offset to a multiple of limit (default 1)
+      --page-key string   pagination page-key of tokenize share records to query for
+      --reverse           results are sorted in descending order
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.gaia")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
 ### gaiad query staking delegation
 
 ```
@@ -3531,6 +3661,32 @@ Usage:
 Flags:
       --height int      Use a specific height to query state at (this can error if the node is pruning state)
   -h, --help            help for historical-info
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.gaia")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### gaiad query staking last-tokenize-share-record-id
+
+```
+Query for last tokenize share record id.
+
+Example:
+$ gaiad query staking last-tokenize-share-record-id
+
+Usage:
+  gaiad query staking last-tokenize-share-record-id [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for last-tokenize-share-record-id
       --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
   -o, --output string   Output format (text|json) (default "text")
 
@@ -3675,6 +3831,162 @@ Flags:
       --page uint         pagination page of delegator redelegations to query for. This sets offset to a multiple of limit (default 1)
       --page-key string   pagination page-key of delegator redelegations to query for
       --reverse           results are sorted in descending order
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.gaia")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### gaiad query staking tokenize-share-lock-info
+
+```
+Query the status of a tokenize share lock for a given account
+Example:
+$ gaiad query staking tokenize-share-lock-info cosmos1gghjut3ccd8ay0zduzj64hwre2fxs9ldmqhffj
+
+Usage:
+  gaiad query staking tokenize-share-lock-info [address] [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for tokenize-share-lock-info
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.gaia")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### gaiad query staking tokenize-share-record-by-denom
+
+```
+Query individual tokenize share record information by share denom.
+
+Example:
+$ gaiad query staking tokenize-share-record-by-denom
+
+Usage:
+  gaiad query staking tokenize-share-record-by-denom [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for tokenize-share-record-by-denom
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.gaia")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### gaiad query staking tokenize-share-record-by-id
+
+```
+Query individual tokenize share record information by share by id.
+
+Example:
+$ gaiad query staking tokenize-share-record-by-id [id]
+
+Usage:
+  gaiad query staking tokenize-share-record-by-id [id] [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for tokenize-share-record-by-id
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.gaia")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### gaiad query staking tokenize-share-records-owned
+
+```
+Query tokenize share records by address.
+
+Example:
+$ gaiad query staking tokenize-share-records-owned [owner]
+
+Usage:
+  gaiad query staking tokenize-share-records-owned [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for tokenize-share-records-owned
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.gaia")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### gaiad query staking total-liquid-staked
+
+```
+Query for total number of liquid staked tokens.
+Liquid staked tokens are identified as either a tokenized delegation, 
+or tokens owned by an interchain account.
+Example:
+$ gaiad query staking total-liquid-staked
+
+Usage:
+  gaiad query staking total-liquid-staked [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for total-liquid-staked
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.gaia")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### gaiad query staking total-tokenize-share-assets
+
+```
+Query for total tokenized staked assets.
+
+Example:
+$ gaiad query staking total-tokenize-share-assets
+
+Usage:
+  gaiad query staking total-tokenize-share-assets [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for total-tokenize-share-assets
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
 
 Global Flags:
       --chain-id string     The network chain ID
@@ -3843,20 +4155,28 @@ Usage:
   gaiad query staking [command]
 
 Available Commands:
-  delegation                 Query a delegation based on address and validator address
-  delegations                Query all delegations made by one delegator
-  delegations-to             Query all delegations made to one validator
-  historical-info            Query historical info at given height
-  params                     Query the current staking parameters information
-  pool                       Query the current staking pool values
-  redelegation               Query a redelegation record based on delegator and a source and destination validator address
-  redelegations              Query all redelegations records for one delegator
-  redelegations-from         Query all outgoing redelegatations from a validator
-  unbonding-delegation       Query an unbonding-delegation record based on delegator and validator address
-  unbonding-delegations      Query all unbonding-delegations records for one delegator
-  unbonding-delegations-from Query all unbonding delegatations from a validator
-  validator                  Query a validator
-  validators                 Query for all validators
+  all-tokenize-share-records     Query for all tokenize share records
+  delegation                     Query a delegation based on address and validator address
+  delegations                    Query all delegations made by one delegator
+  delegations-to                 Query all delegations made to one validator
+  historical-info                Query historical info at given height
+  last-tokenize-share-record-id  Query for last tokenize share record id
+  params                         Query the current staking parameters information
+  pool                           Query the current staking pool values
+  redelegation                   Query a redelegation record based on delegator and a source and destination validator address
+  redelegations                  Query all redelegations records for one delegator
+  redelegations-from             Query all outgoing redelegatations from a validator
+  tokenize-share-lock-info       Query tokenize share lock information
+  tokenize-share-record-by-denom Query individual tokenize share record information by share denom
+  tokenize-share-record-by-id    Query individual tokenize share record information by share by id
+  tokenize-share-records-owned   Query tokenize share records by address
+  total-liquid-staked            Query for total liquid staked tokens
+  total-tokenize-share-assets    Query for total tokenized staked assets
+  unbonding-delegation           Query an unbonding-delegation record based on delegator and validator address
+  unbonding-delegations          Query all unbonding-delegations records for one delegator
+  unbonding-delegations-from     Query all unbonding delegatations from a validator
+  validator                      Query a validator
+  validators                     Query for all validators
 
 Flags:
   -h, --help   help for staking
@@ -3979,31 +4299,6 @@ Global Flags:
 
 ```
 
-### gaiad query upgrade module_versions
-
-```
-Gets a list of module names and their respective consensus versions.
-Following the command with a specific module name will return only
-that module's information.
-
-Usage:
-  gaiad query upgrade module_versions [optional module_name] [flags]
-
-Flags:
-      --height int      Use a specific height to query state at (this can error if the node is pruning state)
-  -h, --help            help for module_versions
-      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
-  -o, --output string   Output format (text|json) (default "text")
-
-Global Flags:
-      --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.gaia")
-      --log_format string   The logging format (json|plain) (default "plain")
-      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
-      --trace               print out full stack trace on errors
-
-```
-
 ### gaiad query upgrade plan
 
 ```
@@ -4075,14 +4370,15 @@ Available Commands:
   distribution             Querying commands for the distribution module
   evidence                 Query for evidence by hash or for all (paginated) submitted evidence
   feegrant                 Querying commands for the feegrant module
+  globalfee                Querying commands for the global fee module
   gov                      Querying commands for the governance module
   ibc                      Querying commands for the IBC module
   ibc-router               
   ibc-transfer             IBC fungible token transfer query subcommands
   interchain-accounts      interchain-accounts subcommands
-  liquidity                Querying commands for the liquidity module
   mint                     Querying commands for the minting module
   params                   Querying commands for the params module
+  provider                 Querying commands for the ccv provider module
   slashing                 Querying commands for the slashing module
   staking                  Querying commands for the staking module
   tendermint-validator-set Get the full tendermint validator set at given height
@@ -4119,7 +4415,33 @@ Usage:
   gaiad rollback [flags]
 
 Flags:
-  -h, --help   help for rollback
+  -h, --help          help for rollback
+      --home string   The application home directory (default "/Users/user/.gaia")
+
+Global Flags:
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### gaiad rosetta
+
+```
+spin up a rosetta server
+
+Usage:
+  gaiad rosetta [flags]
+
+Flags:
+      --addr string         the address rosetta will bind to (default ":8080")
+      --blockchain string   the blockchain type (default "app")
+      --grpc string         the app gRPC endpoint (default "localhost:9090")
+  -h, --help                help for rosetta
+      --network string      the network name (default "network")
+      --offline             run rosetta only with construction API
+      --retries int         the number of retries that will be done before quitting (default 5)
+      --tendermint string   the tendermint rpc endpoint, without tcp:// (default "localhost:26657")
 
 Global Flags:
       --home string         directory for config and data (default "/Users/user/.gaia")
@@ -4181,11 +4503,14 @@ Flags:
       --halt-height uint                                Block height at which to gracefully halt the chain and shutdown the node
       --halt-time uint                                  Minimum block time (in Unix seconds) at which to gracefully halt the chain and shutdown the node
   -h, --help                                            help for start
+      --home string                                     The application home directory (default "/Users/user/.gaia")
+      --iavl-disable-fastnode                           Disable fast node for IAVL tree (default true)
       --inter-block-cache                               Enable inter-block caching (default true)
       --inv-check-period uint                           Assert registered invariants every N blocks
       --min-retain-blocks uint                          Minimum block height offset during ABCI commit to prune Tendermint blocks
       --minimum-gas-prices string                       Minimum gas prices to accept for transactions; Any fee in a tx must meet this minimum (e.g. 0.01photino;0.0001stake)
       --moniker string                                  node name (default "Pro16.local")
+      --p2p.external-address string                     ip:port address to advertise to peers for them to dial
       --p2p.laddr string                                node listen address. (0.0.0.0:0 means any interface, any port) (default "tcp://0.0.0.0:26656")
       --p2p.persistent_peers string                     comma-delimited ID@host:port persistent peers
       --p2p.pex                                         enable/disable Peer-Exchange (default true)
@@ -4206,6 +4531,7 @@ Flags:
       --rpc.unsafe                                      enabled unsafe rpc methods
       --state-sync.snapshot-interval uint               State sync snapshot interval
       --state-sync.snapshot-keep-recent uint32          State sync snapshot to keep (default 2)
+      --trace                                           Provide full stack traces for errors in ABCI Log
       --trace-store string                              Enable KVStore tracing to an output file
       --transport string                                Transport protocol: socket, grpc (default "socket")
       --unsafe-skip-upgrades ints                       Skip a set of upgrade heights to continue the old binary
@@ -4213,10 +4539,8 @@ Flags:
       --x-crisis-skip-assert-invariants                 Skip x/crisis invariants check on startup
 
 Global Flags:
-      --home string         directory for config and data (default "/Users/user/.gaia")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
-      --trace               print out full stack trace on errors
 
 ```
 
@@ -4247,6 +4571,9 @@ Remove all the data and WAL
 
 Usage:
   gaiad tendermint reset-state [flags]
+
+Aliases:
+  reset-state, reset_state
 
 Flags:
   -h, --help   help for reset-state
@@ -4436,7 +4763,7 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -4483,8 +4810,8 @@ Flags:
       --allowed-validators strings   Allowed validators addresses separated by ,
   -b, --broadcast-mode string        Transaction broadcasting mode (sync|async|block) (default "sync")
       --deny-validators strings      Deny validators addresses separated by ,
-      --dry-run                      ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
-      --expiration int               The Unix timestamp. Default is one year. (default 1700482346)
+      --dry-run                      ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
+      --expiration int               The Unix timestamp. Default is one year. (default 1728223690)
       --fee-account string           Fee account pays fees for the transaction instead of deducting from the signer
       --fees string                  Fees to pay along with transaction; eg: 10uatom
       --from string                  Name or address of private key with which to sign
@@ -4529,7 +4856,7 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -4590,8 +4917,9 @@ Use "gaiad tx authz [command] --help" for more information about a command.
 ### gaiad tx bank send
 
 ```
-Send funds from one account to another. Note, the'--from' flag is
-ignored as it is implied from [from_key_or_address].
+Send funds from one account to another. 
+		Note, the'--from' flag is ignored as it is implied from [from_key_or_address].
+		When using '--dry-run' a key name cannot be used, only a bech32 address.
 
 Usage:
   gaiad tx bank send [from_key_or_address] [to_address] [amount] [flags]
@@ -4599,7 +4927,7 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -4639,8 +4967,9 @@ Usage:
   gaiad tx bank [command]
 
 Available Commands:
-  send        Send funds from one account to another. Note, the'--from' flag is
-ignored as it is implied from [from_key_or_address].
+  send        Send funds from one account to another. 
+		Note, the'--from' flag is ignored as it is implied from [from_key_or_address].
+		When using '--dry-run' a key name cannot be used, only a bech32 address.
 
 Flags:
   -h, --help   help for bank
@@ -4672,7 +5001,7 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -4713,7 +5042,7 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -4780,7 +5109,7 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -4825,7 +5154,7 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -4869,7 +5198,7 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -4914,7 +5243,7 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -4927,6 +5256,50 @@ Flags:
       --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
       --ledger                   Use a connected Ledger device
       --max-msgs int             Limit the number of messages per tx (0 for unlimited)
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.gaia")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### gaiad tx distribution withdraw-all-tokenize-share-rewards
+
+```
+Withdraw reward for all owned TokenizeShareRecord
+
+Example:
+$ gaiad tx distribution withdraw-tokenize-share-rewards --from mykey
+
+Usage:
+  gaiad tx distribution withdraw-all-tokenize-share-rewards [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for withdraw-all-tokenize-share-rewards
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
       --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
       --note string              Note to add a description to the transaction (previously --memo)
       --offline                  Offline mode (does not allow any online functionality
@@ -4962,7 +5335,7 @@ Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
       --commission               Withdraw the validator's commission in addition to the rewards
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -4971,6 +5344,50 @@ Flags:
       --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
       --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
   -h, --help                     help for withdraw-rewards
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.gaia")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### gaiad tx distribution withdraw-tokenize-share-rewards
+
+```
+Withdraw reward for an owned TokenizeShareRecord
+
+Example:
+$ gaiad tx distribution withdraw-tokenize-share-rewards 1 --from mykey
+
+Usage:
+  gaiad tx distribution withdraw-tokenize-share-rewards [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for withdraw-tokenize-share-rewards
       --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
       --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
       --ledger                   Use a connected Ledger device
@@ -5002,10 +5419,12 @@ Usage:
   gaiad tx distribution [command]
 
 Available Commands:
-  fund-community-pool  Funds the community pool with the specified amount
-  set-withdraw-addr    change the default withdraw address for rewards associated with an address
-  withdraw-all-rewards withdraw all delegations rewards for a delegator
-  withdraw-rewards     Withdraw rewards from a given delegation address, and optionally withdraw validator commission if the delegation address given is a validator operator
+  fund-community-pool                 Funds the community pool with the specified amount
+  set-withdraw-addr                   change the default withdraw address for rewards associated with an address
+  withdraw-all-rewards                withdraw all delegations rewards for a delegator
+  withdraw-all-tokenize-share-rewards Withdraw reward for all owning TokenizeShareRecord
+  withdraw-rewards                    Withdraw rewards from a given delegation address, and optionally withdraw validator commission if the delegation address given is a validator operator
+  withdraw-tokenize-share-rewards     Withdraw reward for an owning TokenizeShareRecord
 
 Flags:
   -h, --help   help for distribution
@@ -5034,7 +5453,7 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -5103,7 +5522,7 @@ Flags:
   -a, --account-number uint        The account number of the signing account (offline mode only)
       --allowed-messages strings   Set of allowed messages for fee allowance
   -b, --broadcast-mode string      Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                    ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                    ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --expiration string          The RFC 3339 timestamp after which the grant expires for the user
       --fee-account string         Fee account pays fees for the transaction instead of deducting from the signer
       --fees string                Fees to pay along with transaction; eg: 10uatom
@@ -5152,7 +5571,7 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -5224,7 +5643,7 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -5267,7 +5686,7 @@ Flags:
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
       --deposit string           deposit of proposal
       --description string       description of proposal
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -5287,6 +5706,60 @@ Flags:
       --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
       --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
       --title string             title of proposal
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.gaia")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### gaiad tx gov submit-proposal change-reward-denoms
+
+```
+Submit an change reward denoms proposal with an initial deposit.
+		The proposal details must be supplied via a JSON file.
+
+		Example:
+		$ <appd> tx gov submit-proposal change-reward-denoms <path/to/proposal.json> --from=<key_or_address>
+
+		Where proposal.json contains:
+		{
+			"title": "Change reward denoms",
+			"summary": "Change reward denoms",
+			"denoms_to_add": ["untrn"],
+			"denoms_to_remove": ["stake"],
+			"deposit": "10000stake"
+		}
+
+Usage:
+  gaiad tx gov submit-proposal change-reward-denoms [proposal-file] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for change-reward-denoms
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
   -y, --yes                      Skip tx broadcasting prompt confirmation
 
 Global Flags:
@@ -5323,7 +5796,7 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -5332,6 +5805,191 @@ Flags:
       --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
       --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
   -h, --help                     help for community-pool-spend
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.gaia")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### gaiad tx gov submit-proposal consumer-addition
+
+```
+
+Submit a consumer addition proposal along with an initial deposit.
+The proposal details must be supplied via a JSON file.
+Unbonding period, transfer timeout period and ccv timeout period should be provided as nanosecond time periods.
+
+Example:
+$ <appd> tx gov submit-proposal consumer-addition <path/to/proposal.json> --from=<key_or_address>
+
+Where proposal.json contains:
+
+{
+    "title": "Create the FooChain",
+    "description": "Gonna be a great chain",
+    "chain_id": "foochain",
+    "initial_height": {
+        "revision_number": 2,
+        "revision_height": 3
+    },
+    "genesis_hash": "Z2VuZXNpcyBoYXNo",
+    "binary_hash": "YmluYXJ5IGhhc2g=",
+    "spawn_time": "2022-01-27T15:59:50.121607-08:00",
+    "blocks_per_distribution_transmission": 1000,
+    "consumer_redistribution_fraction": "0.75",
+	"distribution_transmission_channel": "",
+    "historical_entries": 10000,
+    "transfer_timeout_period": 3600000000000,
+    "ccv_timeout_period": 2419200000000000,
+    "unbonding_period": 1728000000000000,
+    "deposit": "10000stake"
+}
+
+Usage:
+  gaiad tx gov submit-proposal consumer-addition [proposal-file] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for consumer-addition
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.gaia")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### gaiad tx gov submit-proposal consumer-removal
+
+```
+
+Submit a consumer chain removal proposal along with an initial deposit.
+The proposal details must be supplied via a JSON file.
+
+Example:
+$ <appd> tx gov submit-proposal consumer-removal <path/to/proposal.json> --from=<key_or_address>
+
+Where proposal.json contains:
+{
+	 "title": "Stop the FooChain",
+	 "description": "It was a great chain",
+	 "chain_id": "foochain",
+	 "stop_time": "2022-01-27T15:59:50.121607-08:00",
+	 "deposit": "10000stake"
+}
+
+Usage:
+  gaiad tx gov submit-proposal consumer-removal [proposal-file] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for consumer-removal
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.gaia")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### gaiad tx gov submit-proposal equivocation
+
+```
+Submit an equivocation proposal along with an initial deposit.
+The proposal details must be supplied via a JSON file.
+
+Example:
+$ <appd> tx gov submit-proposal equivocation <path/to/proposal.json> --from=<key_or_address>
+
+Where proposal.json contains:
+{
+	 "title": "Equivoque Foo validator",
+	 "description": "He double-signs on the Foobar consumer chain",
+	 "equivocations": [
+		{
+			"height": 10420042,
+			"time": "2023-01-27T15:59:50.121607-08:00",
+			"power": 10,
+			"consensus_address": "cosmosvalcons1s5afhd6gxevu37mkqcvvsj8qeylhn0rz46zdlq"
+		}
+	 ],
+	 "deposit": "10000stake"
+}
+
+Usage:
+  gaiad tx gov submit-proposal equivocation [proposal-file] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for equivocation
       --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
       --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
       --ledger                   Use a connected Ledger device
@@ -5376,7 +6034,7 @@ Flags:
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
       --deposit string           deposit of proposal
       --description string       description of proposal
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -5446,7 +6104,7 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -5491,7 +6149,7 @@ Flags:
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
       --deposit string           deposit of proposal
       --description string       description of proposal
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -5539,7 +6197,7 @@ Flags:
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
       --deposit string           deposit of proposal
       --description string       description of proposal
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -5598,7 +6256,11 @@ Usage:
 
 Available Commands:
   cancel-software-upgrade Cancel the current software upgrade proposal
+  change-reward-denoms    Submit a change reward denoms proposal
   community-pool-spend    Submit a community pool spend proposal
+  consumer-addition       Submit a consumer addition proposal
+  consumer-removal        Submit a consumer chain removal proposal
+  equivocation            Submit an equivocation proposal
   ibc-upgrade             Submit an IBC upgrade proposal
   param-change            Submit a parameter change proposal
   software-upgrade        Submit a software upgrade proposal
@@ -5609,7 +6271,7 @@ Flags:
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
       --deposit string           The proposal deposit
       --description string       The proposal description
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -5659,7 +6321,7 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -5704,7 +6366,7 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -5799,7 +6461,7 @@ gaiad tx ibc client create [path/to/client_state.json] [path/to/consensus_state.
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -5891,7 +6553,7 @@ gaiad tx ibc client upgrade [client-identifier] [path/to/client_state.json] [pat
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -5970,7 +6632,7 @@ Flags:
       --absolute-timeouts               Timeout flags are used as absolute timeouts.
   -a, --account-number uint             The account number of the signing account (offline mode only)
   -b, --broadcast-mode string           Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                         ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                         ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string              Fee account pays fees for the transaction instead of deducting from the signer
       --fees string                     Fees to pay along with transaction; eg: 10uatom
       --from string                     Name or address of private key with which to sign
@@ -5982,6 +6644,7 @@ Flags:
       --keyring-backend string          Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
       --keyring-dir string              The client Keyring directory; if omitted, the default 'home' directory will be used
       --ledger                          Use a connected Ledger device
+      --memo string                     Memo to be sent along with the packet.
       --node string                     <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
       --note string                     Note to add a description to the transaction (previously --memo)
       --offline                         Offline mode (does not allow any online functionality
@@ -6055,259 +6718,6 @@ Use "gaiad tx ibc [command] --help" for more information about a command.
 
 ```
 
-### gaiad tx liquidity create-pool
-
-```
-Create liquidity pool and deposit coins.
-
-Example:
-$ gaiad tx liquidity create-pool 1 1000000000uatom,50000000000uusd --from mykey
-
-This example creates a liquidity pool of pool-type 1 (two coins) and deposits 1000000000uatom and 50000000000uusd.
-New liquidity pools can be created only for coin combinations that do not already exist in the network.
-
-[pool-type]: The id of the liquidity pool-type. The only supported pool type is 1
-[deposit-coins]: The amount of coins to deposit to the liquidity pool. The number of deposit coins must be 2 in pool type 1.
-
-Usage:
-  gaiad tx liquidity create-pool [pool-type] [deposit-coins] [flags]
-
-Flags:
-  -a, --account-number uint      The account number of the signing account (offline mode only)
-  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
-      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
-      --fees string              Fees to pay along with transaction; eg: 10uatom
-      --from string              Name or address of private key with which to sign
-      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
-      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
-      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
-      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
-  -h, --help                     help for create-pool
-      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
-      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
-      --ledger                   Use a connected Ledger device
-      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
-      --note string              Note to add a description to the transaction (previously --memo)
-      --offline                  Offline mode (does not allow any online functionality
-  -o, --output string            Output format (text|json) (default "json")
-  -s, --sequence uint            The sequence number of the signing account (offline mode only)
-      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
-      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
-  -y, --yes                      Skip tx broadcasting prompt confirmation
-
-Global Flags:
-      --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.gaia")
-      --log_format string   The logging format (json|plain) (default "plain")
-      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
-      --trace               print out full stack trace on errors
-
-```
-
-### gaiad tx liquidity deposit
-
-```
-Deposit coins a liquidity pool.
-
-This deposit request is not processed immediately since it is accumulated in the liquidity pool batch.
-All requests in a batch are treated equally and executed at the same swap price.
-
-Example:
-$ gaiad tx liquidity deposit 1 100000000uatom,5000000000uusd --from mykey
-
-This example request deposits 100000000uatom and 5000000000uusd to pool-id 1.
-Deposits must be the same coin denoms as the reserve coins.
-
-[pool-id]: The pool id of the liquidity pool
-[deposit-coins]: The amount of coins to deposit to the liquidity pool
-
-Usage:
-  gaiad tx liquidity deposit [pool-id] [deposit-coins] [flags]
-
-Flags:
-  -a, --account-number uint      The account number of the signing account (offline mode only)
-  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
-      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
-      --fees string              Fees to pay along with transaction; eg: 10uatom
-      --from string              Name or address of private key with which to sign
-      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
-      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
-      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
-      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
-  -h, --help                     help for deposit
-      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
-      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
-      --ledger                   Use a connected Ledger device
-      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
-      --note string              Note to add a description to the transaction (previously --memo)
-      --offline                  Offline mode (does not allow any online functionality
-  -o, --output string            Output format (text|json) (default "json")
-  -s, --sequence uint            The sequence number of the signing account (offline mode only)
-      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
-      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
-  -y, --yes                      Skip tx broadcasting prompt confirmation
-
-Global Flags:
-      --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.gaia")
-      --log_format string   The logging format (json|plain) (default "plain")
-      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
-      --trace               print out full stack trace on errors
-
-```
-
-### gaiad tx liquidity swap
-
-```
-Swap offer coin with demand coin from the liquidity pool with the given order price.
-
-This swap request is not processed immediately since it is accumulated in the liquidity pool batch.
-All requests in a batch are treated equally and executed at the same swap price.
-The order of swap requests is ignored since the universal swap price is calculated in every batch to prevent front running.
-
-The requested swap is executed with a swap price that is calculated from the given swap price function of the pool, the other swap requests, and the liquidity pool coin reserve status.
-Swap orders are executed only when the execution swap price is equal to or greater than the submitted order price of the swap order.
-
-Example:
-$ gaiad tx liquidity swap 1 1 50000000uusd uatom 0.019 0.003 --from mykey
-
-For this example, imagine that an existing liquidity pool has with 1000000000uatom and 50000000000uusd.
-This example request swaps 50000000uusd for at least 950000uatom with the order price of 0.019 and swap fee rate of 0.003.
-A sufficient balance of half of the swap-fee-rate of the offer coin is required to reserve the offer coin fee.
-
-The order price is the exchange ratio of X/Y, where X is the amount of the first coin and Y is the amount of the second coin when their denoms are sorted alphabetically.
-Increasing order price reduces the possibility for your request to be processed and results in buying uatom at a lower price than the pool price.
-
-For explicit calculations, The swap fee rate must be the value that set as liquidity parameter in the current network.
-The only supported swap-type is 1. For the detailed swap algorithm, see https://github.com/gravity-devs/liquidity
-
-[pool-id]: The pool id of the liquidity pool 
-[swap-type]: The swap type of the swap message. The only supported swap type is 1 (instant swap).
-[offer-coin]: The amount of offer coin to swap 
-[demand-coin-denom]: The denomination of the coin to exchange with offer coin 
-[order-price]: The limit order price for the swap order. The price is the exchange ratio of X/Y where X is the amount of the first coin and Y is the amount of the second coin when their denoms are sorted alphabetically 
-[swap-fee-rate]: The swap fee rate to pay for swap that is proportional to swap amount. The swap fee rate must be the value that set as liquidity parameter in the current network.
-
-Usage:
-  gaiad tx liquidity swap [pool-id] [swap-type] [offer-coin] [demand-coin-denom] [order-price] [swap-fee-rate] [flags]
-
-Flags:
-  -a, --account-number uint      The account number of the signing account (offline mode only)
-  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
-      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
-      --fees string              Fees to pay along with transaction; eg: 10uatom
-      --from string              Name or address of private key with which to sign
-      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
-      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
-      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
-      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
-  -h, --help                     help for swap
-      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
-      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
-      --ledger                   Use a connected Ledger device
-      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
-      --note string              Note to add a description to the transaction (previously --memo)
-      --offline                  Offline mode (does not allow any online functionality
-  -o, --output string            Output format (text|json) (default "json")
-  -s, --sequence uint            The sequence number of the signing account (offline mode only)
-      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
-      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
-  -y, --yes                      Skip tx broadcasting prompt confirmation
-
-Global Flags:
-      --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.gaia")
-      --log_format string   The logging format (json|plain) (default "plain")
-      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
-      --trace               print out full stack trace on errors
-
-```
-
-### gaiad tx liquidity withdraw
-
-```
-Withdraw pool coin from the specified liquidity pool.
-
-This swap request is not processed immediately since it is accumulated in the liquidity pool batch.
-All requests in a batch are treated equally and executed at the same swap price.
-
-Example:
-$ gaiad tx liquidity withdraw 1 10000pool96EF6EA6E5AC828ED87E8D07E7AE2A8180570ADD212117B2DA6F0B75D17A6295 --from mykey
-
-This example request withdraws 10000 pool coin from the specified liquidity pool.
-The appropriate pool coin must be requested from the specified pool.
-
-[pool-id]: The pool id of the liquidity pool
-[pool-coin]: The amount of pool coin to withdraw from the liquidity pool
-
-Usage:
-  gaiad tx liquidity withdraw [pool-id] [pool-coin] [flags]
-
-Flags:
-  -a, --account-number uint      The account number of the signing account (offline mode only)
-  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
-      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
-      --fees string              Fees to pay along with transaction; eg: 10uatom
-      --from string              Name or address of private key with which to sign
-      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
-      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
-      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
-      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
-  -h, --help                     help for withdraw
-      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
-      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
-      --ledger                   Use a connected Ledger device
-      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
-      --note string              Note to add a description to the transaction (previously --memo)
-      --offline                  Offline mode (does not allow any online functionality
-  -o, --output string            Output format (text|json) (default "json")
-  -s, --sequence uint            The sequence number of the signing account (offline mode only)
-      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
-      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
-  -y, --yes                      Skip tx broadcasting prompt confirmation
-
-Global Flags:
-      --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.gaia")
-      --log_format string   The logging format (json|plain) (default "plain")
-      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
-      --trace               print out full stack trace on errors
-
-```
-
-### gaiad tx liquidity
-
-```
-Liquidity transaction subcommands
-
-Usage:
-  gaiad tx liquidity [flags]
-  gaiad tx liquidity [command]
-
-Available Commands:
-  create-pool Create liquidity pool and deposit coins
-  deposit     Deposit coins to a liquidity pool
-  swap        Swap offer coin with demand coin from the liquidity pool with the given order price
-  withdraw    Withdraw pool coin from the specified liquidity pool
-
-Flags:
-  -h, --help   help for liquidity
-
-Global Flags:
-      --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user/.gaia")
-      --log_format string   The logging format (json|plain) (default "plain")
-      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
-      --trace               print out full stack trace on errors
-
-Use "gaiad tx liquidity [command] --help" for more information about a command.
-
-```
-
 ### gaiad tx multisign-batch
 
 ```
@@ -6328,7 +6738,7 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -6389,7 +6799,8 @@ Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
       --amino                    Generate Amino-encoded JSON suitable for submitting to the txs REST endpoint
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --chain-id string          network chain ID
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -6413,11 +6824,77 @@ Flags:
   -y, --yes                      Skip tx broadcasting prompt confirmation
 
 Global Flags:
+      --home string         directory for config and data (default "/Users/user/.gaia")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### gaiad tx provider assign-consensus-key
+
+```
+assign a consensus public key to use for a consumer chain
+
+Usage:
+  gaiad tx provider assign-consensus-key [consumer-chain-id] [consumer-pubkey] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for assign-consensus-key
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
       --chain-id string     The network chain ID
       --home string         directory for config and data (default "/Users/user/.gaia")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
+
+```
+
+### gaiad tx provider
+
+```
+provider transactions subcommands
+
+Usage:
+  gaiad tx provider [flags]
+  gaiad tx provider [command]
+
+Available Commands:
+  assign-consensus-key assign a consensus public key to use for a consumer chain
+
+Flags:
+  -h, --help   help for provider
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.gaia")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "gaiad tx provider [command] --help" for more information about a command.
 
 ```
 
@@ -6446,7 +6923,8 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --chain-id string          network chain ID
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -6471,7 +6949,6 @@ Flags:
   -y, --yes                      Skip tx broadcasting prompt confirmation
 
 Global Flags:
-      --chain-id string     The network chain ID
       --home string         directory for config and data (default "/Users/user/.gaia")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
@@ -6503,7 +6980,8 @@ Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
       --amino                    Generate Amino encoded JSON suitable for submiting to the txs REST endpoint
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --chain-id string          The network chain ID
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -6529,7 +7007,6 @@ Flags:
   -y, --yes                      Skip tx broadcasting prompt confirmation
 
 Global Flags:
-      --chain-id string     The network chain ID
       --home string         directory for config and data (default "/Users/user/.gaia")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
@@ -6550,7 +7027,7 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -6606,6 +7083,53 @@ Use "gaiad tx slashing [command] --help" for more information about a command.
 
 ```
 
+### gaiad tx staking cancel-unbond
+
+```
+Cancel Unbonding Delegation and delegate back to the validator.
+
+Example:
+$ gaiad tx staking cancel-unbond cosmosvaloper1gghjut3ccd8ay0zduzj64hwre2fxs9ldmqhffj 100stake 2 --from mykey
+
+Usage:
+  gaiad tx staking cancel-unbond [validator-addr] [amount] [creation-height] [flags]
+
+Examples:
+$ gaiad tx staking cancel-unbond cosmosvaloper1gghjut3ccd8ay0zduzj64hwre2fxs9ldmqhffj 100stake 2 --from mykey
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for cancel-unbond
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.gaia")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
 ### gaiad tx staking create-validator
 
 ```
@@ -6622,7 +7146,7 @@ Flags:
       --commission-max-rate string          The maximum commission rate percentage
       --commission-rate string              The initial commission rate percentage
       --details string                      The validator's (optional) details
-      --dry-run                             ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                             ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string                  Fee account pays fees for the transaction instead of deducting from the signer
       --fees string                         Fees to pay along with transaction; eg: 10uatom
       --from string                         Name or address of private key with which to sign
@@ -6636,7 +7160,6 @@ Flags:
       --keyring-backend string              Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
       --keyring-dir string                  The client Keyring directory; if omitted, the default 'home' directory will be used
       --ledger                              Use a connected Ledger device
-      --min-self-delegation string          The minimum self delegation required on the validator
       --moniker string                      The validator's name
       --node string                         <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
       --node-id string                      The node's ID
@@ -6674,7 +7197,7 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -6683,6 +7206,52 @@ Flags:
       --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
       --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
   -h, --help                     help for delegate
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.gaia")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### gaiad tx staking disable-tokenize-shares
+
+```
+Disables the tokenization of shares for an address. The account
+must explicitly re-enable if they wish to tokenize again, at which point they must wait 
+the chain's unbonding period. 
+
+Example:
+$ gaiad tx staking disable-tokenize-shares --from mykey
+
+Usage:
+  gaiad tx staking disable-tokenize-shares [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for disable-tokenize-shares
       --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
       --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
       --ledger                   Use a connected Ledger device
@@ -6713,35 +7282,125 @@ Usage:
   gaiad tx staking edit-validator [flags]
 
 Flags:
-  -a, --account-number uint          The account number of the signing account (offline mode only)
-  -b, --broadcast-mode string        Transaction broadcasting mode (sync|async|block) (default "sync")
-      --commission-rate string       The new commission rate percentage
-      --details string               The validator's (optional) details (default "[do-not-modify]")
-      --dry-run                      ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
-      --fee-account string           Fee account pays fees for the transaction instead of deducting from the signer
-      --fees string                  Fees to pay along with transaction; eg: 10uatom
-      --from string                  Name or address of private key with which to sign
-      --gas string                   gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
-      --gas-adjustment float         adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
-      --gas-prices string            Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
-      --generate-only                Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
-  -h, --help                         help for edit-validator
-      --identity string              The (optional) identity signature (ex. UPort or Keybase) (default "[do-not-modify]")
-      --keyring-backend string       Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
-      --keyring-dir string           The client Keyring directory; if omitted, the default 'home' directory will be used
-      --ledger                       Use a connected Ledger device
-      --min-self-delegation string   The minimum self delegation required on the validator
-      --new-moniker string           The validator's name (default "[do-not-modify]")
-      --node string                  <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
-      --note string                  Note to add a description to the transaction (previously --memo)
-      --offline                      Offline mode (does not allow any online functionality
-  -o, --output string                Output format (text|json) (default "json")
-      --security-contact string      The validator's (optional) security contact email (default "[do-not-modify]")
-  -s, --sequence uint                The sequence number of the signing account (offline mode only)
-      --sign-mode string             Choose sign mode (direct|amino-json), this is an advanced feature
-      --timeout-height uint          Set a block timeout height to prevent the tx from being committed past a certain height
-      --website string               The validator's (optional) website (default "[do-not-modify]")
-  -y, --yes                          Skip tx broadcasting prompt confirmation
+  -a, --account-number uint       The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string     Transaction broadcasting mode (sync|async|block) (default "sync")
+      --commission-rate string    The new commission rate percentage
+      --details string            The validator's (optional) details (default "[do-not-modify]")
+      --dry-run                   ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
+      --fee-account string        Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string               Fees to pay along with transaction; eg: 10uatom
+      --from string               Name or address of private key with which to sign
+      --gas string                gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
+      --gas-adjustment float      adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string         Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only             Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                      help for edit-validator
+      --identity string           The (optional) identity signature (ex. UPort or Keybase) (default "[do-not-modify]")
+      --keyring-backend string    Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string        The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                    Use a connected Ledger device
+      --new-moniker string        The validator's name (default "[do-not-modify]")
+      --node string               <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string               Note to add a description to the transaction (previously --memo)
+      --offline                   Offline mode (does not allow any online functionality
+  -o, --output string             Output format (text|json) (default "json")
+      --security-contact string   The validator's (optional) security contact email (default "[do-not-modify]")
+  -s, --sequence uint             The sequence number of the signing account (offline mode only)
+      --sign-mode string          Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint       Set a block timeout height to prevent the tx from being committed past a certain height
+      --website string            The validator's (optional) website (default "[do-not-modify]")
+  -y, --yes                       Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.gaia")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### gaiad tx staking enable-tokenize-shares
+
+```
+Enables the tokenization of shares for an address after 
+it had been disable. This transaction queues the enablement of tokenization, but
+the address must wait 1 unbonding period from the time of this transaction before
+tokenization is permitted.
+
+Example:
+$ gaiad tx staking enable-tokenize-shares --from mykey
+
+Usage:
+  gaiad tx staking enable-tokenize-shares [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for enable-tokenize-shares
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.gaia")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### gaiad tx staking redeem-tokens
+
+```
+Redeem specified amount of share tokens to delegation.
+
+Example:
+$ gaiad tx staking redeem-tokens 100sharetoken --from mykey
+
+Usage:
+  gaiad tx staking redeem-tokens [amount] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for redeem-tokens
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
 
 Global Flags:
       --chain-id string     The network chain ID
@@ -6766,7 +7425,7 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -6775,6 +7434,138 @@ Flags:
       --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
       --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
   -h, --help                     help for redelegate
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.gaia")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### gaiad tx staking tokenize-share
+
+```
+Tokenize delegation to share tokens.
+
+Example:
+$ gaiad tx staking tokenize-share cosmosvaloper1gghjut3ccd8ay0zduzj64hwre2fxs9ldmqhffj 100stake cosmos1gghjut3ccd8ay0zduzj64hwre2fxs9ldmqhffj --from mykey
+
+Usage:
+  gaiad tx staking tokenize-share [validator-addr] [amount] [rewardOwner] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for tokenize-share
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.gaia")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### gaiad tx staking transfer-tokenize-share-record
+
+```
+Transfer ownership of TokenizeShareRecord.
+
+Example:
+$ gaiad tx staking transfer-tokenize-share-record 1 cosmos1gghjut3ccd8ay0zduzj64hwre2fxs9ldmqhffj --from mykey
+
+Usage:
+  gaiad tx staking transfer-tokenize-share-record [record-id] [new-owner] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for transfer-tokenize-share-record
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.gaia")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### gaiad tx staking unbond-validator
+
+```
+Unbond a validator.
+
+Example:
+$ gaiad tx staking unbond-validator --from mykey
+
+Usage:
+  gaiad tx staking unbond-validator [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for unbond-validator
       --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
       --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
       --ledger                   Use a connected Ledger device
@@ -6810,7 +7601,7 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -6819,6 +7610,50 @@ Flags:
       --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
       --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
   -h, --help                     help for unbond
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user/.gaia")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### gaiad tx staking validator-bond
+
+```
+Mark a delegation as a validator self-bond.
+
+Example:
+$ gaiad tx staking validator-bond cosmosvaloper13h5xdxhsdaugwdrkusf8lkgu406h8t62jkqv3h --from mykey
+
+Usage:
+  gaiad tx staking validator-bond [validator] [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for validator-bond
       --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
       --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
       --ledger                   Use a connected Ledger device
@@ -6850,11 +7685,19 @@ Usage:
   gaiad tx staking [command]
 
 Available Commands:
-  create-validator create new validator initialized with a self-delegation to it
-  delegate         Delegate liquid tokens to a validator
-  edit-validator   edit an existing validator account
-  redelegate       Redelegate illiquid tokens from one validator to another
-  unbond           Unbond shares from a validator
+  cancel-unbond                  Cancel unbonding delegation and delegate back to the validator
+  create-validator               create new validator initialized with a self-delegation to it
+  delegate                       Delegate liquid tokens to a validator
+  disable-tokenize-shares        Disable tokenization of shares
+  edit-validator                 edit an existing validator account
+  enable-tokenize-shares         Enable tokenization of shares
+  redeem-tokens                  Redeem specified amount of share tokens to delegation
+  redelegate                     Redelegate illiquid tokens from one validator to another
+  tokenize-share                 Tokenize delegation to share tokens
+  transfer-tokenize-share-record Transfer ownership of TokenizeShareRecord
+  unbond                         Unbond shares from a validator
+  unbond-validator               Unbond a validator
+  validator-bond                 Mark a delegation as a validator self-bond
 
 Flags:
   -h, --help   help for staking
@@ -6887,7 +7730,8 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --chain-id string          The network chain ID
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -6909,7 +7753,6 @@ Flags:
   -y, --yes                      Skip tx broadcasting prompt confirmation
 
 Global Flags:
-      --chain-id string     The network chain ID
       --home string         directory for config and data (default "/Users/user/.gaia")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
@@ -6933,7 +7776,7 @@ Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
       --delayed                  Create a delayed vesting account if true
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -7012,9 +7855,9 @@ Available Commands:
   gov                 Governance transactions subcommands
   ibc                 IBC transaction subcommands
   ibc-transfer        IBC fungible token transfer transaction subcommands
-  liquidity           Liquidity transaction subcommands
   multisign           Generate multisig signatures for transactions generated offline
   multisign-batch     Assemble multisig transactions in batch from batch signatures
+  provider            provider transactions subcommands
   sign                Sign a transaction generated offline
   sign-batch          Sign transaction batch files
   slashing            Slashing transaction subcommands

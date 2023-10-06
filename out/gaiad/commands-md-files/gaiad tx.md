@@ -18,9 +18,9 @@ Available Commands:
   gov                 Governance transactions subcommands
   ibc                 IBC transaction subcommands
   ibc-transfer        IBC fungible token transfer transaction subcommands
-  liquidity           Liquidity transaction subcommands
   multisign           Generate multisig signatures for transactions generated offline
   multisign-batch     Assemble multisig transactions in batch from batch signatures
+  provider            provider transactions subcommands
   sign                Sign a transaction generated offline
   sign-batch          Sign transaction batch files
   slashing            Slashing transaction subcommands

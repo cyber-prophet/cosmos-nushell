@@ -9,6 +9,7 @@ Usage:
 Flags:
       --height int               Use a specific height to query state at (this can error if the node is pruning state)
   -h, --help                     help for add-genesis-account
+      --home string              The application home directory (default "/Users/user/.gaia")
       --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test) (default "os")
       --node string              <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
   -o, --output string            Output format (text|json) (default "text")
@@ -17,7 +18,6 @@ Flags:
       --vesting-start-time int   schedule start time (unix epoch) for vesting accounts
 
 Global Flags:
-      --home string         directory for config and data (default "/Users/user/.gaia")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors

@@ -11,7 +11,7 @@ Flags:
       --commission-max-rate string          The maximum commission rate percentage
       --commission-rate string              The initial commission rate percentage
       --details string                      The validator's (optional) details
-      --dry-run                             ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                             ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string                  Fee account pays fees for the transaction instead of deducting from the signer
       --fees string                         Fees to pay along with transaction; eg: 10uatom
       --from string                         Name or address of private key with which to sign
@@ -25,7 +25,6 @@ Flags:
       --keyring-backend string              Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
       --keyring-dir string                  The client Keyring directory; if omitted, the default 'home' directory will be used
       --ledger                              Use a connected Ledger device
-      --min-self-delegation string          The minimum self delegation required on the validator
       --moniker string                      The validator's name
       --node string                         <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
       --node-id string                      The node's ID

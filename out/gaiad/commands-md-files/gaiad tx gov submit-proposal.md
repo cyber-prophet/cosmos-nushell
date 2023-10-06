@@ -23,7 +23,11 @@ Usage:
 
 Available Commands:
   cancel-software-upgrade Cancel the current software upgrade proposal
+  change-reward-denoms    Submit a change reward denoms proposal
   community-pool-spend    Submit a community pool spend proposal
+  consumer-addition       Submit a consumer addition proposal
+  consumer-removal        Submit a consumer chain removal proposal
+  equivocation            Submit an equivocation proposal
   ibc-upgrade             Submit an IBC upgrade proposal
   param-change            Submit a parameter change proposal
   software-upgrade        Submit a software upgrade proposal
@@ -34,7 +38,7 @@ Flags:
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
       --deposit string           The proposal deposit
       --description string       The proposal description
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign

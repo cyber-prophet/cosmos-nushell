@@ -1,24 +1,12 @@
-Deposit coins a liquidity pool.
-
-This deposit request is not processed immediately since it is accumulated in the liquidity pool batch.
-All requests in a batch are treated equally and executed at the same swap price.
-
-Example:
-$ gaiad tx liquidity deposit 1 100000000uatom,5000000000uusd --from mykey
-
-This example request deposits 100000000uatom and 5000000000uusd to pool-id 1.
-Deposits must be the same coin denoms as the reserve coins.
-
-[pool-id]: The pool id of the liquidity pool
-[deposit-coins]: The amount of coins to deposit to the liquidity pool
+assign a consensus public key to use for a consumer chain
 
 Usage:
-  gaiad tx liquidity deposit [pool-id] [deposit-coins] [flags]
+  gaiad tx provider assign-consensus-key [consumer-chain-id] [consumer-pubkey] [flags]
 
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -26,7 +14,7 @@ Flags:
       --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
       --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
       --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
-  -h, --help                     help for deposit
+  -h, --help                     help for assign-consensus-key
       --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
       --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
       --ledger                   Use a connected Ledger device

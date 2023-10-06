@@ -1,17 +1,14 @@
-Query all deposit messages of the liquidity pool batch on the specified pool
-
-If batch messages are normally processed from the endblock, the resulting state is applied and the messages are removed in the beginning of next block.
-To query for past blocks, query the block height using the REST/gRPC API of a node that is not pruned.
+Query individual tokenize share record information by share by id.
 
 Example:
-$ gaiad query liquidity deposits 1
+$ gaiad query staking tokenize-share-record-by-id [id]
 
 Usage:
-  gaiad query liquidity deposits [pool-id] [flags]
+  gaiad query staking tokenize-share-record-by-id [id] [flags]
 
 Flags:
       --height int      Use a specific height to query state at (this can error if the node is pruning state)
-  -h, --help            help for deposits
+  -h, --help            help for tokenize-share-record-by-id
       --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
   -o, --output string   Output format (text|json) (default "text")
 

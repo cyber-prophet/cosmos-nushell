@@ -1,18 +1,14 @@
-Query all swap messages in the liquidity pool batch for the specified pool-id
-
-If batch messages are normally processed from the endblock,
-the resulting state is applied and the messages are removed in the beginning of next block.
-To query for past blocks, query the block height using the REST/gRPC API of a node that is not pruned.
-
-Example:
-$ gaiad query liquidity swaps 1
+Query module account info by module name
 
 Usage:
-  gaiad query liquidity swaps [pool-id] [flags]
+  gaiad query auth module-account [module-name] [flags]
+
+Examples:
+gaiad q auth module-account auth
 
 Flags:
       --height int      Use a specific height to query state at (this can error if the node is pruning state)
-  -h, --help            help for swaps
+  -h, --help            help for module-account
       --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
   -o, --output string   Output format (text|json) (default "text")
 

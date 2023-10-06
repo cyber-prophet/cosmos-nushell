@@ -4,7 +4,7 @@ Usage:
   gaiad query ibc-transfer denom-hash [trace] [flags]
 
 Examples:
-gaiad query ibc-transfer denom-hash [denom_trace]
+gaiad query ibc-transfer denom-hash transfer/channel-0/uatom
 
 Flags:
       --height int      Use a specific height to query state at (this can error if the node is pruning state)

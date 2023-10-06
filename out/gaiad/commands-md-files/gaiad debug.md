@@ -5,9 +5,10 @@ Usage:
   gaiad debug [command]
 
 Available Commands:
-  addr        Convert an address between hex and bech32
-  pubkey      Decode a pubkey from proto JSON
-  raw-bytes   Convert raw bytes output (eg. [10 21 13 255]) to hex
+  addr           Convert an address between hex and bech32
+  bech32-convert Convert any bech32 string to the cosmos prefix
+  pubkey         Decode a pubkey from proto JSON
+  raw-bytes      Convert raw bytes output (eg. [10 21 13 255]) to hex
 
 Flags:
   -h, --help   help for debug

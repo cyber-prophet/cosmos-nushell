@@ -5,11 +5,19 @@ Usage:
   gaiad tx staking [command]
 
 Available Commands:
-  create-validator create new validator initialized with a self-delegation to it
-  delegate         Delegate liquid tokens to a validator
-  edit-validator   edit an existing validator account
-  redelegate       Redelegate illiquid tokens from one validator to another
-  unbond           Unbond shares from a validator
+  cancel-unbond                  Cancel unbonding delegation and delegate back to the validator
+  create-validator               create new validator initialized with a self-delegation to it
+  delegate                       Delegate liquid tokens to a validator
+  disable-tokenize-shares        Disable tokenization of shares
+  edit-validator                 edit an existing validator account
+  enable-tokenize-shares         Enable tokenization of shares
+  redeem-tokens                  Redeem specified amount of share tokens to delegation
+  redelegate                     Redelegate illiquid tokens from one validator to another
+  tokenize-share                 Tokenize delegation to share tokens
+  transfer-tokenize-share-record Transfer ownership of TokenizeShareRecord
+  unbond                         Unbond shares from a validator
+  unbond-validator               Unbond a validator
+  validator-bond                 Mark a delegation as a validator self-bond
 
 Flags:
   -h, --help   help for staking

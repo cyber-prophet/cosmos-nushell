@@ -7,7 +7,6 @@ file. The following default parameters are included:
 	commission rate:             0.1
 	commission max rate:         0.2
 	commission max change rate:  0.01
-	minimum self delegation:     1
 
 
 Example:
@@ -32,7 +31,7 @@ Flags:
       --commission-max-rate string          The maximum commission rate percentage
       --commission-rate string              The initial commission rate percentage
       --details string                      The validator's (optional) details
-      --dry-run                             ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                             ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string                  Fee account pays fees for the transaction instead of deducting from the signer
       --fees string                         Fees to pay along with transaction; eg: 10uatom
       --from string                         Name or address of private key with which to sign
@@ -41,12 +40,12 @@ Flags:
       --gas-prices string                   Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
       --generate-only                       Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
   -h, --help                                help for gentx
+      --home string                         The application home directory (default "/Users/user/.gaia")
       --identity string                     The (optional) identity signature (ex. UPort or Keybase)
-      --ip string                           The node's public IP (default "10.0.0.66")
+      --ip string                           The node's public IP (default "192.168.1.8")
       --keyring-backend string              Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
       --keyring-dir string                  The client Keyring directory; if omitted, the default 'home' directory will be used
       --ledger                              Use a connected Ledger device
-      --min-self-delegation string          The minimum self delegation required on the validator
       --moniker string                      The validator's (optional) moniker
       --node string                         <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
       --node-id string                      The node's NodeID
@@ -63,7 +62,6 @@ Flags:
   -y, --yes                                 Skip tx broadcasting prompt confirmation
 
 Global Flags:
-      --home string         directory for config and data (default "/Users/user/.gaia")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors

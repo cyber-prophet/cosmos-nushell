@@ -1,14 +1,14 @@
-Query values set as liquidity parameters.
-
+Returns the current pending VSCMatured and slash packet data instances for a consumer chainId.
+			Queue is ordered by ibc sequence number. 
 Example:
-$ gaiad query liquidity params
+$ gaiad query provider throttled-consumer-packet-data foochain
 
 Usage:
-  gaiad query liquidity params [flags]
+  gaiad query provider throttled-consumer-packet-data [chainid] [flags]
 
 Flags:
       --height int      Use a specific height to query state at (this can error if the node is pruning state)
-  -h, --help            help for params
+  -h, --help            help for throttled-consumer-packet-data
       --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
   -o, --output string   Output format (text|json) (default "text")
 

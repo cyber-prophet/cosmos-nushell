@@ -1,18 +1,15 @@
-Query the withdraw messages in the liquidity pool batch for the specified pool-id and msg-index
-
-if the batch message are normally processed from the endblock,
-the resulting state is applied and the messages are removed in the beginning of next block.
-To query for past blocks, query the block height using the REST/gRPC API of a node that is not pruned.
-
+Query for total number of liquid staked tokens.
+Liquid staked tokens are identified as either a tokenized delegation, 
+or tokens owned by an interchain account.
 Example:
-$ gaiad query liquidity withdraw 1 20
+$ gaiad query staking total-liquid-staked
 
 Usage:
-  gaiad query liquidity withdraw [pool-id] [msg-index] [flags]
+  gaiad query staking total-liquid-staked [flags]
 
 Flags:
       --height int      Use a specific height to query state at (this can error if the node is pruning state)
-  -h, --help            help for withdraw
+  -h, --help            help for total-liquid-staked
       --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
   -o, --output string   Output format (text|json) (default "text")
 

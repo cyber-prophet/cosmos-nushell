@@ -1,5 +1,6 @@
-Send funds from one account to another. Note, the'--from' flag is
-ignored as it is implied from [from_key_or_address].
+Send funds from one account to another. 
+		Note, the'--from' flag is ignored as it is implied from [from_key_or_address].
+		When using '--dry-run' a key name cannot be used, only a bech32 address.
 
 Usage:
   gaiad tx bank send [from_key_or_address] [to_address] [amount] [flags]
@@ -7,7 +8,7 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign

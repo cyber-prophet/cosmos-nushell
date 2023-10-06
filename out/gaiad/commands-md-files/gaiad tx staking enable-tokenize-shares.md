@@ -1,21 +1,18 @@
-Create liquidity pool and deposit coins.
+Enables the tokenization of shares for an address after 
+it had been disable. This transaction queues the enablement of tokenization, but
+the address must wait 1 unbonding period from the time of this transaction before
+tokenization is permitted.
 
 Example:
-$ gaiad tx liquidity create-pool 1 1000000000uatom,50000000000uusd --from mykey
-
-This example creates a liquidity pool of pool-type 1 (two coins) and deposits 1000000000uatom and 50000000000uusd.
-New liquidity pools can be created only for coin combinations that do not already exist in the network.
-
-[pool-type]: The id of the liquidity pool-type. The only supported pool type is 1
-[deposit-coins]: The amount of coins to deposit to the liquidity pool. The number of deposit coins must be 2 in pool type 1.
+$ gaiad tx staking enable-tokenize-shares --from mykey
 
 Usage:
-  gaiad tx liquidity create-pool [pool-type] [deposit-coins] [flags]
+  gaiad tx staking enable-tokenize-shares [flags]
 
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -23,7 +20,7 @@ Flags:
       --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
       --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
       --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
-  -h, --help                     help for create-pool
+  -h, --help                     help for enable-tokenize-shares
       --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
       --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
       --ledger                   Use a connected Ledger device

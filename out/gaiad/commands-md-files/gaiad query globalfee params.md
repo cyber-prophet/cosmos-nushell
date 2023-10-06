@@ -1,18 +1,11 @@
-Query all withdraw messages on the liquidity pool batch for the specified pool-id
-
-If batch messages are normally processed from the endblock,
-the resulting state is applied and the messages are removed in the beginning of next block.
-To query for past blocks, query the block height using the REST/gRPC API of a node that is not pruned.
-
-Example:
-$ gaiad query liquidity withdraws 1
+Show globalfee requirement: minimum_gas_prices, bypass_min_fee_msg_types, max_total_bypass_minFee_msg_gas_usage
 
 Usage:
-  gaiad query liquidity withdraws [pool-id] [flags]
+  gaiad query globalfee params [flags]
 
 Flags:
       --height int      Use a specific height to query state at (this can error if the node is pruning state)
-  -h, --help            help for withdraws
+  -h, --help            help for params
       --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
   -o, --output string   Output format (text|json) (default "text")
 

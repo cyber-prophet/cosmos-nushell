@@ -1,13 +1,14 @@
-Query details of a liquidity pool batch
+Query for last tokenize share record id.
+
 Example:
-$ gaiad query liquidity batch 1
+$ gaiad query staking last-tokenize-share-record-id
 
 Usage:
-  gaiad query liquidity batch [pool-id] [flags]
+  gaiad query staking last-tokenize-share-record-id [flags]
 
 Flags:
       --height int      Use a specific height to query state at (this can error if the node is pruning state)
-  -h, --help            help for batch
+  -h, --help            help for last-tokenize-share-record-id
       --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
   -o, --output string   Output format (text|json) (default "text")
 

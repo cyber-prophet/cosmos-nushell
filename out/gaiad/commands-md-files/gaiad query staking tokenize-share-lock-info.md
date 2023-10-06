@@ -1,18 +1,13 @@
-Query for the swap message on the batch of the liquidity pool specified pool-id and msg-index
-
-If the batch message are normally processed and from the endblock,
-the resulting state is applied and the messages are removed in the beginning of next block.
-To query for past blocks, query the block height using the REST/gRPC API of a node that is not pruned.
-
+Query the status of a tokenize share lock for a given account
 Example:
-$ gaiad query liquidity swap 1 20
+$ gaiad query staking tokenize-share-lock-info cosmos1gghjut3ccd8ay0zduzj64hwre2fxs9ldmqhffj
 
 Usage:
-  gaiad query liquidity swap [pool-id] [msg-index] [flags]
+  gaiad query staking tokenize-share-lock-info [address] [flags]
 
 Flags:
       --height int      Use a specific height to query state at (this can error if the node is pruning state)
-  -h, --help            help for swap
+  -h, --help            help for tokenize-share-lock-info
       --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
   -o, --output string   Output format (text|json) (default "text")
 

@@ -1,13 +1,14 @@
-Gets a list of module names and their respective consensus versions.
-Following the command with a specific module name will return only
-that module's information.
+Query for total tokenized staked assets.
+
+Example:
+$ gaiad query staking total-tokenize-share-assets
 
 Usage:
-  gaiad query upgrade module_versions [optional module_name] [flags]
+  gaiad query staking total-tokenize-share-assets [flags]
 
 Flags:
       --height int      Use a specific height to query state at (this can error if the node is pruning state)
-  -h, --help            help for module_versions
+  -h, --help            help for total-tokenize-share-assets
       --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
   -o, --output string   Output format (text|json) (default "text")
 

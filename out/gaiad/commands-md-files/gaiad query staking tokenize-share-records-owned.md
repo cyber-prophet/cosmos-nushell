@@ -1,13 +1,14 @@
-Query details about all liquidity pools on a network.
+Query tokenize share records by address.
+
 Example:
-$ gaiad query liquidity pools
+$ gaiad query staking tokenize-share-records-owned [owner]
 
 Usage:
-  gaiad query liquidity pools [flags]
+  gaiad query staking tokenize-share-records-owned [flags]
 
 Flags:
       --height int      Use a specific height to query state at (this can error if the node is pruning state)
-  -h, --help            help for pools
+  -h, --help            help for tokenize-share-records-owned
       --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
   -o, --output string   Output format (text|json) (default "text")
 

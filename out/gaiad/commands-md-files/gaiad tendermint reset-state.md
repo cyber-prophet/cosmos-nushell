@@ -3,6 +3,9 @@ Remove all the data and WAL
 Usage:
   gaiad tendermint reset-state [flags]
 
+Aliases:
+  reset-state, reset_state
+
 Flags:
   -h, --help   help for reset-state
 

@@ -1,11 +1,8 @@
 
 
-# gaiad keys in a form of table
+# gaiad keys in a form of a table
 export def "gaiad _keys table" [] {
-	gaiad keys list --output text | lines | window 5 -s 5 | 
-    each {|it| ($it| parse -r '(?P<col>\w+):(?P<value>.*)')} | 
-    each {|it| ($it| transpose -r)} | reduce {|it, acc| $it | append $acc} | 
-    select name type address 
+	gaiad keys list --output json | from json | select name type address 
 }
 
 # Helper function to use addresses for completions in --from parameter
@@ -13,32 +10,32 @@ export def "nu-complete gaiad _keys values" [] {
     (gaiad _keys table).name | zip (gaiad _keys table).address | flatten
   }
 
-def "nu-completions-gaiad--json-plain-" [] { ["json", "plain"] }
-def "nu-completions-gaiad--os-file-test-" [] { ["os", "file", "test"] }
-def "nu-completions-gaiad--default-nothing-everything-custom-" [] { ["default", "nothing", "everything", "custom"] }
-def "nu-completions-gaiad--sync-async-block-" [] { ["sync", "async", "block"] }
-def "nu-completions-gaiad--direct-amino-json-" [] { ["direct", "amino-json"] }
-def "nu-completions-gaiad--text-json-" [] { ["text", "json"] }
-def "nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-" [] { ["trace", "debug", "info", "warn", "error", "fatal", "panic"] }
 def "nu-completions-gaiad--socket---grpc-" [] { ["socket", "grpc"] }
 def "nu-completions-gaiad--os-file-kwallet-pass-test-memory-" [] { ["os", "file", "kwallet", "pass", "test", "memory"] }
-def "nu-completions-gaiad--os-file-kwallet-pass-test-" [] { ["os", "file", "kwallet", "pass", "test"] }
 def "nu-completions-gaiad--acc-val-cons-" [] { ["acc", "val", "cons"] }
+def "nu-completions-gaiad--text-json-" [] { ["text", "json"] }
+def "nu-completions-gaiad--sync-async-block-" [] { ["sync", "async", "block"] }
+def "nu-completions-gaiad--os-file-test-" [] { ["os", "file", "test"] }
+def "nu-completions-gaiad--default-nothing-everything-custom-" [] { ["default", "nothing", "everything", "custom"] }
+def "nu-completions-gaiad--json-plain-" [] { ["json", "plain"] }
+def "nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-" [] { ["trace", "debug", "info", "warn", "error", "fatal", "panic"] }
+def "nu-completions-gaiad--direct-amino-json-" [] { ["direct", "amino-json"] }
+def "nu-completions-gaiad--os-file-kwallet-pass-test-" [] { ["os", "file", "kwallet", "pass", "test"] }
 
 # Add a genesis account to genesis.json. The provided account must specify the account address or key name and a list of initial coins. If a key name is given, the address will be looked up in the local Keybase. The list of initial tokens must contain valid denominations. Accounts may optionally be supplied with vesting parameters.
 export extern 'gaiad add-genesis-account' [
-	address_or_key_name?: string
+	address_or_key_name?: string@"nu-complete gaiad _keys values"
 	coin?: string
 	coin?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for add-genesis-account
+	--home: string		# The application home directory (default "/Users/user/.gaia")
 	--keyring-backend: string@"nu-completions-gaiad--os-file-kwallet-pass-test-"		# Select keyring's backend (os|file|kwallet|pass|test) (default "os")
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "text")
 	--vesting-amount: string		# amount of coins for vesting accounts
 	--vesting-end-time: int		# schedule end time (unix epoch) for vesting accounts
 	--vesting-start-time: int		# schedule start time (unix epoch) for vesting accounts
-	--home: string		# directory for config and data (default "/Users/user/.gaia")
 	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -48,7 +45,7 @@ export extern 'gaiad add-genesis-account' [
 export extern 'gaiad collect-gentxs' [
 	--gentx-dir: string		# override default "gentx" directory from which collect and execute genesis transactions; default [--home]/config/gentx/
 	--help(-h)		# help for collect-gentxs
-	--home: string		# directory for config and data (default "/Users/user/.gaia")
+	--home: string		# The application home directory (default "/Users/user/.gaia")
 	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -67,7 +64,7 @@ export extern 'gaiad config' [
 
 # Convert an address between hex encoding and bech32.
 export extern 'gaiad debug addr' [
-	address?: string
+	address?: string@"nu-complete gaiad _keys values"
 	--help(-h)		# help for addr
 	--home: string		# directory for config and data (default "/Users/user/.gaia")
 	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
@@ -100,8 +97,8 @@ export extern 'gaiad export' [
 	--for-zero-height		# Export state to start at height zero (perform preproccessing)
 	--height: int		# Export state from a particular height (-1 means latest height) (default -1)
 	--help(-h)		# help for export
+	--home: string		# The application home directory (default "/Users/user/.gaia")
 	--jail-allowed-addrs: string		# Comma-separated list of operator addresses of jailed validators to unjail
-	--home: string		# directory for config and data (default "/Users/user/.gaia")
 	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -119,7 +116,7 @@ export extern 'gaiad gentx' [
 	--commission-max-rate: string		# The maximum commission rate percentage
 	--commission-rate: string		# The initial commission rate percentage
 	--details: string		# The validator's (optional) details
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
@@ -128,12 +125,12 @@ export extern 'gaiad gentx' [
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
 	--generate-only		# Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
 	--help(-h)		# help for gentx
+	--home: string		# The application home directory (default "/Users/user/.gaia")
 	--identity: string		# The (optional) identity signature (ex. UPort or Keybase)
-	--ip: string		# The node's public IP (default "192.168.1.44")
+	--ip: string		# The node's public IP (default "192.168.1.8")
 	--keyring-backend: string@"nu-completions-gaiad--os-file-kwallet-pass-test-memory-"		# Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
 	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
 	--ledger		# Use a connected Ledger device
-	--min-self-delegation: string		# The minimum self delegation required on the validator
 	--moniker: string		# The validator's (optional) moniker
 	--node: string		# <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
 	--node-id: string		# The node's NodeID
@@ -148,7 +145,6 @@ export extern 'gaiad gentx' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--website: string		# The validator's (optional) website
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
-	--home: string		# directory for config and data (default "/Users/user/.gaia")
 	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -169,9 +165,9 @@ export extern 'gaiad init' [
 	moniker?: string
 	--chain-id: string		# genesis file chain-id, if left blank will be randomly created
 	--help(-h)		# help for init
+	--home: string		# node's home directory (default "/Users/user/.gaia")
 	--overwrite(-o)		# overwrite the genesis.json file
 	--recover		# provide seed phrase to recover existing key instead of creating
-	--home: string		# directory for config and data (default "/Users/user/.gaia")
 	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -320,7 +316,7 @@ export extern 'gaiad keys show' [
 
 # Query for account by address
 export extern 'gaiad query account' [
-	address?: string
+	address?: string@"nu-complete gaiad _keys values"
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for account
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -334,7 +330,7 @@ export extern 'gaiad query account' [
 
 # Query for account by address
 export extern 'gaiad query auth account' [
-	address?: string
+	address?: string@"nu-complete gaiad _keys values"
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for account
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -365,6 +361,20 @@ export extern 'gaiad query auth accounts' [
 	--trace		# print out full stack trace on errors
 ]
 
+# Query module account info by module name
+export extern 'gaiad query auth module-account' [
+	module_name?: string
+	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
+	--help(-h)		# help for module-account
+	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "text")
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user/.gaia")
+	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
 # Query the current auth parameters: $ <appd> query auth params
 export extern 'gaiad query auth params' [
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
@@ -380,8 +390,8 @@ export extern 'gaiad query auth params' [
 
 # Query authorization grants for a granter-grantee pair. If msg-type-url is set, it will select grants only for that msg type.
 export extern 'gaiad query authz grants' [
-	granter_addr?: string
-	grantee_addr?: string
+	granter_addr?: string@"nu-complete gaiad _keys values"
+	grantee_addr?: string@"nu-complete gaiad _keys values"
 	msg_type_url_?: string
 	--count-total		# count total number of records in grants to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
@@ -402,7 +412,7 @@ export extern 'gaiad query authz grants' [
 
 # Query authorization grants granted to a grantee.
 export extern 'gaiad query authz grants-by-grantee' [
-	grantee_addr?: string
+	grantee_addr?: string@"nu-complete gaiad _keys values"
 	--count-total		# count total number of records in grantee-grants to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for grants-by-grantee
@@ -422,7 +432,7 @@ export extern 'gaiad query authz grants-by-grantee' [
 
 # Query authorization grants granted by granter.
 export extern 'gaiad query authz grants-by-granter' [
-	granter_addr?: string
+	granter_addr?: string@"nu-complete gaiad _keys values"
 	--count-total		# count total number of records in granter-grants to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for grants-by-granter
@@ -442,7 +452,7 @@ export extern 'gaiad query authz grants-by-granter' [
 
 # Query the total balance of an account or of a specific denomination.
 export extern 'gaiad query bank balances' [
-	address?: string
+	address?: string@"nu-complete gaiad _keys values"
 	--count-total		# count total number of records in all balances to query for
 	--denom: string		# The specific balance denomination to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
@@ -549,7 +559,7 @@ export extern 'gaiad query distribution params' [
 
 # Query all rewards earned by a delegator, optionally restrict to rewards from a single validator.
 export extern 'gaiad query distribution rewards' [
-	delegator_addr?: string
+	delegator_addr?: string@"nu-complete gaiad _keys values"
 	validator_addr?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for rewards
@@ -584,6 +594,20 @@ export extern 'gaiad query distribution slashes' [
 	--trace		# print out full stack trace on errors
 ]
 
+# Query the query tokenize share record rewards.
+export extern 'gaiad query distribution tokenize-share-record-rewards' [
+	owner?: string
+	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
+	--help(-h)		# help for tokenize-share-record-rewards
+	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "text")
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user/.gaia")
+	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
 # Query distribution outstanding (un-withdrawn) rewards for a validator and all their delegations.
 export extern 'gaiad query distribution validator-outstanding-rewards' [
 	validator?: string
@@ -600,8 +624,8 @@ export extern 'gaiad query distribution validator-outstanding-rewards' [
 
 # Query details for a grant.  You can find the fee-grant of a granter and grantee.
 export extern 'gaiad query feegrant grant' [
-	granter?: string
-	grantee?: string
+	granter?: string@"nu-complete gaiad _keys values"
+	grantee?: string@"nu-complete gaiad _keys values"
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for grant
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -615,7 +639,7 @@ export extern 'gaiad query feegrant grant' [
 
 # Queries all the grants for a grantee address.
 export extern 'gaiad query feegrant grants-by-grantee' [
-	grantee?: string
+	grantee?: string@"nu-complete gaiad _keys values"
 	--count-total		# count total number of records in grants to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for grants-by-grantee
@@ -635,7 +659,7 @@ export extern 'gaiad query feegrant grants-by-grantee' [
 
 # Queries all the grants issued for a granter address.
 export extern 'gaiad query feegrant grants-by-granter' [
-	granter?: string
+	granter?: string@"nu-complete gaiad _keys values"
 	--count-total		# count total number of records in grants to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for grants-by-granter
@@ -646,6 +670,19 @@ export extern 'gaiad query feegrant grants-by-granter' [
 	--page: int		# pagination page of grants to query for. This sets offset to a multiple of limit (default 1)
 	--page-key: string		# pagination page-key of grants to query for
 	--reverse		# results are sorted in descending order
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user/.gaia")
+	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
+# Show globalfee requirement: minimum_gas_prices, bypass_min_fee_msg_types, max_total_bypass_minFee_msg_gas_usage
+export extern 'gaiad query globalfee params' [
+	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
+	--help(-h)		# help for params
+	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
 	--home: string		# directory for config and data (default "/Users/user/.gaia")
 	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
@@ -1021,6 +1058,26 @@ export extern 'gaiad query ibc client consensus-state' [
 	--trace		# print out full stack trace on errors
 ]
 
+# Query the heights of all consensus states associated with the provided client ID.
+export extern 'gaiad query ibc client consensus-state-heights' [
+	client_id?: string
+	--count-total		# count total number of records in consensus state heights to query for
+	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
+	--help(-h)		# help for consensus-state-heights
+	--limit: int		# pagination limit of consensus state heights to query for (default 100)
+	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+	--offset: int		# pagination offset of consensus state heights to query for
+	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "text")
+	--page: int		# pagination page of consensus state heights to query for. This sets offset to a multiple of limit (default 1)
+	--page-key: string		# pagination page-key of consensus state heights to query for
+	--reverse		# results are sorted in descending order
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user/.gaia")
+	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
 # Query all the consensus states from a given client state.
 export extern 'gaiad query ibc client consensus-states' [
 	client_id?: string
@@ -1201,9 +1258,8 @@ export extern 'gaiad query ibc-transfer denom-hash' [
 	--trace		# print out full stack trace on errors
 ]
 
-# Query the denom trace info from a given trace hash
+# Query the denom trace info from a given trace hash or ibc denom
 export extern 'gaiad query ibc-transfer denom-trace' [
-	hash?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for denom-trace
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -1260,6 +1316,21 @@ export extern 'gaiad query ibc-transfer params' [
 	--trace		# print out full stack trace on errors
 ]
 
+# Query the controller submodule for the interchain account address for a given owner on a particular connection
+export extern 'gaiad query interchain-accounts controller interchain-account' [
+	owner?: string
+	connection_id?: string
+	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
+	--help(-h)		# help for interchain-account
+	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "text")
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user/.gaia")
+	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
 # Query the current interchain-accounts controller submodule parameters
 export extern 'gaiad query interchain-accounts controller params' [
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
@@ -1292,149 +1363,6 @@ export extern 'gaiad query interchain-accounts host packet-events' [
 export extern 'gaiad query interchain-accounts host params' [
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for params
-	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
-	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "text")
-	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.gaia")
-	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
-	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
-	--trace		# print out full stack trace on errors
-]
-
-# Query details of a liquidity pool batch
-export extern 'gaiad query liquidity batch' [
-	pool_id?: string
-	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
-	--help(-h)		# help for batch
-	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
-	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "text")
-	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.gaia")
-	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
-	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
-	--trace		# print out full stack trace on errors
-]
-
-# Query the deposit messages on the liquidity pool batch for the specified pool-id and msg-index If batch messages are normally processed from the endblock, the resulting state is applied and the messages are removed from the beginning of the next block. To query for past blocks, query the block height using the REST/gRPC API of a node that is not pruned.
-export extern 'gaiad query liquidity deposit' [
-	pool_id?: string
-	msg_index?: string
-	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
-	--help(-h)		# help for deposit
-	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
-	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "text")
-	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.gaia")
-	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
-	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
-	--trace		# print out full stack trace on errors
-]
-
-# Query all deposit messages of the liquidity pool batch on the specified pool If batch messages are normally processed from the endblock, the resulting state is applied and the messages are removed in the beginning of next block. To query for past blocks, query the block height using the REST/gRPC API of a node that is not pruned.
-export extern 'gaiad query liquidity deposits' [
-	pool_id?: string
-	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
-	--help(-h)		# help for deposits
-	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
-	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "text")
-	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.gaia")
-	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
-	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
-	--trace		# print out full stack trace on errors
-]
-
-# Query values set as liquidity parameters.
-export extern 'gaiad query liquidity params' [
-	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
-	--help(-h)		# help for params
-	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
-	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "text")
-	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.gaia")
-	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
-	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
-	--trace		# print out full stack trace on errors
-]
-
-# Query details of a liquidity pool
-export extern 'gaiad query liquidity pool' [
-	pool_id?: string
-	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
-	--help(-h)		# help for pool
-	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
-	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "text")
-	--pool-coin-denom: string		# The denomination of the pool coin
-	--reserve-acc: string		# The Bech32 address of the reserve account
-	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.gaia")
-	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
-	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
-	--trace		# print out full stack trace on errors
-]
-
-# Query details about all liquidity pools on a network.
-export extern 'gaiad query liquidity pools' [
-	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
-	--help(-h)		# help for pools
-	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
-	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "text")
-	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.gaia")
-	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
-	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
-	--trace		# print out full stack trace on errors
-]
-
-# Query for the swap message on the batch of the liquidity pool specified pool-id and msg-index If the batch message are normally processed and from the endblock, the resulting state is applied and the messages are removed in the beginning of next block. To query for past blocks, query the block height using the REST/gRPC API of a node that is not pruned.
-export extern 'gaiad query liquidity swap' [
-	pool_id?: string
-	msg_index?: string
-	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
-	--help(-h)		# help for swap
-	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
-	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "text")
-	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.gaia")
-	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
-	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
-	--trace		# print out full stack trace on errors
-]
-
-# Query all swap messages in the liquidity pool batch for the specified pool-id If batch messages are normally processed from the endblock, the resulting state is applied and the messages are removed in the beginning of next block. To query for past blocks, query the block height using the REST/gRPC API of a node that is not pruned.
-export extern 'gaiad query liquidity swaps' [
-	pool_id?: string
-	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
-	--help(-h)		# help for swaps
-	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
-	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "text")
-	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.gaia")
-	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
-	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
-	--trace		# print out full stack trace on errors
-]
-
-# Query the withdraw messages in the liquidity pool batch for the specified pool-id and msg-index if the batch message are normally processed from the endblock, the resulting state is applied and the messages are removed in the beginning of next block. To query for past blocks, query the block height using the REST/gRPC API of a node that is not pruned.
-export extern 'gaiad query liquidity withdraw' [
-	pool_id?: string
-	msg_index?: string
-	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
-	--help(-h)		# help for withdraw
-	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
-	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "text")
-	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.gaia")
-	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
-	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
-	--trace		# print out full stack trace on errors
-]
-
-# Query all withdraw messages on the liquidity pool batch for the specified pool-id If batch messages are normally processed from the endblock, the resulting state is applied and the messages are removed in the beginning of next block. To query for past blocks, query the block height using the REST/gRPC API of a node that is not pruned.
-export extern 'gaiad query liquidity withdraws' [
-	pool_id?: string
-	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
-	--help(-h)		# help for withdraws
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
@@ -1498,6 +1426,129 @@ export extern 'gaiad query params subspace' [
 	--trace		# print out full stack trace on errors
 ]
 
+# Query for consumer chain genesis state by chain id
+export extern 'gaiad query provider consumer-genesis' [
+	chainid?: string
+	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
+	--help(-h)		# help for consumer-genesis
+	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "text")
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user/.gaia")
+	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
+# Query active consumer chains for provider chain.
+export extern 'gaiad query provider list-consumer-chains' [
+	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
+	--help(-h)		# help for list-consumer-chains
+	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "text")
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user/.gaia")
+	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
+# Query mature and pending consumer chains start proposals on provider chain. 		Matured proposals will be executed on the next block - their spawn_time has passed 		Pending proposals are waiting for their spawn_time to pass.
+export extern 'gaiad query provider list-start-proposals' [
+	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
+	--help(-h)		# help for list-start-proposals
+	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "text")
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user/.gaia")
+	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
+# Query mature and pending consumer chains stop proposals on provider chain. 		Matured proposals will be executed on the next block - their stop_time has passed 		Pending proposals are waiting for their stop_time to pass.
+export extern 'gaiad query provider list-stop-proposals' [
+	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
+	--help(-h)		# help for list-stop-proposals
+	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "text")
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user/.gaia")
+	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
+# Returns the registered consumer reward denoms.
+export extern 'gaiad query provider registered-consumer-reward-denoms' [
+	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
+	--help(-h)		# help for registered-consumer-reward-denoms
+	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "text")
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user/.gaia")
+	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
+# Returns state relevant to throttled slash packet queue on the provider chain. 			Queue is ordered by time of arrival.
+export extern 'gaiad query provider throttle-state' [
+	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
+	--help(-h)		# help for throttle-state
+	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "text")
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user/.gaia")
+	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
+# Returns the current pending VSCMatured and slash packet data instances for a consumer chainId. 			Queue is ordered by ibc sequence number. 
+export extern 'gaiad query provider throttled-consumer-packet-data' [
+	chainid?: string
+	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
+	--help(-h)		# help for throttled-consumer-packet-data
+	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "text")
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user/.gaia")
+	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
+# Returns the currently assigned validator consensus public key for a consumer chain, if one has been assigned.
+export extern 'gaiad query provider validator-consumer-key' [
+	chainid?: string
+	provider_validator_address?: string
+	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
+	--help(-h)		# help for validator-consumer-key
+	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "text")
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user/.gaia")
+	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
+# Returns the currently assigned validator consensus public key for the provider chain.
+export extern 'gaiad query provider validator-provider-key' [
+	chainid?: string
+	consumer_validator_address?: string
+	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
+	--help(-h)		# help for validator-provider-key
+	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "text")
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user/.gaia")
+	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
 # Query genesis parameters for the slashing module: $ <appd> query slashing params
 export extern 'gaiad query slashing params' [
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
@@ -1544,9 +1595,28 @@ export extern 'gaiad query slashing signing-infos' [
 	--trace		# print out full stack trace on errors
 ]
 
+# Query for all tokenize share records.
+export extern 'gaiad query staking all-tokenize-share-records' [
+	--count-total		# count total number of records in tokenize share records to query for
+	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
+	--help(-h)		# help for all-tokenize-share-records
+	--limit: int		# pagination limit of tokenize share records to query for (default 100)
+	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+	--offset: int		# pagination offset of tokenize share records to query for
+	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "text")
+	--page: int		# pagination page of tokenize share records to query for. This sets offset to a multiple of limit (default 1)
+	--page-key: string		# pagination page-key of tokenize share records to query for
+	--reverse		# results are sorted in descending order
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user/.gaia")
+	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
 # Query delegations for an individual delegator on an individual validator.
 export extern 'gaiad query staking delegation' [
-	delegator_addr?: string
+	delegator_addr?: string@"nu-complete gaiad _keys values"
 	validator_addr?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for delegation
@@ -1561,7 +1631,7 @@ export extern 'gaiad query staking delegation' [
 
 # Query delegations for an individual delegator on all validators.
 export extern 'gaiad query staking delegations' [
-	delegator_addr?: string
+	delegator_addr?: string@"nu-complete gaiad _keys values"
 	--count-total		# count total number of records in delegations to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for delegations
@@ -1613,6 +1683,19 @@ export extern 'gaiad query staking historical-info' [
 	--trace		# print out full stack trace on errors
 ]
 
+# Query for last tokenize share record id.
+export extern 'gaiad query staking last-tokenize-share-record-id' [
+	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
+	--help(-h)		# help for last-tokenize-share-record-id
+	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "text")
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user/.gaia")
+	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
 # Query values set as staking parameters.
 export extern 'gaiad query staking params' [
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
@@ -1641,7 +1724,7 @@ export extern 'gaiad query staking pool' [
 
 # Query a redelegation record for an individual delegator between a source and destination validator.
 export extern 'gaiad query staking redelegation' [
-	delegator_addr?: string
+	delegator_addr?: string@"nu-complete gaiad _keys values"
 	src_validator_addr?: string
 	dst_validator_addr?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
@@ -1657,7 +1740,7 @@ export extern 'gaiad query staking redelegation' [
 
 # Query all redelegation records for an individual delegator.
 export extern 'gaiad query staking redelegations' [
-	delegator_addr?: string
+	delegator_addr?: string@"nu-complete gaiad _keys values"
 	--count-total		# count total number of records in delegator redelegations to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for redelegations
@@ -1695,9 +1778,89 @@ export extern 'gaiad query staking redelegations-from' [
 	--trace		# print out full stack trace on errors
 ]
 
+# Query the status of a tokenize share lock for a given account
+export extern 'gaiad query staking tokenize-share-lock-info' [
+	address?: string@"nu-complete gaiad _keys values"
+	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
+	--help(-h)		# help for tokenize-share-lock-info
+	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "text")
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user/.gaia")
+	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
+# Query individual tokenize share record information by share denom.
+export extern 'gaiad query staking tokenize-share-record-by-denom' [
+	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
+	--help(-h)		# help for tokenize-share-record-by-denom
+	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "text")
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user/.gaia")
+	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
+# Query individual tokenize share record information by share by id.
+export extern 'gaiad query staking tokenize-share-record-by-id' [
+	id?: string
+	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
+	--help(-h)		# help for tokenize-share-record-by-id
+	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "text")
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user/.gaia")
+	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
+# Query tokenize share records by address.
+export extern 'gaiad query staking tokenize-share-records-owned' [
+	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
+	--help(-h)		# help for tokenize-share-records-owned
+	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "text")
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user/.gaia")
+	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
+# Query for total number of liquid staked tokens. Liquid staked tokens are identified as either a tokenized delegation,  or tokens owned by an interchain account.
+export extern 'gaiad query staking total-liquid-staked' [
+	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
+	--help(-h)		# help for total-liquid-staked
+	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "text")
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user/.gaia")
+	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
+# Query for total tokenized staked assets.
+export extern 'gaiad query staking total-tokenize-share-assets' [
+	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
+	--help(-h)		# help for total-tokenize-share-assets
+	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "text")
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user/.gaia")
+	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
 # Query unbonding delegations for an individual delegator on an individual validator.
 export extern 'gaiad query staking unbonding-delegation' [
-	delegator_addr?: string
+	delegator_addr?: string@"nu-complete gaiad _keys values"
 	validator_addr?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for unbonding-delegation
@@ -1712,7 +1875,7 @@ export extern 'gaiad query staking unbonding-delegation' [
 
 # Query unbonding delegations for an individual delegator.
 export extern 'gaiad query staking unbonding-delegations' [
-	delegator_addr?: string
+	delegator_addr?: string@"nu-complete gaiad _keys values"
 	--count-total		# count total number of records in unbonding delegations to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for unbonding-delegations
@@ -1843,19 +2006,6 @@ export extern 'gaiad query upgrade applied' [
 	--trace		# print out full stack trace on errors
 ]
 
-# Gets a list of module names and their respective consensus versions. Following the command with a specific module name will return only that module's information.
-export extern 'gaiad query upgrade module_versions' [
-	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
-	--help(-h)		# help for module_versions
-	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
-	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "text")
-	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.gaia")
-	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
-	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
-	--trace		# print out full stack trace on errors
-]
-
 # Gets the currently scheduled upgrade plan, if one exists
 export extern 'gaiad query upgrade plan' [
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
@@ -1872,6 +2022,22 @@ export extern 'gaiad query upgrade plan' [
 # A state rollback is performed to recover from an incorrect application state transition, when Tendermint has persisted an incorrect app hash and is thus unable to make progress. Rollback overwrites a state at height n with the state at height n - 1. The application also roll back to height n - 1. No blocks are removed, so upon restarting Tendermint the transactions in block n will be re-executed a
 export extern 'gaiad rollback' [
 	--help(-h)		# help for rollback
+	--home: string		# The application home directory (default "/Users/user/.gaia")
+	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
+# spin up a rosetta server
+export extern 'gaiad rosetta' [
+	--addr: string		# the address rosetta will bind to (default ":8080")
+	--blockchain: string		# the blockchain type (default "app")
+	--grpc: string		# the app gRPC endpoint (default "localhost:9090")
+	--help(-h)		# help for rosetta
+	--network: string		# the network name (default "network")
+	--offline		# run rosetta only with construction API
+	--retries: int		# the number of retries that will be done before quitting (default 5)
+	--tendermint: string		# the tendermint rpc endpoint, without tcp:// (default "localhost:26657")
 	--home: string		# directory for config and data (default "/Users/user/.gaia")
 	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
@@ -1891,6 +2057,8 @@ export extern 'gaiad start' [
 	--halt-height: int		# Block height at which to gracefully halt the chain and shutdown the node
 	--halt-time: int		# Minimum block time (in Unix seconds) at which to gracefully halt the chain and shutdown the node
 	--help(-h)		# help for start
+	--home: string		# The application home directory (default "/Users/user/.gaia")
+	--iavl-disable-fastnode		# Disable fast node for IAVL tree (default true)
 	--inter-block-cache		# Enable inter-block caching (default true)
 	--inv-check-period: int		# Assert registered invariants every N blocks
 	--min-retain-blocks: int		# Minimum block height offset during ABCI commit to prune Tendermint blocks
@@ -1902,15 +2070,14 @@ export extern 'gaiad start' [
 	--pruning-interval: int		# Height interval at which pruned heights are removed from disk (ignored if pruning is not 'custom')
 	--pruning-keep-every: int		# Offset heights to keep on disk after 'keep-every' (ignored if pruning is not 'custom')
 	--pruning-keep-recent: int		# Number of recent heights to keep on disk (ignored if pruning is not 'custom')
+	--trace		# Provide full stack traces for errors in ABCI Log
 	--trace-store: string		# Enable KVStore tracing to an output file
 	--transport: string		# Transport protocol: socket, grpc (default "socket")
 	--unsafe-skip-upgrades: string		# Skip a set of upgrade heights to continue the old binary
 	--with-tendermint		# Run abci app embedded in-process with tendermint (default true)
 	--x-crisis-skip-assert-invariants		# Skip x/crisis invariants check on startup
-	--home: string		# directory for config and data (default "/Users/user/.gaia")
 	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
-	--trace		# print out full stack trace on errors
 ]
 
 # Query remote node for status
@@ -2001,7 +2168,7 @@ export extern 'gaiad tx authz exec' [
 	msg_tx_json_file?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
@@ -2030,13 +2197,13 @@ export extern 'gaiad tx authz exec' [
 
 # grant authorization to an address to execute a transaction on your behalf:
 export extern 'gaiad tx authz grant' [
-	grantee?: string
+	grantee?: string@"nu-complete gaiad _keys values"
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--allowed-validators: string		# Allowed validators addresses separated by ,
 	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--deny-validators: string		# Deny validators addresses separated by ,
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
-	--expiration: int		# The Unix timestamp. Default is one year. (default 1703179364)
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
+	--expiration: int		# The Unix timestamp. Default is one year. (default 1728223690)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
@@ -2067,11 +2234,11 @@ export extern 'gaiad tx authz grant' [
 
 # revoke authorization from a granter to a grantee:
 export extern 'gaiad tx authz revoke' [
-	grantee?: string
+	grantee?: string@"nu-complete gaiad _keys values"
 	msg_type?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
@@ -2098,14 +2265,14 @@ export extern 'gaiad tx authz revoke' [
 	--trace		# print out full stack trace on errors
 ]
 
-# Send funds from one account to another. Note, the'--from' flag is ignored as it is implied from [from_key_or_address].
+# Send funds from one account to another.  		Note, the'--from' flag is ignored as it is implied from [from_key_or_address]. 		When using '--dry-run' a key name cannot be used, only a bech32 address.
 export extern 'gaiad tx bank send' [
-	from_key_or_address?: string
-	to_address?: string
+	from_key_or_address?: string@"nu-complete gaiad _keys values"
+	to_address?: string@"nu-complete gaiad _keys values"
 	amount?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
@@ -2137,7 +2304,7 @@ export extern 'gaiad tx broadcast' [
 	file_path?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
@@ -2170,7 +2337,7 @@ export extern 'gaiad tx crisis invariant-broken' [
 	invariant_route?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
@@ -2202,7 +2369,7 @@ export extern 'gaiad tx decode' [
 	amino_byte_string?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
@@ -2235,7 +2402,7 @@ export extern 'gaiad tx distribution fund-community-pool' [
 	amount?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
@@ -2264,10 +2431,10 @@ export extern 'gaiad tx distribution fund-community-pool' [
 
 # Set the withdraw address for rewards associated with a delegator address.
 export extern 'gaiad tx distribution set-withdraw-addr' [
-	withdraw_addr?: string
+	withdraw_addr?: string@"nu-complete gaiad _keys values"
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
@@ -2298,7 +2465,7 @@ export extern 'gaiad tx distribution set-withdraw-addr' [
 export extern 'gaiad tx distribution withdraw-all-rewards' [
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
@@ -2326,13 +2493,44 @@ export extern 'gaiad tx distribution withdraw-all-rewards' [
 	--trace		# print out full stack trace on errors
 ]
 
+# Withdraw reward for all owned TokenizeShareRecord
+export extern 'gaiad tx distribution withdraw-all-tokenize-share-rewards' [
+	--account-number(-a): int		# The account number of the signing account (offline mode only)
+	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
+	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
+	--fees: string		# Fees to pay along with transaction; eg: 10uatom
+	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
+	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
+	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+	--generate-only		# Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+	--help(-h)		# help for withdraw-all-tokenize-share-rewards
+	--keyring-backend: string@"nu-completions-gaiad--os-file-kwallet-pass-test-memory-"		# Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
+	--ledger		# Use a connected Ledger device
+	--node: string		# <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+	--note: string		# Note to add a description to the transaction (previously --memo)
+	--offline		# Offline mode (does not allow any online functionality
+	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "json")
+	--sequence(-s): int		# The sequence number of the signing account (offline mode only)
+	--sign-mode: string@"nu-completions-gaiad--direct-amino-json-"		# Choose sign mode (direct|amino-json), this is an advanced feature
+	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
+	--yes(-y)		# Skip tx broadcasting prompt confirmation
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user/.gaia")
+	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
 # Withdraw rewards from a given delegation address, and optionally withdraw validator commission if the delegation address given is a validator operator.
 export extern 'gaiad tx distribution withdraw-rewards' [
 	validator_addr?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--commission		# Withdraw the validator's commission in addition to the rewards
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
@@ -2359,12 +2557,43 @@ export extern 'gaiad tx distribution withdraw-rewards' [
 	--trace		# print out full stack trace on errors
 ]
 
+# Withdraw reward for an owned TokenizeShareRecord
+export extern 'gaiad tx distribution withdraw-tokenize-share-rewards' [
+	--account-number(-a): int		# The account number of the signing account (offline mode only)
+	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
+	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
+	--fees: string		# Fees to pay along with transaction; eg: 10uatom
+	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
+	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
+	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+	--generate-only		# Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+	--help(-h)		# help for withdraw-tokenize-share-rewards
+	--keyring-backend: string@"nu-completions-gaiad--os-file-kwallet-pass-test-memory-"		# Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
+	--ledger		# Use a connected Ledger device
+	--node: string		# <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+	--note: string		# Note to add a description to the transaction (previously --memo)
+	--offline		# Offline mode (does not allow any online functionality
+	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "json")
+	--sequence(-s): int		# The sequence number of the signing account (offline mode only)
+	--sign-mode: string@"nu-completions-gaiad--direct-amino-json-"		# Choose sign mode (direct|amino-json), this is an advanced feature
+	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
+	--yes(-y)		# Skip tx broadcasting prompt confirmation
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user/.gaia")
+	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
 # Encode transactions created with the --generate-only flag and signed with the sign command. Read a transaction from <file>, serialize it to the Amino wire protocol, and output it as base64. If you supply a dash (-) argument in place of an input filename, the command reads from standard input.
 export extern 'gaiad tx encode' [
 	file?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
@@ -2403,12 +2632,12 @@ export extern 'gaiad tx evidence' [
 
 # Grant authorization to pay fees from your address. Note, the'--from' flag is 				ignored as it is implied from [granter].
 export extern 'gaiad tx feegrant grant' [
-	granter_key_or_address?: string
-	grantee?: string
+	granter_key_or_address?: string@"nu-complete gaiad _keys values"
+	grantee?: string@"nu-complete gaiad _keys values"
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--allowed-messages: string		# Set of allowed messages for fee allowance
 	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--expiration: string		# The RFC 3339 timestamp after which the grant expires for the user
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
@@ -2441,11 +2670,11 @@ export extern 'gaiad tx feegrant grant' [
 
 # revoke fee grant from a granter to a grantee. Note, the'--from' flag is 			ignored as it is implied from [granter].
 export extern 'gaiad tx feegrant revoke' [
-	granter?: string
-	grantee?: string
+	granter?: string@"nu-complete gaiad _keys values"
+	grantee?: string@"nu-complete gaiad _keys values"
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
@@ -2478,7 +2707,7 @@ export extern 'gaiad tx gov deposit' [
 	deposit?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
@@ -2511,7 +2740,7 @@ export extern 'gaiad tx gov submit-proposal cancel-software-upgrade' [
 	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--deposit: string		# deposit of proposal
 	--description: string		# description of proposal
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
@@ -2539,12 +2768,44 @@ export extern 'gaiad tx gov submit-proposal cancel-software-upgrade' [
 	--trace		# print out full stack trace on errors
 ]
 
+# Submit an change reward denoms proposal with an initial deposit. 		The proposal details must be supplied via a JSON file. 		Example: 		$ <appd> tx gov submit-proposal change-reward-denoms <path/to/proposal.json> --from=<key_or_address> 		Where proposal.json contains: 		{ 			"title": "Change reward denoms", 			"summary": "Change reward denoms", 			"denoms_to_add": ["untrn"], 			"denoms_to_remove": 
+export extern 'gaiad tx gov submit-proposal change-reward-denoms' [
+	proposal_file?: string
+	--account-number(-a): int		# The account number of the signing account (offline mode only)
+	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
+	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
+	--fees: string		# Fees to pay along with transaction; eg: 10uatom
+	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
+	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
+	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+	--generate-only		# Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+	--help(-h)		# help for change-reward-denoms
+	--keyring-backend: string@"nu-completions-gaiad--os-file-kwallet-pass-test-memory-"		# Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
+	--ledger		# Use a connected Ledger device
+	--node: string		# <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+	--note: string		# Note to add a description to the transaction (previously --memo)
+	--offline		# Offline mode (does not allow any online functionality
+	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "json")
+	--sequence(-s): int		# The sequence number of the signing account (offline mode only)
+	--sign-mode: string@"nu-completions-gaiad--direct-amino-json-"		# Choose sign mode (direct|amino-json), this is an advanced feature
+	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
+	--yes(-y)		# Skip tx broadcasting prompt confirmation
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user/.gaia")
+	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
 # Submit a community pool spend proposal along with an initial deposit. The proposal details must be supplied via a JSON file.
 export extern 'gaiad tx gov submit-proposal community-pool-spend' [
 	proposal_file?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
@@ -2571,6 +2832,102 @@ export extern 'gaiad tx gov submit-proposal community-pool-spend' [
 	--trace		# print out full stack trace on errors
 ]
 
+# Submit a consumer addition proposal along with an initial deposit. The proposal details must be supplied via a JSON file. Unbonding period, transfer timeout period and ccv timeout period should be provided as nanosecond time periods.
+export extern 'gaiad tx gov submit-proposal consumer-addition' [
+	proposal_file?: string
+	--account-number(-a): int		# The account number of the signing account (offline mode only)
+	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
+	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
+	--fees: string		# Fees to pay along with transaction; eg: 10uatom
+	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
+	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
+	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+	--generate-only		# Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+	--help(-h)		# help for consumer-addition
+	--keyring-backend: string@"nu-completions-gaiad--os-file-kwallet-pass-test-memory-"		# Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
+	--ledger		# Use a connected Ledger device
+	--node: string		# <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+	--note: string		# Note to add a description to the transaction (previously --memo)
+	--offline		# Offline mode (does not allow any online functionality
+	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "json")
+	--sequence(-s): int		# The sequence number of the signing account (offline mode only)
+	--sign-mode: string@"nu-completions-gaiad--direct-amino-json-"		# Choose sign mode (direct|amino-json), this is an advanced feature
+	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
+	--yes(-y)		# Skip tx broadcasting prompt confirmation
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user/.gaia")
+	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
+# Submit a consumer chain removal proposal along with an initial deposit. The proposal details must be supplied via a JSON file.
+export extern 'gaiad tx gov submit-proposal consumer-removal' [
+	proposal_file?: string
+	--account-number(-a): int		# The account number of the signing account (offline mode only)
+	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
+	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
+	--fees: string		# Fees to pay along with transaction; eg: 10uatom
+	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
+	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
+	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+	--generate-only		# Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+	--help(-h)		# help for consumer-removal
+	--keyring-backend: string@"nu-completions-gaiad--os-file-kwallet-pass-test-memory-"		# Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
+	--ledger		# Use a connected Ledger device
+	--node: string		# <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+	--note: string		# Note to add a description to the transaction (previously --memo)
+	--offline		# Offline mode (does not allow any online functionality
+	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "json")
+	--sequence(-s): int		# The sequence number of the signing account (offline mode only)
+	--sign-mode: string@"nu-completions-gaiad--direct-amino-json-"		# Choose sign mode (direct|amino-json), this is an advanced feature
+	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
+	--yes(-y)		# Skip tx broadcasting prompt confirmation
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user/.gaia")
+	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
+# Submit an equivocation proposal along with an initial deposit. The proposal details must be supplied via a JSON file.
+export extern 'gaiad tx gov submit-proposal equivocation' [
+	proposal_file?: string
+	--account-number(-a): int		# The account number of the signing account (offline mode only)
+	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
+	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
+	--fees: string		# Fees to pay along with transaction; eg: 10uatom
+	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
+	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
+	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+	--generate-only		# Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+	--help(-h)		# help for equivocation
+	--keyring-backend: string@"nu-completions-gaiad--os-file-kwallet-pass-test-memory-"		# Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
+	--ledger		# Use a connected Ledger device
+	--node: string		# <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+	--note: string		# Note to add a description to the transaction (previously --memo)
+	--offline		# Offline mode (does not allow any online functionality
+	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "json")
+	--sequence(-s): int		# The sequence number of the signing account (offline mode only)
+	--sign-mode: string@"nu-completions-gaiad--direct-amino-json-"		# Choose sign mode (direct|amino-json), this is an advanced feature
+	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
+	--yes(-y)		# Skip tx broadcasting prompt confirmation
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user/.gaia")
+	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
 # Submit an IBC client breaking upgrade proposal along with an initial deposit. The client state specified is the upgraded client state representing the upgraded chain Example Upgraded Client State JSON:  { 	"@type":"/ibc.lightclients.tendermint.v1.ClientState",  	"chain_id":"testchain1", 	"unbonding_period":"1814400s", 	"latest_height":{"revision_number":"0","revision_height":"2"}, 	"proof_specs":[
 export extern 'gaiad tx gov submit-proposal ibc-upgrade' [
 	name?: string
@@ -2579,7 +2936,7 @@ export extern 'gaiad tx gov submit-proposal ibc-upgrade' [
 	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--deposit: string		# deposit of proposal
 	--description: string		# description of proposal
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
@@ -2612,7 +2969,7 @@ export extern 'gaiad tx gov submit-proposal param-change' [
 	proposal_file?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
@@ -2646,7 +3003,7 @@ export extern 'gaiad tx gov submit-proposal software-upgrade' [
 	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--deposit: string		# deposit of proposal
 	--description: string		# description of proposal
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
@@ -2684,7 +3041,7 @@ export extern 'gaiad tx gov submit-proposal update-client' [
 	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--deposit: string		# deposit of proposal
 	--description: string		# description of proposal
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
@@ -2718,7 +3075,7 @@ export extern 'gaiad tx gov vote' [
 	option?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
@@ -2751,7 +3108,7 @@ export extern 'gaiad tx gov weighted-vote' [
 	weighted_options?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
@@ -2792,7 +3149,7 @@ export extern 'gaiad tx ibc channel' [
 export extern 'gaiad tx ibc client create' [
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
@@ -2847,7 +3204,7 @@ export extern 'gaiad tx ibc client upgrade' [
 	upgrade_consensus_state_proof?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
@@ -2883,7 +3240,7 @@ export extern 'gaiad tx ibc-transfer transfer' [
 	--absolute-timeouts		# Timeout flags are used as absolute timeouts.
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
@@ -2895,148 +3252,13 @@ export extern 'gaiad tx ibc-transfer transfer' [
 	--keyring-backend: string@"nu-completions-gaiad--os-file-kwallet-pass-test-memory-"		# Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
 	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
 	--ledger		# Use a connected Ledger device
+	--memo: string		# Memo to be sent along with the packet.
 	--node: string		# <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
 	--note: string		# Note to add a description to the transaction (previously --memo)
 	--offline		# Offline mode (does not allow any online functionality
 	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "json")
 	--packet-timeout-height: string		# Packet timeout block height. The timeout is disabled when set to 0-0. (default "0-1000")
 	--packet-timeout-timestamp: int		# Packet timeout timestamp in nanoseconds from now. Default is 10 minutes. The timeout is disabled when set to 0. (default 600000000000)
-	--sequence(-s): int		# The sequence number of the signing account (offline mode only)
-	--sign-mode: string@"nu-completions-gaiad--direct-amino-json-"		# Choose sign mode (direct|amino-json), this is an advanced feature
-	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
-	--yes(-y)		# Skip tx broadcasting prompt confirmation
-	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.gaia")
-	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
-	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
-	--trace		# print out full stack trace on errors
-]
-
-# Create liquidity pool and deposit coins.
-export extern 'gaiad tx liquidity create-pool' [
-	pool_type?: string
-	deposit_coins?: string
-	--account-number(-a): int		# The account number of the signing account (offline mode only)
-	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
-	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
-	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
-	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
-	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
-	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
-	--generate-only		# Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
-	--help(-h)		# help for create-pool
-	--keyring-backend: string@"nu-completions-gaiad--os-file-kwallet-pass-test-memory-"		# Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
-	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
-	--ledger		# Use a connected Ledger device
-	--node: string		# <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
-	--note: string		# Note to add a description to the transaction (previously --memo)
-	--offline		# Offline mode (does not allow any online functionality
-	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "json")
-	--sequence(-s): int		# The sequence number of the signing account (offline mode only)
-	--sign-mode: string@"nu-completions-gaiad--direct-amino-json-"		# Choose sign mode (direct|amino-json), this is an advanced feature
-	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
-	--yes(-y)		# Skip tx broadcasting prompt confirmation
-	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.gaia")
-	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
-	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
-	--trace		# print out full stack trace on errors
-]
-
-# Deposit coins a liquidity pool. This deposit request is not processed immediately since it is accumulated in the liquidity pool batch. All requests in a batch are treated equally and executed at the same swap price.
-export extern 'gaiad tx liquidity deposit' [
-	pool_id?: string
-	deposit_coins?: string
-	--account-number(-a): int		# The account number of the signing account (offline mode only)
-	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
-	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
-	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
-	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
-	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
-	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
-	--generate-only		# Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
-	--help(-h)		# help for deposit
-	--keyring-backend: string@"nu-completions-gaiad--os-file-kwallet-pass-test-memory-"		# Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
-	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
-	--ledger		# Use a connected Ledger device
-	--node: string		# <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
-	--note: string		# Note to add a description to the transaction (previously --memo)
-	--offline		# Offline mode (does not allow any online functionality
-	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "json")
-	--sequence(-s): int		# The sequence number of the signing account (offline mode only)
-	--sign-mode: string@"nu-completions-gaiad--direct-amino-json-"		# Choose sign mode (direct|amino-json), this is an advanced feature
-	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
-	--yes(-y)		# Skip tx broadcasting prompt confirmation
-	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.gaia")
-	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
-	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
-	--trace		# print out full stack trace on errors
-]
-
-# Swap offer coin with demand coin from the liquidity pool with the given order price. This swap request is not processed immediately since it is accumulated in the liquidity pool batch. All requests in a batch are treated equally and executed at the same swap price. The order of swap requests is ignored since the universal swap price is calculated in every batch to prevent front running. The reques
-export extern 'gaiad tx liquidity swap' [
-	pool_id?: string
-	swap_type?: string
-	offer_coin?: string
-	demand_coin_denom?: string
-	order_price?: string
-	swap_fee_rate?: string
-	--account-number(-a): int		# The account number of the signing account (offline mode only)
-	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
-	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
-	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
-	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
-	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
-	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
-	--generate-only		# Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
-	--help(-h)		# help for swap
-	--keyring-backend: string@"nu-completions-gaiad--os-file-kwallet-pass-test-memory-"		# Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
-	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
-	--ledger		# Use a connected Ledger device
-	--node: string		# <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
-	--note: string		# Note to add a description to the transaction (previously --memo)
-	--offline		# Offline mode (does not allow any online functionality
-	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "json")
-	--sequence(-s): int		# The sequence number of the signing account (offline mode only)
-	--sign-mode: string@"nu-completions-gaiad--direct-amino-json-"		# Choose sign mode (direct|amino-json), this is an advanced feature
-	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
-	--yes(-y)		# Skip tx broadcasting prompt confirmation
-	--chain-id: string		# The network chain ID
-	--home: string		# directory for config and data (default "/Users/user/.gaia")
-	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
-	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
-	--trace		# print out full stack trace on errors
-]
-
-# Withdraw pool coin from the specified liquidity pool. This swap request is not processed immediately since it is accumulated in the liquidity pool batch. All requests in a batch are treated equally and executed at the same swap price.
-export extern 'gaiad tx liquidity withdraw' [
-	pool_id?: string
-	pool_coin?: string
-	--account-number(-a): int		# The account number of the signing account (offline mode only)
-	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
-	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
-	--fees: string		# Fees to pay along with transaction; eg: 10uatom
-	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
-	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
-	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
-	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
-	--generate-only		# Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
-	--help(-h)		# help for withdraw
-	--keyring-backend: string@"nu-completions-gaiad--os-file-kwallet-pass-test-memory-"		# Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
-	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
-	--ledger		# Use a connected Ledger device
-	--node: string		# <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
-	--note: string		# Note to add a description to the transaction (previously --memo)
-	--offline		# Offline mode (does not allow any online functionality
-	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "json")
 	--sequence(-s): int		# The sequence number of the signing account (offline mode only)
 	--sign-mode: string@"nu-completions-gaiad--direct-amino-json-"		# Choose sign mode (direct|amino-json), this is an advanced feature
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
@@ -3056,7 +3278,8 @@ export extern 'gaiad tx multisign' [
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--amino		# Generate Amino-encoded JSON suitable for submitting to the txs REST endpoint
 	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--chain-id: string		# network chain ID
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
@@ -3078,7 +3301,6 @@ export extern 'gaiad tx multisign' [
 	--signature-only		# Print only the generated signature, then exit
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
-	--chain-id: string		# The network chain ID
 	--home: string		# directory for config and data (default "/Users/user/.gaia")
 	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
@@ -3092,7 +3314,7 @@ export extern 'gaiad tx multisign-batch' [
 	signature_file?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
@@ -3122,13 +3344,47 @@ export extern 'gaiad tx multisign-batch' [
 	--trace		# print out full stack trace on errors
 ]
 
+# assign a consensus public key to use for a consumer chain
+export extern 'gaiad tx provider assign-consensus-key' [
+	consumer_chain_id?: string
+	consumer_pubkey?: string
+	--account-number(-a): int		# The account number of the signing account (offline mode only)
+	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
+	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
+	--fees: string		# Fees to pay along with transaction; eg: 10uatom
+	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
+	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
+	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+	--generate-only		# Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+	--help(-h)		# help for assign-consensus-key
+	--keyring-backend: string@"nu-completions-gaiad--os-file-kwallet-pass-test-memory-"		# Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
+	--ledger		# Use a connected Ledger device
+	--node: string		# <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+	--note: string		# Note to add a description to the transaction (previously --memo)
+	--offline		# Offline mode (does not allow any online functionality
+	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "json")
+	--sequence(-s): int		# The sequence number of the signing account (offline mode only)
+	--sign-mode: string@"nu-completions-gaiad--direct-amino-json-"		# Choose sign mode (direct|amino-json), this is an advanced feature
+	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
+	--yes(-y)		# Skip tx broadcasting prompt confirmation
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user/.gaia")
+	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
 # Sign a transaction created with the --generate-only flag. It will read a transaction from [file], sign it, and print its JSON encoding. If the --signature-only flag is set, it will output the signature parts only. The --offline flag makes sure that the client will not reach out to full node. As a result, the account and sequence number queries will not be performed and it is required to set such p
 export extern 'gaiad tx sign' [
 	file?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--amino		# Generate Amino encoded JSON suitable for submiting to the txs REST endpoint
 	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--chain-id: string		# The network chain ID
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
@@ -3152,7 +3408,6 @@ export extern 'gaiad tx sign' [
 	--signature-only		# Print only the signatures
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
-	--chain-id: string		# The network chain ID
 	--home: string		# directory for config and data (default "/Users/user/.gaia")
 	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
@@ -3164,7 +3419,8 @@ export extern 'gaiad tx sign-batch' [
 	file?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--chain-id: string		# network chain ID
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
@@ -3187,7 +3443,6 @@ export extern 'gaiad tx sign-batch' [
 	--signature-only		# Print only the generated signature, then exit (default true)
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
-	--chain-id: string		# The network chain ID
 	--home: string		# directory for config and data (default "/Users/user/.gaia")
 	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
@@ -3198,7 +3453,7 @@ export extern 'gaiad tx sign-batch' [
 export extern 'gaiad tx slashing unjail' [
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
@@ -3207,6 +3462,40 @@ export extern 'gaiad tx slashing unjail' [
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
 	--generate-only		# Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
 	--help(-h)		# help for unjail
+	--keyring-backend: string@"nu-completions-gaiad--os-file-kwallet-pass-test-memory-"		# Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
+	--ledger		# Use a connected Ledger device
+	--node: string		# <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+	--note: string		# Note to add a description to the transaction (previously --memo)
+	--offline		# Offline mode (does not allow any online functionality
+	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "json")
+	--sequence(-s): int		# The sequence number of the signing account (offline mode only)
+	--sign-mode: string@"nu-completions-gaiad--direct-amino-json-"		# Choose sign mode (direct|amino-json), this is an advanced feature
+	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
+	--yes(-y)		# Skip tx broadcasting prompt confirmation
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user/.gaia")
+	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
+# Cancel Unbonding Delegation and delegate back to the validator.
+export extern 'gaiad tx staking cancel-unbond' [
+	validator_addr?: string
+	amount?: string
+	creation_height?: string
+	--account-number(-a): int		# The account number of the signing account (offline mode only)
+	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
+	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
+	--fees: string		# Fees to pay along with transaction; eg: 10uatom
+	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
+	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
+	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+	--generate-only		# Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+	--help(-h)		# help for cancel-unbond
 	--keyring-backend: string@"nu-completions-gaiad--os-file-kwallet-pass-test-memory-"		# Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
 	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
 	--ledger		# Use a connected Ledger device
@@ -3234,7 +3523,7 @@ export extern 'gaiad tx staking create-validator' [
 	--commission-max-rate: string		# The maximum commission rate percentage
 	--commission-rate: string		# The initial commission rate percentage
 	--details: string		# The validator's (optional) details
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
@@ -3248,7 +3537,6 @@ export extern 'gaiad tx staking create-validator' [
 	--keyring-backend: string@"nu-completions-gaiad--os-file-kwallet-pass-test-memory-"		# Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
 	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
 	--ledger		# Use a connected Ledger device
-	--min-self-delegation: string		# The minimum self delegation required on the validator
 	--moniker: string		# The validator's name
 	--node: string		# <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
 	--node-id: string		# The node's ID
@@ -3275,7 +3563,7 @@ export extern 'gaiad tx staking delegate' [
 	amount?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
@@ -3302,13 +3590,44 @@ export extern 'gaiad tx staking delegate' [
 	--trace		# print out full stack trace on errors
 ]
 
+# Disables the tokenization of shares for an address. The account must explicitly re-enable if they wish to tokenize again, at which point they must wait  the chain's unbonding period. 
+export extern 'gaiad tx staking disable-tokenize-shares' [
+	--account-number(-a): int		# The account number of the signing account (offline mode only)
+	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
+	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
+	--fees: string		# Fees to pay along with transaction; eg: 10uatom
+	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
+	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
+	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+	--generate-only		# Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+	--help(-h)		# help for disable-tokenize-shares
+	--keyring-backend: string@"nu-completions-gaiad--os-file-kwallet-pass-test-memory-"		# Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
+	--ledger		# Use a connected Ledger device
+	--node: string		# <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+	--note: string		# Note to add a description to the transaction (previously --memo)
+	--offline		# Offline mode (does not allow any online functionality
+	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "json")
+	--sequence(-s): int		# The sequence number of the signing account (offline mode only)
+	--sign-mode: string@"nu-completions-gaiad--direct-amino-json-"		# Choose sign mode (direct|amino-json), this is an advanced feature
+	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
+	--yes(-y)		# Skip tx broadcasting prompt confirmation
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user/.gaia")
+	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
 # edit an existing validator account
 export extern 'gaiad tx staking edit-validator' [
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--commission-rate: string		# The new commission rate percentage
 	--details: string		# The validator's (optional) details (default "[do-not-modify]")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
@@ -3321,7 +3640,6 @@ export extern 'gaiad tx staking edit-validator' [
 	--keyring-backend: string@"nu-completions-gaiad--os-file-kwallet-pass-test-memory-"		# Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
 	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
 	--ledger		# Use a connected Ledger device
-	--min-self-delegation: string		# The minimum self delegation required on the validator
 	--new-moniker: string		# The validator's name (default "[do-not-modify]")
 	--node: string		# <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
 	--note: string		# Note to add a description to the transaction (previously --memo)
@@ -3340,6 +3658,69 @@ export extern 'gaiad tx staking edit-validator' [
 	--trace		# print out full stack trace on errors
 ]
 
+# Enables the tokenization of shares for an address after  it had been disable. This transaction queues the enablement of tokenization, but the address must wait 1 unbonding period from the time of this transaction before tokenization is permitted.
+export extern 'gaiad tx staking enable-tokenize-shares' [
+	--account-number(-a): int		# The account number of the signing account (offline mode only)
+	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
+	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
+	--fees: string		# Fees to pay along with transaction; eg: 10uatom
+	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
+	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
+	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+	--generate-only		# Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+	--help(-h)		# help for enable-tokenize-shares
+	--keyring-backend: string@"nu-completions-gaiad--os-file-kwallet-pass-test-memory-"		# Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
+	--ledger		# Use a connected Ledger device
+	--node: string		# <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+	--note: string		# Note to add a description to the transaction (previously --memo)
+	--offline		# Offline mode (does not allow any online functionality
+	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "json")
+	--sequence(-s): int		# The sequence number of the signing account (offline mode only)
+	--sign-mode: string@"nu-completions-gaiad--direct-amino-json-"		# Choose sign mode (direct|amino-json), this is an advanced feature
+	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
+	--yes(-y)		# Skip tx broadcasting prompt confirmation
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user/.gaia")
+	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
+# Redeem specified amount of share tokens to delegation.
+export extern 'gaiad tx staking redeem-tokens' [
+	amount?: string
+	--account-number(-a): int		# The account number of the signing account (offline mode only)
+	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
+	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
+	--fees: string		# Fees to pay along with transaction; eg: 10uatom
+	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
+	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
+	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+	--generate-only		# Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+	--help(-h)		# help for redeem-tokens
+	--keyring-backend: string@"nu-completions-gaiad--os-file-kwallet-pass-test-memory-"		# Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
+	--ledger		# Use a connected Ledger device
+	--node: string		# <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+	--note: string		# Note to add a description to the transaction (previously --memo)
+	--offline		# Offline mode (does not allow any online functionality
+	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "json")
+	--sequence(-s): int		# The sequence number of the signing account (offline mode only)
+	--sign-mode: string@"nu-completions-gaiad--direct-amino-json-"		# Choose sign mode (direct|amino-json), this is an advanced feature
+	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
+	--yes(-y)		# Skip tx broadcasting prompt confirmation
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user/.gaia")
+	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
 # Redelegate an amount of illiquid staking tokens from one validator to another.
 export extern 'gaiad tx staking redelegate' [
 	src_validator_addr?: string
@@ -3347,7 +3728,7 @@ export extern 'gaiad tx staking redelegate' [
 	amount?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
@@ -3374,13 +3755,80 @@ export extern 'gaiad tx staking redelegate' [
 	--trace		# print out full stack trace on errors
 ]
 
+# Tokenize delegation to share tokens.
+export extern 'gaiad tx staking tokenize-share' [
+	validator_addr?: string
+	amount?: string
+	rewardOwner?: string
+	--account-number(-a): int		# The account number of the signing account (offline mode only)
+	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
+	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
+	--fees: string		# Fees to pay along with transaction; eg: 10uatom
+	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
+	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
+	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+	--generate-only		# Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+	--help(-h)		# help for tokenize-share
+	--keyring-backend: string@"nu-completions-gaiad--os-file-kwallet-pass-test-memory-"		# Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
+	--ledger		# Use a connected Ledger device
+	--node: string		# <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+	--note: string		# Note to add a description to the transaction (previously --memo)
+	--offline		# Offline mode (does not allow any online functionality
+	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "json")
+	--sequence(-s): int		# The sequence number of the signing account (offline mode only)
+	--sign-mode: string@"nu-completions-gaiad--direct-amino-json-"		# Choose sign mode (direct|amino-json), this is an advanced feature
+	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
+	--yes(-y)		# Skip tx broadcasting prompt confirmation
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user/.gaia")
+	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
+# Transfer ownership of TokenizeShareRecord.
+export extern 'gaiad tx staking transfer-tokenize-share-record' [
+	record_id?: string
+	new_owner?: string
+	--account-number(-a): int		# The account number of the signing account (offline mode only)
+	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
+	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
+	--fees: string		# Fees to pay along with transaction; eg: 10uatom
+	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
+	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
+	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+	--generate-only		# Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+	--help(-h)		# help for transfer-tokenize-share-record
+	--keyring-backend: string@"nu-completions-gaiad--os-file-kwallet-pass-test-memory-"		# Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
+	--ledger		# Use a connected Ledger device
+	--node: string		# <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+	--note: string		# Note to add a description to the transaction (previously --memo)
+	--offline		# Offline mode (does not allow any online functionality
+	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "json")
+	--sequence(-s): int		# The sequence number of the signing account (offline mode only)
+	--sign-mode: string@"nu-completions-gaiad--direct-amino-json-"		# Choose sign mode (direct|amino-json), this is an advanced feature
+	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
+	--yes(-y)		# Skip tx broadcasting prompt confirmation
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user/.gaia")
+	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
 # Unbond an amount of bonded shares from a validator.
 export extern 'gaiad tx staking unbond' [
 	validator_addr?: string
 	amount?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
@@ -3407,12 +3855,76 @@ export extern 'gaiad tx staking unbond' [
 	--trace		# print out full stack trace on errors
 ]
 
+# Unbond a validator.
+export extern 'gaiad tx staking unbond-validator' [
+	--account-number(-a): int		# The account number of the signing account (offline mode only)
+	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
+	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
+	--fees: string		# Fees to pay along with transaction; eg: 10uatom
+	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
+	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
+	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+	--generate-only		# Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+	--help(-h)		# help for unbond-validator
+	--keyring-backend: string@"nu-completions-gaiad--os-file-kwallet-pass-test-memory-"		# Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
+	--ledger		# Use a connected Ledger device
+	--node: string		# <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+	--note: string		# Note to add a description to the transaction (previously --memo)
+	--offline		# Offline mode (does not allow any online functionality
+	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "json")
+	--sequence(-s): int		# The sequence number of the signing account (offline mode only)
+	--sign-mode: string@"nu-completions-gaiad--direct-amino-json-"		# Choose sign mode (direct|amino-json), this is an advanced feature
+	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
+	--yes(-y)		# Skip tx broadcasting prompt confirmation
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user/.gaia")
+	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
+# Mark a delegation as a validator self-bond.
+export extern 'gaiad tx staking validator-bond' [
+	validator?: string
+	--account-number(-a): int		# The account number of the signing account (offline mode only)
+	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
+	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
+	--fees: string		# Fees to pay along with transaction; eg: 10uatom
+	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
+	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
+	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+	--generate-only		# Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+	--help(-h)		# help for validator-bond
+	--keyring-backend: string@"nu-completions-gaiad--os-file-kwallet-pass-test-memory-"		# Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
+	--ledger		# Use a connected Ledger device
+	--node: string		# <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+	--note: string		# Note to add a description to the transaction (previously --memo)
+	--offline		# Offline mode (does not allow any online functionality
+	--output(-o): string@"nu-completions-gaiad--text-json-"		# Output format (text|json) (default "json")
+	--sequence(-s): int		# The sequence number of the signing account (offline mode only)
+	--sign-mode: string@"nu-completions-gaiad--direct-amino-json-"		# Choose sign mode (direct|amino-json), this is an advanced feature
+	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
+	--yes(-y)		# Skip tx broadcasting prompt confirmation
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user/.gaia")
+	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
 # Print the addresses that must sign the transaction, those who have already signed it, and make sure that signatures are in the correct order. The command would check whether all required signers have signed the transactions, whether the signatures were collected in the right order, and if the signature is valid over the given transaction. If the --offline flag is also set, signature validation ove
 export extern 'gaiad tx validate-signatures' [
 	file?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--chain-id: string		# The network chain ID
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign
@@ -3432,7 +3944,6 @@ export extern 'gaiad tx validate-signatures' [
 	--sign-mode: string@"nu-completions-gaiad--direct-amino-json-"		# Choose sign mode (direct|amino-json), this is an advanced feature
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
-	--chain-id: string		# The network chain ID
 	--home: string		# directory for config and data (default "/Users/user/.gaia")
 	--log_format: string@"nu-completions-gaiad--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-gaiad--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
@@ -3441,13 +3952,13 @@ export extern 'gaiad tx validate-signatures' [
 
 # Create a new vesting account funded with an allocation of tokens. The account can either be a delayed or continuous vesting account, which is determined by the '--delayed' flag. All vesting accouts created will have their start time set by the committed block's time. The end_time must be provided as a UNIX epoch timestamp.
 export extern 'gaiad tx vesting create-vesting-account' [
-	to_address?: string
+	to_address?: string@"nu-complete gaiad _keys values"
 	amount?: string
 	end_time?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-gaiad--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--delayed		# Create a delayed vesting account if true
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete gaiad _keys values"		# Name or address of private key with which to sign

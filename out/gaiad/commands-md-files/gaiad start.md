@@ -47,11 +47,14 @@ Flags:
       --halt-height uint                                Block height at which to gracefully halt the chain and shutdown the node
       --halt-time uint                                  Minimum block time (in Unix seconds) at which to gracefully halt the chain and shutdown the node
   -h, --help                                            help for start
+      --home string                                     The application home directory (default "/Users/user/.gaia")
+      --iavl-disable-fastnode                           Disable fast node for IAVL tree (default true)
       --inter-block-cache                               Enable inter-block caching (default true)
       --inv-check-period uint                           Assert registered invariants every N blocks
       --min-retain-blocks uint                          Minimum block height offset during ABCI commit to prune Tendermint blocks
       --minimum-gas-prices string                       Minimum gas prices to accept for transactions; Any fee in a tx must meet this minimum (e.g. 0.01photino;0.0001stake)
       --moniker string                                  node name (default "Pro16.local")
+      --p2p.external-address string                     ip:port address to advertise to peers for them to dial
       --p2p.laddr string                                node listen address. (0.0.0.0:0 means any interface, any port) (default "tcp://0.0.0.0:26656")
       --p2p.persistent_peers string                     comma-delimited ID@host:port persistent peers
       --p2p.pex                                         enable/disable Peer-Exchange (default true)
@@ -72,6 +75,7 @@ Flags:
       --rpc.unsafe                                      enabled unsafe rpc methods
       --state-sync.snapshot-interval uint               State sync snapshot interval
       --state-sync.snapshot-keep-recent uint32          State sync snapshot to keep (default 2)
+      --trace                                           Provide full stack traces for errors in ABCI Log
       --trace-store string                              Enable KVStore tracing to an output file
       --transport string                                Transport protocol: socket, grpc (default "socket")
       --unsafe-skip-upgrades ints                       Skip a set of upgrade heights to continue the old binary
@@ -79,7 +83,5 @@ Flags:
       --x-crisis-skip-assert-invariants                 Skip x/crisis invariants check on startup
 
 Global Flags:
-      --home string         directory for config and data (default "/Users/user/.gaia")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
-      --trace               print out full stack trace on errors

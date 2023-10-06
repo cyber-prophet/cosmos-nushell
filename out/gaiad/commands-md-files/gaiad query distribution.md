@@ -10,6 +10,7 @@ Available Commands:
   params                        Query distribution params
   rewards                       Query all distribution delegator rewards or rewards from a particular validator
   slashes                       Query distribution validator slashes
+  tokenize-share-record-rewards Query distribution tokenize share record rewards
   validator-outstanding-rewards Query distribution outstanding (un-withdrawn) rewards for a validator and all their delegations
 
 Flags:

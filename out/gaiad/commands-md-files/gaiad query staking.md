@@ -5,20 +5,28 @@ Usage:
   gaiad query staking [command]
 
 Available Commands:
-  delegation                 Query a delegation based on address and validator address
-  delegations                Query all delegations made by one delegator
-  delegations-to             Query all delegations made to one validator
-  historical-info            Query historical info at given height
-  params                     Query the current staking parameters information
-  pool                       Query the current staking pool values
-  redelegation               Query a redelegation record based on delegator and a source and destination validator address
-  redelegations              Query all redelegations records for one delegator
-  redelegations-from         Query all outgoing redelegatations from a validator
-  unbonding-delegation       Query an unbonding-delegation record based on delegator and validator address
-  unbonding-delegations      Query all unbonding-delegations records for one delegator
-  unbonding-delegations-from Query all unbonding delegatations from a validator
-  validator                  Query a validator
-  validators                 Query for all validators
+  all-tokenize-share-records     Query for all tokenize share records
+  delegation                     Query a delegation based on address and validator address
+  delegations                    Query all delegations made by one delegator
+  delegations-to                 Query all delegations made to one validator
+  historical-info                Query historical info at given height
+  last-tokenize-share-record-id  Query for last tokenize share record id
+  params                         Query the current staking parameters information
+  pool                           Query the current staking pool values
+  redelegation                   Query a redelegation record based on delegator and a source and destination validator address
+  redelegations                  Query all redelegations records for one delegator
+  redelegations-from             Query all outgoing redelegatations from a validator
+  tokenize-share-lock-info       Query tokenize share lock information
+  tokenize-share-record-by-denom Query individual tokenize share record information by share denom
+  tokenize-share-record-by-id    Query individual tokenize share record information by share by id
+  tokenize-share-records-owned   Query tokenize share records by address
+  total-liquid-staked            Query for total liquid staked tokens
+  total-tokenize-share-assets    Query for total tokenized staked assets
+  unbonding-delegation           Query an unbonding-delegation record based on delegator and validator address
+  unbonding-delegations          Query all unbonding-delegations records for one delegator
+  unbonding-delegations-from     Query all unbonding delegatations from a validator
+  validator                      Query a validator
+  validators                     Query for all validators
 
 Flags:
   -h, --help   help for staking
