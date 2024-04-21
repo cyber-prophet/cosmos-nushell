@@ -5,8 +5,9 @@ Usage:
   cyber tx bank [command]
 
 Available Commands:
-  send        Send funds from one account to another. Note, the'--from' flag is
-ignored as it is implied from [from_key_or_address].
+  send        Send funds from one account to another. 
+		Note, the'--from' flag is ignored as it is implied from [from_key_or_address].
+		When using '--dry-run' a key name cannot be used, only a bech32 address.
 
 Flags:
   -h, --help   help for bank

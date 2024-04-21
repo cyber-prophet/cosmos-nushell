@@ -5,15 +5,18 @@ Usage:
   cyber query wasm [command]
 
 Available Commands:
-  code                  Downloads wasm bytecode for given code id
-  code-info             Prints out metadata of a code id
-  contract              Prints out metadata of a contract given its address
-  contract-history      Prints out the code history for a contract given its address
-  contract-state        Querying commands for the wasm module
-  libwasmvm-version     Get libwasmvm version
-  list-code             List all wasm bytecode on the chain
-  list-contract-by-code List wasm all bytecode on the chain for given code id
-  pinned                List all pinned code ids
+  build-address             build contract address
+  code                      Downloads wasm bytecode for given code id
+  code-info                 Prints out metadata of a code id
+  contract                  Prints out metadata of a contract given its address
+  contract-history          Prints out the code history for a contract given its address
+  contract-state            Querying commands for the wasm module
+  libwasmvm-version         Get libwasmvm version
+  list-code                 List all wasm bytecode on the chain
+  list-contract-by-code     List wasm all bytecode on the chain for given code id
+  list-contracts-by-creator List all contracts by creator
+  params                    Query the current wasm parameters
+  pinned                    List all pinned code ids
 
 Flags:
   -h, --help   help for wasm

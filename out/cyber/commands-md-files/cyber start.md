@@ -48,11 +48,14 @@ Flags:
       --halt-height uint                                Block height at which to gracefully halt the chain and shutdown the node
       --halt-time uint                                  Minimum block time (in Unix seconds) at which to gracefully halt the chain and shutdown the node
   -h, --help                                            help for start
+      --home string                                     The application home directory (default "/Users/user//.cyber")
+      --iavl-disable-fastnode                           Disable fast node for IAVL tree (default true)
       --inter-block-cache                               Enable inter-block caching (default true)
       --inv-check-period uint                           Assert registered invariants every N blocks
       --min-retain-blocks uint                          Minimum block height offset during ABCI commit to prune Tendermint blocks
       --minimum-gas-prices string                       Minimum gas prices to accept for transactions; Any fee in a tx must meet this minimum (e.g. 0.01photino;0.0001stake)
-      --moniker string                                  node name (default "Pro16.local")
+      --moniker string                                  node name (default "Pro16")
+      --p2p.external-address string                     ip:port address to advertise to peers for them to dial
       --p2p.laddr string                                node listen address. (0.0.0.0:0 means any interface, any port) (default "tcp://0.0.0.0:26656")
       --p2p.persistent_peers string                     comma-delimited ID@host:port persistent peers
       --p2p.pex                                         enable/disable Peer-Exchange (default true)
@@ -74,17 +77,17 @@ Flags:
       --search-api                                      Run search API
       --state-sync.snapshot-interval uint               State sync snapshot interval
       --state-sync.snapshot-keep-recent uint32          State sync snapshot to keep (default 2)
+      --trace                                           Provide full stack traces for errors in ABCI Log
       --trace-store string                              Enable KVStore tracing to an output file
       --transport string                                Transport protocol: socket, grpc (default "socket")
       --unsafe-skip-upgrades ints                       Skip a set of upgrade heights to continue the old binary
       --wasm.memory_cache_size uint32                   Sets the size in MiB (NOT bytes) of an in-memory cache for Wasm modules. Set to 0 to disable. (default 100)
       --wasm.query_gas_limit uint                       Set the max gas that can be spent on executing a query with a Wasm contract (default 3000000)
       --wasm.simulation_gas_limit string                Set the max gas that can be spent when executing a simulation TX
+      --wasm.skip_wasmvm_version_check                  Skip check that ensures that libwasmvm version (the Rust project) and wasmvm version (the Go project) match
       --with-tendermint                                 Run abci app embedded in-process with tendermint (default true)
       --x-crisis-skip-assert-invariants                 Skip x/crisis invariants check on startup
 
 Global Flags:
-      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
-      --trace               print out full stack trace on errors

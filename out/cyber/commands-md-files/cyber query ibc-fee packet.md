@@ -1,13 +1,14 @@
-Gets a list of module names and their respective consensus versions.
-Following the command with a specific module name will return only
-that module's information.
+Query for an unrelayed incentivized packet by port-id, channel-id and packet sequence.
 
 Usage:
-  cyber query upgrade module_versions [optional module_name] [flags]
+  cyber query ibc-fee packet [port-id] [channel-id] [sequence] [flags]
+
+Examples:
+cyber query ibc-fee packet
 
 Flags:
       --height int      Use a specific height to query state at (this can error if the node is pruning state)
-  -h, --help            help for module_versions
+  -h, --help            help for packet
       --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
   -o, --output string   Output format (text|json) (default "text")
 

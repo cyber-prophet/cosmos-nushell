@@ -18,7 +18,7 @@ The order price is the exchange ratio of X/Y, where X is the amount of the first
 Increasing order price reduces the possibility for your request to be processed and results in buying uatom at a lower price than the pool price.
 
 For explicit calculations, The swap fee rate must be the value that set as liquidity parameter in the current network.
-The only supported swap-type is 1. For the detailed swap algorithm, see https://github.com/tendermint/liquidity
+The only supported swap-type is 1. For the detailed swap algorithm, see https://github.com/gravity-devs/liquidity
 
 [pool-id]: The pool id of the liquidity pool 
 [swap-type]: The swap type of the swap message. The only supported swap type is 1 (instant swap).
@@ -33,7 +33,7 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign

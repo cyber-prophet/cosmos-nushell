@@ -5,12 +5,15 @@ Usage:
   cyber tx wasm [command]
 
 Available Commands:
-  clear-contract-admin Clears admin for a contract to prevent further migrations
-  execute              Execute a command on a wasm contract
-  instantiate          Instantiate a wasm contract
-  migrate              Migrate a wasm contract to a new code version
-  set-contract-admin   Set new admin for a contract
-  store                Upload a wasm binary
+  clear-contract-admin      Clears admin for a contract to prevent further migrations
+  execute                   Execute a command on a wasm contract
+  grant                     Grant authorization to an address
+  instantiate               Instantiate a wasm contract
+  instantiate2              Instantiate a wasm contract with predictable address
+  migrate                   Migrate a wasm contract to a new code version
+  set-contract-admin        Set new admin for a contract
+  store                     Upload a wasm binary
+  update-instantiate-config Update instantiate config for a codeID
 
 Flags:
   -h, --help   help for wasm

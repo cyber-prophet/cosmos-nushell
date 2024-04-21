@@ -28,11 +28,13 @@ Available Commands:
   execute-contract          Submit a execute wasm contract proposal (run by any address)
   ibc-upgrade               Submit an IBC upgrade proposal
   instantiate-contract      Submit an instantiate wasm contract proposal
+  instantiate-contract-2    Submit an instantiate wasm contract proposal with predictable address
   migrate-contract          Submit a migrate wasm contract to a new code version proposal
   param-change              Submit a parameter change proposal
   pin-codes                 Submit a pin code proposal for pinning a code to cache
   set-contract-admin        Submit a new admin for a contract proposal
   software-upgrade          Submit a software upgrade proposal
+  store-instantiate         Submit and instantiate a wasm contract proposal
   sudo-contract             Submit a sudo wasm contract proposal (to call privileged commands)
   unpin-codes               Submit a unpin code proposal for unpinning a code to cache
   update-client             Submit an update IBC client proposal
@@ -44,7 +46,7 @@ Flags:
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
       --deposit string           The proposal deposit
       --description string       The proposal description
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign

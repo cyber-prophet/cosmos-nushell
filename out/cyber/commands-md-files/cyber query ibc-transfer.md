@@ -5,7 +5,7 @@ Usage:
 
 Available Commands:
   denom-hash     Query the denom hash info from a given denom trace
-  denom-trace    Query the denom trace info from a given trace hash
+  denom-trace    Query the denom trace info from a given trace hash or ibc denom
   denom-traces   Query the trace info for all token denominations
   escrow-address Get the escrow address for a channel
   params         Query the current ibc-transfer parameters

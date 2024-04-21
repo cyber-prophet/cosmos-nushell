@@ -5,9 +5,10 @@ Usage:
   cyber query auth [command]
 
 Available Commands:
-  account     Query for account by address
-  accounts    Query all the accounts
-  params      Query the current auth parameters
+  account        Query for account by address
+  accounts       Query all the accounts
+  module-account Query module account info by module name
+  params         Query the current auth parameters
 
 Flags:
   -h, --help   help for auth

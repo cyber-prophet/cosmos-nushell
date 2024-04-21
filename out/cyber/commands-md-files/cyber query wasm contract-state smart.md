@@ -8,7 +8,7 @@ Flags:
       --b64             base64 encoded query argument
       --height int      Use a specific height to query state at (this can error if the node is pruning state)
   -h, --help            help for smart
-      --hex             hex encoded  query argument
+      --hex             hex encoded query argument
       --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
   -o, --output string   Output format (text|json) (default "text")
 

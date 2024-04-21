@@ -19,6 +19,7 @@ Available Commands:
   graph               Graph transaction subcommands
   grid                grid transactions subcommands
   ibc                 IBC transaction subcommands
+  ibc-fee             IBC relayer incentivization transaction subcommands
   ibc-transfer        IBC fungible token transfer transaction subcommands
   liquidity           Liquidity transaction subcommands
   multisign           Generate multisig signatures for transactions generated offline

@@ -1,4 +1,4 @@
-		Long:    List all pinned code ids,
+List all pinned code ids
 
 Usage:
   cyber query wasm pinned [flags]

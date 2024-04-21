@@ -1,17 +1,17 @@
 Submit an update instantiate config  proposal for multiple code ids.
 
 Example: 
-$ cyber tx gov submit-proposal update-instantiate-config 1,nobody 2,everybody 3,bostrom1l2rsakp388kuv9k8qzq6lrm9taddae7fpx59wm
+$ cyber tx gov submit-proposal update-instantiate-config 1:nobody 2:everybody 3:bostrom1l2rsakp388kuv9k8qzq6lrm9taddae7fpx59wm,bostrom1vx8knpllrj7n963p9ttd80w47kpacrhuts497x
 
 Usage:
-  cyber tx gov submit-proposal update-instantiate-config [code-id,permission]... [flags]
+  cyber tx gov submit-proposal update-instantiate-config [code-id:permission]... [flags]
 
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
       --deposit string           Deposit of proposal
       --description string       Description of proposal
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -27,12 +27,10 @@ Flags:
       --note string              Note to add a description to the transaction (previously --memo)
       --offline                  Offline mode (does not allow any online functionality
   -o, --output string            Output format (text|json) (default "json")
-      --proposal string          Proposal file path (if this path is given, other proposal flags are ignored)
   -s, --sequence uint            The sequence number of the signing account (offline mode only)
       --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
       --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
       --title string             Title of proposal
-      --type string              Permission of proposal, types: store-code/instantiate/migrate/update-admin/clear-admin/text/parameter_change/software_upgrade
   -y, --yes                      Skip tx broadcasting prompt confirmation
 
 Global Flags:

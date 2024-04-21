@@ -2,7 +2,7 @@
 
 # cyber keys in a form of a table
 export def "cyber _keys table" [] {
-	cyber keys list --output json | from json | select name type address 
+	cyber keys list --output json | from json | select name type address
 }
 
 # Helper function to use addresses for completions in --from parameter
@@ -10,17 +10,17 @@ export def "nu-complete cyber _keys values" [] {
     (cyber _keys table).name | zip (cyber _keys table).address | flatten
   }
 
-def "nu-completions-cyber--os-file-kwallet-pass-test-" [] { ["os", "file", "kwallet", "pass", "test"] }
-def "nu-completions-cyber--default-nothing-everything-custom-" [] { ["default", "nothing", "everything", "custom"] }
-def "nu-completions-cyber--os-file-kwallet-pass-test-memory-" [] { ["os", "file", "kwallet", "pass", "test", "memory"] }
-def "nu-completions-cyber--os-file-test-" [] { ["os", "file", "test"] }
-def "nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-" [] { ["trace", "debug", "info", "warn", "error", "fatal", "panic"] }
-def "nu-completions-cyber--sync-async-block-" [] { ["sync", "async", "block"] }
 def "nu-completions-cyber--socket---grpc-" [] { ["socket", "grpc"] }
-def "nu-completions-cyber--text-json-" [] { ["text", "json"] }
-def "nu-completions-cyber--json-plain-" [] { ["json", "plain"] }
-def "nu-completions-cyber--acc-val-cons-" [] { ["acc", "val", "cons"] }
 def "nu-completions-cyber--direct-amino-json-" [] { ["direct", "amino-json"] }
+def "nu-completions-cyber--os-file-kwallet-pass-test-" [] { ["os", "file", "kwallet", "pass", "test"] }
+def "nu-completions-cyber--acc-val-cons-" [] { ["acc", "val", "cons"] }
+def "nu-completions-cyber--sync-async-block-" [] { ["sync", "async", "block"] }
+def "nu-completions-cyber--default-nothing-everything-custom-" [] { ["default", "nothing", "everything", "custom"] }
+def "nu-completions-cyber--os-file-test-" [] { ["os", "file", "test"] }
+def "nu-completions-cyber--os-file-kwallet-pass-test-memory-" [] { ["os", "file", "kwallet", "pass", "test", "memory"] }
+def "nu-completions-cyber--json-plain-" [] { ["json", "plain"] }
+def "nu-completions-cyber--text-json-" [] { ["text", "json"] }
+def "nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-" [] { ["trace", "debug", "info", "warn", "error", "fatal", "panic"] }
 
 # Add a genesis account to genesis.json. The provided account must specify the account address or key name and a list of initial coins. If a key name is given, the address will be looked up in the local Keybase. The list of initial tokens must contain valid denominations. Accounts may optionally be supplied with vesting parameters.
 export extern 'cyber add-genesis-account' [
@@ -29,13 +29,13 @@ export extern 'cyber add-genesis-account' [
 	coin?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for add-genesis-account
+	--home: string		# The application home directory (default "/Users/user//.cyber")
 	--keyring-backend: string@"nu-completions-cyber--os-file-kwallet-pass-test-"		# Select keyring's backend (os|file|kwallet|pass|test) (default "os")
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--vesting-amount: string		# amount of coins for vesting accounts
 	--vesting-end-time: int		# schedule end time (unix epoch) for vesting accounts
 	--vesting-start-time: int		# schedule start time (unix epoch) for vesting accounts
-	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -45,7 +45,7 @@ export extern 'cyber add-genesis-account' [
 export extern 'cyber collect-gentxs' [
 	--gentx-dir: string		# override default "gentx" directory from which collect and execute genesis transactions; default [--home]/config/gentx/
 	--help(-h)		# help for collect-gentxs
-	--home: string		# directory for config and data (default "/Users/user//.cyber")
+	--home: string		# The application home directory (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -97,8 +97,8 @@ export extern 'cyber export' [
 	--for-zero-height		# Export state to start at height zero (perform preproccessing)
 	--height: int		# Export state from a particular height (-1 means latest height) (default -1)
 	--help(-h)		# help for export
+	--home: string		# The application home directory (default "/Users/user//.cyber")
 	--jail-allowed-addrs: string		# Comma-separated list of operator addresses of jailed validators to unjail
-	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -116,7 +116,7 @@ export extern 'cyber gentx' [
 	--commission-max-rate: string		# The maximum commission rate percentage
 	--commission-rate: string		# The initial commission rate percentage
 	--details: string		# The validator's (optional) details
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -125,8 +125,9 @@ export extern 'cyber gentx' [
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
 	--generate-only		# Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
 	--help(-h)		# help for gentx
+	--home: string		# The application home directory (default "/Users/user//.cyber")
 	--identity: string		# The (optional) identity signature (ex. UPort or Keybase)
-	--ip: string		# The node's public IP (default "192.168.1.105")
+	--ip: string		# The node's public IP (default "192.168.8.100")
 	--keyring-backend: string@"nu-completions-cyber--os-file-kwallet-pass-test-memory-"		# Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
 	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
 	--ledger		# Use a connected Ledger device
@@ -145,7 +146,6 @@ export extern 'cyber gentx' [
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--website: string		# The validator's (optional) website
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
-	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -166,9 +166,9 @@ export extern 'cyber init' [
 	moniker?: string
 	--chain-id: string		# genesis file chain-id, if left blank will be randomly created
 	--help(-h)		# help for init
+	--home: string		# node's home directory (default "/Users/user//.cyber")
 	--overwrite(-o)		# overwrite the genesis.json file
 	--recover		# provide seed phrase to recover existing key instead of creating
-	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -315,14 +315,15 @@ export extern 'cyber keys show' [
 	--trace		# print out full stack trace on errors
 ]
 
-# Migrate the source genesis into the target version and print to STDOUT.
-export extern 'cyber migrate' [
-	target_version?: string
-	genesis_file?: string
-	--chain-id: string		# override chain_id with this flag
-	--genesis-time: string		# override genesis_time with this flag
-	--help(-h)		# help for migrate
-	--home: string		# directory for config and data (default "/Users/user//.cyber")
+# Prune app history states by keeping the recent heights and deleting old heights. 		The pruning option is provided via the '--pruning' flag or alternatively with '--pruning-keep-recent' 		 		For '--pruning' the options are as follows: 		 		default: the last 362880 states are kept 		nothing: all historic states will be saved, nothing will be deleted (i.e. archiving node) 		everything: 2 latest state
+export extern 'cyber prune' [
+	--app-db-backend: string		# The type of database for application and snapshots databases
+	--help(-h)		# help for prune
+	--home: string		# The database home directory
+	--pruning: string@"nu-completions-cyber--default-nothing-everything-custom-"		# Pruning strategy (default|nothing|everything|custom) (default "default")
+	--pruning-interval: int		# Height interval at which pruned heights are removed from disk (ignored if pruning is not 'custom'), 
+	--pruning-keep-every: int		# Offset heights to keep on disk after 'keep-every' (ignored if pruning is not 'custom'),
+	--pruning-keep-recent: int		# Number of recent heights to keep on disk (ignored if pruning is not 'custom')
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -368,6 +369,20 @@ export extern 'cyber query auth accounts' [
 	--page: int		# pagination page of all-accounts to query for. This sets offset to a multiple of limit (default 1)
 	--page-key: string		# pagination page-key of all-accounts to query for
 	--reverse		# results are sorted in descending order
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
+	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
+# Query module account info by module name
+export extern 'cyber query auth module-account' [
+	module_name?: string
+	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
+	--help(-h)		# help for module-account
+	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
 	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
@@ -1276,6 +1291,26 @@ export extern 'cyber query ibc client consensus-state' [
 	--trace		# print out full stack trace on errors
 ]
 
+# Query the heights of all consensus states associated with the provided client ID.
+export extern 'cyber query ibc client consensus-state-heights' [
+	client_id?: string
+	--count-total		# count total number of records in consensus state heights to query for
+	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
+	--help(-h)		# help for consensus-state-heights
+	--limit: int		# pagination limit of consensus state heights to query for (default 100)
+	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+	--offset: int		# pagination offset of consensus state heights to query for
+	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
+	--page: int		# pagination page of consensus state heights to query for. This sets offset to a multiple of limit (default 1)
+	--page-key: string		# pagination page-key of consensus state heights to query for
+	--reverse		# results are sorted in descending order
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
+	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
 # Query all the consensus states from a given client state.
 export extern 'cyber query ibc client consensus-states' [
 	client_id?: string
@@ -1429,6 +1464,174 @@ export extern 'cyber query ibc connection path' [
 	--trace		# print out full stack trace on errors
 ]
 
+# Query the ibc-fee enabled status of a channel
+export extern 'cyber query ibc-fee channel' [
+	port_id?: string
+	channel_id?: string
+	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
+	--help(-h)		# help for channel
+	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
+	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
+# Query the ibc-fee enabled channels
+export extern 'cyber query ibc-fee channels' [
+	--count-total		# count total number of records in channels to query for
+	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
+	--help(-h)		# help for channels
+	--limit: int		# pagination limit of channels to query for (default 100)
+	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+	--offset: int		# pagination offset of channels to query for
+	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
+	--page: int		# pagination page of channels to query for. This sets offset to a multiple of limit (default 1)
+	--page-key: string		# pagination page-key of channels to query for
+	--reverse		# results are sorted in descending order
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
+	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
+# Query the relayer counterparty payee on a given channel
+export extern 'cyber query ibc-fee counterparty-payee' [
+	channel_id?: string
+	relayer?: string
+	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
+	--help(-h)		# help for counterparty-payee
+	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
+	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
+# Query for an unrelayed incentivized packet by port-id, channel-id and packet sequence.
+export extern 'cyber query ibc-fee packet' [
+	port_id?: string
+	channel_id?: string
+	sequence?: string
+	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
+	--help(-h)		# help for packet
+	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
+	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
+# Query for all of the unrelayed incentivized packets and associated fees across all channels.
+export extern 'cyber query ibc-fee packets' [
+	--count-total		# count total number of records in packets to query for
+	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
+	--help(-h)		# help for packets
+	--limit: int		# pagination limit of packets to query for (default 100)
+	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+	--offset: int		# pagination offset of packets to query for
+	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
+	--page: int		# pagination page of packets to query for. This sets offset to a multiple of limit (default 1)
+	--page-key: string		# pagination page-key of packets to query for
+	--reverse		# results are sorted in descending order
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
+	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
+# Query for all of the unrelayed incentivized packets on a given channel. These are packets that have not yet been relayed.
+export extern 'cyber query ibc-fee packets-for-channel' [
+	port_id?: string
+	channel_id?: string
+	--count-total		# count total number of records in packets-for-channel to query for
+	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
+	--help(-h)		# help for packets-for-channel
+	--limit: int		# pagination limit of packets-for-channel to query for (default 100)
+	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+	--offset: int		# pagination offset of packets-for-channel to query for
+	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
+	--page: int		# pagination page of packets-for-channel to query for. This sets offset to a multiple of limit (default 1)
+	--page-key: string		# pagination page-key of packets-for-channel to query for
+	--reverse		# results are sorted in descending order
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
+	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
+# Query the relayer payee address on a given channel
+export extern 'cyber query ibc-fee payee' [
+	channel_id?: string
+	relayer?: string
+	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
+	--help(-h)		# help for payee
+	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
+	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
+# Query the total acknowledgement fees for a packet
+export extern 'cyber query ibc-fee total-ack-fees' [
+	port_id?: string
+	channel_id?: string
+	sequence?: string
+	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
+	--help(-h)		# help for total-ack-fees
+	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
+	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
+# Query the total receive fees for a packet
+export extern 'cyber query ibc-fee total-recv-fees' [
+	port_id?: string
+	channel_id?: string
+	sequence?: string
+	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
+	--help(-h)		# help for total-recv-fees
+	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
+	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
+# Query the total timeout fees for a packet
+export extern 'cyber query ibc-fee total-timeout-fees' [
+	port_id?: string
+	channel_id?: string
+	sequence?: string
+	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
+	--help(-h)		# help for total-timeout-fees
+	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
+	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
 # Query the denom hash info from a given denom trace
 export extern 'cyber query ibc-transfer denom-hash' [
 	trace?: string
@@ -1443,9 +1646,8 @@ export extern 'cyber query ibc-transfer denom-hash' [
 	--trace		# print out full stack trace on errors
 ]
 
-# Query the denom trace info from a given trace hash
+# Query the denom trace info from a given trace hash or ibc denom
 export extern 'cyber query ibc-transfer denom-trace' [
-	hash?: string
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for denom-trace
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
@@ -2204,10 +2406,10 @@ export extern 'cyber query upgrade applied' [
 	--trace		# print out full stack trace on errors
 ]
 
-# Gets a list of module names and their respective consensus versions. Following the command with a specific module name will return only that module's information.
-export extern 'cyber query upgrade module_versions' [
+# Gets the currently scheduled upgrade plan, if one exists
+export extern 'cyber query upgrade plan' [
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
-	--help(-h)		# help for module_versions
+	--help(-h)		# help for plan
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
@@ -2217,12 +2419,15 @@ export extern 'cyber query upgrade module_versions' [
 	--trace		# print out full stack trace on errors
 ]
 
-# Gets the currently scheduled upgrade plan, if one exists
-export extern 'cyber query upgrade plan' [
-	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
-	--help(-h)		# help for plan
-	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
-	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
+# build contract address
+export extern 'cyber query wasm build-address' [
+	code_hash?: string
+	creator_address?: string
+	salt_hex_encoded?: string
+	--ascii		# ascii encoded salt
+	--b64		# base64 encoded salt
+	--help(-h)		# help for build-address
+	--hex		# hex encoded salt
 	--chain-id: string		# The network chain ID
 	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
@@ -2320,7 +2525,7 @@ export extern 'cyber query wasm contract-state raw' [
 	--b64		# base64 encoded key argument
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for raw
-	--hex		# hex encoded  key argument
+	--hex		# hex encoded key argument
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
@@ -2338,7 +2543,7 @@ export extern 'cyber query wasm contract-state smart' [
 	--b64		# base64 encoded query argument
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
 	--help(-h)		# help for smart
-	--hex		# hex encoded  query argument
+	--hex		# hex encoded query argument
 	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
 	--chain-id: string		# The network chain ID
@@ -2397,7 +2602,40 @@ export extern 'cyber query wasm list-contract-by-code' [
 	--trace		# print out full stack trace on errors
 ]
 
-# 		Long:    List all pinned code ids,
+# List all contracts by creator
+export extern 'cyber query wasm list-contracts-by-creator' [
+	creator?: string
+	--count-total		# count total number of records in list contracts by creator to query for
+	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
+	--help(-h)		# help for list-contracts-by-creator
+	--limit: int		# pagination limit of list contracts by creator to query for (default 100)
+	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+	--offset: int		# pagination offset of list contracts by creator to query for
+	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
+	--page: int		# pagination page of list contracts by creator to query for. This sets offset to a multiple of limit (default 1)
+	--page-key: string		# pagination page-key of list contracts by creator to query for
+	--reverse		# results are sorted in descending order
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
+	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
+# Query the current wasm parameters
+export extern 'cyber query wasm params' [
+	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
+	--help(-h)		# help for params
+	--node: string		# <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "text")
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
+	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
+# List all pinned code ids
 export extern 'cyber query wasm pinned' [
 	--count-total		# count total number of records in list codes to query for
 	--height: int		# Use a specific height to query state at (this can error if the node is pruning state)
@@ -2419,7 +2657,7 @@ export extern 'cyber query wasm pinned' [
 # A state rollback is performed to recover from an incorrect application state transition, when Tendermint has persisted an incorrect app hash and is thus unable to make progress. Rollback overwrites a state at height n with the state at height n - 1. The application also roll back to height n - 1. No blocks are removed, so upon restarting Tendermint the transactions in block n will be re-executed a
 export extern 'cyber rollback' [
 	--help(-h)		# help for rollback
-	--home: string		# directory for config and data (default "/Users/user//.cyber")
+	--home: string		# The application home directory (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
 	--trace		# print out full stack trace on errors
@@ -2439,12 +2677,13 @@ export extern 'cyber start' [
 	--halt-height: int		# Block height at which to gracefully halt the chain and shutdown the node
 	--halt-time: int		# Minimum block time (in Unix seconds) at which to gracefully halt the chain and shutdown the node
 	--help(-h)		# help for start
-	--iavl-disable-fastnode		# Enable fast node for IAVL tree (default true)
+	--home: string		# The application home directory (default "/Users/user//.cyber")
+	--iavl-disable-fastnode		# Disable fast node for IAVL tree (default true)
 	--inter-block-cache		# Enable inter-block caching (default true)
 	--inv-check-period: int		# Assert registered invariants every N blocks
 	--min-retain-blocks: int		# Minimum block height offset during ABCI commit to prune Tendermint blocks
 	--minimum-gas-prices: string		# Minimum gas prices to accept for transactions; Any fee in a tx must meet this minimum (e.g. 0.01photino;0.0001stake)
-	--moniker: string		# node name (default "Pro16.local")
+	--moniker: string		# node name (default "Pro16")
 	--priv_validator_laddr: string		# socket address to listen on for connections from external priv_validator process
 	--proxy_app: string		# proxy app address, or one of: 'kvstore', 'persistent_kvstore', 'counter', 'e2e' or 'noop' for local testing. (default "tcp://127.0.0.1:26658")
 	--pruning: string@"nu-completions-cyber--default-nothing-everything-custom-"		# Pruning strategy (default|nothing|everything|custom) (default "default")
@@ -2452,15 +2691,14 @@ export extern 'cyber start' [
 	--pruning-keep-every: int		# Offset heights to keep on disk after 'keep-every' (ignored if pruning is not 'custom')
 	--pruning-keep-recent: int		# Number of recent heights to keep on disk (ignored if pruning is not 'custom')
 	--search-api		# Run search API
+	--trace		# Provide full stack traces for errors in ABCI Log
 	--trace-store: string		# Enable KVStore tracing to an output file
 	--transport: string		# Transport protocol: socket, grpc (default "socket")
 	--unsafe-skip-upgrades: string		# Skip a set of upgrade heights to continue the old binary
 	--with-tendermint		# Run abci app embedded in-process with tendermint (default true)
 	--x-crisis-skip-assert-invariants		# Skip x/crisis invariants check on startup
-	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
-	--trace		# print out full stack trace on errors
 ]
 
 # Query remote node for status
@@ -2551,7 +2789,7 @@ export extern 'cyber tx authz exec' [
 	msg_tx_json_file?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -2585,8 +2823,8 @@ export extern 'cyber tx authz grant' [
 	--allowed-validators: string		# Allowed validators addresses separated by ,
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--deny-validators: string		# Deny validators addresses separated by ,
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
-	--expiration: int		# The Unix timestamp. Default is one year. (default 1707841670)
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
+	--expiration: int		# The Unix timestamp. Default is one year. (default 1745237692)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -2621,7 +2859,7 @@ export extern 'cyber tx authz revoke' [
 	msg_type?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -2648,14 +2886,14 @@ export extern 'cyber tx authz revoke' [
 	--trace		# print out full stack trace on errors
 ]
 
-# Send funds from one account to another. Note, the'--from' flag is ignored as it is implied from [from_key_or_address].
+# Send funds from one account to another.  		Note, the'--from' flag is ignored as it is implied from [from_key_or_address]. 		When using '--dry-run' a key name cannot be used, only a bech32 address.
 export extern 'cyber tx bank send' [
 	from_key_or_address?: string@"nu-complete cyber _keys values"
 	to_address?: string@"nu-complete cyber _keys values"
 	amount?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -2687,7 +2925,7 @@ export extern 'cyber tx broadcast' [
 	file_path?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -2720,7 +2958,7 @@ export extern 'cyber tx crisis invariant-broken' [
 	invariant_route?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -2752,7 +2990,7 @@ export extern 'cyber tx decode' [
 	amino_byte_string?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -2785,7 +3023,7 @@ export extern 'cyber tx distribution fund-community-pool' [
 	amount?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -2817,7 +3055,7 @@ export extern 'cyber tx distribution set-withdraw-addr' [
 	withdraw_addr?: string@"nu-complete cyber _keys values"
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -2848,7 +3086,7 @@ export extern 'cyber tx distribution set-withdraw-addr' [
 export extern 'cyber tx distribution withdraw-all-rewards' [
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -2882,7 +3120,7 @@ export extern 'cyber tx distribution withdraw-rewards' [
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--commission		# Withdraw the validator's commission in addition to the rewards
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -2914,7 +3152,7 @@ export extern 'cyber tx encode' [
 	file?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -2958,7 +3196,7 @@ export extern 'cyber tx feegrant grant' [
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--allowed-messages: string		# Set of allowed messages for fee allowance
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--expiration: string		# The RFC 3339 timestamp after which the grant expires for the user
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
@@ -2995,7 +3233,7 @@ export extern 'cyber tx feegrant revoke' [
 	grantee?: string@"nu-complete cyber _keys values"
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -3028,7 +3266,7 @@ export extern 'cyber tx gov deposit' [
 	deposit?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -3061,7 +3299,7 @@ export extern 'cyber tx gov submit-proposal cancel-software-upgrade' [
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--deposit: string		# deposit of proposal
 	--description: string		# description of proposal
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -3096,7 +3334,7 @@ export extern 'cyber tx gov submit-proposal clear-contract-admin' [
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--deposit: string		# Deposit of proposal
 	--description: string		# Description of proposal
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -3112,12 +3350,10 @@ export extern 'cyber tx gov submit-proposal clear-contract-admin' [
 	--note: string		# Note to add a description to the transaction (previously --memo)
 	--offline		# Offline mode (does not allow any online functionality
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "json")
-	--proposal: string		# Proposal file path (if this path is given, other proposal flags are ignored)
 	--sequence(-s): int		# The sequence number of the signing account (offline mode only)
 	--sign-mode: string@"nu-completions-cyber--direct-amino-json-"		# Choose sign mode (direct|amino-json), this is an advanced feature
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--title: string		# Title of proposal
-	--type: string		# Permission of proposal, types: store-code/instantiate/migrate/update-admin/clear-admin/text/parameter_change/software_upgrade
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
 	--home: string		# directory for config and data (default "/Users/user//.cyber")
@@ -3131,7 +3367,7 @@ export extern 'cyber tx gov submit-proposal community-pool-spend' [
 	proposal_file?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -3167,7 +3403,7 @@ export extern 'cyber tx gov submit-proposal execute-contract' [
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--deposit: string		# Deposit of proposal
 	--description: string		# Description of proposal
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -3183,13 +3419,11 @@ export extern 'cyber tx gov submit-proposal execute-contract' [
 	--note: string		# Note to add a description to the transaction (previously --memo)
 	--offline		# Offline mode (does not allow any online functionality
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "json")
-	--proposal: string		# Proposal file path (if this path is given, other proposal flags are ignored)
 	--run-as: string		# The address that is passed as sender to the contract on proposal execution
 	--sequence(-s): int		# The sequence number of the signing account (offline mode only)
 	--sign-mode: string@"nu-completions-cyber--direct-amino-json-"		# Choose sign mode (direct|amino-json), this is an advanced feature
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--title: string		# Title of proposal
-	--type: string		# Permission of proposal, types: store-code/instantiate/migrate/update-admin/clear-admin/text/parameter_change/software_upgrade
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
 	--home: string		# directory for config and data (default "/Users/user//.cyber")
@@ -3206,7 +3440,7 @@ export extern 'cyber tx gov submit-proposal ibc-upgrade' [
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--deposit: string		# deposit of proposal
 	--description: string		# description of proposal
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -3239,12 +3473,12 @@ export extern 'cyber tx gov submit-proposal instantiate-contract' [
 	code_id_int64?: string
 	json_encoded_init_args?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
-	--admin: string		# Address of an admin
+	--admin: string		# Address or key name of an admin
 	--amount: string		# Coins to send to the contract during instantiation
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--deposit: string		# Deposit of proposal
 	--description: string		# Description of proposal
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -3262,13 +3496,11 @@ export extern 'cyber tx gov submit-proposal instantiate-contract' [
 	--note: string		# Note to add a description to the transaction (previously --memo)
 	--offline		# Offline mode (does not allow any online functionality
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "json")
-	--proposal: string		# Proposal file path (if this path is given, other proposal flags are ignored)
 	--run-as: string		# The address that pays the init funds. It is the creator of the contract and passed to the contract as sender on proposal execution
 	--sequence(-s): int		# The sequence number of the signing account (offline mode only)
 	--sign-mode: string@"nu-completions-cyber--direct-amino-json-"		# Choose sign mode (direct|amino-json), this is an advanced feature
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--title: string		# Title of proposal
-	--type: string		# Permission of proposal, types: store-code/instantiate/migrate/update-admin/clear-admin/text/parameter_change/software_upgrade
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
 	--home: string		# directory for config and data (default "/Users/user//.cyber")
@@ -3286,7 +3518,7 @@ export extern 'cyber tx gov submit-proposal migrate-contract' [
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--deposit: string		# Deposit of proposal
 	--description: string		# Description of proposal
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -3302,12 +3534,10 @@ export extern 'cyber tx gov submit-proposal migrate-contract' [
 	--note: string		# Note to add a description to the transaction (previously --memo)
 	--offline		# Offline mode (does not allow any online functionality
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "json")
-	--proposal: string		# Proposal file path (if this path is given, other proposal flags are ignored)
 	--sequence(-s): int		# The sequence number of the signing account (offline mode only)
 	--sign-mode: string@"nu-completions-cyber--direct-amino-json-"		# Choose sign mode (direct|amino-json), this is an advanced feature
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--title: string		# Title of proposal
-	--type: string		# Permission of proposal, types: store-code/instantiate/migrate/update-admin/clear-admin/text/parameter_change/software_upgrade
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
 	--home: string		# directory for config and data (default "/Users/user//.cyber")
@@ -3321,7 +3551,7 @@ export extern 'cyber tx gov submit-proposal param-change' [
 	proposal_file?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -3355,7 +3585,7 @@ export extern 'cyber tx gov submit-proposal pin-codes' [
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--deposit: string		# Deposit of proposal
 	--description: string		# Description of proposal
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -3371,12 +3601,10 @@ export extern 'cyber tx gov submit-proposal pin-codes' [
 	--note: string		# Note to add a description to the transaction (previously --memo)
 	--offline		# Offline mode (does not allow any online functionality
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "json")
-	--proposal: string		# Proposal file path (if this path is given, other proposal flags are ignored)
 	--sequence(-s): int		# The sequence number of the signing account (offline mode only)
 	--sign-mode: string@"nu-completions-cyber--direct-amino-json-"		# Choose sign mode (direct|amino-json), this is an advanced feature
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--title: string		# Title of proposal
-	--type: string		# Permission of proposal, types: store-code/instantiate/migrate/update-admin/clear-admin/text/parameter_change/software_upgrade
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
 	--home: string		# directory for config and data (default "/Users/user//.cyber")
@@ -3393,7 +3621,7 @@ export extern 'cyber tx gov submit-proposal set-contract-admin' [
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--deposit: string		# Deposit of proposal
 	--description: string		# Description of proposal
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -3409,12 +3637,10 @@ export extern 'cyber tx gov submit-proposal set-contract-admin' [
 	--note: string		# Note to add a description to the transaction (previously --memo)
 	--offline		# Offline mode (does not allow any online functionality
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "json")
-	--proposal: string		# Proposal file path (if this path is given, other proposal flags are ignored)
 	--sequence(-s): int		# The sequence number of the signing account (offline mode only)
 	--sign-mode: string@"nu-completions-cyber--direct-amino-json-"		# Choose sign mode (direct|amino-json), this is an advanced feature
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--title: string		# Title of proposal
-	--type: string		# Permission of proposal, types: store-code/instantiate/migrate/update-admin/clear-admin/text/parameter_change/software_upgrade
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
 	--home: string		# directory for config and data (default "/Users/user//.cyber")
@@ -3430,7 +3656,7 @@ export extern 'cyber tx gov submit-proposal software-upgrade' [
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--deposit: string		# deposit of proposal
 	--description: string		# description of proposal
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -3460,6 +3686,54 @@ export extern 'cyber tx gov submit-proposal software-upgrade' [
 	--trace		# print out full stack trace on errors
 ]
 
+# Submit and instantiate a wasm contract proposal
+export extern 'cyber tx gov submit-proposal store-instantiate' [
+	json_encoded_init_args?: string
+	--account-number(-a): int		# The account number of the signing account (offline mode only)
+	--admin: string		# Address or key name of an admin
+	--amount: string		# Coins to send to the contract during instantiation
+	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
+	--builder: string		# Builder is a valid docker image name with tag, such as "cosmwasm/workspace-optimizer:0.12.9"
+	--code-hash: string		# CodeHash is the sha256 hash of the wasm code
+	--code-source-url: string		# Code Source URL is a valid absolute HTTPS URI to the contract's source code,
+	--deposit: string		# Deposit of proposal
+	--description: string		# Description of proposal
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
+	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
+	--fees: string		# Fees to pay along with transaction; eg: 10uatom
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
+	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
+	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+	--generate-only		# Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+	--help(-h)		# help for store-instantiate
+	--instantiate-anyof-addresses: string		# Any of the addresses can instantiate a contract from the code, optional
+	--instantiate-everybody: string		# Everybody can instantiate a contract from the code, optional
+	--instantiate-nobody: string		# Nobody except the governance process can instantiate a contract from the code, optional
+	--instantiate-only-address: string		# Removed: use instantiate-anyof-addresses instead
+	--keyring-backend: string@"nu-completions-cyber--os-file-kwallet-pass-test-memory-"		# Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
+	--label: string		# A human-readable name for this contract in lists
+	--ledger		# Use a connected Ledger device
+	--no-admin		# You must set this explicitly if you don't want an admin
+	--node: string		# <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+	--note: string		# Note to add a description to the transaction (previously --memo)
+	--offline		# Offline mode (does not allow any online functionality
+	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "json")
+	--run-as: string		# The address that is stored as code creator. It is the creator of the contract and passed to the contract as sender on proposal execution
+	--sequence(-s): int		# The sequence number of the signing account (offline mode only)
+	--sign-mode: string@"nu-completions-cyber--direct-amino-json-"		# Choose sign mode (direct|amino-json), this is an advanced feature
+	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
+	--title: string		# Title of proposal
+	--unpin-code		# Unpin code on upload, optional
+	--yes(-y)		# Skip tx broadcasting prompt confirmation
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
+	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
 # Submit a sudo wasm contract proposal (to call privileged commands)
 export extern 'cyber tx gov submit-proposal sudo-contract' [
 	contract_addr_bech32?: string
@@ -3468,7 +3742,7 @@ export extern 'cyber tx gov submit-proposal sudo-contract' [
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--deposit: string		# Deposit of proposal
 	--description: string		# Description of proposal
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -3484,12 +3758,10 @@ export extern 'cyber tx gov submit-proposal sudo-contract' [
 	--note: string		# Note to add a description to the transaction (previously --memo)
 	--offline		# Offline mode (does not allow any online functionality
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "json")
-	--proposal: string		# Proposal file path (if this path is given, other proposal flags are ignored)
 	--sequence(-s): int		# The sequence number of the signing account (offline mode only)
 	--sign-mode: string@"nu-completions-cyber--direct-amino-json-"		# Choose sign mode (direct|amino-json), this is an advanced feature
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--title: string		# Title of proposal
-	--type: string		# Permission of proposal, types: store-code/instantiate/migrate/update-admin/clear-admin/text/parameter_change/software_upgrade
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
 	--home: string		# directory for config and data (default "/Users/user//.cyber")
@@ -3505,7 +3777,7 @@ export extern 'cyber tx gov submit-proposal unpin-codes' [
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--deposit: string		# Deposit of proposal
 	--description: string		# Description of proposal
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -3521,12 +3793,10 @@ export extern 'cyber tx gov submit-proposal unpin-codes' [
 	--note: string		# Note to add a description to the transaction (previously --memo)
 	--offline		# Offline mode (does not allow any online functionality
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "json")
-	--proposal: string		# Proposal file path (if this path is given, other proposal flags are ignored)
 	--sequence(-s): int		# The sequence number of the signing account (offline mode only)
 	--sign-mode: string@"nu-completions-cyber--direct-amino-json-"		# Choose sign mode (direct|amino-json), this is an advanced feature
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--title: string		# Title of proposal
-	--type: string		# Permission of proposal, types: store-code/instantiate/migrate/update-admin/clear-admin/text/parameter_change/software_upgrade
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
 	--home: string		# directory for config and data (default "/Users/user//.cyber")
@@ -3543,7 +3813,7 @@ export extern 'cyber tx gov submit-proposal update-client' [
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--deposit: string		# deposit of proposal
 	--description: string		# description of proposal
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -3571,13 +3841,13 @@ export extern 'cyber tx gov submit-proposal update-client' [
 	--trace		# print out full stack trace on errors
 ]
 
-# Submit an update instantiate config  proposal for multiple code ids. Example:  $ cyber tx gov submit-proposal update-instantiate-config 1,nobody 2,everybody 3,bostrom1l2rsakp388kuv9k8qzq6lrm9taddae7fpx59wm
+# Submit an update instantiate config  proposal for multiple code ids. Example:  $ cyber tx gov submit-proposal update-instantiate-config 1:nobody 2:everybody 3:bostrom1l2rsakp388kuv9k8qzq6lrm9taddae7fpx59wm,bostrom1vx8knpllrj7n963p9ttd80w47kpacrhuts497x
 export extern 'cyber tx gov submit-proposal update-instantiate-config' [
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--deposit: string		# Deposit of proposal
 	--description: string		# Description of proposal
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -3593,12 +3863,10 @@ export extern 'cyber tx gov submit-proposal update-instantiate-config' [
 	--note: string		# Note to add a description to the transaction (previously --memo)
 	--offline		# Offline mode (does not allow any online functionality
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "json")
-	--proposal: string		# Proposal file path (if this path is given, other proposal flags are ignored)
 	--sequence(-s): int		# The sequence number of the signing account (offline mode only)
 	--sign-mode: string@"nu-completions-cyber--direct-amino-json-"		# Choose sign mode (direct|amino-json), this is an advanced feature
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--title: string		# Title of proposal
-	--type: string		# Permission of proposal, types: store-code/instantiate/migrate/update-admin/clear-admin/text/parameter_change/software_upgrade
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
 	--home: string		# directory for config and data (default "/Users/user//.cyber")
@@ -3611,9 +3879,12 @@ export extern 'cyber tx gov submit-proposal update-instantiate-config' [
 export extern 'cyber tx gov submit-proposal wasm-store' [
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
+	--builder: string		# Builder is a valid docker image name with tag, such as "cosmwasm/workspace-optimizer:0.12.9"
+	--code-hash: string		# CodeHash is the sha256 hash of the wasm code
+	--code-source-url: string		# Code Source URL is a valid absolute HTTPS URI to the contract's source code,
 	--deposit: string		# Deposit of proposal
 	--description: string		# Description of proposal
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -3622,9 +3893,10 @@ export extern 'cyber tx gov submit-proposal wasm-store' [
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
 	--generate-only		# Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
 	--help(-h)		# help for wasm-store
+	--instantiate-anyof-addresses: string		# Any of the addresses can instantiate a contract from the code, optional
 	--instantiate-everybody: string		# Everybody can instantiate a contract from the code, optional
 	--instantiate-nobody: string		# Nobody except the governance process can instantiate a contract from the code, optional
-	--instantiate-only-address: string		# Only this address can instantiate a contract instance from the code, optional
+	--instantiate-only-address: string		# Removed: use instantiate-anyof-addresses instead
 	--keyring-backend: string@"nu-completions-cyber--os-file-kwallet-pass-test-memory-"		# Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
 	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
 	--ledger		# Use a connected Ledger device
@@ -3632,13 +3904,12 @@ export extern 'cyber tx gov submit-proposal wasm-store' [
 	--note: string		# Note to add a description to the transaction (previously --memo)
 	--offline		# Offline mode (does not allow any online functionality
 	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "json")
-	--proposal: string		# Proposal file path (if this path is given, other proposal flags are ignored)
 	--run-as: string		# The address that is stored as code creator
 	--sequence(-s): int		# The sequence number of the signing account (offline mode only)
 	--sign-mode: string@"nu-completions-cyber--direct-amino-json-"		# Choose sign mode (direct|amino-json), this is an advanced feature
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--title: string		# Title of proposal
-	--type: string		# Permission of proposal, types: store-code/instantiate/migrate/update-admin/clear-admin/text/parameter_change/software_upgrade
+	--unpin-code		# Unpin code on upload, optional
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
 	--chain-id: string		# The network chain ID
 	--home: string		# directory for config and data (default "/Users/user//.cyber")
@@ -3653,7 +3924,7 @@ export extern 'cyber tx gov vote' [
 	option?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -3686,7 +3957,7 @@ export extern 'cyber tx gov weighted-vote' [
 	weighted_options?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -3719,7 +3990,7 @@ export extern 'cyber tx graph cyberlink' [
 	cid_to?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -3752,7 +4023,7 @@ export extern 'cyber tx grid create-route' [
 	name?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -3784,7 +4055,7 @@ export extern 'cyber tx grid delete-route' [
 	destination?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -3817,7 +4088,7 @@ export extern 'cyber tx grid edit-route' [
 	value?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -3850,7 +4121,7 @@ export extern 'cyber tx grid edit-route-name' [
 	name?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -3891,7 +4162,7 @@ export extern 'cyber tx ibc channel' [
 export extern 'cyber tx ibc client create' [
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -3946,7 +4217,7 @@ export extern 'cyber tx ibc client upgrade' [
 	upgrade_consensus_state_proof?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -3955,6 +4226,113 @@ export extern 'cyber tx ibc client upgrade' [
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
 	--generate-only		# Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
 	--help(-h)		# help for upgrade
+	--keyring-backend: string@"nu-completions-cyber--os-file-kwallet-pass-test-memory-"		# Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
+	--ledger		# Use a connected Ledger device
+	--node: string		# <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+	--note: string		# Note to add a description to the transaction (previously --memo)
+	--offline		# Offline mode (does not allow any online functionality
+	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "json")
+	--sequence(-s): int		# The sequence number of the signing account (offline mode only)
+	--sign-mode: string@"nu-completions-cyber--direct-amino-json-"		# Choose sign mode (direct|amino-json), this is an advanced feature
+	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
+	--yes(-y)		# Skip tx broadcasting prompt confirmation
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
+	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
+# Pay a fee to incentivize an existing IBC packet.
+export extern 'cyber tx ibc-fee pay-packet-fee' [
+	src_port?: string
+	src_channel?: string
+	sequence?: string
+	--account-number(-a): int		# The account number of the signing account (offline mode only)
+	--ack-fee: string		# Fee paid to a relayer for relaying a packet acknowledgement.
+	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
+	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
+	--fees: string		# Fees to pay along with transaction; eg: 10uatom
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
+	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
+	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+	--generate-only		# Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+	--help(-h)		# help for pay-packet-fee
+	--keyring-backend: string@"nu-completions-cyber--os-file-kwallet-pass-test-memory-"		# Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
+	--ledger		# Use a connected Ledger device
+	--node: string		# <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+	--note: string		# Note to add a description to the transaction (previously --memo)
+	--offline		# Offline mode (does not allow any online functionality
+	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "json")
+	--recv-fee: string		# Fee paid to a relayer for relaying a packet receive.
+	--sequence(-s): int		# The sequence number of the signing account (offline mode only)
+	--sign-mode: string@"nu-completions-cyber--direct-amino-json-"		# Choose sign mode (direct|amino-json), this is an advanced feature
+	--timeout-fee: string		# Fee paid to a relayer for relaying a packet timeout.
+	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
+	--yes(-y)		# Skip tx broadcasting prompt confirmation
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
+	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
+# Register a counterparty payee address on a given channel.
+export extern 'cyber tx ibc-fee register-counterparty-payee' [
+	port_id?: string
+	channel_id?: string
+	relayer?: string
+	counterparty_payee?: string
+	--account-number(-a): int		# The account number of the signing account (offline mode only)
+	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
+	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
+	--fees: string		# Fees to pay along with transaction; eg: 10uatom
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
+	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
+	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+	--generate-only		# Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+	--help(-h)		# help for register-counterparty-payee
+	--keyring-backend: string@"nu-completions-cyber--os-file-kwallet-pass-test-memory-"		# Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
+	--ledger		# Use a connected Ledger device
+	--node: string		# <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+	--note: string		# Note to add a description to the transaction (previously --memo)
+	--offline		# Offline mode (does not allow any online functionality
+	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "json")
+	--sequence(-s): int		# The sequence number of the signing account (offline mode only)
+	--sign-mode: string@"nu-completions-cyber--direct-amino-json-"		# Choose sign mode (direct|amino-json), this is an advanced feature
+	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
+	--yes(-y)		# Skip tx broadcasting prompt confirmation
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
+	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
+# Register a payee address on a given channel.
+export extern 'cyber tx ibc-fee register-payee' [
+	port_id?: string
+	channel_id?: string
+	relayer?: string
+	payee?: string
+	--account-number(-a): int		# The account number of the signing account (offline mode only)
+	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
+	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
+	--fees: string		# Fees to pay along with transaction; eg: 10uatom
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
+	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
+	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+	--generate-only		# Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+	--help(-h)		# help for register-payee
 	--keyring-backend: string@"nu-completions-cyber--os-file-kwallet-pass-test-memory-"		# Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
 	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
 	--ledger		# Use a connected Ledger device
@@ -3982,7 +4360,7 @@ export extern 'cyber tx ibc-transfer transfer' [
 	--absolute-timeouts		# Timeout flags are used as absolute timeouts.
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -3994,6 +4372,7 @@ export extern 'cyber tx ibc-transfer transfer' [
 	--keyring-backend: string@"nu-completions-cyber--os-file-kwallet-pass-test-memory-"		# Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
 	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
 	--ledger		# Use a connected Ledger device
+	--memo: string		# Memo to be sent along with the packet.
 	--node: string		# <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
 	--note: string		# Note to add a description to the transaction (previously --memo)
 	--offline		# Offline mode (does not allow any online functionality
@@ -4017,7 +4396,7 @@ export extern 'cyber tx liquidity create-pool' [
 	deposit_coins?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -4050,7 +4429,7 @@ export extern 'cyber tx liquidity deposit' [
 	deposit_coins?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -4087,7 +4466,7 @@ export extern 'cyber tx liquidity swap' [
 	swap_fee_rate?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -4120,7 +4499,7 @@ export extern 'cyber tx liquidity withdraw' [
 	pool_coin?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -4155,7 +4534,8 @@ export extern 'cyber tx multisign' [
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--amino		# Generate Amino-encoded JSON suitable for submitting to the txs REST endpoint
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--chain-id: string		# network chain ID
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -4177,7 +4557,6 @@ export extern 'cyber tx multisign' [
 	--signature-only		# Print only the generated signature, then exit
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
-	--chain-id: string		# The network chain ID
 	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
@@ -4191,7 +4570,7 @@ export extern 'cyber tx multisign-batch' [
 	signature_file?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -4228,7 +4607,7 @@ export extern 'cyber tx resources investmint' [
 	length?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -4261,7 +4640,8 @@ export extern 'cyber tx sign' [
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--amino		# Generate Amino encoded JSON suitable for submiting to the txs REST endpoint
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--chain-id: string		# The network chain ID
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -4285,7 +4665,6 @@ export extern 'cyber tx sign' [
 	--signature-only		# Print only the signatures
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
-	--chain-id: string		# The network chain ID
 	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
@@ -4297,7 +4676,8 @@ export extern 'cyber tx sign-batch' [
 	file?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--chain-id: string		# network chain ID
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -4320,7 +4700,6 @@ export extern 'cyber tx sign-batch' [
 	--signature-only		# Print only the generated signature, then exit (default true)
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
-	--chain-id: string		# The network chain ID
 	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
@@ -4331,7 +4710,7 @@ export extern 'cyber tx sign-batch' [
 export extern 'cyber tx slashing unjail' [
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -4367,7 +4746,7 @@ export extern 'cyber tx staking create-validator' [
 	--commission-max-rate: string		# The maximum commission rate percentage
 	--commission-rate: string		# The initial commission rate percentage
 	--details: string		# The validator's (optional) details
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -4408,7 +4787,7 @@ export extern 'cyber tx staking delegate' [
 	amount?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -4441,7 +4820,7 @@ export extern 'cyber tx staking edit-validator' [
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--commission-rate: string		# The new commission rate percentage
 	--details: string		# The validator's (optional) details (default "[do-not-modify]")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -4480,7 +4859,7 @@ export extern 'cyber tx staking redelegate' [
 	amount?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -4513,7 +4892,7 @@ export extern 'cyber tx staking unbond' [
 	amount?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -4545,7 +4924,8 @@ export extern 'cyber tx validate-signatures' [
 	file?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--chain-id: string		# The network chain ID
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -4565,7 +4945,6 @@ export extern 'cyber tx validate-signatures' [
 	--sign-mode: string@"nu-completions-cyber--direct-amino-json-"		# Choose sign mode (direct|amino-json), this is an advanced feature
 	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
 	--yes(-y)		# Skip tx broadcasting prompt confirmation
-	--chain-id: string		# The network chain ID
 	--home: string		# directory for config and data (default "/Users/user//.cyber")
 	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
 	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
@@ -4580,7 +4959,7 @@ export extern 'cyber tx vesting create-vesting-account' [
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
 	--delayed		# Create a delayed vesting account if true
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -4612,7 +4991,7 @@ export extern 'cyber tx wasm clear-contract-admin' [
 	contract_addr_bech32?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -4646,7 +5025,7 @@ export extern 'cyber tx wasm execute' [
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--amount: string		# Coins to send to the contract along with command
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -4673,15 +5052,55 @@ export extern 'cyber tx wasm execute' [
 	--trace		# print out full stack trace on errors
 ]
 
-# Instantiate a wasm contract
+# Grant authorization to an address.
+export extern 'cyber tx wasm grant' [
+	grantee?: string@"nu-complete cyber _keys values"
+	contract_addr_bech32?: string
+	--account-number(-a): int		# The account number of the signing account (offline mode only)
+	--allow-all-messages		# Allow all messages
+	--allow-msg-keys: string		# Allowed msg keys
+	--allow-raw-msgs: string		# Allowed raw msgs
+	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
+	--expiration: int		# The Unix timestamp.
+	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
+	--fees: string		# Fees to pay along with transaction; eg: 10uatom
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
+	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
+	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+	--generate-only		# Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+	--help(-h)		# help for grant
+	--keyring-backend: string@"nu-completions-cyber--os-file-kwallet-pass-test-memory-"		# Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
+	--ledger		# Use a connected Ledger device
+	--max-calls: int		# Maximal number of calls to the contract
+	--max-funds: string		# Maximal amount of tokens transferable to the contract.
+	--no-token-transfer		# Don't allow token transfer
+	--node: string		# <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+	--note: string		# Note to add a description to the transaction (previously --memo)
+	--offline		# Offline mode (does not allow any online functionality
+	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "json")
+	--sequence(-s): int		# The sequence number of the signing account (offline mode only)
+	--sign-mode: string@"nu-completions-cyber--direct-amino-json-"		# Choose sign mode (direct|amino-json), this is an advanced feature
+	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
+	--yes(-y)		# Skip tx broadcasting prompt confirmation
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
+	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
+# Creates a new instance of an uploaded wasm code with the given 'constructor' message. Each contract instance has a unique address assigned.
 export extern 'cyber tx wasm instantiate' [
 	code_id_int64?: string
 	json_encoded_init_args?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
-	--admin: string		# Address of an admin
+	--admin: string		# Address or key name of an admin
 	--amount: string		# Coins to send to the contract during instantiation
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -4717,7 +5136,7 @@ export extern 'cyber tx wasm migrate' [
 	json_encoded_migration_args?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -4750,7 +5169,7 @@ export extern 'cyber tx wasm set-contract-admin' [
 	new_admin_addr_bech32?: string
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -4781,7 +5200,7 @@ export extern 'cyber tx wasm set-contract-admin' [
 export extern 'cyber tx wasm store' [
 	--account-number(-a): int		# The account number of the signing account (offline mode only)
 	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
-	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
 	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
 	--fees: string		# Fees to pay along with transaction; eg: 10uatom
 	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
@@ -4790,9 +5209,46 @@ export extern 'cyber tx wasm store' [
 	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
 	--generate-only		# Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
 	--help(-h)		# help for store
+	--instantiate-anyof-addresses: string		# Any of the addresses can instantiate a contract from the code, optional
 	--instantiate-everybody: string		# Everybody can instantiate a contract from the code, optional
 	--instantiate-nobody: string		# Nobody except the governance process can instantiate a contract from the code, optional
-	--instantiate-only-address: string		# Only this address can instantiate a contract instance from the code, optional
+	--instantiate-only-address: string		# Removed: use instantiate-anyof-addresses instead
+	--keyring-backend: string@"nu-completions-cyber--os-file-kwallet-pass-test-memory-"		# Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
+	--ledger		# Use a connected Ledger device
+	--node: string		# <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+	--note: string		# Note to add a description to the transaction (previously --memo)
+	--offline		# Offline mode (does not allow any online functionality
+	--output(-o): string@"nu-completions-cyber--text-json-"		# Output format (text|json) (default "json")
+	--sequence(-s): int		# The sequence number of the signing account (offline mode only)
+	--sign-mode: string@"nu-completions-cyber--direct-amino-json-"		# Choose sign mode (direct|amino-json), this is an advanced feature
+	--timeout-height: int		# Set a block timeout height to prevent the tx from being committed past a certain height
+	--yes(-y)		# Skip tx broadcasting prompt confirmation
+	--chain-id: string		# The network chain ID
+	--home: string		# directory for config and data (default "/Users/user//.cyber")
+	--log_format: string@"nu-completions-cyber--json-plain-"		# The logging format (json|plain) (default "plain")
+	--log_level: string@"nu-completions-cyber--trace-debug-info-warn-error-fatal-panic-"		# The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+	--trace		# print out full stack trace on errors
+]
+
+# Update instantiate config for a codeID
+export extern 'cyber tx wasm update-instantiate-config' [
+	code_id_int64?: string
+	--account-number(-a): int		# The account number of the signing account (offline mode only)
+	--broadcast-mode(-b): string@"nu-completions-cyber--sync-async-block-"		# Transaction broadcasting mode (sync|async|block) (default "sync")
+	--dry-run		# ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
+	--fee-account: string		# Fee account pays fees for the transaction instead of deducting from the signer
+	--fees: string		# Fees to pay along with transaction; eg: 10uatom
+	--from: string@"nu-complete cyber _keys values"		# Name or address of private key with which to sign
+	--gas: string		# gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
+	--gas-adjustment: string		# adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+	--gas-prices: string		# Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+	--generate-only		# Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+	--help(-h)		# help for update-instantiate-config
+	--instantiate-anyof-addresses: string		# Any of the addresses can instantiate a contract from the code, optional
+	--instantiate-everybody: string		# Everybody can instantiate a contract from the code, optional
+	--instantiate-nobody: string		# Nobody except the governance process can instantiate a contract from the code, optional
+	--instantiate-only-address: string		# Removed: use instantiate-anyof-addresses instead
 	--keyring-backend: string@"nu-completions-cyber--os-file-kwallet-pass-test-memory-"		# Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
 	--keyring-dir: string		# The client Keyring directory; if omitted, the default 'home' directory will be used
 	--ledger		# Use a connected Ledger device

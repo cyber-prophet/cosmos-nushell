@@ -14,7 +14,7 @@ Flags:
   -a, --account-number uint        The account number of the signing account (offline mode only)
       --allowed-messages strings   Set of allowed messages for fee allowance
   -b, --broadcast-mode string      Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                    ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                    ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --expiration string          The RFC 3339 timestamp after which the grant expires for the user
       --fee-account string         Fee account pays fees for the transaction instead of deducting from the signer
       --fees string                Fees to pay along with transaction; eg: 10uatom

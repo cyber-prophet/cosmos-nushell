@@ -22,6 +22,7 @@ Available Commands:
   graph                    Querying commands for the graph module
   grid                     Querying commands for the grid module
   ibc                      Querying commands for the IBC module
+  ibc-fee                  IBC relayer incentivization query subcommands
   ibc-transfer             IBC fungible token transfer query subcommands
   liquidity                Querying commands for the liquidity module
   mint                     Querying commands for the minting module

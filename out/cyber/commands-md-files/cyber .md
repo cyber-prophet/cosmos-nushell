@@ -13,7 +13,7 @@ Available Commands:
   help                Help about any command
   init                Initialize private validator, p2p, genesis, and application configuration files
   keys                Manage your application's keys
-  migrate             Migrate genesis to a specified target version
+  prune               Prune app history states by keeping the recent heights and deleting old heights
   query               Querying subcommands
   rollback            rollback cosmos-sdk and tendermint state by one height
   start               Run the full node

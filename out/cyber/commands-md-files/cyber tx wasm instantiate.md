@@ -1,17 +1,21 @@
-Instantiate a wasm contract
+Creates a new instance of an uploaded wasm code with the given 'constructor' message.
+Each contract instance has a unique address assigned.
+Example:
+$ cyber tx wasm instantiate 1 '{"foo":"bar"}' --admin="$(cyber keys show mykey -a)" \
+  --from mykey --amount="100ustake" --label "local0.1.0"
 
 Usage:
-  cyber tx wasm instantiate [code_id_int64] [json_encoded_init_args] --label [text] --admin [address,optional] --amount [coins,optional] [flags]
+  cyber tx wasm instantiate [code_id_int64] [json_encoded_init_args] --label [text] --admin [address,optional] --amount [coins,optional]  [flags]
 
 Aliases:
   instantiate, start, init, inst, i
 
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
-      --admin string             Address of an admin
+      --admin string             Address or key name of an admin
       --amount string            Coins to send to the contract during instantiation
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign

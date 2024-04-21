@@ -16,7 +16,7 @@ Available Commands:
   help                Help about any command
   init                Initialize private validator, p2p, genesis, and application configuration files
   keys                Manage your application's keys
-  migrate             Migrate genesis to a specified target version
+  prune               Prune app history states by keeping the recent heights and deleting old heights
   query               Querying subcommands
   rollback            rollback cosmos-sdk and tendermint state by one height
   start               Run the full node
@@ -52,6 +52,7 @@ Usage:
 Flags:
       --height int               Use a specific height to query state at (this can error if the node is pruning state)
   -h, --help                     help for add-genesis-account
+      --home string              The application home directory (default "/Users/user//.cyber")
       --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test) (default "os")
       --node string              <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
   -o, --output string            Output format (text|json) (default "text")
@@ -60,7 +61,6 @@ Flags:
       --vesting-start-time int   schedule start time (unix epoch) for vesting accounts
 
 Global Flags:
-      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -78,9 +78,9 @@ Usage:
 Flags:
       --gentx-dir string   override default "gentx" directory from which collect and execute genesis transactions; default [--home]/config/gentx/
   -h, --help               help for collect-gentxs
+      --home string        The application home directory (default "/Users/user//.cyber")
 
 Global Flags:
-      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -211,10 +211,10 @@ Flags:
       --for-zero-height              Export state to start at height zero (perform preproccessing)
       --height int                   Export state from a particular height (-1 means latest height) (default -1)
   -h, --help                         help for export
+      --home string                  The application home directory (default "/Users/user//.cyber")
       --jail-allowed-addrs strings   Comma-separated list of operator addresses of jailed validators to unjail
 
 Global Flags:
-      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -258,7 +258,7 @@ Flags:
       --commission-max-rate string          The maximum commission rate percentage
       --commission-rate string              The initial commission rate percentage
       --details string                      The validator's (optional) details
-      --dry-run                             ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                             ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string                  Fee account pays fees for the transaction instead of deducting from the signer
       --fees string                         Fees to pay along with transaction; eg: 10uatom
       --from string                         Name or address of private key with which to sign
@@ -267,8 +267,9 @@ Flags:
       --gas-prices string                   Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
       --generate-only                       Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
   -h, --help                                help for gentx
+      --home string                         The application home directory (default "/Users/user//.cyber")
       --identity string                     The (optional) identity signature (ex. UPort or Keybase)
-      --ip string                           The node's public IP (default "10.0.0.66")
+      --ip string                           The node's public IP (default "192.168.8.100")
       --keyring-backend string              Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
       --keyring-dir string                  The client Keyring directory; if omitted, the default 'home' directory will be used
       --ledger                              Use a connected Ledger device
@@ -289,7 +290,6 @@ Flags:
   -y, --yes                                 Skip tx broadcasting prompt confirmation
 
 Global Flags:
-      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -327,11 +327,11 @@ Usage:
 Flags:
       --chain-id string   genesis file chain-id, if left blank will be randomly created
   -h, --help              help for init
+      --home string       node's home directory (default "/Users/user//.cyber")
   -o, --overwrite         overwrite the genesis.json file
       --recover           provide seed phrase to recover existing key instead of creating
 
 Global Flags:
-      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -642,12 +642,12 @@ Available Commands:
 
 Flags:
   -h, --help                     help for keys
+      --home string              The application home directory (default "/Users/user//.cyber")
       --keyring-backend string   Select keyring's backend (os|file|test) (default "os")
       --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
       --output string            Output format (text|json) (default "text")
 
 Global Flags:
-      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -656,24 +656,41 @@ Use "cyber keys [command] --help" for more information about a command.
 
 ```
 
-### cyber migrate
+### cyber prune
 
 ```
-Migrate the source genesis into the target version and print to STDOUT.
-
-Example:
-$ cyber migrate v0.36 /path/to/genesis.json --chain-id=cosmoshub-3 --genesis-time=2019-04-22T17:00:00Z
+Prune app history states by keeping the recent heights and deleting old heights.
+		The pruning option is provided via the '--pruning' flag or alternatively with '--pruning-keep-recent'
+		
+		For '--pruning' the options are as follows:
+		
+		default: the last 362880 states are kept
+		nothing: all historic states will be saved, nothing will be deleted (i.e. archiving node)
+		everything: 2 latest states will be kept
+		custom: allow pruning options to be manually specified through 'pruning-keep-recent'.
+		besides pruning options, database home directory and database backend type should also be specified via flags
+		'--home' and '--app-db-backend'.
+		valid app-db-backend type includes 'goleveldb', 'cleveldb', 'rocksdb', 'boltdb', and 'badgerdb'.
 
 Usage:
-  cyber migrate [target-version] [genesis-file] [flags]
+  cyber prune [flags]
+
+Examples:
+prune --home './' --app-db-backend 'goleveldb' --pruning 'custom' --pruning-keep-recent 100 --
+		pruning-keep-every 10, --pruning-interval 10
 
 Flags:
-      --chain-id string       override chain_id with this flag
-      --genesis-time string   override genesis_time with this flag
-  -h, --help                  help for migrate
+      --app-db-backend string      The type of database for application and snapshots databases
+  -h, --help                       help for prune
+      --home string                The database home directory
+      --pruning string             Pruning strategy (default|nothing|everything|custom) (default "default")
+      --pruning-interval uint      Height interval at which pruned heights are removed from disk (ignored if pruning is not 'custom'), 
+                                   		this is not used by this command but kept for compatibility with the complete pruning options (default 10)
+      --pruning-keep-every uint    Offset heights to keep on disk after 'keep-every' (ignored if pruning is not 'custom'),
+                                   		this is not used by this command but kept for compatibility with the complete pruning options
+      --pruning-keep-recent uint   Number of recent heights to keep on disk (ignored if pruning is not 'custom')
 
 Global Flags:
-      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -755,6 +772,32 @@ Global Flags:
 
 ```
 
+### cyber query auth module-account
+
+```
+Query module account info by module name
+
+Usage:
+  cyber query auth module-account [module-name] [flags]
+
+Examples:
+cyber q auth module-account auth
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for module-account
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user//.cyber")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
 ### cyber query auth params
 
 ```
@@ -790,9 +833,10 @@ Usage:
   cyber query auth [command]
 
 Available Commands:
-  account     Query for account by address
-  accounts    Query all the accounts
-  params      Query the current auth parameters
+  account        Query for account by address
+  accounts       Query all the accounts
+  module-account Query module account info by module name
+  params         Query the current auth parameters
 
 Flags:
   -h, --help   help for auth
@@ -2639,6 +2683,38 @@ Use "cyber query ibc channel [command] --help" for more information about a comm
 
 ```
 
+### cyber query ibc client consensus-state-heights
+
+```
+Query the heights of all consensus states associated with the provided client ID.
+
+Usage:
+  cyber query ibc client consensus-state-heights [client-id] [flags]
+
+Examples:
+cyber query ibc client consensus-state-heights [client-id]
+
+Flags:
+      --count-total       count total number of records in consensus state heights to query for
+      --height int        Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help              help for consensus-state-heights
+      --limit uint        pagination limit of consensus state heights to query for (default 100)
+      --node string       <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+      --offset uint       pagination offset of consensus state heights to query for
+  -o, --output string     Output format (text|json) (default "text")
+      --page uint         pagination page of consensus state heights to query for. This sets offset to a multiple of limit (default 1)
+      --page-key string   pagination page-key of consensus state heights to query for
+      --reverse           results are sorted in descending order
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user//.cyber")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
 ### cyber query ibc client consensus-state
 
 ```
@@ -2870,14 +2946,15 @@ Usage:
   cyber query ibc client [command]
 
 Available Commands:
-  consensus-state      Query the consensus state of a client at a given height
-  consensus-states     Query all the consensus states of a client.
-  header               Query the latest header of the running chain
-  params               Query the current ibc client parameters
-  self-consensus-state Query the self consensus state for this chain
-  state                Query a client state
-  states               Query all available light clients
-  status               Query client status
+  consensus-state         Query the consensus state of a client at a given height
+  consensus-state-heights Query the heights of all consensus states of a client.
+  consensus-states        Query all the consensus states of a client.
+  header                  Query the latest header of the running chain
+  params                  Query the current ibc client parameters
+  self-consensus-state    Query the self consensus state for this chain
+  state                   Query a client state
+  states                  Query all available light clients
+  status                  Query client status
 
 Flags:
   -h, --help   help for client
@@ -3006,6 +3083,318 @@ Use "cyber query ibc connection [command] --help" for more information about a c
 
 ```
 
+### cyber query ibc-fee channel
+
+```
+Query the ibc-fee enabled status of a channel
+
+Usage:
+  cyber query ibc-fee channel [port-id] [channel-id] [flags]
+
+Examples:
+cyber query ibc-fee channel transfer channel-6
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for channel
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user//.cyber")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### cyber query ibc-fee channels
+
+```
+Query the ibc-fee enabled channels
+
+Usage:
+  cyber query ibc-fee channels [flags]
+
+Examples:
+cyber query ibc-fee channels
+
+Flags:
+      --count-total       count total number of records in channels to query for
+      --height int        Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help              help for channels
+      --limit uint        pagination limit of channels to query for (default 100)
+      --node string       <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+      --offset uint       pagination offset of channels to query for
+  -o, --output string     Output format (text|json) (default "text")
+      --page uint         pagination page of channels to query for. This sets offset to a multiple of limit (default 1)
+      --page-key string   pagination page-key of channels to query for
+      --reverse           results are sorted in descending order
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user//.cyber")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### cyber query ibc-fee counterparty-payee
+
+```
+Query the relayer counterparty payee on a given channel
+
+Usage:
+  cyber query ibc-fee counterparty-payee [channel-id] [relayer] [flags]
+
+Examples:
+cyber query ibc-fee counterparty-payee channel-5 cosmos1layxcsmyye0dc0har9sdfzwckaz8sjwlfsj8zs
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for counterparty-payee
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user//.cyber")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### cyber query ibc-fee packet
+
+```
+Query for an unrelayed incentivized packet by port-id, channel-id and packet sequence.
+
+Usage:
+  cyber query ibc-fee packet [port-id] [channel-id] [sequence] [flags]
+
+Examples:
+cyber query ibc-fee packet
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for packet
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user//.cyber")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### cyber query ibc-fee packets-for-channel
+
+```
+Query for all of the unrelayed incentivized packets on a given channel. These are packets that have not yet been relayed.
+
+Usage:
+  cyber query ibc-fee packets-for-channel [port-id] [channel-id] [flags]
+
+Examples:
+cyber query ibc-fee packets-for-channel
+
+Flags:
+      --count-total       count total number of records in packets-for-channel to query for
+      --height int        Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help              help for packets-for-channel
+      --limit uint        pagination limit of packets-for-channel to query for (default 100)
+      --node string       <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+      --offset uint       pagination offset of packets-for-channel to query for
+  -o, --output string     Output format (text|json) (default "text")
+      --page uint         pagination page of packets-for-channel to query for. This sets offset to a multiple of limit (default 1)
+      --page-key string   pagination page-key of packets-for-channel to query for
+      --reverse           results are sorted in descending order
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user//.cyber")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### cyber query ibc-fee packets
+
+```
+Query for all of the unrelayed incentivized packets and associated fees across all channels.
+
+Usage:
+  cyber query ibc-fee packets [flags]
+
+Examples:
+cyber query ibc-fee packets
+
+Flags:
+      --count-total       count total number of records in packets to query for
+      --height int        Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help              help for packets
+      --limit uint        pagination limit of packets to query for (default 100)
+      --node string       <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+      --offset uint       pagination offset of packets to query for
+  -o, --output string     Output format (text|json) (default "text")
+      --page uint         pagination page of packets to query for. This sets offset to a multiple of limit (default 1)
+      --page-key string   pagination page-key of packets to query for
+      --reverse           results are sorted in descending order
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user//.cyber")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### cyber query ibc-fee payee
+
+```
+Query the relayer payee address on a given channel
+
+Usage:
+  cyber query ibc-fee payee [channel-id] [relayer] [flags]
+
+Examples:
+cyber query ibc-fee payee channel-5 cosmos1layxcsmyye0dc0har9sdfzwckaz8sjwlfsj8zs
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for payee
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user//.cyber")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### cyber query ibc-fee total-ack-fees
+
+```
+Query the total acknowledgement fees for a packet
+
+Usage:
+  cyber query ibc-fee total-ack-fees [port-id] [channel-id] [sequence] [flags]
+
+Examples:
+cyber query ibc-fee total-ack-fees transfer channel-5 100
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for total-ack-fees
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user//.cyber")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### cyber query ibc-fee total-recv-fees
+
+```
+Query the total receive fees for a packet
+
+Usage:
+  cyber query ibc-fee total-recv-fees [port-id] [channel-id] [sequence] [flags]
+
+Examples:
+cyber query ibc-fee total-recv-fees transfer channel-5 100
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for total-recv-fees
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user//.cyber")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### cyber query ibc-fee total-timeout-fees
+
+```
+Query the total timeout fees for a packet
+
+Usage:
+  cyber query ibc-fee total-timeout-fees [port-id] [channel-id] [sequence] [flags]
+
+Examples:
+cyber query ibc-fee total-timeout-fees transfer channel-5 100
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for total-timeout-fees
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user//.cyber")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### cyber query ibc-fee
+
+```
+IBC relayer incentivization query subcommands
+
+Usage:
+  cyber query ibc-fee [command]
+
+Available Commands:
+  channel             Query the ibc-fee enabled status of a channel
+  channels            Query the ibc-fee enabled channels
+  counterparty-payee  Query the relayer counterparty payee on a given channel
+  packet              Query for an unrelayed incentivized packet by port-id, channel-id and packet sequence.
+  packets             Query for all of the unrelayed incentivized packets and associated fees across all channels.
+  packets-for-channel Query for all of the unrelayed incentivized packets on a given channel
+  payee               Query the relayer payee address on a given channel
+  total-ack-fees      Query the total acknowledgement fees for a packet
+  total-recv-fees     Query the total receive fees for a packet
+  total-timeout-fees  Query the total timeout fees for a packet
+
+Flags:
+  -h, --help   help for ibc-fee
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user//.cyber")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "cyber query ibc-fee [command] --help" for more information about a command.
+
+```
+
 ### cyber query ibc-transfer denom-hash
 
 ```
@@ -3015,7 +3404,7 @@ Usage:
   cyber query ibc-transfer denom-hash [trace] [flags]
 
 Examples:
-cyber query ibc-transfer denom-hash [denom_trace]
+cyber query ibc-transfer denom-hash transfer/channel-0/uatom
 
 Flags:
       --height int      Use a specific height to query state at (this can error if the node is pruning state)
@@ -3035,13 +3424,13 @@ Global Flags:
 ### cyber query ibc-transfer denom-trace
 
 ```
-Query the denom trace info from a given trace hash
+Query the denom trace info from a given trace hash or ibc denom
 
 Usage:
-  cyber query ibc-transfer denom-trace [hash] [flags]
+  cyber query ibc-transfer denom-trace [hash/denom] [flags]
 
 Examples:
-cyber query ibc-transfer denom-trace [hash]
+cyber query ibc-transfer denom-trace 27A6394C3F9FF9C9DCF5DFFADF9BB5FE9A37C7E92B006199894CF1824DF9AC7C
 
 Flags:
       --height int      Use a specific height to query state at (this can error if the node is pruning state)
@@ -3152,7 +3541,7 @@ Usage:
 
 Available Commands:
   denom-hash     Query the denom hash info from a given denom trace
-  denom-trace    Query the denom trace info from a given trace hash
+  denom-trace    Query the denom trace info from a given trace hash or ibc denom
   denom-traces   Query the trace info for all token denominations
   escrow-address Get the escrow address for a channel
   params         Query the current ibc-transfer parameters
@@ -4644,31 +5033,6 @@ Global Flags:
 
 ```
 
-### cyber query upgrade module_versions
-
-```
-Gets a list of module names and their respective consensus versions.
-Following the command with a specific module name will return only
-that module's information.
-
-Usage:
-  cyber query upgrade module_versions [optional module_name] [flags]
-
-Flags:
-      --height int      Use a specific height to query state at (this can error if the node is pruning state)
-  -h, --help            help for module_versions
-      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
-  -o, --output string   Output format (text|json) (default "text")
-
-Global Flags:
-      --chain-id string     The network chain ID
-      --home string         directory for config and data (default "/Users/user//.cyber")
-      --log_format string   The logging format (json|plain) (default "plain")
-      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
-      --trace               print out full stack trace on errors
-
-```
-
 ### cyber query upgrade plan
 
 ```
@@ -4716,6 +5080,32 @@ Global Flags:
       --trace               print out full stack trace on errors
 
 Use "cyber query upgrade [command] --help" for more information about a command.
+
+```
+
+### cyber query wasm build-address
+
+```
+build contract address
+
+Usage:
+  cyber query wasm build-address [code-hash] [creator-address] [salt-hex-encoded] [json_encoded_init_args (required when set as fixed)] [flags]
+
+Aliases:
+  build-address, address
+
+Flags:
+      --ascii   ascii encoded salt
+      --b64     base64 encoded salt
+  -h, --help    help for build-address
+      --hex     hex encoded salt
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user//.cyber")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
 
 ```
 
@@ -4842,7 +5232,7 @@ Flags:
       --b64             base64 encoded key argument
       --height int      Use a specific height to query state at (this can error if the node is pruning state)
   -h, --help            help for raw
-      --hex             hex encoded  key argument
+      --hex             hex encoded key argument
       --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
   -o, --output string   Output format (text|json) (default "text")
 
@@ -4868,7 +5258,7 @@ Flags:
       --b64             base64 encoded query argument
       --height int      Use a specific height to query state at (this can error if the node is pruning state)
   -h, --help            help for smart
-      --hex             hex encoded  query argument
+      --hex             hex encoded query argument
       --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
   -o, --output string   Output format (text|json) (default "text")
 
@@ -5025,10 +5415,62 @@ Global Flags:
 
 ```
 
+### cyber query wasm list-contracts-by-creator
+
+```
+List all contracts by creator
+
+Usage:
+  cyber query wasm list-contracts-by-creator [creator] [flags]
+
+Flags:
+      --count-total       count total number of records in list contracts by creator to query for
+      --height int        Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help              help for list-contracts-by-creator
+      --limit uint        pagination limit of list contracts by creator to query for (default 100)
+      --node string       <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+      --offset uint       pagination offset of list contracts by creator to query for
+  -o, --output string     Output format (text|json) (default "text")
+      --page uint         pagination page of list contracts by creator to query for. This sets offset to a multiple of limit (default 1)
+      --page-key string   pagination page-key of list contracts by creator to query for
+      --reverse           results are sorted in descending order
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user//.cyber")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### cyber query wasm params
+
+```
+Query the current wasm parameters
+
+Usage:
+  cyber query wasm params [flags]
+
+Flags:
+      --height int      Use a specific height to query state at (this can error if the node is pruning state)
+  -h, --help            help for params
+      --node string     <host>:<port> to Tendermint RPC interface for this chain (default "tcp://localhost:26657")
+  -o, --output string   Output format (text|json) (default "text")
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user//.cyber")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
 ### cyber query wasm pinned
 
 ```
-		Long:    List all pinned code ids,
+List all pinned code ids
 
 Usage:
   cyber query wasm pinned [flags]
@@ -5064,15 +5506,18 @@ Usage:
   cyber query wasm [command]
 
 Available Commands:
-  code                  Downloads wasm bytecode for given code id
-  code-info             Prints out metadata of a code id
-  contract              Prints out metadata of a contract given its address
-  contract-history      Prints out the code history for a contract given its address
-  contract-state        Querying commands for the wasm module
-  libwasmvm-version     Get libwasmvm version
-  list-code             List all wasm bytecode on the chain
-  list-contract-by-code List wasm all bytecode on the chain for given code id
-  pinned                List all pinned code ids
+  build-address             build contract address
+  code                      Downloads wasm bytecode for given code id
+  code-info                 Prints out metadata of a code id
+  contract                  Prints out metadata of a contract given its address
+  contract-history          Prints out the code history for a contract given its address
+  contract-state            Querying commands for the wasm module
+  libwasmvm-version         Get libwasmvm version
+  list-code                 List all wasm bytecode on the chain
+  list-contract-by-code     List wasm all bytecode on the chain for given code id
+  list-contracts-by-creator List all contracts by creator
+  params                    Query the current wasm parameters
+  pinned                    List all pinned code ids
 
 Flags:
   -h, --help   help for wasm
@@ -5115,6 +5560,7 @@ Available Commands:
   graph                    Querying commands for the graph module
   grid                     Querying commands for the grid module
   ibc                      Querying commands for the IBC module
+  ibc-fee                  IBC relayer incentivization query subcommands
   ibc-transfer             IBC fungible token transfer query subcommands
   liquidity                Querying commands for the liquidity module
   mint                     Querying commands for the minting module
@@ -5158,10 +5604,10 @@ Usage:
   cyber rollback [flags]
 
 Flags:
-  -h, --help   help for rollback
+  -h, --help          help for rollback
+      --home string   The application home directory (default "/Users/user//.cyber")
 
 Global Flags:
-      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
       --trace               print out full stack trace on errors
@@ -5221,11 +5667,14 @@ Flags:
       --halt-height uint                                Block height at which to gracefully halt the chain and shutdown the node
       --halt-time uint                                  Minimum block time (in Unix seconds) at which to gracefully halt the chain and shutdown the node
   -h, --help                                            help for start
+      --home string                                     The application home directory (default "/Users/user//.cyber")
+      --iavl-disable-fastnode                           Disable fast node for IAVL tree (default true)
       --inter-block-cache                               Enable inter-block caching (default true)
       --inv-check-period uint                           Assert registered invariants every N blocks
       --min-retain-blocks uint                          Minimum block height offset during ABCI commit to prune Tendermint blocks
       --minimum-gas-prices string                       Minimum gas prices to accept for transactions; Any fee in a tx must meet this minimum (e.g. 0.01photino;0.0001stake)
-      --moniker string                                  node name (default "Pro16.local")
+      --moniker string                                  node name (default "Pro16")
+      --p2p.external-address string                     ip:port address to advertise to peers for them to dial
       --p2p.laddr string                                node listen address. (0.0.0.0:0 means any interface, any port) (default "tcp://0.0.0.0:26656")
       --p2p.persistent_peers string                     comma-delimited ID@host:port persistent peers
       --p2p.pex                                         enable/disable Peer-Exchange (default true)
@@ -5247,20 +5696,20 @@ Flags:
       --search-api                                      Run search API
       --state-sync.snapshot-interval uint               State sync snapshot interval
       --state-sync.snapshot-keep-recent uint32          State sync snapshot to keep (default 2)
+      --trace                                           Provide full stack traces for errors in ABCI Log
       --trace-store string                              Enable KVStore tracing to an output file
       --transport string                                Transport protocol: socket, grpc (default "socket")
       --unsafe-skip-upgrades ints                       Skip a set of upgrade heights to continue the old binary
       --wasm.memory_cache_size uint32                   Sets the size in MiB (NOT bytes) of an in-memory cache for Wasm modules. Set to 0 to disable. (default 100)
       --wasm.query_gas_limit uint                       Set the max gas that can be spent on executing a query with a Wasm contract (default 3000000)
       --wasm.simulation_gas_limit string                Set the max gas that can be spent when executing a simulation TX
+      --wasm.skip_wasmvm_version_check                  Skip check that ensures that libwasmvm version (the Rust project) and wasmvm version (the Go project) match
       --with-tendermint                                 Run abci app embedded in-process with tendermint (default true)
       --x-crisis-skip-assert-invariants                 Skip x/crisis invariants check on startup
 
 Global Flags:
-      --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
-      --trace               print out full stack trace on errors
 
 ```
 
@@ -5480,7 +5929,7 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -5527,8 +5976,8 @@ Flags:
       --allowed-validators strings   Allowed validators addresses separated by ,
   -b, --broadcast-mode string        Transaction broadcasting mode (sync|async|block) (default "sync")
       --deny-validators strings      Deny validators addresses separated by ,
-      --dry-run                      ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
-      --expiration int               The Unix timestamp. Default is one year. (default 1700482147)
+      --dry-run                      ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
+      --expiration int               The Unix timestamp. Default is one year. (default 1745237692)
       --fee-account string           Fee account pays fees for the transaction instead of deducting from the signer
       --fees string                  Fees to pay along with transaction; eg: 10uatom
       --from string                  Name or address of private key with which to sign
@@ -5573,7 +6022,7 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -5634,8 +6083,9 @@ Use "cyber tx authz [command] --help" for more information about a command.
 ### cyber tx bank send
 
 ```
-Send funds from one account to another. Note, the'--from' flag is
-ignored as it is implied from [from_key_or_address].
+Send funds from one account to another. 
+		Note, the'--from' flag is ignored as it is implied from [from_key_or_address].
+		When using '--dry-run' a key name cannot be used, only a bech32 address.
 
 Usage:
   cyber tx bank send [from_key_or_address] [to_address] [amount] [flags]
@@ -5643,7 +6093,7 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -5683,8 +6133,9 @@ Usage:
   cyber tx bank [command]
 
 Available Commands:
-  send        Send funds from one account to another. Note, the'--from' flag is
-ignored as it is implied from [from_key_or_address].
+  send        Send funds from one account to another. 
+		Note, the'--from' flag is ignored as it is implied from [from_key_or_address].
+		When using '--dry-run' a key name cannot be used, only a bech32 address.
 
 Flags:
   -h, --help   help for bank
@@ -5716,7 +6167,7 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -5757,7 +6208,7 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -5824,7 +6275,7 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -5869,7 +6320,7 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -5913,7 +6364,7 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -5958,7 +6409,7 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -6006,7 +6457,7 @@ Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
       --commission               Withdraw the validator's commission in addition to the rewards
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -6078,7 +6529,7 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -6147,7 +6598,7 @@ Flags:
   -a, --account-number uint        The account number of the signing account (offline mode only)
       --allowed-messages strings   Set of allowed messages for fee allowance
   -b, --broadcast-mode string      Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                    ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                    ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --expiration string          The RFC 3339 timestamp after which the grant expires for the user
       --fee-account string         Fee account pays fees for the transaction instead of deducting from the signer
       --fees string                Fees to pay along with transaction; eg: 10uatom
@@ -6196,7 +6647,7 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -6268,7 +6719,7 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -6311,7 +6762,7 @@ Flags:
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
       --deposit string           deposit of proposal
       --description string       description of proposal
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -6355,7 +6806,7 @@ Flags:
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
       --deposit string           Deposit of proposal
       --description string       Description of proposal
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -6371,12 +6822,10 @@ Flags:
       --note string              Note to add a description to the transaction (previously --memo)
       --offline                  Offline mode (does not allow any online functionality
   -o, --output string            Output format (text|json) (default "json")
-      --proposal string          Proposal file path (if this path is given, other proposal flags are ignored)
   -s, --sequence uint            The sequence number of the signing account (offline mode only)
       --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
       --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
       --title string             Title of proposal
-      --type string              Permission of proposal, types: store-code/instantiate/migrate/update-admin/clear-admin/text/parameter_change/software_upgrade
   -y, --yes                      Skip tx broadcasting prompt confirmation
 
 Global Flags:
@@ -6413,7 +6862,7 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -6457,7 +6906,7 @@ Flags:
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
       --deposit string           Deposit of proposal
       --description string       Description of proposal
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -6473,13 +6922,11 @@ Flags:
       --note string              Note to add a description to the transaction (previously --memo)
       --offline                  Offline mode (does not allow any online functionality
   -o, --output string            Output format (text|json) (default "json")
-      --proposal string          Proposal file path (if this path is given, other proposal flags are ignored)
       --run-as string            The address that is passed as sender to the contract on proposal execution
   -s, --sequence uint            The sequence number of the signing account (offline mode only)
       --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
       --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
       --title string             Title of proposal
-      --type string              Permission of proposal, types: store-code/instantiate/migrate/update-admin/clear-admin/text/parameter_change/software_upgrade
   -y, --yes                      Skip tx broadcasting prompt confirmation
 
 Global Flags:
@@ -6514,7 +6961,7 @@ Flags:
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
       --deposit string           deposit of proposal
       --description string       description of proposal
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -6555,12 +7002,12 @@ Usage:
 
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
-      --admin string             Address of an admin
+      --admin string             Address or key name of an admin
       --amount string            Coins to send to the contract during instantiation
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
       --deposit string           Deposit of proposal
       --description string       Description of proposal
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -6578,13 +7025,11 @@ Flags:
       --note string              Note to add a description to the transaction (previously --memo)
       --offline                  Offline mode (does not allow any online functionality
   -o, --output string            Output format (text|json) (default "json")
-      --proposal string          Proposal file path (if this path is given, other proposal flags are ignored)
       --run-as string            The address that pays the init funds. It is the creator of the contract and passed to the contract as sender on proposal execution
   -s, --sequence uint            The sequence number of the signing account (offline mode only)
       --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
       --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
       --title string             Title of proposal
-      --type string              Permission of proposal, types: store-code/instantiate/migrate/update-admin/clear-admin/text/parameter_change/software_upgrade
   -y, --yes                      Skip tx broadcasting prompt confirmation
 
 Global Flags:
@@ -6609,7 +7054,7 @@ Flags:
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
       --deposit string           Deposit of proposal
       --description string       Description of proposal
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -6625,12 +7070,10 @@ Flags:
       --note string              Note to add a description to the transaction (previously --memo)
       --offline                  Offline mode (does not allow any online functionality
   -o, --output string            Output format (text|json) (default "json")
-      --proposal string          Proposal file path (if this path is given, other proposal flags are ignored)
   -s, --sequence uint            The sequence number of the signing account (offline mode only)
       --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
       --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
       --title string             Title of proposal
-      --type string              Permission of proposal, types: store-code/instantiate/migrate/update-admin/clear-admin/text/parameter_change/software_upgrade
   -y, --yes                      Skip tx broadcasting prompt confirmation
 
 Global Flags:
@@ -6681,7 +7124,7 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -6724,7 +7167,7 @@ Flags:
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
       --deposit string           Deposit of proposal
       --description string       Description of proposal
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -6740,12 +7183,10 @@ Flags:
       --note string              Note to add a description to the transaction (previously --memo)
       --offline                  Offline mode (does not allow any online functionality
   -o, --output string            Output format (text|json) (default "json")
-      --proposal string          Proposal file path (if this path is given, other proposal flags are ignored)
   -s, --sequence uint            The sequence number of the signing account (offline mode only)
       --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
       --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
       --title string             Title of proposal
-      --type string              Permission of proposal, types: store-code/instantiate/migrate/update-admin/clear-admin/text/parameter_change/software_upgrade
   -y, --yes                      Skip tx broadcasting prompt confirmation
 
 Global Flags:
@@ -6770,7 +7211,7 @@ Flags:
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
       --deposit string           Deposit of proposal
       --description string       Description of proposal
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -6786,12 +7227,10 @@ Flags:
       --note string              Note to add a description to the transaction (previously --memo)
       --offline                  Offline mode (does not allow any online functionality
   -o, --output string            Output format (text|json) (default "json")
-      --proposal string          Proposal file path (if this path is given, other proposal flags are ignored)
   -s, --sequence uint            The sequence number of the signing account (offline mode only)
       --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
       --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
       --title string             Title of proposal
-      --type string              Permission of proposal, types: store-code/instantiate/migrate/update-admin/clear-admin/text/parameter_change/software_upgrade
   -y, --yes                      Skip tx broadcasting prompt confirmation
 
 Global Flags:
@@ -6818,7 +7257,7 @@ Flags:
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
       --deposit string           deposit of proposal
       --description string       description of proposal
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -6851,6 +7290,63 @@ Global Flags:
 
 ```
 
+### cyber tx gov submit-proposal store-instantiate
+
+```
+Submit and instantiate a wasm contract proposal
+
+Usage:
+  cyber tx gov submit-proposal store-instantiate [wasm file] [json_encoded_init_args] --label [text] --title [text] --description [text] --run-as [address]--unpin-code [unpin_code,optional] --source [source,optional] --builder [builder,optional] --code-hash [code_hash,optional] --admin [address,optional] --amount [coins,optional] [flags]
+
+Flags:
+  -a, --account-number uint                   The account number of the signing account (offline mode only)
+      --admin string                          Address or key name of an admin
+      --amount string                         Coins to send to the contract during instantiation
+  -b, --broadcast-mode string                 Transaction broadcasting mode (sync|async|block) (default "sync")
+      --builder string                        Builder is a valid docker image name with tag, such as "cosmwasm/workspace-optimizer:0.12.9"
+      --code-hash bytesHex                    CodeHash is the sha256 hash of the wasm code
+      --code-source-url string                Code Source URL is a valid absolute HTTPS URI to the contract's source code,
+      --deposit string                        Deposit of proposal
+      --description string                    Description of proposal
+      --dry-run                               ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
+      --fee-account string                    Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string                           Fees to pay along with transaction; eg: 10uatom
+      --from string                           Name or address of private key with which to sign
+      --gas string                            gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
+      --gas-adjustment float                  adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string                     Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only                         Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                                  help for store-instantiate
+      --instantiate-anyof-addresses strings   Any of the addresses can instantiate a contract from the code, optional
+      --instantiate-everybody string          Everybody can instantiate a contract from the code, optional
+      --instantiate-nobody string             Nobody except the governance process can instantiate a contract from the code, optional
+      --instantiate-only-address string       Removed: use instantiate-anyof-addresses instead
+      --keyring-backend string                Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string                    The client Keyring directory; if omitted, the default 'home' directory will be used
+      --label string                          A human-readable name for this contract in lists
+      --ledger                                Use a connected Ledger device
+      --no-admin                              You must set this explicitly if you don't want an admin
+      --node string                           <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string                           Note to add a description to the transaction (previously --memo)
+      --offline                               Offline mode (does not allow any online functionality
+  -o, --output string                         Output format (text|json) (default "json")
+      --run-as string                         The address that is stored as code creator. It is the creator of the contract and passed to the contract as sender on proposal execution
+  -s, --sequence uint                         The sequence number of the signing account (offline mode only)
+      --sign-mode string                      Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint                   Set a block timeout height to prevent the tx from being committed past a certain height
+      --title string                          Title of proposal
+      --unpin-code                            Unpin code on upload, optional
+  -y, --yes                                   Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user//.cyber")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
 ### cyber tx gov submit-proposal sudo-contract
 
 ```
@@ -6864,7 +7360,7 @@ Flags:
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
       --deposit string           Deposit of proposal
       --description string       Description of proposal
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -6880,12 +7376,10 @@ Flags:
       --note string              Note to add a description to the transaction (previously --memo)
       --offline                  Offline mode (does not allow any online functionality
   -o, --output string            Output format (text|json) (default "json")
-      --proposal string          Proposal file path (if this path is given, other proposal flags are ignored)
   -s, --sequence uint            The sequence number of the signing account (offline mode only)
       --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
       --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
       --title string             Title of proposal
-      --type string              Permission of proposal, types: store-code/instantiate/migrate/update-admin/clear-admin/text/parameter_change/software_upgrade
   -y, --yes                      Skip tx broadcasting prompt confirmation
 
 Global Flags:
@@ -6910,7 +7404,7 @@ Flags:
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
       --deposit string           Deposit of proposal
       --description string       Description of proposal
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -6926,12 +7420,10 @@ Flags:
       --note string              Note to add a description to the transaction (previously --memo)
       --offline                  Offline mode (does not allow any online functionality
   -o, --output string            Output format (text|json) (default "json")
-      --proposal string          Proposal file path (if this path is given, other proposal flags are ignored)
   -s, --sequence uint            The sequence number of the signing account (offline mode only)
       --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
       --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
       --title string             Title of proposal
-      --type string              Permission of proposal, types: store-code/instantiate/migrate/update-admin/clear-admin/text/parameter_change/software_upgrade
   -y, --yes                      Skip tx broadcasting prompt confirmation
 
 Global Flags:
@@ -6958,7 +7450,7 @@ Flags:
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
       --deposit string           deposit of proposal
       --description string       description of proposal
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -6995,17 +7487,17 @@ Global Flags:
 Submit an update instantiate config  proposal for multiple code ids.
 
 Example: 
-$ cyber tx gov submit-proposal update-instantiate-config 1,nobody 2,everybody 3,bostrom1l2rsakp388kuv9k8qzq6lrm9taddae7fpx59wm
+$ cyber tx gov submit-proposal update-instantiate-config 1:nobody 2:everybody 3:bostrom1l2rsakp388kuv9k8qzq6lrm9taddae7fpx59wm,bostrom1vx8knpllrj7n963p9ttd80w47kpacrhuts497x
 
 Usage:
-  cyber tx gov submit-proposal update-instantiate-config [code-id,permission]... [flags]
+  cyber tx gov submit-proposal update-instantiate-config [code-id:permission]... [flags]
 
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
       --deposit string           Deposit of proposal
       --description string       Description of proposal
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -7021,12 +7513,10 @@ Flags:
       --note string              Note to add a description to the transaction (previously --memo)
       --offline                  Offline mode (does not allow any online functionality
   -o, --output string            Output format (text|json) (default "json")
-      --proposal string          Proposal file path (if this path is given, other proposal flags are ignored)
   -s, --sequence uint            The sequence number of the signing account (offline mode only)
       --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
       --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
       --title string             Title of proposal
-      --type string              Permission of proposal, types: store-code/instantiate/migrate/update-admin/clear-admin/text/parameter_change/software_upgrade
   -y, --yes                      Skip tx broadcasting prompt confirmation
 
 Global Flags:
@@ -7044,40 +7534,43 @@ Global Flags:
 Submit a wasm binary proposal
 
 Usage:
-  cyber tx gov submit-proposal wasm-store [wasm file] --title [text] --description [text] --run-as [address] [flags]
+  cyber tx gov submit-proposal wasm-store [wasm file] --title [text] --description [text] --run-as [address] --unpin-code [unpin_code] --source [source] --builder [builder] --code-hash [code_hash] [flags]
 
 Flags:
-  -a, --account-number uint               The account number of the signing account (offline mode only)
-  -b, --broadcast-mode string             Transaction broadcasting mode (sync|async|block) (default "sync")
-      --deposit string                    Deposit of proposal
-      --description string                Description of proposal
-      --dry-run                           ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
-      --fee-account string                Fee account pays fees for the transaction instead of deducting from the signer
-      --fees string                       Fees to pay along with transaction; eg: 10uatom
-      --from string                       Name or address of private key with which to sign
-      --gas string                        gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
-      --gas-adjustment float              adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
-      --gas-prices string                 Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
-      --generate-only                     Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
-  -h, --help                              help for wasm-store
-      --instantiate-everybody string      Everybody can instantiate a contract from the code, optional
-      --instantiate-nobody string         Nobody except the governance process can instantiate a contract from the code, optional
-      --instantiate-only-address string   Only this address can instantiate a contract instance from the code, optional
-      --keyring-backend string            Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
-      --keyring-dir string                The client Keyring directory; if omitted, the default 'home' directory will be used
-      --ledger                            Use a connected Ledger device
-      --node string                       <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
-      --note string                       Note to add a description to the transaction (previously --memo)
-      --offline                           Offline mode (does not allow any online functionality
-  -o, --output string                     Output format (text|json) (default "json")
-      --proposal string                   Proposal file path (if this path is given, other proposal flags are ignored)
-      --run-as string                     The address that is stored as code creator
-  -s, --sequence uint                     The sequence number of the signing account (offline mode only)
-      --sign-mode string                  Choose sign mode (direct|amino-json), this is an advanced feature
-      --timeout-height uint               Set a block timeout height to prevent the tx from being committed past a certain height
-      --title string                      Title of proposal
-      --type string                       Permission of proposal, types: store-code/instantiate/migrate/update-admin/clear-admin/text/parameter_change/software_upgrade
-  -y, --yes                               Skip tx broadcasting prompt confirmation
+  -a, --account-number uint                   The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string                 Transaction broadcasting mode (sync|async|block) (default "sync")
+      --builder string                        Builder is a valid docker image name with tag, such as "cosmwasm/workspace-optimizer:0.12.9"
+      --code-hash bytesHex                    CodeHash is the sha256 hash of the wasm code
+      --code-source-url string                Code Source URL is a valid absolute HTTPS URI to the contract's source code,
+      --deposit string                        Deposit of proposal
+      --description string                    Description of proposal
+      --dry-run                               ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
+      --fee-account string                    Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string                           Fees to pay along with transaction; eg: 10uatom
+      --from string                           Name or address of private key with which to sign
+      --gas string                            gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
+      --gas-adjustment float                  adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string                     Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only                         Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                                  help for wasm-store
+      --instantiate-anyof-addresses strings   Any of the addresses can instantiate a contract from the code, optional
+      --instantiate-everybody string          Everybody can instantiate a contract from the code, optional
+      --instantiate-nobody string             Nobody except the governance process can instantiate a contract from the code, optional
+      --instantiate-only-address string       Removed: use instantiate-anyof-addresses instead
+      --keyring-backend string                Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string                    The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                                Use a connected Ledger device
+      --node string                           <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string                           Note to add a description to the transaction (previously --memo)
+      --offline                               Offline mode (does not allow any online functionality
+  -o, --output string                         Output format (text|json) (default "json")
+      --run-as string                         The address that is stored as code creator
+  -s, --sequence uint                         The sequence number of the signing account (offline mode only)
+      --sign-mode string                      Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint                   Set a block timeout height to prevent the tx from being committed past a certain height
+      --title string                          Title of proposal
+      --unpin-code                            Unpin code on upload, optional
+  -y, --yes                                   Skip tx broadcasting prompt confirmation
 
 Global Flags:
       --chain-id string     The network chain ID
@@ -7121,11 +7614,13 @@ Available Commands:
   execute-contract          Submit a execute wasm contract proposal (run by any address)
   ibc-upgrade               Submit an IBC upgrade proposal
   instantiate-contract      Submit an instantiate wasm contract proposal
+  instantiate-contract-2    Submit an instantiate wasm contract proposal with predictable address
   migrate-contract          Submit a migrate wasm contract to a new code version proposal
   param-change              Submit a parameter change proposal
   pin-codes                 Submit a pin code proposal for pinning a code to cache
   set-contract-admin        Submit a new admin for a contract proposal
   software-upgrade          Submit a software upgrade proposal
+  store-instantiate         Submit and instantiate a wasm contract proposal
   sudo-contract             Submit a sudo wasm contract proposal (to call privileged commands)
   unpin-codes               Submit a unpin code proposal for unpinning a code to cache
   update-client             Submit an update IBC client proposal
@@ -7137,7 +7632,7 @@ Flags:
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
       --deposit string           The proposal deposit
       --description string       The proposal description
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -7187,7 +7682,7 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -7232,7 +7727,7 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -7304,7 +7799,7 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -7371,7 +7866,7 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -7412,7 +7907,7 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -7453,7 +7948,7 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -7494,7 +7989,7 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -7589,7 +8084,7 @@ cyber tx ibc client create [path/to/client_state.json] [path/to/consensus_state.
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -7681,7 +8176,7 @@ cyber tx ibc client upgrade [client-identifier] [path/to/client_state.json] [pat
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -7740,6 +8235,169 @@ Use "cyber tx ibc client [command] --help" for more information about a command.
 
 ```
 
+### cyber tx ibc-fee pay-packet-fee
+
+```
+Pay a fee to incentivize an existing IBC packet.
+
+Usage:
+  cyber tx ibc-fee pay-packet-fee [src-port] [src-channel] [sequence] [flags]
+
+Examples:
+cyber tx ibc-fee pay-packet-fee transfer channel-0 1 --recv-fee 10stake --ack-fee 10stake --timeout-fee 10stake
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+      --ack-fee string           Fee paid to a relayer for relaying a packet acknowledgement.
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for pay-packet-fee
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+      --recv-fee string          Fee paid to a relayer for relaying a packet receive.
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-fee string       Fee paid to a relayer for relaying a packet timeout.
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user//.cyber")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### cyber tx ibc-fee register-counterparty-payee
+
+```
+Register a counterparty payee address on a given channel.
+
+Usage:
+  cyber tx ibc-fee register-counterparty-payee [port-id] [channel-id] [relayer] [counterparty-payee]  [flags]
+
+Examples:
+cyber tx ibc-fee register-counterparty-payee transfer channel-0 cosmos1rsp837a4kvtgp2m4uqzdge0zzu6efqgucm0qdh osmo1v5y0tz01llxzf4c2afml8s3awue0ymju22wxx2
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for register-counterparty-payee
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user//.cyber")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### cyber tx ibc-fee register-payee
+
+```
+Register a payee address on a given channel.
+
+Usage:
+  cyber tx ibc-fee register-payee [port-id] [channel-id] [relayer] [payee]  [flags]
+
+Examples:
+cyber tx ibc-fee register-payee transfer channel-0 cosmos1rsp837a4kvtgp2m4uqzdge0zzu6efqgucm0qdh cosmos153lf4zntqt33a4v0sm5cytrxyqn78q7kz8j8x5
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for register-payee
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user//.cyber")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### cyber tx ibc-fee
+
+```
+IBC relayer incentivization transaction subcommands
+
+Usage:
+  cyber tx ibc-fee [flags]
+  cyber tx ibc-fee [command]
+
+Available Commands:
+  pay-packet-fee              Pay a fee to incentivize an existing IBC packet
+  register-counterparty-payee Register a counterparty payee address on a given channel.
+  register-payee              Register a payee on a given channel.
+
+Flags:
+  -h, --help   help for ibc-fee
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user//.cyber")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+Use "cyber tx ibc-fee [command] --help" for more information about a command.
+
+```
+
 ### cyber tx ibc-transfer transfer
 
 ```
@@ -7760,7 +8418,7 @@ Flags:
       --absolute-timeouts               Timeout flags are used as absolute timeouts.
   -a, --account-number uint             The account number of the signing account (offline mode only)
   -b, --broadcast-mode string           Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                         ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                         ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string              Fee account pays fees for the transaction instead of deducting from the signer
       --fees string                     Fees to pay along with transaction; eg: 10uatom
       --from string                     Name or address of private key with which to sign
@@ -7772,6 +8430,7 @@ Flags:
       --keyring-backend string          Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
       --keyring-dir string              The client Keyring directory; if omitted, the default 'home' directory will be used
       --ledger                          Use a connected Ledger device
+      --memo string                     Memo to be sent along with the packet.
       --node string                     <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
       --note string                     Note to add a description to the transaction (previously --memo)
       --offline                         Offline mode (does not allow any online functionality
@@ -7865,7 +8524,7 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -7918,7 +8577,7 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -7971,7 +8630,7 @@ The order price is the exchange ratio of X/Y, where X is the amount of the first
 Increasing order price reduces the possibility for your request to be processed and results in buying uatom at a lower price than the pool price.
 
 For explicit calculations, The swap fee rate must be the value that set as liquidity parameter in the current network.
-The only supported swap-type is 1. For the detailed swap algorithm, see https://github.com/tendermint/liquidity
+The only supported swap-type is 1. For the detailed swap algorithm, see https://github.com/gravity-devs/liquidity
 
 [pool-id]: The pool id of the liquidity pool 
 [swap-type]: The swap type of the swap message. The only supported swap type is 1 (instant swap).
@@ -7986,7 +8645,7 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -8039,7 +8698,7 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -8118,7 +8777,7 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -8179,7 +8838,8 @@ Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
       --amino                    Generate Amino-encoded JSON suitable for submitting to the txs REST endpoint
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --chain-id string          network chain ID
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -8203,7 +8863,6 @@ Flags:
   -y, --yes                      Skip tx broadcasting prompt confirmation
 
 Global Flags:
-      --chain-id string     The network chain ID
       --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
@@ -8217,7 +8876,7 @@ Global Flags:
 Long.
 
 Example:
-$ 0.3.2-4-ge784b12 tx resources investmint 1000000000hydrogen millivolt 2500000 --from <key>
+$ 3.0.0 tx resources investmint 1000000000hydrogen millivolt 2500000 --from <key>
 
 Usage:
   cyber tx resources investmint [amount] [resource] [length] [flags]
@@ -8225,7 +8884,7 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -8306,7 +8965,8 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --chain-id string          network chain ID
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -8331,7 +8991,6 @@ Flags:
   -y, --yes                      Skip tx broadcasting prompt confirmation
 
 Global Flags:
-      --chain-id string     The network chain ID
       --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
@@ -8363,7 +9022,8 @@ Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
       --amino                    Generate Amino encoded JSON suitable for submiting to the txs REST endpoint
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --chain-id string          The network chain ID
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -8389,7 +9049,6 @@ Flags:
   -y, --yes                      Skip tx broadcasting prompt confirmation
 
 Global Flags:
-      --chain-id string     The network chain ID
       --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
@@ -8410,7 +9069,7 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -8482,7 +9141,7 @@ Flags:
       --commission-max-rate string          The maximum commission rate percentage
       --commission-rate string              The initial commission rate percentage
       --details string                      The validator's (optional) details
-      --dry-run                             ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                             ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string                  Fee account pays fees for the transaction instead of deducting from the signer
       --fees string                         Fees to pay along with transaction; eg: 10uatom
       --from string                         Name or address of private key with which to sign
@@ -8534,7 +9193,7 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -8577,7 +9236,7 @@ Flags:
   -b, --broadcast-mode string        Transaction broadcasting mode (sync|async|block) (default "sync")
       --commission-rate string       The new commission rate percentage
       --details string               The validator's (optional) details (default "[do-not-modify]")
-      --dry-run                      ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                      ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string           Fee account pays fees for the transaction instead of deducting from the signer
       --fees string                  Fees to pay along with transaction; eg: 10uatom
       --from string                  Name or address of private key with which to sign
@@ -8591,7 +9250,7 @@ Flags:
       --keyring-dir string           The client Keyring directory; if omitted, the default 'home' directory will be used
       --ledger                       Use a connected Ledger device
       --min-self-delegation string   The minimum self delegation required on the validator
-      --moniker string               The validator's name (default "[do-not-modify]")
+      --new-moniker string           The validator's name (default "[do-not-modify]")
       --node string                  <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
       --note string                  Note to add a description to the transaction (previously --memo)
       --offline                      Offline mode (does not allow any online functionality
@@ -8626,7 +9285,7 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -8670,7 +9329,7 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -8747,7 +9406,8 @@ Usage:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --chain-id string          The network chain ID
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -8769,7 +9429,6 @@ Flags:
   -y, --yes                      Skip tx broadcasting prompt confirmation
 
 Global Flags:
-      --chain-id string     The network chain ID
       --home string         directory for config and data (default "/Users/user//.cyber")
       --log_format string   The logging format (json|plain) (default "plain")
       --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
@@ -8793,7 +9452,7 @@ Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
       --delayed                  Create a delayed vesting account if true
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -8863,7 +9522,7 @@ Aliases:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -8908,7 +9567,7 @@ Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
       --amount string            Coins to send to the contract along with command
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -8938,23 +9597,81 @@ Global Flags:
 
 ```
 
+### cyber tx wasm grant
+
+```
+Grant authorization to an address.
+Examples:
+$ cyber tx grant <grantee_addr> execution <contract_addr> --allow-all-messages --max-calls 1 --no-token-transfer --expiration 1667979596
+
+$ cyber tx grant <grantee_addr> execution <contract_addr> --allow-all-messages --max-funds 100000uwasm --expiration 1667979596
+
+$ cyber tx grant <grantee_addr> execution <contract_addr> --allow-all-messages --max-calls 5 --max-funds 100000uwasm --expiration 1667979596
+
+Usage:
+  cyber tx wasm grant [grantee] [message_type="execution"|"migration"] [contract_addr_bech32] --allow-raw-msgs [msg1,msg2,...] --allow-msg-keys [key1,key2,...] --allow-all-messages [flags]
+
+Flags:
+  -a, --account-number uint      The account number of the signing account (offline mode only)
+      --allow-all-messages       Allow all messages
+      --allow-msg-keys strings   Allowed msg keys
+      --allow-raw-msgs strings   Allowed raw msgs
+  -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
+      --expiration int           The Unix timestamp.
+      --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string              Fees to pay along with transaction; eg: 10uatom
+      --from string              Name or address of private key with which to sign
+      --gas string               gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
+      --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string        Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                     help for grant
+      --keyring-backend string   Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string       The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                   Use a connected Ledger device
+      --max-calls uint           Maximal number of calls to the contract
+      --max-funds string         Maximal amount of tokens transferable to the contract.
+      --no-token-transfer        Don't allow token transfer
+      --node string              <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string              Note to add a description to the transaction (previously --memo)
+      --offline                  Offline mode (does not allow any online functionality
+  -o, --output string            Output format (text|json) (default "json")
+  -s, --sequence uint            The sequence number of the signing account (offline mode only)
+      --sign-mode string         Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint      Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                      Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user//.cyber")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
 ### cyber tx wasm instantiate
 
 ```
-Instantiate a wasm contract
+Creates a new instance of an uploaded wasm code with the given 'constructor' message.
+Each contract instance has a unique address assigned.
+Example:
+$ cyber tx wasm instantiate 1 '{"foo":"bar"}' --admin="$(cyber keys show mykey -a)" \
+  --from mykey --amount="100ustake" --label "local0.1.0"
 
 Usage:
-  cyber tx wasm instantiate [code_id_int64] [json_encoded_init_args] --label [text] --admin [address,optional] --amount [coins,optional] [flags]
+  cyber tx wasm instantiate [code_id_int64] [json_encoded_init_args] --label [text] --admin [address,optional] --amount [coins,optional]  [flags]
 
 Aliases:
   instantiate, start, init, inst, i
 
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
-      --admin string             Address of an admin
+      --admin string             Address or key name of an admin
       --amount string            Coins to send to the contract during instantiation
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -9000,7 +9717,7 @@ Aliases:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -9044,7 +9761,7 @@ Aliases:
 Flags:
   -a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
+      --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
       --fee-account string       Fee account pays fees for the transaction instead of deducting from the signer
       --fees string              Fees to pay along with transaction; eg: 10uatom
       --from string              Name or address of private key with which to sign
@@ -9086,31 +9803,80 @@ Aliases:
   store, upload, st, s
 
 Flags:
-  -a, --account-number uint               The account number of the signing account (offline mode only)
-  -b, --broadcast-mode string             Transaction broadcasting mode (sync|async|block) (default "sync")
-      --dry-run                           ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
-      --fee-account string                Fee account pays fees for the transaction instead of deducting from the signer
-      --fees string                       Fees to pay along with transaction; eg: 10uatom
-      --from string                       Name or address of private key with which to sign
-      --gas string                        gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
-      --gas-adjustment float              adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
-      --gas-prices string                 Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
-      --generate-only                     Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
-  -h, --help                              help for store
-      --instantiate-everybody string      Everybody can instantiate a contract from the code, optional
-      --instantiate-nobody string         Nobody except the governance process can instantiate a contract from the code, optional
-      --instantiate-only-address string   Only this address can instantiate a contract instance from the code, optional
-      --keyring-backend string            Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
-      --keyring-dir string                The client Keyring directory; if omitted, the default 'home' directory will be used
-      --ledger                            Use a connected Ledger device
-      --node string                       <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
-      --note string                       Note to add a description to the transaction (previously --memo)
-      --offline                           Offline mode (does not allow any online functionality
-  -o, --output string                     Output format (text|json) (default "json")
-  -s, --sequence uint                     The sequence number of the signing account (offline mode only)
-      --sign-mode string                  Choose sign mode (direct|amino-json), this is an advanced feature
-      --timeout-height uint               Set a block timeout height to prevent the tx from being committed past a certain height
-  -y, --yes                               Skip tx broadcasting prompt confirmation
+  -a, --account-number uint                   The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string                 Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                               ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
+      --fee-account string                    Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string                           Fees to pay along with transaction; eg: 10uatom
+      --from string                           Name or address of private key with which to sign
+      --gas string                            gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
+      --gas-adjustment float                  adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string                     Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only                         Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                                  help for store
+      --instantiate-anyof-addresses strings   Any of the addresses can instantiate a contract from the code, optional
+      --instantiate-everybody string          Everybody can instantiate a contract from the code, optional
+      --instantiate-nobody string             Nobody except the governance process can instantiate a contract from the code, optional
+      --instantiate-only-address string       Removed: use instantiate-anyof-addresses instead
+      --keyring-backend string                Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string                    The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                                Use a connected Ledger device
+      --node string                           <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string                           Note to add a description to the transaction (previously --memo)
+      --offline                               Offline mode (does not allow any online functionality
+  -o, --output string                         Output format (text|json) (default "json")
+  -s, --sequence uint                         The sequence number of the signing account (offline mode only)
+      --sign-mode string                      Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint                   Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                                   Skip tx broadcasting prompt confirmation
+
+Global Flags:
+      --chain-id string     The network chain ID
+      --home string         directory for config and data (default "/Users/user//.cyber")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
+
+```
+
+### cyber tx wasm update-instantiate-config
+
+```
+Update instantiate config for a codeID
+
+Usage:
+  cyber tx wasm update-instantiate-config [code_id_int64] [flags]
+
+Aliases:
+  update-instantiate-config, update-instantiate-config
+
+Flags:
+  -a, --account-number uint                   The account number of the signing account (offline mode only)
+  -b, --broadcast-mode string                 Transaction broadcasting mode (sync|async|block) (default "sync")
+      --dry-run                               ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it (when enabled, the local Keybase is not accessible)
+      --fee-account string                    Fee account pays fees for the transaction instead of deducting from the signer
+      --fees string                           Fees to pay along with transaction; eg: 10uatom
+      --from string                           Name or address of private key with which to sign
+      --gas string                            gas limit to set per-transaction; set to "auto" to calculate sufficient gas automatically (default 200000)
+      --gas-adjustment float                  adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
+      --gas-prices string                     Gas prices in decimal format to determine the transaction fee (e.g. 0.1uatom)
+      --generate-only                         Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible)
+  -h, --help                                  help for update-instantiate-config
+      --instantiate-anyof-addresses strings   Any of the addresses can instantiate a contract from the code, optional
+      --instantiate-everybody string          Everybody can instantiate a contract from the code, optional
+      --instantiate-nobody string             Nobody except the governance process can instantiate a contract from the code, optional
+      --instantiate-only-address string       Removed: use instantiate-anyof-addresses instead
+      --keyring-backend string                Select keyring's backend (os|file|kwallet|pass|test|memory) (default "os")
+      --keyring-dir string                    The client Keyring directory; if omitted, the default 'home' directory will be used
+      --ledger                                Use a connected Ledger device
+      --node string                           <host>:<port> to tendermint rpc interface for this chain (default "tcp://localhost:26657")
+      --note string                           Note to add a description to the transaction (previously --memo)
+      --offline                               Offline mode (does not allow any online functionality
+  -o, --output string                         Output format (text|json) (default "json")
+  -s, --sequence uint                         The sequence number of the signing account (offline mode only)
+      --sign-mode string                      Choose sign mode (direct|amino-json), this is an advanced feature
+      --timeout-height uint                   Set a block timeout height to prevent the tx from being committed past a certain height
+  -y, --yes                                   Skip tx broadcasting prompt confirmation
 
 Global Flags:
       --chain-id string     The network chain ID
@@ -9131,12 +9897,15 @@ Usage:
   cyber tx wasm [command]
 
 Available Commands:
-  clear-contract-admin Clears admin for a contract to prevent further migrations
-  execute              Execute a command on a wasm contract
-  instantiate          Instantiate a wasm contract
-  migrate              Migrate a wasm contract to a new code version
-  set-contract-admin   Set new admin for a contract
-  store                Upload a wasm binary
+  clear-contract-admin      Clears admin for a contract to prevent further migrations
+  execute                   Execute a command on a wasm contract
+  grant                     Grant authorization to an address
+  instantiate               Instantiate a wasm contract
+  instantiate2              Instantiate a wasm contract with predictable address
+  migrate                   Migrate a wasm contract to a new code version
+  set-contract-admin        Set new admin for a contract
+  store                     Upload a wasm binary
+  update-instantiate-config Update instantiate config for a codeID
 
 Flags:
   -h, --help   help for wasm
@@ -9176,6 +9945,7 @@ Available Commands:
   graph               Graph transaction subcommands
   grid                grid transactions subcommands
   ibc                 IBC transaction subcommands
+  ibc-fee             IBC relayer incentivization transaction subcommands
   ibc-transfer        IBC fungible token transfer transaction subcommands
   liquidity           Liquidity transaction subcommands
   multisign           Generate multisig signatures for transactions generated offline
